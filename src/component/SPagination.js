@@ -1,4 +1,4 @@
-import style from "../css/Pagination.module.css";
+import style from "../css/SPagination.module.css";
 import arrow_left from "../asset/image/ic_arrow_left.png";
 import arrow_right from "../asset/image/ic_arrow_right.png";
 
