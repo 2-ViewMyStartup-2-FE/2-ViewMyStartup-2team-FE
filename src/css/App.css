@@ -1,10 +1,9 @@
 html {
-    /* 10px */
-    font-size: 62.5%;
-    font-family: Pretendard;
+  /* 10px */
+  font-size: 62.5%;
+  font-family: Pretendard;
 }
 
 body {
-    display: flex;
-    margin: 0;
+  margin: 0;
 }

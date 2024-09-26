@@ -7,7 +7,7 @@ function App() {
   return (
     <Fragment>
       <Nav />
-      <Outlet />
+     <Outlet />
     </Fragment>
   );
 }
