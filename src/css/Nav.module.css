@@ -1,0 +1,75 @@
+.header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 100%;
+    height: 6rem;
+    background-color: #131313;
+    border: 1px solid #2E2E2E; 
+    z-index: 100;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+    width: 192rem;
+    height: 6rem;
+    margin: 0 10%;
+    gap: 4rem;
+}
+
+.logo {
+    width: 11.2rem;
+    height: 4rem;
+}
+
+.titleGroup {
+    display: flex;
+    gap: 2rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.8rem;
+    color: #747474;
+    text-decoration: none;
+}
+
+.title.active {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+    .nav{
+        width: 74.4rem;
+        margin: 0 2.4rem;
+        gap: 2.4rem;
+    }
+
+}
+
+@media (max-width: 743px) {
+    .header {
+        height: 5.6rem;
+    }
+
+    .nav{
+        width: 37.5rem;
+        height: 5.6rem; 
+        margin: 0 1.6rem;
+        gap: 1.6rem;
+    }
+
+    .logo {
+        width: 6.35rem;
+        height: 2.24rem;
+    }
+
+    .title {
+        font-size: 1.3rem;
+        line-height: 1.551rem;
+        gap: 1rem;
+    }
+}

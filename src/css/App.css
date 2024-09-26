@@ -1,0 +1,10 @@
+html {
+    /* 10px */
+    font-size: 62.5%;
+    font-family: Pretendard;
+}
+
+body {
+    margin: 0;
+    background-color: #131313;
+}
