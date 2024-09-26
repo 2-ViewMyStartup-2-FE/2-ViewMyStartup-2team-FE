@@ -1,12 +1,10 @@
 import style from "../css/SPagination.module.css";
-import arrow_left from "../asset/image/ic_arrow_left.png";
-import arrow_right from "../asset/image/ic_arrow_right.png";
+import arrow_left from "../asset/images/ic_arrow_left.png";
+import arrow_right from "../asset/images/ic_arrow_right.png";
 
-const ITEM_LIMIT = 10; // 페이지 당 항목 수
-
-export default function SPagination({ currentPage, setCurrentPage, totalCount }) {
+export default function SPagination({ currentPage, setCurrentPage, totalCount, itemLimit }) {
   const pageLimit = 5; // 보여줄 최대 페이지 수
-  const totalPage = Math.ceil(totalCount / ITEM_LIMIT); // 전체 페이지 수
+  const totalPage = Math.ceil(totalCount / itemLimit); // 전체 페이지 수
 
   const getVisiblePages = () => {
     const pageGroup = Math.ceil(currentPage / pageLimit); // 현재 페이지 그룹

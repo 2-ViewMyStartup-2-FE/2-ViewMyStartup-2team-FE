@@ -1,10 +1,12 @@
 import style from "../css/StartupPage.module.css";
-import search from "../asset/image/ic_search.png";
+import search from "../asset/images/logo.png";
 import RankSort from "../component/ListSort";
 import StartupList from "../component/StartupList";
 import Pagination from "../component/SPagination.js";
 import { useState } from "react";
 import startupData from "../api/mock.js";
+
+const ITEM_LIMIT = 10; // 페이지 당 항목 수
 
 export default function StartupPage() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
@@ -41,9 +43,11 @@ export default function StartupPage() {
         </div>
         <div className={style.pagination}>
           <Pagination 
-          currentPage={currentPage} 
-          setCurrentPage={setCurrentPage}
-          totalCount={totalCount} />
+            currentPage={currentPage} // 현재 페이지 번호
+            setCurrentPage={setCurrentPage}
+            totalCount={totalCount} // 전체 데이터 수
+            itemLimit={ITEM_LIMIT} // 페이지 당 항목 수
+          />
         </div>
       </div>
     </div>

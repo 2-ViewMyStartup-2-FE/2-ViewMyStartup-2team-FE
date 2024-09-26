@@ -1,5 +1,5 @@
-import logo from '../asset/image/logo.png';
-import codeit from '../asset/image/codeit.png';
+import logo from '../asset/images/logo.png';
+import codeit from '../asset/images/codeit.png';
 
 // rank는 프론트에서 처리
 const startupData = [

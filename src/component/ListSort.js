@@ -1,5 +1,5 @@
 import { useState } from "react";
-import toggle from "../asset/image/ic_toggle.png";
+import toggle from "../asset/images/ic_toggle.png";
 import style from "../css/ListSort.module.css";
 
 export default function ListSort() {
