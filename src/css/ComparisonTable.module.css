@@ -1,0 +1,92 @@
+.table {
+    width: 100%;
+    /* height: 37.5rem; */
+    border-collapse: collapse;
+    white-space: nowrap;
+    font-family: Pretendard;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.671rem;
+    color: #FFFFFF;
+}
+
+.tableContainer {
+    max-width: 100%;
+}
+
+.header {
+    height: 3.9rem;
+    background: #2E2E2E;
+}
+
+.margin {
+    height: 1.6rem;
+}
+
+.comparisonItem {
+    background: #212121;
+}
+
+.nameSize {
+    width: 21.3rem;
+    height: 100%;
+}
+
+.descriptionSize {
+    width: 30.4rem;
+    height: 100%;
+}
+
+.autoSize {
+    height: 100%;
+    flex: 1;
+}
+
+.content {
+    /* height: 32rem; */
+    height: auto;
+}
+
+.row td {
+    height: 6.4rem;
+    text-align: center;
+}
+
+@media(max-width: 119.9rem) {
+    .nameSize {
+        width: 15rem;
+    }
+
+    .descriptionSize {
+        width: 18rem;
+    }
+}
+
+@media(max-width: 74.3rem) {
+    .comparisonItem {
+        font-size: 1.3rem;
+        font-weight: 500;
+        line-height: 1.551rem;
+    }
+
+    .table {
+        min-width: 800px;
+    }
+
+    .tableContainer {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .tableContainer::-webkit-scrollbar {
+        height: 0.8rem;
+    }
+
+    .tableContainer::-webkit-scrollbar-track {
+        background: #212121;
+    }
+
+    .tableContainer::-webkit-scrollbar-thumb {
+        background: gray;
+    }
+}

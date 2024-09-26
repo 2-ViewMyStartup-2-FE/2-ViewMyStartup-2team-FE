@@ -1,11 +1,11 @@
-import styles from "./ComprisonHeader.module.css";
+import styles from "../css/ComprisonHeader.module.css";
 import ComprisonTitle from "./ComparisonTitle.js";
-import SortOption from "./SortOption.js";
-function ComprisonHeader({ title }) {
+import SortSelector from "./SortSelector.js";
+function ComprisonHeader({ title, className }) {
   return (
-    <div className={styles.header}>
+    <div className={`${styles.header} ${className}`}>
       <ComprisonTitle>{title}</ComprisonTitle>
-      <SortOption />
+      <SortSelector />
     </div>
   );
 }

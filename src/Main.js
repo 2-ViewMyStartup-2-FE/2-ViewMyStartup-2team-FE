@@ -7,7 +7,6 @@ export default function Main() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/test" element={<ComparisonResult />} />
       </Routes>
     </BrowserRouter>
   );
