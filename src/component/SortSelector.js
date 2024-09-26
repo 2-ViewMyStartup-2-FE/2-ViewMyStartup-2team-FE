@@ -27,9 +27,10 @@ function SortSelector() {
       ...provided,
       fontSize: FONT_SIZE, // 선택된 값의 글씨 크기 설정
       color: "#D8D8D8",
-      //paddingLeft: isMobile ? "0.8rem" : "1rem", // 왼쪽 패딩 추가
       paddingTop: isMobile ? "0.8rem" : "1rem",
-      paddingBottom: isMobile ? "0.8rem" : "1rem"
+      paddingBottom: isMobile ? "0.8rem" : "1rem",
+      whiteSpace: "nowrap", // 줄 바꿈 방지
+      overflow: "visible" // 오버플로우를 보이도록
     }),
     option: (provided, state) => ({
       ...provided,
@@ -61,7 +62,9 @@ function SortSelector() {
       marginRight: isMobile ? "0.8rem" : "1rem",
       display: "flex", // 플렉스 박스 설정
       alignItems: "center", // 수직 정렬
-      justifyContent: "center" // 수평 정렬
+      justifyContent: "center", // 수평 정렬
+      marginLeft: "0",
+      padding: "0"
     }),
     menu: (provided) => ({
       ...provided,
