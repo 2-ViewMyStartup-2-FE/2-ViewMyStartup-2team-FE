@@ -30,7 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1200px;
+  max-width: 120rem;
   width: 100%;
   margin: 10rem auto 0;
 }
@@ -47,19 +47,20 @@ body {
   margin: 0;
 }
 .mainSection {
-  width: 100%;
-  padding: 1.6rem;
-  border: 1px dashed var(--black-300);
-  height: 300px;
-}
-.content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  width: 100%;
+  padding: 1.6rem;
   gap: 1.6rem;
+  height: 30rem;
+  border-radius: 0.4rem;
   background-color: var(--black-300);
+}
+.content {
+  height: 100%;
+  width: 100%;
 }
 .content img {
   width: 4.8rem;
@@ -119,8 +120,9 @@ body {
   align-items: center;
   width: 100%;
   padding: 1.6rem;
-  height: 300px;
+  height: 30rem;
   background-color: var(--black-300);
+  border-radius: 0.4rem;
 }
 .mainSection2 p {
   font-size: 1.4rem;
@@ -132,20 +134,21 @@ body {
 
 @media (max-width: 1199px) {
   .container {
-    max-width: 696px;
+    max-width: 69.6rem;
   }
-  .mainSection {
-    height: 240px;
+  .mainSection,
+  .mainSection2 {
+    height: 24rem;
     border-radius: 0.8rem;
   }
 }
 
 @media (max-width: 743px) {
   .container {
-    max-width: 343px;
+    max-width: 34.3rem;
   }
   .mainSection {
-    height: 180px;
+    height: 18rem;
   }
   .contentFont,
   .button {
@@ -154,5 +157,13 @@ body {
   }
   .button {
     padding: 1.3rem 2.4rem;
+  }
+
+  .mainSection2 {
+    height: 34.8rem;
+  }
+  .addButton {
+    padding: 0.4rem 1.2rem;
+    height: 3.2rem;
   }
 }
