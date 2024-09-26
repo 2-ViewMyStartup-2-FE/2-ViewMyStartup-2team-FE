@@ -15,9 +15,18 @@ function MyCompare() {
           </div>
         </div>
         <div className={compareStyle.addSection}>
-          <div className={compareStyle.headTheme}>
+          <div className={compareStyle.headTheme2}>
             <p className={compareStyle.headFont}> 어떤기업이 궁금하세요?</p>
-            <button>기업 추가하기</button>
+            <button className={compareStyle.addButton}>기업 추가하기</button>
+          </div>
+          <div>
+            <div className={compareStyle.mainSection2}>
+              <p>
+                아직 추가한 기업이 없어요,
+                <br />
+                버튼을 눌러 기업을 추가 해 보세요!
+              </p>
+            </div>
           </div>
         </div>
       </div>
