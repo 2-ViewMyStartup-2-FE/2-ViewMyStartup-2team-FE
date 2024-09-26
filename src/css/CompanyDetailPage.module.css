@@ -100,101 +100,6 @@
   color: #d8d8d8;
 }
 
-.investInfoSection {
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-  margin-top: 3.2rem;
-}
-
-.investInfoTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 120rem;
-}
-
-.investInfoTitle h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 2.387rem;
-  color: #ffffff;
-}
-
-.investBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 13.1rem;
-  height: 4rem;
-  border-radius: 5rem;
-  background-color: #eb5230;
-  text-decoration: none;
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1.909rem;
-  color: #ffffff;
-}
-
-.investInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-}
-
-.investment {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 2.387rem;
-  color: #ffffff;
-  padding-top: 1.6rem;
-  border-top: 0.1rem solid #2e2e2e;
-}
-
-.investDetailTitle {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: 8.4rem 8.4rem 8.4rem 88.4rem 6.4rem;
-  grid-template-rows: 3.9rem;
-  width: 100%;
-  max-width: 120rem;
-  border-radius: 0.5rem;
-  background-color: #282828;
-}
-
-.investDetailTitle h1 {
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 1.671rem;
-  color: #ffffff;
-}
-
-.investDetail {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: 8.4rem 8.4rem 8.4rem 88.4rem 6.4rem;
-  grid-template-rows: 6.4rem;
-  width: 100%;
-  max-width: 120rem;
-  border-radius: 0.5rem;
-  background-color: #212121;
-}
-
-.investDetail h1 {
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.671rem;
-  color: #d8d8d8;
-}
-
-.investDetail h1:nth-of-type(4) {
-  justify-self: start;
-  padding: 0 1.6rem;
-}
-
 @media (max-width: 1199px) and (min-width: 744px) {
   .companyDetailPage {
     margin: 10rem 2.4rem 0 2.4rem;
@@ -216,24 +121,6 @@
   .introduction {
     max-width: 69.6rem;
     margin-top: 2.4rem;
-  }
-
-  .investInfoSection {
-    margin-top: 2.4rem;
-  }
-
-  .investInfoTitle {
-    max-width: 69.6rem;
-  }
-
-  .investDetailTitle {
-    max-width: 69.6rem;
-    grid-template-columns: 8.4rem 8.4rem 8.4rem 38.1rem 6.4rem;
-  }
-
-  .investDetail {
-    max-width: 69.6rem;
-    grid-template-columns: 8.4rem 8.4rem 8.4rem 38.1rem 6.4rem;
   }
 }
 
@@ -293,68 +180,5 @@
   .introduction {
     max-width: 34.3rem;
     margin-top: 1.6rem;
-  }
-
-  .investInfoSection {
-    width: 34.3rem;
-    gap: 1.6rem;
-    margin-top: 1.6rem;
-    overflow: hidden;
-  }
-
-  .investInfoTitle {
-    max-width: 34.3rem;
-  }
-
-  .investInfoTitle h1 {
-    font-size: 1.6rem;
-    line-height: 1.909rem;
-  }
-
-  .investBtn {
-    width: 9.7rem;
-    height: 3.2rem;
-    font-size: 1.4rem;
-    line-height: 1.671rem;
-  }
-
-  .investInfo {
-    overflow-x: auto; /* 가로 스크롤을 활성화 */
-    padding-bottom: 1rem;
-  }
-
-  .investment {
-    font-size: 1.6rem;
-    line-height: 1.909rem;
-  }
-
-  .investDetailTitle {
-    width: 69.6rem;
-    max-width: 69.6rem;
-    grid-template-columns: 8.4rem 8.4rem 8.4rem 38.1rem 6.4rem;
-  }
-
-  .investDetail {
-    width: 69.6rem;
-    max-width: 69.6rem;
-    grid-template-columns: 8.4rem 8.4rem 8.4rem 38.1rem 6.4rem;
-  }
-
-  /* 가로 스크롤바의 전체 영역 */
-  .investInfo::-webkit-scrollbar {
-    height: 1.2rem; /* 세로 스크롤일 경우 width 속성을 사용하고, 가로 스크롤은 height */
-  }
-
-  /* 스크롤바의 트랙(스크롤바 배경) */
-  .investInfo::-webkit-scrollbar-track {
-    background-color: #212121; /* 트랙 배경색 */
-    border-radius: 0.8rem; /* 트랙에 둥근 모서리 적용 */
-  }
-
-  /* 스크롤바의 이동 가능한 슬라이더 부분 */
-  .investInfo::-webkit-scrollbar-thumb {
-    background-color: #131313; /* 슬라이더 색상 */
-    border-radius: 0.8rem; /* 둥근 모서리 적용 */
-    border: 0.1rem solid #212121; /* 슬라이더 주변에 여백 추가 */
   }
 }

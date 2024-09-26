@@ -1,4 +1,4 @@
-import img_logo from "../asset/image/img_logo.png";
+import img_logo from "../asset/images/img_logo.png";
 import { Link, useLocation } from "react-router-dom";
 import style from "../css/Nav.module.css";
 
@@ -13,7 +13,7 @@ export default function Nav() {
   return (
     <div className={style.header}>
       <div className={style.nav}>
-        <img className={style.logo} src={img_logo} alt="logo image" />
+        <img className={style.logo} src={img_logo} alt="logo" />
         <div className={style.titleGroup}>
           <Link
             className={`${style.title} ${isCompare ? "active" : ""}`}
