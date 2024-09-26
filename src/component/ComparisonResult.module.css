@@ -1,0 +1,22 @@
+.comparisonResult {
+    width: 120rem;
+    height: 43.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: red;
+}
+
+@media(max-width: 119.9rem) {
+    .comparisonResult {
+        width: 69.6rem;
+    }
+}
+
+@media(max-width: 74.3rem) {
+    .comparisonResult {
+        width: 34.3rem;
+        height: 45.5rem;
+    }
+}
