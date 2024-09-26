@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
-import { Outlet } from 'react-router-dom';
-import './css/App.css';
+import { Fragment } from "react";
+import { Outlet } from "react-router-dom";
+import "../css/App.css";
 
 function App() {
   return (

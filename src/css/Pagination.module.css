@@ -1,0 +1,56 @@
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.paginationWrapper button,
+.pageBtns button {
+  width: 4.8rem;
+  height: 4.8rem;
+  background-color: #2e2e2e;
+  border-radius: 1rem;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 2.148rem;
+  color: #747474;
+}
+
+.prevPageBtn,
+.nextPageBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageBtns {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.pageBtns button.active {
+  background-color: #eb5230;
+  color: #ffffff;
+  border: none;
+}
+
+.pageBtns button:disabled {
+  cursor: not-allowed;
+  background-color: #2e2e2e;
+}
+
+@media (max-width: 743px) {
+  .paginationWrapper {
+    margin-top: 2.4rem;
+  }
+
+  .paginationWrapper button,
+  .pageBtns button {
+    width: 3.2rem;
+    height: 3.2rem;
+    font-size: 1.6rem;
+    line-height: 1.909rem;
+  }
+}
