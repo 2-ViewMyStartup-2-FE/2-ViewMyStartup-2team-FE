@@ -1,10 +1,8 @@
 import style from '../css/StartupList.module.css';
 
-const ITEM_LIMIT = 10; // 페이지 당 항목 수
-
-function StartupList({ currentPage, data }) {
-  const startIndex = (currentPage - 1) * ITEM_LIMIT; // 현재 페이지의 시작 인덱스
-  const endIndex = startIndex + ITEM_LIMIT; // 현재 페이지의 끝 인덱스
+function StartupList({ currentPage, itemLimit, data }) {
+  const startIndex = (currentPage - 1) * itemLimit; // 현재 페이지의 시작 인덱스
+  const endIndex = startIndex + itemLimit; // 현재 페이지의 끝 인덱스
 
   const sortedData = data.map((item) => ({
     ...item,

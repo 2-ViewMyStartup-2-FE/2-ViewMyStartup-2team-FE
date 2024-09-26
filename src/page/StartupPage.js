@@ -3,14 +3,34 @@ import search from "../asset/images/logo.png";
 import RankSort from "../component/ListSort";
 import StartupList from "../component/StartupList";
 import Pagination from "../component/SPagination.js";
-import { useState } from "react";
-import startupData from "../api/mock.js";
+import { useState, useEffect } from "react";
+import { getStartupList } from "../api/StartupAPI.js";
+// import startupData from "../api/mock.js";
 
 const ITEM_LIMIT = 10; // 페이지 당 항목 수
 
 export default function StartupPage() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
-  const totalCount = startupData.length;
+  const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
+  const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
+  // const totalCount = startupData.length;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getStartupList(); 
+        
+        if (response) {
+          setStartupData(response.data);
+          setTotalCount(response.totalCount);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div className={style.container}>
@@ -39,6 +59,7 @@ export default function StartupPage() {
         <div className={style.listBody}>
           <StartupList 
             currentPage={currentPage}
+            itemLimit={ITEM_LIMIT}
             data={startupData} />
         </div>
         <div className={style.pagination}>
