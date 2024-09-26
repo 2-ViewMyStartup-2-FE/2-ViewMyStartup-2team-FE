@@ -13,7 +13,7 @@ export default function Nav() {
   return (
     <div className={style.header}>
       <div className={style.nav}>
-        <img className={style.logo} src={img_logo} alt="logo image" />
+        <img className={style.logo} src={img_logo} alt="logo" />
         <div className={style.titleGroup}>
           <Link
             className={`${style.title} ${isCompare ? "active" : ""}`}

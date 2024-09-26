@@ -6,6 +6,7 @@
     height: 6rem;
     background-color: #131313;
     border: 1px solid #2E2E2E; 
+    z-index: 100;
 }
 
 .nav{
@@ -13,8 +14,7 @@
     align-items: center;
     width: 192rem;
     height: 6rem;
-    background-color: #131313;
-    margin: 0 36rem;
+    margin: 0 10%;
     gap: 4rem;
 }
 
