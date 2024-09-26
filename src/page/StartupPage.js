@@ -2,7 +2,7 @@ import style from "../css/StartupPage.module.css";
 import search from "../asset/image/ic_search.png";
 import RankSort from "../component/ListSort";
 import StartupList from "../component/StartupList";
-import Pagination from "../component/Pagination";
+import Pagination from "../component/SPagination.js";
 import { useState } from "react";
 import startupData from "../api/mock.js";
 

@@ -4,7 +4,7 @@ import arrow_right from "../asset/image/ic_arrow_right.png";
 
 const ITEM_LIMIT = 10; // 페이지 당 항목 수
 
-export default function Pagination({ currentPage, setCurrentPage, totalCount }) {
+export default function SPagination({ currentPage, setCurrentPage, totalCount }) {
   const pageLimit = 5; // 보여줄 최대 페이지 수
   const totalPage = Math.ceil(totalCount / ITEM_LIMIT); // 전체 페이지 수
 
