@@ -1,5 +1,5 @@
 import style from "../css/StartupPage.module.css";
-import search from "../asset/images/logo.png";
+import search from "../asset/images/ic_search.png";
 import SortContent from "../component/SortContent.js";
 import StartupList from "../component/StartupList.js";
 import Pagination from "../component/SPagination.js";
