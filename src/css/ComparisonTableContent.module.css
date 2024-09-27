@@ -1,0 +1,98 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+    font-family: Pretendard;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.671rem;
+    color: #FFFFFF;
+}
+
+.tableContainer {
+    width: 100%;
+}
+
+.header {
+    height: 3.9rem;
+    background: #2E2E2E;
+}
+
+.margin {
+    height: 1.6rem;
+}
+
+.name {
+    width: 21.3rem;
+    height: 100%;
+}
+
+.description {
+    width: 30.4rem;
+    height: 100%;
+}
+
+.ranking {
+    width: 6.8rem;
+    height: 100%;
+    padding: 0;
+}
+
+.other {
+    height: 100%;
+    flex: 1;
+}
+
+.content {
+    height: auto;
+    background: #212121;
+}
+
+.row td {
+    height: 6.4rem;
+    text-align: center;
+}
+
+@media(max-width: 119.9rem) {
+    .name {
+        width: 15rem;
+    }
+
+    .description {
+        width: 18rem;
+    }
+}
+
+@media(max-width: 74.3rem) {
+    .other {
+        font-size: 1.3rem;
+        font-weight: 500;
+        line-height: 1.551rem;
+    }
+
+    .table {
+        min-width: 800px;
+    }
+
+    .tableContainer {
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .tableContainer::-webkit-scrollbar {
+        height: 0.8rem;
+    }
+
+    .tableContainer::-webkit-scrollbar-track {
+        background: #212121;
+    }
+
+    .tableContainer::-webkit-scrollbar-thumb {
+        background: gray;
+    }
+
+    .marginBottom {
+        height: 1.2rem;
+        background: #131313;
+    }
+}
