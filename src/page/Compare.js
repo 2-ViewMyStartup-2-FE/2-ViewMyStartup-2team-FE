@@ -1,4 +1,4 @@
-import compareStyle from "./Compare.module.css";
+import compareStyle from "../css/Compare.module.css";
 import btnPlus from "../asset/image/btn_plus.png";
 
 function MyCompare() {
