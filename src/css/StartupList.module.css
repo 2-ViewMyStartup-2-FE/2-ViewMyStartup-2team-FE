@@ -78,6 +78,16 @@
     overflow: hidden; /* 넘친 텍스트 숨기기 */
 }
 
+.investment.status {
+    width: 20%;
+    color: #D8D8D8;
+}
+
+.revenue.status {
+    width: 20%;
+    color: #D8D8D8;
+}
+
 @media (max-width: 743px) {
     .rank, .companyName, .compDetail, .category, .investment, .revenue, .employees {
         font-size: 1rem;
