@@ -1,6 +1,6 @@
 import style from '../css/StartupList.module.css';
 
-function StartupList({ currentPage, itemLimit, data }) {
+function StartupList({ currentPage, itemLimit, data, isStatusPage }) {
   const startIndex = (currentPage - 1) * itemLimit; // 현재 페이지의 시작 인덱스
   const endIndex = startIndex + itemLimit; // 현재 페이지의 끝 인덱스
 
@@ -10,6 +10,7 @@ function StartupList({ currentPage, itemLimit, data }) {
   })).sort((a, b) => b.total - a.total);
 
   const visibleData = sortedData.slice(startIndex, endIndex);
+  // console.log(isStatusPage);
 
   return (
     <div className={style.table}>
@@ -22,9 +23,10 @@ function StartupList({ currentPage, itemLimit, data }) {
           </div>
           <div className={style.compDetail}>{item.compDetail}</div>
           <div className={style.category}>{item.category}</div>
-          <div className={style.investment}>{item.investment}억 원</div>
-          <div className={style.revenue}>{item.revenue}억 원</div>
-          <div className={style.employees}>{item.employees}명</div>
+          <div className={`${style.investment} ${isStatusPage ? style.status : ''}`}>{item.investment}억 원</div>
+          <div className={`${style.revenue} ${isStatusPage ? style.status : ''}`}>{item.revenue}억 원</div>
+          {!isStatusPage && (
+          <div className={style.employees}>{item.employees}명</div>)}
         </div>
       ))}
     </div>
