@@ -1,0 +1,25 @@
+.comparisonTable {
+    width: 120rem;
+    height: 43.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #131313;
+}
+
+.margin {
+    margin-bottom: 1.6rem;
+}
+
+@media(max-width: 119.9rem) {
+    .comparisonTable {
+        width: 69.6rem;
+    }
+}
+
+@media(max-width: 74.3rem) {
+    .comparisonTable {
+        width: 34.3rem;
+        height: 45.5rem;
+    }
+}
