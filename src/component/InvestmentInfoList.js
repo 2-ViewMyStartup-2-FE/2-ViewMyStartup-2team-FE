@@ -1,5 +1,5 @@
 import kebabIcon from "../asset/images/ic_kebab.png";
-import Pagination from "./Pagination.js";
+import Pagination from "./SPagination.js";
 import styles from "../css/InvestmentInfoList.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -107,11 +107,6 @@ export default function InvestmentInfoList() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = investments.slice(indexOfFirstItem, indexOfLastItem); // 해당 페이지에 맞는 데이터 슬라이스
 
-  // 페이지 변경 함수
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   return (
     <div className={styles.investInfoSection}>
       <div className={styles.investInfoTitle}>
@@ -159,10 +154,10 @@ export default function InvestmentInfoList() {
         </div>
       </div>
       <Pagination
-        totalItems={investments.length} // 전체 데이터 수
-        itemsPerPage={itemsPerPage} // 페이지당 항목 수
         currentPage={currentPage} // 현재 페이지 번호
-        onPageChange={handlePageChange} // 페이지 변경 함수
+        setCurrentPage={setCurrentPage}
+        totalCount={investments.length} // 전체 데이터 수
+        itemLimit={itemsPerPage} // 페이지당 항목 수
       />
     </div>
   );
