@@ -4,6 +4,7 @@ import CompanyDetailPage from "./pages/CompanyDetailPage";
 import StartupPage from "./page/StartupPage";
 import MyCompare from "./page/Compare";
 import CompareResultPage from "./page/CompareResultPage";
+import CompareStatusPage from "./page/CompareStatusPage";
 
 export default function Main() {
   return (
@@ -14,6 +15,7 @@ export default function Main() {
           <Route path="CompanyDetailPage" element={<CompanyDetailPage />} />
           <Route path="compare" element={<MyCompare />} />
           <Route path="compare-result" element={<CompareResultPage />} />
+          <Route path="compare-status" element={<CompareStatusPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
