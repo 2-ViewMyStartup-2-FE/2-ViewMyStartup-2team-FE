@@ -4,6 +4,9 @@ import CompanyDetailPage from "./pages/CompanyDetailPage";
 import StartupPage from "./page/StartupPage";
 import MyCompare from "./page/Compare";
 import CompareResultPage from "./page/CompareResultPage";
+import CompareStatusPage from "./page/CompareStatusPage";
+import StartupPage from "./pages/StartupPage";
+import InvestStatusPage from "./pages/InvestStatusPage";
 
 export default function Main() {
   return (
@@ -14,6 +17,8 @@ export default function Main() {
           <Route path="CompanyDetailPage" element={<CompanyDetailPage />} />
           <Route path="compare" element={<MyCompare />} />
           <Route path="compare-result" element={<CompareResultPage />} />
+          <Route path="compare-status" element={<CompareStatusPage />} />
+          <Route path="invest-status" element={<InvestStatusPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
