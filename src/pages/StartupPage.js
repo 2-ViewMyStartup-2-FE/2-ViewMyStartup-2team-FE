@@ -34,17 +34,18 @@ export default function StartupPage() {
 
   // 데이터 정렬 함수
   const sortData = (data, option) => {
+    const dataCopy = data.slice();
     switch (option) {
       case "누적 투자금액 높은순":
-        return data.sort((a, b) => b.investment - a.investment);
+        return dataCopy.sort((a, b) => b.investment - a.investment);
       case "누적 투자금액 낮은순":
-        return data.sort((a, b) => a.investment - b.investment);
+        return dataCopy.sort((a, b) => a.investment - b.investment);
       case "매출액 높은순":
-        return data.sort((a, b) => b.revenue - a.revenue);
+        return dataCopy.sort((a, b) => b.revenue - a.revenue);
       case "매출액 낮은순":
-        return data.sort((a, b) => a.revenue - b.revenue);
+        return dataCopy.sort((a, b) => a.revenue - b.revenue);
       case "고용 인원 많은순":
-        return data.sort((a, b) => b.employees - a.employees);
+        return dataCopy.sort((a, b) => b.employees - a.employees);
       default:
         return data;
     }
@@ -57,6 +58,8 @@ export default function StartupPage() {
 
   // 정렬된 데이터
   const sortedData = sortData([...startupData], sortType);
+
+  console.log(sortedData);
 
   return (
     <div className={style.container}>
