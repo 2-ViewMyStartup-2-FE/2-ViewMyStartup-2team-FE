@@ -1,7 +1,7 @@
 import style from "../css/StartupPage.module.css";
 import search from "../asset/images/logo.png";
 import SortContent from "../component/SortContent.js";
-import StartupList from "../component/StartupList";
+import StartupList from "../component/StartupList.js";
 import Pagination from "../component/SPagination.js";
 import { useState, useEffect } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
@@ -12,22 +12,22 @@ export default function StartupPage() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
   const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
   const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
-  const sortOption = 'list';
-  const [sortType, setSortType] = useState('누적 투자금액 높은순');
+  const sortOption = "list";
+  const [sortType, setSortType] = useState("누적 투자금액 높은순");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getStartupList(); 
-        
+        const response = await getStartupList();
+
         if (response) {
           setStartupData(response.data);
           setTotalCount(response.totalCount);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
-    }
+    };
 
     fetchData();
   }, []);
@@ -35,15 +35,15 @@ export default function StartupPage() {
   // 데이터 정렬 함수
   const sortData = (data, option) => {
     switch (option) {
-      case '누적 투자금액 높은순':
+      case "누적 투자금액 높은순":
         return data.sort((a, b) => b.investment - a.investment);
-      case '누적 투자금액 낮은순':
+      case "누적 투자금액 낮은순":
         return data.sort((a, b) => a.investment - b.investment);
-      case '매출액 높은순':
+      case "매출액 높은순":
         return data.sort((a, b) => b.revenue - a.revenue);
-      case '매출액 낮은순':
+      case "매출액 낮은순":
         return data.sort((a, b) => a.revenue - b.revenue);
-      case '고용 인원 많은순':
+      case "고용 인원 많은순":
         return data.sort((a, b) => b.employees - a.employees);
       default:
         return data;
@@ -51,7 +51,7 @@ export default function StartupPage() {
   };
 
   const handleSelect = (selectedOption) => {
-    console.log('Selected option:', selectedOption);
+    console.log("Selected option:", selectedOption);
     setSortType(selectedOption);
   };
 
@@ -67,9 +67,14 @@ export default function StartupPage() {
             <img className={style.searchIcon} src={search} alt="search" />
             <input
               className={style.search}
-              placeholder="검색어를 입력해주세요" />
+              placeholder="검색어를 입력해주세요"
+            />
           </div>
-          <SortContent sortOption={sortOption} defaultOption={sortType} onSelect={handleSelect} />
+          <SortContent
+            sortOption={sortOption}
+            defaultOption={sortType}
+            onSelect={handleSelect}
+          />
         </div>
       </div>
       <div className={style.body}>
@@ -83,14 +88,15 @@ export default function StartupPage() {
           <div className={style.category}>고용 인원</div>
         </div>
         <div className={style.listBody}>
-          <StartupList 
+          <StartupList
             currentPage={currentPage}
             itemLimit={ITEM_LIMIT}
             data={sortedData}
-            isStatusPage={false} />
+            isStatusPage={false}
+          />
         </div>
         <div className={style.pagination}>
-          <Pagination 
+          <Pagination
             currentPage={currentPage} // 현재 페이지 번호
             setCurrentPage={setCurrentPage}
             totalCount={totalCount} // 전체 데이터 수

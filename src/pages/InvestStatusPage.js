@@ -1,5 +1,5 @@
 import { useState } from "react";
-import StartupList from "../component/StartupList";
+import StartupList from "../component/StartupList.js";
 import style from "../css/InvestStatusPage.module.css";
 import startupData from "../api/mock.js";
 import SPagination from "../component/SPagination.js";
