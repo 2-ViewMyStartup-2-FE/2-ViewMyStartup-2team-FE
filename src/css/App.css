@@ -1,10 +1,16 @@
 html {
-    /* 10px */
-    font-size: 62.5%;
-    font-family: Pretendard;
+  /* 10px */
+  font-size: 62.5%;
+  font-family: Pretendard;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    margin: 0;
-    background-color: #131313;
+  margin: 0;
+  background-color: #131313;
 }

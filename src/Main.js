@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./component/App";
+import CompanyDetailPage from "./pages/CompanyDetailPage";
 import StartupPage from "./page/StartupPage";
+import MyCompare from "./page/Compare";
+
 import InvestStatusPage from "./page/InvestStatusPage";
 
 export default function Main() {
@@ -9,6 +12,8 @@ export default function Main() {
       <Routes>
         <Route path="/" element={<App />} >
           <Route index element={<StartupPage />} />
+          <Route path="CompanyDetailPage" element={<CompanyDetailPage />} />
+          <Route path="/compare" element={<MyCompare />} />
           <Route path="/invest-status" element={<InvestStatusPage />} />
         </Route>
       </Routes>
