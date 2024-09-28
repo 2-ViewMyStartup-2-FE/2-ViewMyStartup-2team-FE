@@ -25,7 +25,7 @@ function getFieldConfig(type, isVisible) {
         message: "투자에 대한 코멘트를 입력해 주세요"
       };
     case "password":
-    case "confirmPassword":
+    case "confirm":
       return {
         frame: styles.other,
         label: type === "password" ? "비밀번호" : "비밀번호 확인",
@@ -68,7 +68,7 @@ function InvestmentForm({ type = "name", onBlur, isVisible, onToggle }) {
             type={INPUTTYPE}
             onBlur={onBlur}
           />
-          {(type === "password" || type === "check") && ( //비밀번호계열 인풋은 토글 버튼추가
+          {(type === "password" || type === "confirm") && ( //비밀번호계열 인풋은 토글 버튼추가
             <button
               type="button"
               className={styles.passwordToggle}

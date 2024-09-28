@@ -42,7 +42,7 @@ function InvestModal({ completeTask, closeModal }) {
             onToggle={onTogglePassword}
           />
           <InvestmentForm
-            type="check"
+            type="confirm"
             onBlur={onBlurField("confirmPassword")}
             isVisible={isConfirmVisible}
             onToggle={onToggleConfirm}
