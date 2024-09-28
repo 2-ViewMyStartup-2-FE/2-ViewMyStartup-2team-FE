@@ -7,10 +7,11 @@ function CompareResultPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
-  const closeModal = () => {
+  const completeTask = () => {
     setIsModalOpen(false);
     setIsPopupOpen(true);
   };
+  const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
   return (
     <div className={styles.compareResultPage}>
@@ -22,7 +23,9 @@ function CompareResultPage() {
       <button onClick={openModal} className={styles.investBtn}>
         나의 기업에 투자하기
       </button>
-      {isModalOpen && <InvestModal closeModal={closeModal} />}
+      {isModalOpen && (
+        <InvestModal completeTask={completeTask} closeModal={closeModal} />
+      )}
       {isPopupOpen && <InvestmentPopup closePopup={closePopup} />}
     </div>
   );

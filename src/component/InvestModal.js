@@ -4,7 +4,7 @@ import InvestModalHeader from "./InvestModalHeader.js";
 import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
 import InvestmentForm from "./InvestmentForm.js";
 import InvestmentButton from "./InvestmentButton.js";
-function InvestModal({ closeModal }) {
+function InvestModal({ completeTask, closeModal }) {
   const [formData, setFormData] = useState({
     name: "",
     amount: "",
@@ -12,23 +12,22 @@ function InvestModal({ closeModal }) {
     password: "",
     confirmPassword: ""
   }); // 입력값을 state로 관리
-  const [showPassword, setShowPassword] = useState(false); //비밀번호와 비밀번호 확인의 토글 상태를 state로 관리
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const onBlurField = (field) => (e) =>
     setFormData((prev) => ({ ...prev, [field]: e.target.value })); //입력값을 변경 onBlur로 사용
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
+  const onTogglePassword = () => setIsPasswordVisible((prev) => !prev);
+  const onToggleConfirm = () => setIsConfirmVisible((prev) => !prev);
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    closeModal();
+    completeTask();
   };
-  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
-  const toggleConfirmPasswordVisibility = () =>
-    setShowConfirmPassword((prev) => !prev);
 
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.frame}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmit}>
           <div className={styles.layoutContainer}>
             <InvestModalHeader closeModal={closeModal} />
             <InvestmentCompanyBrief />
@@ -39,14 +38,14 @@ function InvestModal({ closeModal }) {
           <InvestmentForm
             type="password"
             onBlur={onBlurField("password")}
-            onClickToggle={togglePasswordVisibility}
-            isVisible={showPassword}
+            isVisible={isPasswordVisible}
+            onToggle={onTogglePassword}
           />
           <InvestmentForm
             type="check"
-            onBlur={onBlurField("check")}
-            onClickToggle={toggleConfirmPasswordVisibility}
-            isVisible={showConfirmPassword}
+            onBlur={onBlurField("confirmPassword")}
+            isVisible={isConfirmVisible}
+            onToggle={onToggleConfirm}
           />
           <InvestmentButton closeModal={closeModal} onSubmit={onSubmit} />
         </form>

@@ -4,8 +4,8 @@ function InvestModalHeader({ closeModal }) {
   return (
     <div className={styles.header}>
       <p className={styles.title}>기업에 투자하기</p>
-      <button className={styles.exitBtn} onClick={closeModal}>
-        <img src={exitImg} />
+      <button type="button" className={styles.exitBtn} onClick={closeModal}>
+        <img src={exitImg} alt="나가기버튼" />
       </button>
     </div>
   );

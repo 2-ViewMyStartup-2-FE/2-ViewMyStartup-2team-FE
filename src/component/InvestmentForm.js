@@ -25,7 +25,7 @@ function getFieldConfig(type, isVisible) {
         message: "투자에 대한 코멘트를 입력해 주세요"
       };
     case "password":
-    case "check":
+    case "confirmPassword":
       return {
         frame: styles.other,
         label: type === "password" ? "비밀번호" : "비밀번호 확인",
@@ -44,21 +44,13 @@ function getFieldConfig(type, isVisible) {
       };
   }
 }
-
-function InvestmentForm({
-  type = "name",
-  onBlur,
-  onClickToggle,
-  isVisible = false
-}) {
-  const handleOnBlur = (e) => onBlur(e);
+function InvestmentForm({ type = "name", onBlur, isVisible, onToggle }) {
   const {
     frame: FRAME,
     label: LABEL,
     inputType: INPUTTYPE,
     message: MESSAGE
   } = getFieldConfig(type, isVisible);
-
   return (
     <div className={FRAME}>
       <label className={styles.label}>{LABEL}</label>
@@ -66,7 +58,7 @@ function InvestmentForm({
         <textarea
           className={styles.commentInput}
           placeholder={MESSAGE}
-          onBlur={handleOnBlur}
+          onBlur={onBlur}
         />
       ) : (
         <div className={styles.inputContainer}>
@@ -74,10 +66,14 @@ function InvestmentForm({
             className={styles.otherInput}
             placeholder={MESSAGE}
             type={INPUTTYPE}
-            onBlur={handleOnBlur}
+            onBlur={onBlur}
           />
           {(type === "password" || type === "check") && ( //비밀번호계열 인풋은 토글 버튼추가
-            <button className={styles.passwordToggle} onClick={onClickToggle}>
+            <button
+              type="button"
+              className={styles.passwordToggle}
+              onClick={onToggle}
+            >
               <img src={toggle} alt="토글이미지" />
             </button>
           )}
