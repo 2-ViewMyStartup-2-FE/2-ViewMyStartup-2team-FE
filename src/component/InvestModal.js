@@ -4,7 +4,7 @@ import InvestModalHeader from "./InvestModalHeader.js";
 import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
 import InvestmentForm from "./InvestmentForm.js";
 import InvestmentButton from "./InvestmentButton.js";
-function InvestModal({ completeTask, closeModal }) {
+function InvestModal({ completeTask, closeModal, myCompany }) {
   const [formData, setFormData] = useState({
     name: "",
     amount: "",
@@ -30,7 +30,7 @@ function InvestModal({ completeTask, closeModal }) {
         <form className={styles.form} onSubmit={onSubmit}>
           <div className={styles.layoutContainer}>
             <InvestModalHeader closeModal={closeModal} />
-            <InvestmentCompanyBrief />
+            <InvestmentCompanyBrief myCompany={myCompany} />
           </div>
           <InvestmentForm type="name" onBlur={onBlurField("name")} />
           <InvestmentForm type="amount" onBlur={onBlurField("amount")} />

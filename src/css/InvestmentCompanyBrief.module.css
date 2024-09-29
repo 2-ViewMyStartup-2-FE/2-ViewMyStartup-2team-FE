@@ -28,6 +28,7 @@
 .logoImg {
     width: 4rem;
     height: 100%;
+    border-radius: 50%;
 }
 
 .layoutContainer {

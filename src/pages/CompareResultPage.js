@@ -69,19 +69,32 @@ function CompareResultPage({
   };
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
+  const list = [MYCOMPANY, ...SELETEDCOMPANIES];
   return (
     <div className={styles.compareResultPage}>
       <SelectedCompanyCard
         myCompany={MYCOMPANY}
         className={styles.selectedCompanyCardLayout}
       />
-      <ComparisonTable type="select" className={styles.selectTableLayout} />
-      <ComparisonTable type="ranking" className={styles.rankingTableLayout} />
+      <ComparisonTable
+        type="select"
+        className={styles.selectTableLayout}
+        list={list}
+      />
+      <ComparisonTable
+        type="ranking"
+        className={styles.rankingTableLayout}
+        list={list}
+      />
       <button onClick={openModal} className={styles.investBtn}>
         나의 기업에 투자하기
       </button>
       {isModalOpen && (
-        <InvestModal completeTask={completeTask} closeModal={closeModal} />
+        <InvestModal
+          completeTask={completeTask}
+          closeModal={closeModal}
+          myCompany={MYCOMPANY}
+        />
       )}
       {isPopupOpen && <InvestmentPopup closePopup={closePopup} />}
     </div>
