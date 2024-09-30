@@ -17,6 +17,11 @@
     cursor: pointer;
 }
 
+.sortButton.status {
+    width: 26.4rem;
+    height: 4.8rem;
+}
+
 .sortContext {
     font-size: 1.4rem;
     line-height: 1.6rem;
@@ -27,7 +32,7 @@
 
 .sortOptions {
     display: flex;
-    position: absolute;    
+    position: absolute;
     flex-direction: column;
     top: 110%;
     width: 16.8rem;
@@ -35,6 +40,11 @@
     border-radius: 1rem;
     border: 1px solid #747474;
     background-color: #131313;
+}
+
+.sortOptions.status {
+    width: 26.4rem;
+    height: 16rem;
 }
 
 span {
@@ -52,6 +62,10 @@ span {
     color: #D8D8D8;
     border: none;
     cursor: pointer;
+}
+
+.sortToggle.status {
+    width: 26.4rem;
 }
 
 @media (max-width: 743px) {

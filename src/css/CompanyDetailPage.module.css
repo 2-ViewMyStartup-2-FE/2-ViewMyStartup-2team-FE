@@ -1,0 +1,184 @@
+.companyDetailPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  padding-bottom: 3.2rem;
+  width: 100%;
+  max-width: 120rem;
+  border-bottom: 0.1rem solid #2e2e2e;
+}
+
+.company img {
+  display: flex;
+  border-radius: 99rem;
+}
+
+.companyName {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.companyName h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 2.864rem;
+  color: #ffffff;
+}
+
+.companyName p {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 2.387rem;
+  color: #747474;
+}
+
+.companyInfo {
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+  margin-top: 3.2rem;
+  width: 100%;
+  max-width: 120rem;
+}
+
+.companyDetailInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 38.4rem;
+  height: 9.2rem;
+  padding: 3.6rem 2.4rem;
+  border-radius: 1rem;
+  background-color: #282828;
+}
+
+.companyDetailInfo h1 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2rem;
+  color: #d8d8d8;
+}
+
+.companyDetailInfo p {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.909rem;
+  color: #ffffff;
+}
+
+.introduction {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  width: 100%;
+  max-width: 120rem;
+  padding: 2.4rem;
+  border-radius: 1rem;
+  background-color: #282828;
+  margin-top: 3.2rem;
+}
+
+.introduction h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.909rem;
+  color: #ffffff;
+}
+
+.introduction p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.671rem;
+  color: #d8d8d8;
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+  .companyDetailPage {
+    margin: 10rem 2.4rem 0 2.4rem;
+  }
+
+  .company {
+    padding-bottom: 2.4rem;
+    max-width: 69.6rem;
+  }
+
+  .companyInfo {
+    margin-top: 2.4rem;
+  }
+
+  .companyDetailInfo {
+    max-width: 21.6rem;
+  }
+
+  .introduction {
+    max-width: 69.6rem;
+    margin-top: 2.4rem;
+  }
+}
+
+@media (max-width: 743px) {
+  .companyDetailPage {
+    margin: 8rem 1.6rem 0 1.6rem;
+  }
+
+  .company {
+    padding-bottom: 1.6rem;
+    max-width: 34.3rem;
+  }
+
+  .company img {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+
+  .companyName {
+    gap: 0.4rem;
+  }
+
+  .companyName h1 {
+    font-size: 2rem;
+    line-height: 2.387rem;
+  }
+
+  .companyName p {
+    font-size: 1.6rem;
+    line-height: 1.909rem;
+  }
+
+  .companyInfo {
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+  }
+
+  .companyDetailInfo {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+    max-width: 10.367rem;
+    height: 12.5rem;
+    padding: 3.6rem 0;
+  }
+
+  .companyDetailInfo h1 {
+    font-size: 1.4rem;
+  }
+
+  .companyDetailInfo p {
+    font-size: 1.4rem;
+    line-height: 1.671rem;
+  }
+
+  .introduction {
+    max-width: 34.3rem;
+    margin-top: 1.6rem;
+  }
+}

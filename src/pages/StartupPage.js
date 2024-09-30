@@ -1,11 +1,10 @@
 import style from "../css/StartupPage.module.css";
-import search from "../asset/images/logo.png";
-import RankSort from "../component/ListSort";
-import StartupList from "../component/StartupList";
+import search from "../asset/images/ic_search.png";
+import SortContent from "../component/SortContent.js";
+import StartupList from "../component/StartupList.js";
 import Pagination from "../component/SPagination.js";
 import { useState, useEffect } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
-
 
 const ITEM_LIMIT = 10; // 페이지 당 항목 수
 
@@ -13,24 +12,54 @@ export default function StartupPage() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
   const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
   const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
-
+  const sortOption = "list";
+  const [sortType, setSortType] = useState("누적 투자금액 높은순");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getStartupList(); 
-        
+        const response = await getStartupList();
+
         if (response) {
           setStartupData(response.data);
           setTotalCount(response.totalCount);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
-    }
+    };
 
     fetchData();
   }, []);
+
+  // 데이터 정렬 함수
+  const sortData = (data, option) => {
+    const dataCopy = data.slice();
+    switch (option) {
+      case "누적 투자금액 높은순":
+        return dataCopy.sort((a, b) => b.investment - a.investment);
+      case "누적 투자금액 낮은순":
+        return dataCopy.sort((a, b) => a.investment - b.investment);
+      case "매출액 높은순":
+        return dataCopy.sort((a, b) => b.revenue - a.revenue);
+      case "매출액 낮은순":
+        return dataCopy.sort((a, b) => a.revenue - b.revenue);
+      case "고용 인원 많은순":
+        return dataCopy.sort((a, b) => b.employees - a.employees);
+      default:
+        return data;
+    }
+  };
+
+  const handleSelect = (selectedOption) => {
+    console.log("Selected option:", selectedOption);
+    setSortType(selectedOption);
+  };
+
+  // 정렬된 데이터
+  const sortedData = sortData([...startupData], sortType);
+
+  console.log(sortedData);
 
   return (
     <div className={style.container}>
@@ -41,9 +70,14 @@ export default function StartupPage() {
             <img className={style.searchIcon} src={search} alt="search" />
             <input
               className={style.search}
-              placeholder="검색어를 입력해주세요" />
+              placeholder="검색어를 입력해주세요"
+            />
           </div>
-          <RankSort />
+          <SortContent
+            sortOption={sortOption}
+            defaultOption={sortType}
+            onSelect={handleSelect}
+          />
         </div>
       </div>
       <div className={style.body}>
@@ -57,13 +91,15 @@ export default function StartupPage() {
           <div className={style.category}>고용 인원</div>
         </div>
         <div className={style.listBody}>
-          <StartupList 
+          <StartupList
             currentPage={currentPage}
             itemLimit={ITEM_LIMIT}
-            data={startupData} />
+            data={sortedData}
+            isStatusPage={false}
+          />
         </div>
         <div className={style.pagination}>
-          <Pagination 
+          <Pagination
             currentPage={currentPage} // 현재 페이지 번호
             setCurrentPage={setCurrentPage}
             totalCount={totalCount} // 전체 데이터 수
