@@ -1,0 +1,138 @@
+.selectedCompanyCard {
+    width: 120rem;
+    height: 35.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    height: 2.4rem;
+    font-family: Pretendard;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2.387rem;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.selectOtherCompanyBtn {
+    width: 16.7rem;
+    height: 100%;
+    padding: 0.8rem 2.4rem;
+    border-radius: 5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.909rem;
+    text-align: center;
+    white-space: nowrap;
+    border: none;
+    color: #FFFFFF;
+    background: #EB5230;
+}
+
+.companyInfoFrame {
+    width: 100%;
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    background: #212121;
+}
+
+.companyInfo {
+    width: 100%;
+    height: 13.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 8rem;
+    height: 8rem;
+    border: none;
+    border-radius: 50%;
+}
+
+.name {
+    width: 100%;
+    height: 2.4rem;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.387rem;
+    text-align: center;
+    margin-top: 1rem;
+    color: #FFFFFF;
+}
+
+.category {
+    width: 100%;
+    height: 2.1rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 2.148rem;
+    text-align: center;
+    margin-top: 0.4rem;
+    color: #747474;
+}
+
+@media(max-width:119.9rem) {
+    .selectedCompanyCard {
+        width: 69.6rem;
+        height: 29.6rem;
+    }
+
+    .companyInfoFrame {
+        height: 24rem;
+    }
+}
+
+@media(max-width:74.3rem) {
+    .selectedCompanyCard {
+        width: 34.3rem;
+        height: 22.8rem;
+    }
+
+    .header {
+        height: 3.2rem;
+    }
+
+    .title {
+        height: 1.9rem;
+        font-size: 1.6rem;
+        line-height: 1.909rem;
+    }
+
+    .selectOtherCompanyBtn {
+        width: 12.8rem;
+        padding: 0.4rem 1.2rem;
+        font-size: 1.4rem;
+        line-height: 1.671rem;
+    }
+
+    .companyInfoFrame {
+        height: 18rem;
+    }
+
+    .companyInfo {
+        height: 13.4rem;
+    }
+
+    .name {
+        font-size: 1.8rem;
+        line-height: 2.148rem;
+    }
+
+    .category {
+        font-size: 1.6rem;
+        line-height: 1.909rem;
+    }
+}
