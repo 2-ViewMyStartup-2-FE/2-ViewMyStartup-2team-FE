@@ -1,7 +1,7 @@
 import styles from "../css/InvestmentButton.module.css";
-function InvestmentButton({ closeModal, onSubmit }) {
+function InvestmentButton({ closeModal, onSubmit, className }) {
   return (
-    <div className={styles.frame}>
+    <div className={`${styles.frame} ${className}`}>
       <div className={styles.layoutContainer}>
         <button type="button" className={styles.cancel} onClick={closeModal}>
           취소

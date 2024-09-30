@@ -38,7 +38,7 @@
     background: #EB5230;
 }
 
-@media(max-width: 74.3rem) {
+@media(max-width: 743px) {
     .frame {
         height: 4.4rem;
     }

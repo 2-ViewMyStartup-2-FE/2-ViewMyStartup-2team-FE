@@ -1,25 +1,25 @@
 import styles from "../css/InvestmentForm.module.css";
 import toggle from "../asset/images/toggle.png";
 
-function getFieldConfig(type, isVisible) {
+function getFieldConfig(type, isVisible, className) {
   switch (type) {
     case "name": //type에 따라 클래스, input태그의 type, 메시지 설정
       return {
-        frame: styles.other,
+        frame: `${styles.other} ${className}`,
         label: "투자자 이름",
         inputType: "text",
         message: "투자자 이름을 입력해 주세요"
       };
     case "amount":
       return {
-        frame: styles.other,
+        frame: `${styles.other} ${className}`,
         label: "투자 금액",
         inputType: "text",
         message: "투자 금액을 입력해 주세요"
       };
     case "comment":
       return {
-        frame: styles.comment,
+        frame: `${styles.comment} ${className}`,
         label: "투자 코멘트",
         inputType: "text",
         message: "투자에 대한 코멘트를 입력해 주세요"
@@ -27,7 +27,7 @@ function getFieldConfig(type, isVisible) {
     case "password":
     case "confirm":
       return {
-        frame: styles.other,
+        frame: `${styles.other} ${className}`,
         label: type === "password" ? "비밀번호" : "비밀번호 확인",
         inputType: isVisible ? "text" : "password",
         message:
@@ -37,20 +37,26 @@ function getFieldConfig(type, isVisible) {
       };
     default:
       return {
-        frame: styles.other,
+        frame: `${styles.other} ${className}`,
         label: "기본 필드",
         inputType: "text",
         message: "기본 메시지를 입력하세요"
       };
   }
 }
-function InvestmentForm({ type = "name", onBlur, isVisible, onToggle }) {
+function InvestmentForm({
+  type = "name",
+  onBlur,
+  isVisible,
+  onToggle,
+  className
+}) {
   const {
     frame: FRAME,
     label: LABEL,
     inputType: INPUTTYPE,
     message: MESSAGE
-  } = getFieldConfig(type, isVisible);
+  } = getFieldConfig(type, isVisible, className);
   return (
     <div className={FRAME}>
       <label className={styles.label}>{LABEL}</label>
