@@ -28,26 +28,47 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
     <div className={styles.modalOverlay}>
       <div className={styles.frame}>
         <form className={styles.form} onSubmit={onSubmit}>
-          <div className={styles.layoutContainer}>
-            <InvestModalHeader closeModal={closeModal} />
-            <InvestmentCompanyBrief myCompany={myCompany} />
-          </div>
-          <InvestmentForm type="name" onBlur={onBlurField("name")} />
-          <InvestmentForm type="amount" onBlur={onBlurField("amount")} />
-          <InvestmentForm type="comment" onBlur={onBlurField("comment")} />
+          <InvestModalHeader closeModal={closeModal} />
+          <InvestmentCompanyBrief
+            myCompany={myCompany}
+            className={styles.briefMargin}
+          />
+
+          <InvestmentForm
+            type="name"
+            onBlur={onBlurField("name")}
+            className={styles.investFormMargin}
+          />
+          <InvestmentForm
+            type="amount"
+            onBlur={onBlurField("amount")}
+            className={styles.investFormMargin}
+          />
+          <InvestmentForm
+            type="comment"
+            onBlur={onBlurField("comment")}
+            className={styles.investFormMargin}
+          />
+
           <InvestmentForm
             type="password"
             onBlur={onBlurField("password")}
             isVisible={isPasswordVisible}
             onToggle={onTogglePassword}
+            className={styles.investFormMargin}
           />
           <InvestmentForm
             type="confirm"
             onBlur={onBlurField("confirmPassword")}
             isVisible={isConfirmVisible}
             onToggle={onToggleConfirm}
+            className={styles.investFormMargin}
           />
-          <InvestmentButton closeModal={closeModal} onSubmit={onSubmit} />
+          <InvestmentButton
+            closeModal={closeModal}
+            onSubmit={onSubmit}
+            className={styles.buttonMarin}
+          />
         </form>
       </div>
     </div>

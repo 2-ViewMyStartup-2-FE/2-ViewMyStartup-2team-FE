@@ -58,7 +58,7 @@
     color: #747474;
 }
 
-@media(max-width:74.3rem) {
+@media(max-width:743px) {
     .frame {
         width: 14.4rem;
         height: 7.3rem;
