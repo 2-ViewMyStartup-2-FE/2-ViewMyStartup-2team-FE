@@ -1,14 +1,13 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: '',
+  baseURL: 'http://127.0.0.1:3000/api',
   timeout: 10000,
 });
 
-export async function requestGet(url, params = {}) {
+export async function requestGet( params = {}) {
   try {
-    // dummy data 사용으로 임시로 axios 나중에는 instance로 변경
-    return await axios.get(url, { params });
+    return await instance.get("/companies/counts", { params });// (/counts path 변경할 예정.)
   } catch (e) {
     console.error('get error: ', e.message);
   }

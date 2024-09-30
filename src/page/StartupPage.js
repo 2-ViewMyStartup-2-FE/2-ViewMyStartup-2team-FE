@@ -5,7 +5,7 @@ import StartupList from "../component/StartupList";
 import Pagination from "../component/SPagination.js";
 import { useState, useEffect } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
-// import startupData from "../api/mock.js";
+
 
 const ITEM_LIMIT = 10; // 페이지 당 항목 수
 
@@ -13,7 +13,7 @@ export default function StartupPage() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
   const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
   const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
-  // const totalCount = startupData.length;
+
 
   useEffect(() => {
     const fetchData = async () => {
