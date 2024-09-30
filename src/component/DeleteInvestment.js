@@ -1,5 +1,7 @@
 import styles from "../css/DeleteInvestment.module.css";
 import closeIcon from "../asset/images/ic_delete.png";
+import openEyeIcon from "../asset/images/open-eyes.png";
+import closeEyeIcon from "../asset/images/closed-eyes.png";
 import { useEffect, useState } from "react";
 
 export default function DeleteInvestment({
@@ -14,6 +16,7 @@ export default function DeleteInvestment({
   onVerifyPassword,
 }) {
   const [isError, setIsError] = useState(false); // 에러 모달 상태
+  const [passwordToggle, setPasswordToggle] = useState(false);
 
   // 비밀번호 확인 및 삭제 처리
   useEffect(() => {
@@ -39,6 +42,10 @@ export default function DeleteInvestment({
     setIsPasswordVerified(false); // 비밀번호 인증 초기화
   };
 
+  const handlePasswordToggle = () => {
+    setPasswordToggle(!passwordToggle);
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div
@@ -57,10 +64,15 @@ export default function DeleteInvestment({
               <div className={styles.modalinput}>
                 <label>비밀번호</label>
                 <input
-                  type="password"
+                  type={!passwordToggle ? "password" : "text"}
                   placeholder="패스워드를 입력해주세요"
                   value={inputPassword}
                   onChange={(e) => setInputPassword(e.target.value)}
+                />
+                <img
+                  src={!passwordToggle ? openEyeIcon : closeEyeIcon}
+                  onClick={handlePasswordToggle}
+                  alt="passwordToggle"
                 />
               </div>
               <div className={styles.buttonContainer}>

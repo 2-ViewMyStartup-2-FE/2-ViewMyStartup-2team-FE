@@ -95,6 +95,7 @@ export default function InvestmentInfoList() {
   const handleDeleteClick = (id) => {
     console.log(`삭제하기 클릭 - 투자자 ID: ${id}`);
     // 삭제 모달 오픈 및 삭제ID저장
+    setActiveDropdown(null);
     setDeleteId(id);
     setShowDeleteModal(true);
     setInputPassword(""); // 비밀번호 필드 초기화
