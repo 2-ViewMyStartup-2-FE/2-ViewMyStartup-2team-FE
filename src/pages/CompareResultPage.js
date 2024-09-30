@@ -1,5 +1,5 @@
 import styles from "../css/CompareResultPage.module.css";
-import ComparisonTable from "../component/ComparisonTable";
+import ComparisonTable from "../component/ComparisonTable.js";
 function CompareResultPage() {
   return (
     <div className={styles.compareResultPage}>
