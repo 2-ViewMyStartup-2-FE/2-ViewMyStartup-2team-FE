@@ -4,7 +4,7 @@ import InvestModalHeader from "./InvestModalHeader.js";
 import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
 import InvestmentForm from "./InvestmentForm.js";
 import InvestmentButton from "./InvestmentButton.js";
-function InvestModal({ completeTask, closeModal }) {
+function InvestModal({ completeTask, closeModal, myCompany }) {
   const [formData, setFormData] = useState({
     name: "",
     amount: "",
@@ -29,7 +29,11 @@ function InvestModal({ completeTask, closeModal }) {
       <div className={styles.frame}>
         <form className={styles.form} onSubmit={onSubmit}>
           <InvestModalHeader closeModal={closeModal} />
-          <InvestmentCompanyBrief className={styles.briefMargin} />
+          <InvestmentCompanyBrief
+            myCompany={myCompany}
+            className={styles.briefMargin}
+          />
+
           <InvestmentForm
             type="name"
             onBlur={onBlurField("name")}
@@ -45,6 +49,7 @@ function InvestModal({ completeTask, closeModal }) {
             onBlur={onBlurField("comment")}
             className={styles.investFormMargin}
           />
+
           <InvestmentForm
             type="password"
             onBlur={onBlurField("password")}
