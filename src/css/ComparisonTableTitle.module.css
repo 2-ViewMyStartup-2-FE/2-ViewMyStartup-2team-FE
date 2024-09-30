@@ -8,7 +8,7 @@
     color: #FFFFFF;
 }
 
-@media(max-width: 74.3rem) {
+@media(max-width: 743px) {
     .title {
         height: 1.9rem;
         font-size: 1.6rem;

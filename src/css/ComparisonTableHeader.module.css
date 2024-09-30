@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-@media(max-width: 74.3rem) {
+@media(max-width: 743px) {
     .header {
         height: 4rem;
     }
