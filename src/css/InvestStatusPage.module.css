@@ -47,7 +47,7 @@
     width: 21%;
 }
 
-.description {
+.compDetail {
     width: 26%;
 }
 
@@ -59,7 +59,7 @@
     width: 20%;
 }
 
-.rank, .company, .description, .category, .other {
+.rank, .company, .compDetail, .category, .other {
     display: flex;
     justify-content: center;
     font-size: 1.4rem;
@@ -117,7 +117,7 @@
         width: 100%;
     }
 
-    .rank, .company, .description, .category, .other {
+    .rank, .company, .compDetail, .category, .other {
         font-size: 1rem;
         line-height: 1.5rem;
     }
