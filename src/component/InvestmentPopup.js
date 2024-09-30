@@ -7,7 +7,7 @@ function InvestmentPopup({ closePopup }) {
         <div className={styles.content}>
           <div className={styles.layoutContainer}>
             <button className={styles.exitBtn} onClick={closePopup}>
-              <img src={exitImg} />
+              <img src={exitImg} alt="종료버튼 이미지" />
             </button>
           </div>
           <div className={styles.completedMessage}>투자가 완료되었어요!</div>
