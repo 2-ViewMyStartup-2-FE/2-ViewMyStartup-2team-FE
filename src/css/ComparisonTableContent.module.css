@@ -18,6 +18,13 @@
     background: #2E2E2E;
 }
 
+.header th {
+    vertical-align: middle;
+    /* 세로 가운데 정렬 */
+    text-align: center;
+    /* 텍스트 가운데 정렬 */
+}
+
 .margin {
     height: 1.6rem;
 }
@@ -51,6 +58,7 @@
 .row td {
     height: 6.4rem;
     text-align: center;
+    vertical-align: middle;
 }
 
 @media(max-width: 119.9rem) {
