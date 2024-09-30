@@ -45,7 +45,7 @@ export default function StartupPage() {
       case "매출액 낮은순":
         return dataCopy.sort((a, b) => a.revenue - b.revenue);
       case "고용 인원 많은순":
-        return dataCopy.sort((a, b) => b.employees - a.employees);
+        return dataCopy.sort((a, b) => b.employee - a.employee);
       default:
         return data;
     }
@@ -84,7 +84,7 @@ export default function StartupPage() {
         <div className={style.listHeader}>
           <div className={style.rank}>순위</div>
           <div className={style.company}>기업 명</div>
-          <div className={style.compDetail}>기업 소개</div>
+          <div className={style.description}>기업 소개</div>
           <div className={style.category}>카테고리</div>
           <div className={style.category}>누적 투자 금액</div>
           <div className={style.category}>매출액</div>

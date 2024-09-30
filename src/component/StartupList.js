@@ -23,15 +23,15 @@ function StartupList({ currentPage, itemLimit, data, isStatusPage }) {
         <div key={index} className={style.listItem}>
           <div className={style.rank}>{startIndex + index + 1}</div>
           <div className={style.company}>
-            <img className={style.logo} src={item.company.logo} alt="logo" />
-            <div className={style.companyName}>{item.company.name}</div>
+            <img className={style.logo} src={item.logo} alt="logo" />
+            <div className={style.companyName}>{item.name}</div>
           </div>
-          <div className={style.compDetail}>{item.compDetail}</div>
+          <div className={style.description}>{item.description}</div>
           <div className={style.category}>{item.category}</div>
           <div className={`${style.investment} ${isStatusPage ? style.status : ''}`}>{item.investment} {!isCompareStatus && '억 원'}</div>
           <div className={`${style.revenue} ${isStatusPage ? style.status : ''}`}>{item.revenue} {!isCompareStatus && '억 원'}</div>
           {!isStatusPage && (
-          <div className={style.employees}>{item.employees}명</div>)}
+          <div className={style.employee}>{item.employee}명</div>)}
         </div>
       ))}
     </div>
