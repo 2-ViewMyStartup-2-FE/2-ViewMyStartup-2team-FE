@@ -14,6 +14,15 @@ export async function requestGet(url, params = {}) {
   }
 }
 
+//배포된 DB 적용 버전
+export async function requestGetDB(url, params = {}) {
+  try {
+    return await instance.get(url, { params });
+  } catch (e) {
+    console.error("get error: ", e.message);
+  }
+}
+
 export async function requestPost(url, data) {
   try {
     return await instance.post(url, data);
