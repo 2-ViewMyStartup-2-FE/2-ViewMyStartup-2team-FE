@@ -18,16 +18,16 @@ export default function StartupPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getStartupList(); 
-        
+        const response = await getStartupList();
+
         if (response) {
           setStartupData(response.data);
           setTotalCount(response.totalCount);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
-    }
+    };
 
     fetchData();
   }, []);
@@ -41,7 +41,8 @@ export default function StartupPage() {
             <img className={style.searchIcon} src={search} alt="search" />
             <input
               className={style.search}
-              placeholder="검색어를 입력해주세요" />
+              placeholder="검색어를 입력해주세요"
+            />
           </div>
           <RankSort />
         </div>
@@ -57,13 +58,14 @@ export default function StartupPage() {
           <div className={style.category}>고용 인원</div>
         </div>
         <div className={style.listBody}>
-          <StartupList 
+          <StartupList
             currentPage={currentPage}
             itemLimit={ITEM_LIMIT}
-            data={startupData} />
+            data={startupData}
+          />
         </div>
         <div className={style.pagination}>
-          <Pagination 
+          <Pagination
             currentPage={currentPage} // 현재 페이지 번호
             setCurrentPage={setCurrentPage}
             totalCount={totalCount} // 전체 데이터 수

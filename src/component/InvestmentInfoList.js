@@ -3,17 +3,8 @@ import Pagination from "./SPagination.js";
 import styles from "../css/InvestmentInfoList.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-// 금액의 '억'을 숫자로 변환하는 함수
-// const parseAmount = (amountStr) => {
-//   return parseInt(amountStr.replace("억", ""), 10); // "10억" -> 10
-// };
-
-// 숫자를 "억" 단위로 변환하는 함수
-const formatAmount = (amount) => {
-  const billion = 100000000; // 1억을 나타내는 숫자
-  return `${(amount / billion).toFixed(0)}억`; // 억 단위로 나누고 소수점 제거
-};
+import ConvertBillion from "../utils/ConvertBillion.js";
+import DeleteInvestment from "./DeleteInvestment.js";
 
 export default function InvestmentInfoList() {
   const [investments, setInvestments] = useState([]);
@@ -21,6 +12,10 @@ export default function InvestmentInfoList() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
   const itemsPerPage = 5; // 한 페이지에 표시할 아이템 수
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // 모달 열림 상태
+  const [deleteId, setDeleteId] = useState(null); // 삭제할 투자자 ID
+  const [inputPassword, setInputPassword] = useState(""); // 비밀번호 상태
+  const [isPasswordVerified, setIsPasswordVerified] = useState(false); // 비밀번호 인증 상태
 
   // useEffect로 데이터를 불러오기
   useEffect(() => {
@@ -68,7 +63,7 @@ export default function InvestmentInfoList() {
     const rankedData = sortedData.map((investor, index) => ({
       ...investor,
       rank: `${index + 1}위`, // index가 0부터 시작하므로 +1
-      formattedAmount: formatAmount(investor.amount),
+      formattedAmount: ConvertBillion(investor.amount),
     }));
 
     // 투자 총합 계산
@@ -97,9 +92,30 @@ export default function InvestmentInfoList() {
   };
 
   // 삭제하기 버튼 클릭 처리
-  const handleDelete = (id) => {
+  const handleDeleteClick = (id) => {
     console.log(`삭제하기 클릭 - 투자자 ID: ${id}`);
-    // 여기에 삭제 로직 추가
+    // 삭제 모달 오픈 및 삭제ID저장
+    setDeleteId(id);
+    setShowDeleteModal(true);
+    setInputPassword(""); // 비밀번호 필드 초기화
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setIsPasswordVerified(false);
+  };
+
+  // 서버에서 확인할 비밀번호를 정의한 함수 (실제 검증 로직을 서버와 통신해야 함)
+  const verifyPassword = (inputPassword) => {
+    const correctPassword = "codeit"; // 실제 비밀번호 검증 API 호출로 대체 필요
+    return inputPassword === correctPassword;
+  };
+
+  // 비밀번호 인증 처리
+  const handlePasswordVerification = () => {
+    if (verifyPassword(inputPassword)) {
+      setIsPasswordVerified(true); // 비밀번호 인증 성공
+    }
   };
 
   // 페이지에 맞는 데이터 범위를 가져오는 함수
@@ -113,7 +129,9 @@ export default function InvestmentInfoList() {
         <h1>View My Startup에서 받은 투자</h1>
         <Link className={styles.investBtn}>기업투자하기</Link>
       </div>
-      <div className={styles.investment}>총 {formatAmount(totalAmount)} 원</div>
+      <div className={styles.investment}>
+        총 {ConvertBillion(totalAmount)} 원
+      </div>
       <div className={styles.investInfo}>
         <div className={styles.investDetailTitle}>
           <h1>투자자 이름</h1>
@@ -142,7 +160,7 @@ export default function InvestmentInfoList() {
                       <button onClick={() => handleEdit(investor.id)}>
                         수정하기
                       </button>
-                      <button onClick={() => handleDelete(investor.id)}>
+                      <button onClick={() => handleDeleteClick(investor.id)}>
                         삭제하기
                       </button>
                     </div>
@@ -159,6 +177,19 @@ export default function InvestmentInfoList() {
         totalCount={investments.length} // 전체 데이터 수
         itemLimit={itemsPerPage} // 페이지당 항목 수
       />
+      {showDeleteModal && (
+        <DeleteInvestment
+          investorId={deleteId}
+          investments={investments}
+          setInvestments={setInvestments}
+          onClose={closeDeleteModal}
+          inputPassword={inputPassword}
+          setInputPassword={setInputPassword}
+          isPasswordVerified={isPasswordVerified}
+          setIsPasswordVerified={setIsPasswordVerified}
+          onVerifyPassword={handlePasswordVerification}
+        />
+      )}
     </div>
   );
 }

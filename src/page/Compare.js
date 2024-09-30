@@ -1,5 +1,5 @@
 import compareStyle from "../css/Compare.module.css";
-import btnPlus from "../asset/image/btn_plus.png";
+import btnPlus from "../asset/images/btn_plus.png";
 
 function MyCompare() {
   return (
