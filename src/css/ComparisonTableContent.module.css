@@ -6,7 +6,6 @@
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.671rem;
-    color: #FFFFFF;
 }
 
 .tableContainer {
@@ -29,28 +28,58 @@
     height: 1.6rem;
 }
 
+.logo {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    margin-left: 2.4rem;
+    margin-right: 1.2rem;
+}
+
 .name {
     width: 21.3rem;
     height: 100%;
+    color: #ffffff;
+}
+
+.name.content {
+    display: flex;
+    align-items: center;
 }
 
 .description {
     width: 30.4rem;
     height: 100%;
+    color: #ffffff;
+}
+
+.description.content {
+    color: #D8D8D8;
+    white-space: normal;
 }
 
 .ranking {
     width: 6.8rem;
     height: 100%;
     padding: 0;
+    color: #ffffff;
+}
+
+.ranking.content {
+    color: #D8D8D8;
 }
 
 .other {
     height: 100%;
     flex: 1;
+    color: #ffffff;
 }
 
-.content {
+.other.content {
+    color: #D8D8D8;
+}
+
+.contentBackground {
     height: auto;
     background: #212121;
 }
@@ -61,7 +90,7 @@
     vertical-align: middle;
 }
 
-@media(max-width: 119.9rem) {
+@media(max-width: 1199px) {
     .name {
         width: 15rem;
     }
@@ -69,9 +98,14 @@
     .description {
         width: 18rem;
     }
+
+    .logo {
+        margin-left: 1.493rem;
+        margin-right: 0.8rem;
+    }
 }
 
-@media(max-width: 74.3rem) {
+@media(max-width: 743px) {
     .other {
         font-size: 1.3rem;
         font-weight: 500;

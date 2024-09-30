@@ -11,13 +11,13 @@
     margin-bottom: 1.6rem;
 }
 
-@media(max-width: 119.9rem) {
+@media(max-width: 1199px) {
     .comparisonTable {
         width: 69.6rem;
     }
 }
 
-@media(max-width: 74.3rem) {
+@media(max-width: 743px) {
     .comparisonTable {
         width: 34.3rem;
         height: 45.5rem;
