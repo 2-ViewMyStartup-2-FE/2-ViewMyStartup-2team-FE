@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManyChoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { requestGet } from "../api/api.js";
-import ModalPagination from "./ModalPagination.js";
+// import ModalPagination from "./ModalPagination.js";
+import SPagination from "./SPagination.js";
 
 function ModalMyCompany({ isOpen, onClose }) {
   const [inputValue, setInputValue] = useState("");
@@ -141,11 +142,12 @@ function ModalMyCompany({ isOpen, onClose }) {
         )}
         {totalCount > ITEM_LIMIT &&
           searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
-            <ModalPagination
+            <SPagination
               currentPage={currentPage}
               setCurrentPage={handlePageChange}
               totalCount={totalCount}
               itemLimit={ITEM_LIMIT}
+              className={style.modalPage}
             />
           )}
       </div>

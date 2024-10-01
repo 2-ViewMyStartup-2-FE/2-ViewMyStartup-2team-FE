@@ -1,6 +1,6 @@
 import compareStyle from "../css/Compare.module.css";
 import btnPlus from "../asset/images/btn_plus.png";
-import ModalMyCompany from "../component/ModalCompany";
+import ModalMyCompany from "../component/ModalCompany.js";
 import { useState } from "react";
 
 function MyCompare() {

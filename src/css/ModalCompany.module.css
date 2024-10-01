@@ -112,6 +112,21 @@
   flex-direction: column;
 }
 
+.modalPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 0.8rem;
+  background-color: #2e2e2e;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.9rem;
+  color: #747474;
+  cursor: pointer;
+}
+
 @media (max-width: 743px) {
   .modalContent {
     padding: 1.6rem;
@@ -119,7 +134,7 @@
   .modalInput {
     padding: 0.8rem 1.2rem;
   }
-  .modalFont{
+  .modalFont {
     font-size: 1.6rem;
   }
 }

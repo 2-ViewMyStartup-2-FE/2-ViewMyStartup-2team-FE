@@ -3,7 +3,7 @@ import closeIcon from "../asset/images/ic_delete.png";
 import openEyeIcon from "../asset/images/open-eyes.png";
 import closeEyeIcon from "../asset/images/closed-eyes.png";
 import { useEffect, useState } from "react";
-import ErrorModal from "./ErrorModal";
+import ErrorModal from "./ErrorModal.js";
 
 export default function DeleteInvestment({
   investorId,
