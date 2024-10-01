@@ -5,16 +5,7 @@ import defaultImg from "../asset/images/img_company_default_logo.png";
 
 function StartupList({ currentPage, itemLimit, data, isStatusPage, isCompareStatus }) {
   const startIndex = (currentPage - 1) * itemLimit; // 현재 페이지의 시작 인덱스
-  // const endIndex = startIndex + itemLimit; // 현재 페이지의 끝 인덱스
-
-  // const sortedData = data.map((item) => ({
-  //   ...item,
-  //   total: item.investment + item.revenue
-  // })).sort((a, b) => b.total - a.total);
-
-  // const visibleData = sortedData.slice(startIndex, endIndex);
-  // console.log(isStatusPage);
-
+  
   return (
     <div className={style.table}>
       {data.map((item, index) => (
