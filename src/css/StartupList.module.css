@@ -6,6 +6,8 @@
   margin-top: 1.5rem;
   border-radius: 0.4rem;
   background-color: #212121;
+  /* overflow: auto;
+  min-width: 40rem; */
 }
 
 .listItem {
@@ -15,6 +17,7 @@
   height: 6.4rem;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .listItem:last-child {
