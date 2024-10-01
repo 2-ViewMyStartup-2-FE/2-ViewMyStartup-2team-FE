@@ -3,7 +3,7 @@ import mdClose from "../asset/images/ic_modalClose.png";
 import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import search from "../asset/images/ic_search.png";
 import { useEffect, useState } from "react";
-import CompanyListItem from "./ManychoiceCompany.js";
+import ManyChoiceCompany from "./ManyChoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { requestGet } from "../api/api.js";
 import ModalPagination from "./ModalPagination.js";
@@ -21,9 +21,9 @@ function ModalMyCompany({ isOpen, onClose }) {
     try {
       const response = await requestGet({ limit: ITEM_LIMIT });
       if (response) {
-        const sortedData = response.data.data
-          .sort((a, b) => b.myChosenCount - a.myChosenCount)
-          .slice(0, ITEM_LIMIT);
+        const sortedData = response.data.data.sort(
+          (a, b) => b.myChosenCount - a.myChosenCount
+        );
         setStartupData(sortedData);
       }
     } catch (error) {
@@ -130,7 +130,7 @@ function ModalMyCompany({ isOpen, onClose }) {
             onClick={handleSearchClick}
           />
         </div>
-        <CompanyListItem itemLimit={ITEM_LIMIT} data={startupData} />
+        <ManyChoiceCompany itemLimit={ITEM_LIMIT} data={startupData} />
         <div className={style.searchHeader}>
           <p className={style.modalFont}>검색 결과{`(${totalCount})`}</p>
         </div>

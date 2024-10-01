@@ -16,10 +16,10 @@ function CompanyList({ item }) {
 function SearchResult({ data }) {
   return (
     <div className={style.listSection}>
-      {data.length > 0 ? (
+      {data && data.length > 0 ? (
         <ul className={style.listItem}>
-          {data.map((item, index) => (
-            <li key={index} className={style.resultItem}>
+          {data.map((item) => (
+            <li key={item.id} className={style.resultItem}>
               <CompanyList item={item} />
             </li>
           ))}

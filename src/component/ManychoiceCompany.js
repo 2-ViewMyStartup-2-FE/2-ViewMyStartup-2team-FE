@@ -1,15 +1,13 @@
 import style from "../css/ManyChoiceCompany.module.css";
 
-function CompanyListItem({ itemLimit, data }) {
-  const visibleData = data.slice(0, itemLimit); // 처음 5개만 표시
-
+function ManyChoiceCompany({ data }) {
   return (
     <div className={style.table}>
       <div className={style.container}>
         <p className={style.headFont}>많이 선택한 기업</p>
         <div className={style.listSection}>
-          {visibleData.map((item, index) => (
-            <div key={index} className={style.listItem}>
+          {data.map((item) => (
+            <div key={item.id} className={style.listItem}>
               <div className={style.company}>
                 <img className={style.logo} src={item.logoImage} alt="logo" />
                 <div className={style.companyName}>{item.name}</div>
@@ -24,4 +22,4 @@ function CompanyListItem({ itemLimit, data }) {
   );
 }
 
-export default CompanyListItem;
+export default ManyChoiceCompany;
