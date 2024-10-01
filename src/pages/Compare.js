@@ -2,10 +2,12 @@ import compareStyle from "../css/Compare.module.css";
 import btnPlus from "../asset/images/btn_plus.png";
 import ModalMyCompany from "../component/ModalCompany.js";
 import { useState } from "react";
+import defaultImg from "../asset/images/img_company_default_logo.png";
 
 function MyCompare() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [addCompany, setAddCompany] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState(null); // 선택한 기업 상태 추가
 
   const openModal = () => {
     setModalOpen(true);
@@ -13,6 +15,15 @@ function MyCompare() {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+  const handleSelectCompany = (company) => {
+    setSelectedCompany(company); // 선택한 기업 상태 업데이트
+    setAddCompany(true);
+  };
+
+  const handleCancelSelect = () => {
+    setSelectedCompany(null);
+    setAddCompany(false);
   };
 
   return (
@@ -22,10 +33,36 @@ function MyCompare() {
           <p className={compareStyle.headFont}>나의 기업을 선택해 주세요!</p>
         </div>
         <div className={compareStyle.mainSection}>
-          <img src={btnPlus} onClick={openModal} alt="btnPlus" />
-          <p className={compareStyle.contentFont} onClick={openModal}>
-            기업추가
-          </p>
+          {selectedCompany ? ( // 선택한 기업이 있을 경우
+            <>
+              <div className={compareStyle.cancelSection}>
+                <p
+                  className={compareStyle.cancelFont}
+                  onClick={handleCancelSelect}
+                >
+                  선택 취소
+                </p>
+              </div>
+              <img
+                className={compareStyle.logo}
+                src={
+                  selectedCompany.logoImage === ""
+                    ? defaultImg
+                    : selectedCompany.logoImage
+                }
+                alt="selected logo"
+              />
+              <p className={compareStyle.selectName}>{selectedCompany.name}</p>
+              <p className={compareStyle.selectCategory}>{selectedCompany.category}</p>
+            </>
+          ) : (
+            <>
+              <img src={btnPlus} onClick={openModal} alt="btnPlus" />
+              <p className={compareStyle.contentFont} onClick={openModal}>
+                기업추가
+              </p>
+            </>
+          )}
         </div>
 
         {addCompany && (
@@ -51,7 +88,11 @@ function MyCompare() {
       </div>
 
       {isModalOpen && (
-        <ModalMyCompany isOpen={isModalOpen} onClose={closeModal} />
+        <ModalMyCompany
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onSelectCompany={handleSelectCompany}
+        />
       )}
     </>
   );
