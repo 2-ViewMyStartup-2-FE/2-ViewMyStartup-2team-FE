@@ -23,6 +23,7 @@ export default function StartupPage() {
         if (response) {
           setStartupData(response.data);
           setTotalCount(response.totalCount);
+          console.log(response);
         }
       } catch (error) {
         console.error("Error fetching data:", error);

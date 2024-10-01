@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://two-viewmystartup-2team-be.onrender.com/",
+  baseURL: "https://two-viewmystartup-2team-be.onrender.com/api",
   timeout: 10000,
 });
 
 export async function requestGet(url, params = {}) {
   try {
     // dummy data 사용으로 임시로 axios 나중에는 instance로 변경
-    return await axios.get(url, { params });
+    return await instance.get(url, { params });
   } catch (e) {
     console.error("get error: ", e.message);
   }
