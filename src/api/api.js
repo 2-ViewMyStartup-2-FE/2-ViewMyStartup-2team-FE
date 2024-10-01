@@ -5,7 +5,7 @@ const instance = axios.create({
   timeout: 10000,
 });
 
-export async function requestGet(params = {}) {
+export async function requestGet(url, params = {}) {
   try {
     return await instance.get(url, { params });
   } catch (e) {
