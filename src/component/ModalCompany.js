@@ -3,7 +3,7 @@ import mdClose from "../asset/images/ic_modalClose.png";
 import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import search from "../asset/images/ic_search.png";
 import { useEffect, useState } from "react";
-import ManyChoiceCompany from "./ManyChoiceCompany.js";
+import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { requestGet } from "../api/api.js";
 // import ModalPagination from "./ModalPagination.js";
