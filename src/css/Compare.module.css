@@ -58,6 +58,9 @@ body {
   border-radius: 0.4rem;
   background-color: var(--black-300);
 }
+.mainSection img{
+  cursor: pointer;
+}
 .content {
   height: 100%;
   width: 100%;
