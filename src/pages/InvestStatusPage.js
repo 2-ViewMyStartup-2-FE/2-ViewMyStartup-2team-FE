@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getInvestmentList } from "../api/InvestStatusAPI.js";
 import StartupList from "../component/StartupList.js";
 import style from "../css/InvestStatusPage.module.css";
-import startupData from "../api/mock.js";
 import SPagination from "../component/SPagination.js";
 import SortContent from "../component/SortContent.js";
 
@@ -9,21 +9,45 @@ const ITEM_LIMIT = 10;
 
 export default function InvestStatusPage() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [investmentData, setInvestmentData] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const sortOption = "invest";
-  const [sortType, setSortType] = useState("View My Startup 투자 금액 높은순");
-  const totalCount = startupData.length;
+  const [sortType, setSortType] = useState("simulatedInvestHighest");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getInvestmentList({
+          page: currentPage,
+          limit: ITEM_LIMIT,
+          order: sortType,
+        });
+
+        if (response) {
+          setInvestmentData(response.data);
+          setTotalCount(response.totalCount);
+          console.log(response.data, response.totalCount);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, sortType]);
+
+    
   // 데이터 정렬 함수
   const sortData = (data, option) => {
     switch (option) {
       case "View My Startup 투자 금액 높은순":
-        return data.sort((a, b) => b.investment - a.investment);
+        return setSortType("simulatedInvestHighest");
       case "View My Startup 투자 금액 낮은순":
-        return data.sort((a, b) => a.investment - b.investment);
+        return setSortType("simulatedInvestLowest");
       case "실제 누적 투자 금액 높은순":
-        return data.sort((a, b) => b.revenue - a.revenue);
+        return setSortType("actualInvestHighest");
       case "실제 누적 투자 금액 낮은순":
-        return data.sort((a, b) => a.revenue - b.revenue);
+        return setSortType("actualInvestLowest");
       default:
         return data;
     }
@@ -34,7 +58,7 @@ export default function InvestStatusPage() {
     setSortType(selectedOption);
   };
 
-  const sortedData = sortData([...startupData], sortType);
+  const sortedData = sortData([...investmentData], sortType);
 
   return (
     <div className={style.container}>
@@ -60,6 +84,7 @@ export default function InvestStatusPage() {
           itemLimit={ITEM_LIMIT}
           data={sortedData}
           isStatusPage={true}
+          isCompareStatus={false}
         />
       </div>
       <SPagination
