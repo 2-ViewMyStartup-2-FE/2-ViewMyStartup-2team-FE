@@ -56,6 +56,13 @@
     padding: 0 4.5rem;
 }
 
+.closeCircle {
+    position: absolute;
+    top: 30%;
+    left: 93%;
+    cursor: pointer;
+}
+
 .body {
     display: flex;
     flex-direction: column;
@@ -113,6 +120,15 @@
         width: 26.9rem;
     }
 
+    .searchIcon {
+        top: 27%;
+        left: 3%;
+    }
+
+    .closeCircle {
+        left: 90%;
+    }
+
     .body {
         width: 100%;
     }
@@ -152,8 +168,13 @@
 
     .searchIcon {
         top: 20%;
-        left: 2%;
+        left: 3%;
     }
+
+    .closeCircle {
+        left: 90%;
+    }
+
 
     .body {
         width: 100%;

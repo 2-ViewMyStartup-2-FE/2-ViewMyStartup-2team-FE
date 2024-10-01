@@ -3,6 +3,7 @@ import searchIcon from "../asset/images/ic_search.png";
 import SortContent from "../component/SortContent.js";
 import StartupList from "../component/StartupList.js";
 import Pagination from "../component/SPagination.js";
+import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import { useState, useEffect } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
 
@@ -14,9 +15,8 @@ export default function StartupPage() {
   const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
   const sortOption = "list";
   const [sortType, setSortType] = useState("investmentHighest");
+  const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
-  // 검색어 입력을 임시로 담아두는 곳
-  const [temp, setTemp] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +31,7 @@ export default function StartupPage() {
         if (response) {
           setStartupData(response.data);
           setTotalCount(response.totalCount);
-          console.log(response.data, response.totalCount);
+          // console.log(response.data, response.totalCount);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -67,13 +67,24 @@ export default function StartupPage() {
   };
 
   const handleSearchClick = () => {
-    setSearch(temp);
+    setSearch(inputValue);
+    setCurrentPage(1);
   }
+
+  const handleClearInput = () => {
+    setInputValue(""); 
+    setSearch(""); 
+    setCurrentPage(1); 
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearchClick();
+    }
+  };
 
   // 정렬된 데이터
   const sortedData = sortData([...startupData], sortType);
-
-  console.log(sortedData);
 
   return (
     <div className={style.container}>
@@ -84,10 +95,19 @@ export default function StartupPage() {
             <img className={style.searchIcon} src={searchIcon} alt="search" onClick={handleSearchClick} />
             <input
               className={style.search}
-              value={temp}
+              value={inputValue}
               placeholder="검색어를 입력해주세요"
-              onChange={(e) => setTemp(e.target.value)}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
+            {inputValue && (
+            <img
+              className={style.closeCircle}
+              src={closeCircle}
+              alt="closeSmall_bt"
+              onClick={handleClearInput}
+            />
+          )}
           </div>
           <SortContent
             sortOption={sortOption}
