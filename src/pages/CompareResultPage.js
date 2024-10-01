@@ -1,8 +1,8 @@
 import styles from "../css/CompareResultPage.module.css";
-import SelectedCompanyCard from "../component/SelectedCompanyCard";
-import ComparisonTable from "../component/ComparisonTable";
-import InvestModal from "../component/InvestModal";
-import InvestmentPopup from "../component/InvestmentPopup";
+import SelectedCompanyCard from "../component/SelectedCompanyCard.js";
+import ComparisonTable from "../component/ComparisonTable.js";
+import InvestModal from "../component/InvestModal.js";
+import InvestmentPopup from "../component/InvestmentPopup.js";
 import { useState } from "react";
 const myComanyMockData = {
   name: "코드잇",
@@ -70,6 +70,7 @@ function CompareResultPage({
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
   const list = [MYCOMPANY, ...SELETEDCOMPANIES];
+
   return (
     <div className={styles.compareResultPage}>
       <SelectedCompanyCard
