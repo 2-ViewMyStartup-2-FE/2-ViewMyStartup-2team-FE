@@ -23,7 +23,12 @@ function YStartupList({
             />
             <div className={style.companyName}>{item.name}</div>
           </div>
-          <div className={style.compDetail}>{item.description}</div>
+          {/* <div className={style.compDetail}>{item.description}</div> */}
+          <div className={style.compDetail}>
+            안녕하세요 두 줄 이상 작성하기 챌린지 어쩌고 저쩌고 어쩌고 저쩌고
+            어쩌고 저쩌고 가나다라마바사 아자차카타파아 아자아자화이자
+            아자아자화이팅 어쩌고
+          </div>
           <div className={style.category}>{item.category}</div>
           <div
             className={`${style.investment} ${
