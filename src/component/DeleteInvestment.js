@@ -3,6 +3,7 @@ import closeIcon from "../asset/images/ic_delete.png";
 import openEyeIcon from "../asset/images/open-eyes.png";
 import closeEyeIcon from "../asset/images/closed-eyes.png";
 import { useEffect, useState } from "react";
+import ErrorModal from "./ErrorModal";
 
 export default function DeleteInvestment({
   investorId,
@@ -15,7 +16,7 @@ export default function DeleteInvestment({
   setIsPasswordVerified,
   onVerifyPassword,
 }) {
-  const [isError, setIsError] = useState(false); // 에러 모달 상태
+  const [isErrorModal, setIsErrorModal] = useState(false); // 에러 모달 상태
   const [passwordToggle, setPasswordToggle] = useState(false);
 
   // 비밀번호 확인 및 삭제 처리
@@ -28,16 +29,16 @@ export default function DeleteInvestment({
     }
   }, [isPasswordVerified, investorId, investments, onClose, setInvestments]);
 
-  const handleDelete = () => {
+  const handlePasswordVerify = () => {
     onVerifyPassword();
     if (!isPasswordVerified) {
-      setIsError(true);
+      setIsErrorModal(true);
     }
   };
 
   // 에러 확인 버튼 클릭 시 원래 모달로 복귀
-  const handleErrorConfirm = () => {
-    setIsError(false); // 에러 모달 닫기
+  const handleErrorConfirmBtn = () => {
+    setIsErrorModal(false); // 에러 모달 닫기
     setInputPassword(""); // 비밀번호 필드 초기화
     setIsPasswordVerified(false); // 비밀번호 인증 초기화
   };
@@ -50,11 +51,11 @@ export default function DeleteInvestment({
     <div className={styles.modalOverlay}>
       <div
         className={`${styles.modalContainer} ${
-          isError ? styles.errorContainer : ""
+          isErrorModal ? styles.errorContainer : ""
         }`}
       >
         {/* 비밀번호 인증 모달 */}
-        {!isError && (
+        {!isErrorModal && (
           <>
             <div className={styles.modalTitle}>
               <h1>삭제 권한 인증</h1>
@@ -76,25 +77,18 @@ export default function DeleteInvestment({
                 />
               </div>
               <div className={styles.buttonContainer}>
-                <button onClick={handleDelete}>삭제하기</button>
+                <button onClick={handlePasswordVerify}>삭제하기</button>
               </div>
             </div>
           </>
         )}
 
         {/* 에러 모달 */}
-        {isError && (
-          <>
-            <div className={styles.ErrorModalTitle}>
-              <img src={closeIcon} alt="취소" onClick={onClose} />
-            </div>
-            <div className={styles.ErrorModalContent}>
-              <p>잘못된 비밀번호로 삭제에 실패하셨습니다.</p>
-              <div className={styles.buttonContainer}>
-                <button onClick={handleErrorConfirm}>확인</button>
-              </div>
-            </div>
-          </>
+        {isErrorModal && (
+          <ErrorModal
+            onClose={onClose}
+            handleErrorConfirmBtn={handleErrorConfirmBtn}
+          />
         )}
       </div>
     </div>
