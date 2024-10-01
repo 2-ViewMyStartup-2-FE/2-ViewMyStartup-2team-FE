@@ -1,0 +1,36 @@
+.header {
+    width: 100%;
+    height: 3.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exitBtn {
+    width: 3.2rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #212121;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+@media(max-width: 743px) {
+    .header {
+        height: 2.4rem;
+    }
+
+    .exitBtn {
+        width: 2.4rem;
+    }
+
+    .title {
+        font-size: 1.6rem;
+    }
+}

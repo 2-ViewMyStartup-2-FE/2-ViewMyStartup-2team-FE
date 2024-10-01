@@ -1,6 +1,13 @@
 import styles from "../css/ComparisonTableContent.module.css";
 
-function ComparisonTableContent({ mockData, type }) {
+function ComparisonTableContent({ list, type }) {
+  function toBillion(number) {
+    return number / 100000000;
+  }
+  const NAMECONTENT = `${styles.name} ${styles.content}`;
+  const DESCRIPTION = `${styles.description} ${styles.content}`;
+  const OTHER = `${styles.other} ${styles.content}`;
+  const RANKING = `${styles.ranking} ${styles.content}`;
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -15,19 +22,28 @@ function ComparisonTableContent({ mockData, type }) {
             <th className={styles.other}>고용 인원</th>
           </tr>
         </thead>
-        <tbody className={styles.content}>
+        <tbody className={styles.contentBackground}>
           <tr className={styles.margin}></tr>
-          {mockData.map((company) => (
+          {list.map((company) => (
             <tr className={styles.row} key={company.name}>
               {type === "ranking" && (
-                <td className={styles.ranking}>{company.rank}위</td>
+                <td className={RANKING}>{company.rank}위</td>
               )}
-              <td className={styles.name}>{company.name}</td>
-              <td className={styles.description}>{company.describe}</td>
-              <td className={styles.other}>{company.category}</td>
-              <td className={styles.other}>{company.totalInvestment}</td>
-              <td className={styles.other}>{company.revenue}</td>
-              <td className={styles.other}>{company.employeeCount}</td>
+              <td className={NAMECONTENT}>
+                <img
+                  src={company.logo}
+                  className={styles.logo}
+                  alt="로고이미지"
+                />
+                <p>{company.name}</p>
+              </td>
+              <td className={DESCRIPTION}>{company.description}</td>
+              <td className={OTHER}>{company.category}</td>
+              <td className={OTHER}>
+                {toBillion(company.totalInvestment)}억 원
+              </td>
+              <td className={OTHER}>{toBillion(company.revenue)}억 원</td>
+              <td className={OTHER}>{company.employee}명</td>
             </tr>
           ))}
           <tr>

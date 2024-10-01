@@ -86,13 +86,13 @@ export default function InvestmentInfoList() {
   };
 
   // 수정하기 버튼 클릭 처리
-  const handleEdit = (id) => {
+  const handleOpenEditModal = (id) => {
     console.log(`수정하기 클릭 - 투자자 ID: ${id}`);
     // 여기에 수정 로직 추가
   };
 
   // 삭제하기 버튼 클릭 처리
-  const handleDeleteClick = (id) => {
+  const handleOpenDeleteModal = (id) => {
     console.log(`삭제하기 클릭 - 투자자 ID: ${id}`);
     // 삭제 모달 오픈 및 삭제ID저장
     setActiveDropdown(null);
@@ -158,10 +158,12 @@ export default function InvestmentInfoList() {
                   {/* 드롭다운 메뉴 */}
                   {activeDropdown === investor.id && (
                     <div className={styles.dropdownMenu}>
-                      <button onClick={() => handleEdit(investor.id)}>
+                      <button onClick={() => handleOpenEditModal(investor.id)}>
                         수정하기
                       </button>
-                      <button onClick={() => handleDeleteClick(investor.id)}>
+                      <button
+                        onClick={() => handleOpenDeleteModal(investor.id)}
+                      >
                         삭제하기
                       </button>
                     </div>

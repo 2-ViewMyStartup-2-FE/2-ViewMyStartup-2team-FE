@@ -32,7 +32,7 @@
 
 .sortOptions {
     display: flex;
-    position: absolute;    
+    position: absolute;
     flex-direction: column;
     top: 110%;
     width: 16.8rem;
