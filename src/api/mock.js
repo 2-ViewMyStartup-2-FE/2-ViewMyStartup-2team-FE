@@ -10,6 +10,8 @@ const startupData = [
     investment: 10,
     revenue: 5,
     employees: 10,
+    myChosenCount: 35,
+    comparedChosenCount: 10,
   },
   {
     company: { name: "네이버", logo: logo },

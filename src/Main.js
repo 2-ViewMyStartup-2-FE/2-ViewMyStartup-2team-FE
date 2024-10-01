@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "./component/App";
-import CompanyDetailPage from "./pages/CompanyDetailPage";
-import StartupPage from "./pages/StartupPage";
-import MyCompare from "./pages/Compare";
-import CompareResultPage from "./pages/CompareResultPage";
-import CompareStatusPage from "./pages/CompareStatusPage";
-import InvestStatusPage from "./pages/InvestStatusPage";
+import App from "./component/App.js";
+import CompanyDetailPage from "./pages/CompanyDetailPage.js";
+import StartupPage from "./pages/StartupPage.js";
+import MyCompare from "./pages/Compare.js";
+import CompareResultPage from "./pages/CompareResultPage.js";
+import CompareStatusPage from "./pages/CompareStatusPage.js";
+import InvestStatusPage from "./pages/InvestStatusPage.js";
 
 export default function Main() {
   return (

@@ -1,0 +1,71 @@
+.errorModalTitle {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.errorModalTitle img {
+  width: 3.2rem;
+  height: 3.2rem;
+  cursor: pointer;
+}
+
+.errorModalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.errorModalContent p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.79rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonContainer button {
+  width: 19.4rem;
+  height: 4.8rem;
+  padding: 1.3rem 4.8rem;
+  border-radius: 5rem;
+  background-color: #eb5230;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.909rem;
+  color: #ffffff;
+}
+
+@media (max-width: 743px) {
+  .errorModalTitle img {
+    width: 2.4rem;
+    height: 2.4rem;
+    cursor: pointer;
+  }
+
+  .errorModalContent {
+    gap: 3.2rem;
+  }
+
+  .errorModalContent p {
+    font-size: 1.4rem;
+    line-height: 1.671rem;
+  }
+
+  .errorModalTitle {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .buttonContainer button {
+    width: 12.4rem;
+    height: 4rem;
+    padding: 1.3rem 2.4rem;
+    font-size: 1.4rem;
+    line-height: 1.671rem;
+  }
+}
