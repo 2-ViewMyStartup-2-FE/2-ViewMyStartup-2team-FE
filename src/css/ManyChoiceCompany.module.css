@@ -47,7 +47,11 @@ p {
   flex-direction: column;
   gap: 1.2rem;
 }
-
+.logo {
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 4.8rem;
+}
 .listItem {
   display: flex;
   justify-content: space-between;
@@ -57,6 +61,8 @@ p {
 .company {
   display: flex;
   gap: 1.6rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .companyName {
@@ -79,6 +85,7 @@ p {
   font-weight: 500;
   line-height: 1.909rem;
   color: var(--brand-orange);
+  cursor: pointer;
 }
 .compareSearch {
   font-size: 1.6rem;
@@ -98,5 +105,10 @@ p {
   .selectButton {
     padding: 0.75rem 1.2rem;
     font-size: 1.4rem;
+  }
+  .logo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 4rem;
   }
 }

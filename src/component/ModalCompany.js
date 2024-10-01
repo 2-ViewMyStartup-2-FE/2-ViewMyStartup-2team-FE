@@ -6,16 +6,22 @@ import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManyChoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { requestGet } from "../api/api.js";
-// import ModalPagination from "./ModalPagination.js";
 import SPagination from "./SPagination.js";
 
-function ModalMyCompany({ isOpen, onClose }) {
+function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   const [inputValue, setInputValue] = useState("");
   const [startupData, setStartupData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+
   const ITEM_LIMIT = 5;
+
+  const handleSelectCompany = (company) => {
+    //선택시 Compare화면에 나타남
+    onSelectCompany(company);
+    onClose(); //모달 닫기
+  };
 
   // 전체 데이터 로드 (페이지네이션 없음)
   const handleLoadFetchData = async () => {
@@ -131,14 +137,18 @@ function ModalMyCompany({ isOpen, onClose }) {
             onClick={handleSearchClick}
           />
         </div>
-        <ManyChoiceCompany itemLimit={ITEM_LIMIT} data={startupData} />
+        <ManyChoiceCompany
+          itemLimit={ITEM_LIMIT}
+          data={startupData}
+          onSelect={handleSelectCompany}
+        />
         <div className={style.searchHeader}>
           <p className={style.modalFont}>검색 결과{`(${totalCount})`}</p>
         </div>
         {searchData.length === 0 ? (
           <p>비교하고 싶은 기업을 검색해 주세요</p>
         ) : (
-          <SearchResult data={searchData} />
+          <SearchResult data={searchData} onSelect={handleSelectCompany} />
         )}
         {totalCount > ITEM_LIMIT &&
           searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
