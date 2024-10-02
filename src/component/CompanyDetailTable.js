@@ -18,7 +18,7 @@ function CompanyDetailTable({ data }) {
       <div className={styles.companyInfo}>
         <div className={styles.companyDetailInfo}>
           <h1>누적 투자 금액</h1>
-          <p>{ConvertBillion(parseInt(data.totalInvestment))}원</p>
+          <p>{ConvertBillion(parseInt(data.totalInvestment))} 원</p>
         </div>
         <div className={styles.companyDetailInfo}>
           <h1>매출액</h1>
