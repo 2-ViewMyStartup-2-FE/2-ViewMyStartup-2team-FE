@@ -3,21 +3,20 @@ import closeIcon from "../asset/images/ic_delete.png";
 import openEyeIcon from "../asset/images/open-eyes.png";
 import closeEyeIcon from "../asset/images/closed-eyes.png";
 import { useEffect, useState } from "react";
-import ErrorModal from "./ErrorModal";
+import ErrorModal from "./ErrorModal.js";
 
 export default function DeleteInvestment({
   investorId,
   investments,
   setInvestments,
   onClose,
-  inputPassword,
-  setInputPassword,
   isPasswordVerified,
   setIsPasswordVerified,
   onVerifyPassword,
 }) {
   const [isErrorModal, setIsErrorModal] = useState(false); // 에러 모달 상태
   const [passwordToggle, setPasswordToggle] = useState(false);
+  const [inputPassword, setInputPassword] = useState(""); // 비밀번호 상태
 
   // 비밀번호 확인 및 삭제 처리
   useEffect(() => {
@@ -30,7 +29,7 @@ export default function DeleteInvestment({
   }, [isPasswordVerified, investorId, investments, onClose, setInvestments]);
 
   const handlePasswordVerify = () => {
-    onVerifyPassword();
+    onVerifyPassword(inputPassword);
     if (!isPasswordVerified) {
       setIsErrorModal(true);
     }

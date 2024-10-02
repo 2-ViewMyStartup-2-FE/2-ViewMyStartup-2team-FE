@@ -1,5 +1,5 @@
 import styles from "../css/InvestmentButton.module.css";
-function InvestmentButton({ closeModal, onSubmit, className }) {
+function InvestmentButton({ mode, closeModal, onSubmit, className }) {
   return (
     <div className={`${styles.frame} ${className}`}>
       <div className={styles.layoutContainer}>
@@ -7,7 +7,7 @@ function InvestmentButton({ closeModal, onSubmit, className }) {
           취소
         </button>
         <button type="submit" className={styles.invest} onClick={onSubmit}>
-          투자하기
+          {mode === "edit" ? "수정하기" : "투자하기"}
         </button>
       </div>
     </div>
