@@ -22,7 +22,6 @@ export default function InvestStatusPage() {
         if (response) {
           setItem(response.data);
           setTotalCount(response.totalCount);
-          console.log(response.data, response.totalCount);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
