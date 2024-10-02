@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import YStartupList from "../component/YStartupList.js";
+import StartupList from "../component/StartupList.js";
 import style from "../css/InvestStatusPage.module.css";
 import { getCountList } from "../api/CompareStatusAPI.js";
 import SPagination from "../component/SPagination.js";
@@ -7,17 +7,18 @@ import SortContent from "../component/SortContent.js";
 
 const ITEM_LIMIT = 10;
 
-export default function InvestStatusPage() {
+export default function CompareStatusPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [item, setItem] = useState([]);
   const sortOption = "compare";
   const [sortType, setSortType] = useState("myCountHighest");
-  const totalCount = 20; // backend에서 total count 받는 함수 추가 후 수정 필요
+  const [totalCount, setTotalcount] = useState(0); 
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getCountList(currentPage, ITEM_LIMIT, sortType);
-      setItem(res);
+      setItem(res.data);
+      setTotalcount(res.totalCount);
     };
 
     fetchData();
@@ -40,7 +41,7 @@ export default function InvestStatusPage() {
   };
 
   const handleSelect = (selectedOption) => {
-    // console.log("Selected option:", selectedOption);
+    console.log("Selected option:", selectedOption);
     setSortType(selectedOption);
   };
 
@@ -60,12 +61,12 @@ export default function InvestStatusPage() {
         <div className={style.listHeader}>
           <div className={style.rank}>순위</div>
           <div className={style.company}>기업 명</div>
-          <div className={style.compDetail}>기업 소개</div>
+          <div className={style.description}>기업 소개</div>
           <div className={style.category}>카테고리</div>
           <div className={style.other}>나의 기업 선택 횟수</div>
           <div className={style.other}>비교 기업 선택 횟수</div>
         </div>
-        <YStartupList
+        <StartupList
           currentPage={currentPage}
           itemLimit={ITEM_LIMIT}
           data={item}

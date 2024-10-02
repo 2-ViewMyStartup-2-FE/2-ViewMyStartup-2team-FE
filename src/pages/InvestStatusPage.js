@@ -41,9 +41,9 @@ export default function InvestStatusPage() {
   const sortData = (data, option) => {
     switch (option) {
       case "View My Startup 투자 금액 높은순":
-        return setSortType("simulatedInvestHighest");
+        return setSortType("virtualInvestHighest");
       case "View My Startup 투자 금액 낮은순":
-        return setSortType("simulatedInvestLowest");
+        return setSortType("virtualInvestLowest");
       case "실제 누적 투자 금액 높은순":
         return setSortType("actualInvestHighest");
       case "실제 누적 투자 금액 낮은순":
@@ -54,7 +54,7 @@ export default function InvestStatusPage() {
   };
 
   const handleSelect = (selectedOption) => {
-    // console.log("Selected option:", selectedOption);
+    console.log("Selected option:", selectedOption);
     setSortType(selectedOption);
   };
 
@@ -71,12 +71,13 @@ export default function InvestStatusPage() {
         />
       </div>
       <div className={style.body}>
+        <div className={style.table}>
         <div className={style.listHeader}>
           <div className={style.rank}>순위</div>
           <div className={style.company}>기업 명</div>
-          <div className={style.compDetail}>기업 소개</div>
+          <div className={style.description}>기업 소개</div>
           <div className={style.category}>카테고리</div>
-          <div className={style.other}>View My Startup 투자 금액</div>
+          <div className={style.other}>View My Startup {window.innerWidth < 1000 && <br />}투자 금액</div>
           <div className={style.other}>실제 누적 투자 금액</div>
         </div>
         <StartupList
@@ -86,6 +87,7 @@ export default function InvestStatusPage() {
           isStatusPage={true}
           isCompareStatus={false}
         />
+      </div>
       </div>
       <SPagination
         currentPage={currentPage} // 현재 페이지 번호
