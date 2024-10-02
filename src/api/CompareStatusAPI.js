@@ -16,7 +16,7 @@ export async function getCountList(page, limit, order) {
       throw new Error("Order must be a string");
     }
     const params = { page, limit, order };
-    const response = await requestGetDB("api/companies/counts", params);
+    const response = await requestGetDB("/companies/counts", params);
     return response.data;
   } catch (e) {
     console.error(e.message);
