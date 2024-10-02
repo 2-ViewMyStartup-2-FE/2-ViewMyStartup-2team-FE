@@ -1,15 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import style from "../css/StartupList.module.css";
 import ConvertBillion from "../utils/ConvertBillion.js";
 import defaultImg from "../asset/images/img_company_default_logo.png";
 
 
 function StartupList({ currentPage, itemLimit, data, isStatusPage, isCompareStatus }) {
+  const navigate = useNavigate();
   const startIndex = (currentPage - 1) * itemLimit; // 현재 페이지의 시작 인덱스
-  
+
+  const handleItemClick = (id) => {
+    navigate(`/companies/${id}`);
+  };
+
   return (
     <div className={style.table}>
       {data.map((item, index) => (
-        <div key={index} className={style.listItem}>
+        <div key={index} className={style.listItem} onClick={() => handleItemClick(item.id)}>
           <div className={style.rank}>{startIndex + index + 1}</div>
           <div className={style.company}>
             <img className={style.logo} src={item.logo === "" ? defaultImg : item.logo} alt="logo" />

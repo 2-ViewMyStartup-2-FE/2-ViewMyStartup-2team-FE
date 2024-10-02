@@ -14,6 +14,8 @@ export default function Main() {
         <Route path="/" element={<App />}>
           <Route index element={<StartupPage />} />
           <Route path="CompanyDetailPage" element={<CompanyDetailPage />} />
+          {/* 임시로 추가해둔 라우트 */}
+          <Route path="companies/:id" element={<CompanyDetailPage />} />
           <Route path="compare" element={<MyCompare />} />
           <Route path="compare-result" element={<CompareResultPage />} />
           <Route path="compare-status" element={<CompareStatusPage />} />
