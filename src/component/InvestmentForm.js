@@ -8,21 +8,21 @@ function getFieldConfig(type, isVisible, className) {
         frame: `${styles.other} ${className}`,
         label: "투자자 이름",
         inputType: "text",
-        message: "투자자 이름을 입력해 주세요"
+        message: "투자자 이름을 입력해 주세요",
       };
     case "amount":
       return {
         frame: `${styles.other} ${className}`,
         label: "투자 금액",
         inputType: "text",
-        message: "투자 금액을 입력해 주세요"
+        message: "투자 금액을 입력해 주세요",
       };
     case "comment":
       return {
         frame: `${styles.comment} ${className}`,
         label: "투자 코멘트",
         inputType: "text",
-        message: "투자에 대한 코멘트를 입력해 주세요"
+        message: "투자에 대한 코멘트를 입력해 주세요",
       };
     case "password":
     case "confirm":
@@ -33,14 +33,14 @@ function getFieldConfig(type, isVisible, className) {
         message:
           type === "password"
             ? "비밀번호를 입력해주세요"
-            : "비밀번호를 다시 한 번 입력해주세요"
+            : "비밀번호를 다시 한 번 입력해주세요",
       };
     default:
       return {
         frame: `${styles.other} ${className}`,
         label: "기본 필드",
         inputType: "text",
-        message: "기본 메시지를 입력하세요"
+        message: "기본 메시지를 입력하세요",
       };
   }
 }
@@ -49,13 +49,13 @@ function InvestmentForm({
   onBlur,
   isVisible,
   onToggle,
-  className
+  className,
 }) {
   const {
     frame: FRAME,
     label: LABEL,
     inputType: INPUTTYPE,
-    message: MESSAGE
+    message: MESSAGE,
   } = getFieldConfig(type, isVisible, className);
   return (
     <div className={FRAME}>
