@@ -10,15 +10,22 @@ const ITEM_LIMIT = 10;
 export default function CompareStatusPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [item, setItem] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const sortOption = "compare";
   const [sortType, setSortType] = useState("myCountHighest");
-  const [totalCount, setTotalcount] = useState(0); 
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getCountList(currentPage, ITEM_LIMIT, sortType);
-      setItem(res.data);
-      setTotalcount(res.totalCount);
+      try {
+        const response = await getCountList(currentPage, ITEM_LIMIT, sortType);
+
+        if (response) {
+          setItem(response.data);
+          setTotalCount(response.totalCount);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
