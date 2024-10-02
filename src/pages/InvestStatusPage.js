@@ -13,6 +13,17 @@ export default function InvestStatusPage() {
   const [totalCount, setTotalCount] = useState(0);
   const sortOption = "invest";
   const [sortType, setSortType] = useState("simulatedInvestHighest");
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,7 +88,7 @@ export default function InvestStatusPage() {
           <div className={style.company}>기업 명</div>
           <div className={style.description}>기업 소개</div>
           <div className={style.category}>카테고리</div>
-          <div className={style.other}>View My Startup {window.innerWidth < 1000 && <br />}투자 금액</div>
+          <div className={style.other}>View My Startup {windowSize < 1000 && <br />}투자 금액</div>
           <div className={style.other}>실제 누적 투자 금액</div>
         </div>
         <StartupList
