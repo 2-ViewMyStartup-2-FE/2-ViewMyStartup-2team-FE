@@ -12,7 +12,7 @@ const myComanyMockData = {
   category: "에듀테크",
   totalInvestment: 14000000000,
   revenue: 5000000000,
-  employee: 68,
+  employee: 68
 };
 const selectedMockData = [
   {
@@ -23,7 +23,7 @@ const selectedMockData = [
     category: "IT",
     totalInvestment: 20000000000,
     revenue: 10000000000,
-    employee: 120,
+    employee: 120
   },
   {
     name: "헬로우 월드",
@@ -33,7 +33,7 @@ const selectedMockData = [
     category: "테크",
     totalInvestment: 30000000000,
     revenue: 15000000000,
-    employee: 85,
+    employee: 85
   },
   {
     name: "그린 에너지",
@@ -43,7 +43,7 @@ const selectedMockData = [
     category: "에너지",
     totalInvestment: 25000000000,
     revenue: 8000000000,
-    employee: 50,
+    employee: 50
   },
   {
     name: "푸드 테크",
@@ -53,13 +53,40 @@ const selectedMockData = [
     category: "식품",
     totalInvestment: 18000000000,
     revenue: 7000000000,
-    employee: 40,
-  },
+    employee: 40
+  }
 ];
+const sortData = (data, option) => {
+  const sortedData = [...data];
+  switch (option) {
+    case "누적 투자금액 높은순":
+      return sortedData.sort((a, b) => b.totalInvestment - a.totalInvestment);
+    case "누적 투자금액 낮은순":
+      return sortedData.sort((a, b) => a.totalInvestment - b.totalInvestment);
+    case "매출액 높은순":
+      return sortedData.sort((a, b) => b.revenue - a.revenue);
+    case "매출액 낮은순":
+      return sortedData.sort((a, b) => a.revenue - b.revenue);
+    case "고용 인원 많은순":
+      return sortedData.sort((a, b) => b.employee - a.employee);
+    case "고용 인원 적은순":
+      return sortedData.sort((a, b) => a.employee - b.employee);
+    default:
+      return sortedData;
+  }
+};
 function CompareResultPage({
   MYCOMPANY = myComanyMockData,
-  SELETEDCOMPANIES = selectedMockData,
+  SELETEDCOMPANIES = selectedMockData
 }) {
+  const [compStatus, setCompStatus] = useState({
+    sort: "누적 투자금액 높은순",
+    list: sortData([MYCOMPANY, ...SELETEDCOMPANIES], "누적 투자금액 높은순")
+  });
+  const [rankStatus, setRankStatus] = useState({
+    sort: "누적 투자금액 높은순",
+    list: sortData([MYCOMPANY, ...SELETEDCOMPANIES], "누적 투자금액 높은순")
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -69,7 +96,18 @@ function CompareResultPage({
   };
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
-  const list = [MYCOMPANY, ...SELETEDCOMPANIES];
+  const handleCompSelect = (selectedOption) => {
+    setCompStatus((prev) => ({
+      sort: selectedOption,
+      list: sortData([...prev.list], selectedOption)
+    }));
+  };
+  const handleRankSelect = (selectedOption) => {
+    setRankStatus((prev) => ({
+      sort: selectedOption,
+      list: sortData([...prev.list], selectedOption)
+    }));
+  };
 
   return (
     <div className={styles.compareResultPage}>
@@ -80,12 +118,18 @@ function CompareResultPage({
       <ComparisonTable
         type="select"
         className={styles.selectTableLayout}
-        list={list}
+        list={compStatus.list}
+        onSelect={handleCompSelect}
+        defaultOption={compStatus.sort}
+        sortOption="list"
       />
       <ComparisonTable
         type="ranking"
         className={styles.rankingTableLayout}
-        list={list}
+        list={rankStatus.list}
+        onSelect={handleRankSelect}
+        defaultOption={rankStatus.sort}
+        sortOption="list"
       />
       <button onClick={openModal} className={styles.investBtn}>
         나의 기업에 투자하기
