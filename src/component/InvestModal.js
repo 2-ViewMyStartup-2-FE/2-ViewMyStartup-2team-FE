@@ -66,8 +66,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
           />
           <InvestmentButton
             closeModal={closeModal}
-            onSubmit={onSubmit}
-            className={styles.buttonMarin}
+            className={styles.buttonMargin}
           />
         </form>
       </div>

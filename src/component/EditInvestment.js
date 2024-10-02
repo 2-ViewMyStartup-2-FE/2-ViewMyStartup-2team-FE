@@ -103,8 +103,7 @@ export default function EditInvestment({
           <InvestmentButton
             mode="edit"
             closeModal={closeEditModal}
-            onSubmit={onSubmit}
-            className={styles.buttonMarin}
+            className={styles.buttonMargin}
           />
         </form>
       </div>
