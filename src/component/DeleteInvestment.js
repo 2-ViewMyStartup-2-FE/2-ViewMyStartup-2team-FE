@@ -10,14 +10,13 @@ export default function DeleteInvestment({
   investments,
   setInvestments,
   onClose,
-  inputPassword,
-  setInputPassword,
   isPasswordVerified,
   setIsPasswordVerified,
   onVerifyPassword,
 }) {
   const [isErrorModal, setIsErrorModal] = useState(false); // 에러 모달 상태
   const [passwordToggle, setPasswordToggle] = useState(false);
+  const [inputPassword, setInputPassword] = useState(""); // 비밀번호 상태
 
   // 비밀번호 확인 및 삭제 처리
   useEffect(() => {
@@ -30,7 +29,7 @@ export default function DeleteInvestment({
   }, [isPasswordVerified, investorId, investments, onClose, setInvestments]);
 
   const handlePasswordVerify = () => {
-    onVerifyPassword();
+    onVerifyPassword(inputPassword);
     if (!isPasswordVerified) {
       setIsErrorModal(true);
     }
