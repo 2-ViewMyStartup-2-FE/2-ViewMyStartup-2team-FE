@@ -8,6 +8,7 @@ export default function ListSort({ options, defaultOption, onSelect }) {
   const [selectedOption, setSelectedOption] = useState(defaultOption);
   const location = useLocation();
   const isList = location.pathname === "/";
+  const isCompareResult = location.pathname === "/compare-result";
 
   const toggleSortMenu = () => setToggle(!isToggle);
 
@@ -24,7 +25,7 @@ export default function ListSort({ options, defaultOption, onSelect }) {
         <img src={toggle} alt="toggle" />
       </button>
       {isToggle && (
-        <div className={`${style.sortOptions} ${!isList ? style.status : ''}`}>
+        <div className={`${style.sortOptions} ${isCompareResult ? style.compareResult : !isList ? style.status :  ''}`}>
           {options.map((option, index) => (
             <Fragment key={index}>
               <button
