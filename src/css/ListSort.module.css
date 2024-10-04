@@ -47,6 +47,11 @@
     height: 16rem;
 }
 
+.sortOptions.compareResult {
+    width: 26.4rem;
+    height: 24rem;
+}
+
 span {
     border: 1px solid #747474;
 }
