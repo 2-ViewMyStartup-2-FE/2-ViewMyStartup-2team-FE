@@ -1,11 +1,21 @@
 import styles from "../css/ComparisonTableHeader.module.css";
 import ComparisonTableTitle from "./ComparisonTableTitle.js";
-import SortSelector from "./SortSelector.js";
-function ComparisonTableHeader({ title, className }) {
+import SortContent from "./SortContent.js";
+function ComparisonTableHeader({
+  title,
+  className,
+  onSelect,
+  defaultOption,
+  sortOption
+}) {
   return (
     <div className={`${styles.header} ${className}`}>
       <ComparisonTableTitle>{title}</ComparisonTableTitle>
-      <SortSelector />
+      <SortContent
+        onSelect={onSelect}
+        defaultOption={defaultOption}
+        sortOption={sortOption}
+      />
     </div>
   );
 }

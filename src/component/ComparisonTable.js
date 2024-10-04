@@ -1,7 +1,14 @@
 import styles from "../css/ComparisonTable.module.css";
 import ComparisonHeader from "./ComparisonHeader.js";
 import ComparisonTableContent from "./ComparisonTableContent.js";
-function ComparisonTable({ type = "select", className = "", list }) {
+function ComparisonTable({
+  type = "select",
+  className = "",
+  list,
+  onSelect,
+  defaultOption,
+  sortOption
+}) {
   const SELECT = "select";
   const RANKING = "ranking";
   const selectTitle = "비교 결과 확인하기";
@@ -11,7 +18,13 @@ function ComparisonTable({ type = "select", className = "", list }) {
   const COMPARISONTABLE = `${styles.comparisonTable} ${className}`;
   return (
     <div className={COMPARISONTABLE}>
-      <ComparisonHeader title={TITLE} className={styles.margin} />
+      <ComparisonHeader
+        title={TITLE}
+        className={styles.margin}
+        onSelect={onSelect}
+        defaultOption={defaultOption}
+        sortOption={sortOption}
+      />
       <ComparisonTableContent type={comparisonType} list={list} />
     </div>
   );

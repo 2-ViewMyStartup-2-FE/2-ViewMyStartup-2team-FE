@@ -84,7 +84,7 @@
     color: #747474;
 }
 
-@media(max-width:119.9rem) {
+@media(max-width:1199px) {
     .selectedCompanyCard {
         width: 69.6rem;
         height: 29.6rem;
@@ -95,7 +95,7 @@
     }
 }
 
-@media(max-width:74.3rem) {
+@media(max-width:743px) {
     .selectedCompanyCard {
         width: 34.3rem;
         height: 22.8rem;

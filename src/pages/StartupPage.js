@@ -25,7 +25,7 @@ export default function StartupPage() {
           page: currentPage,
           limit: ITEM_LIMIT,
           order: sortType,
-          search: search,
+          search: search
         });
 
         if (response) {
@@ -39,6 +39,7 @@ export default function StartupPage() {
     };
 
     fetchData();
+    console.log(search);
   }, [currentPage, sortType, search]);
 
   // 데이터 정렬 함수
@@ -69,19 +70,26 @@ export default function StartupPage() {
   const handleSearchClick = () => {
     setSearch(inputValue);
     setCurrentPage(1);
-  }
-
-  const handleClearInput = () => {
-    setInputValue(""); 
-    setSearch(""); 
-    setCurrentPage(1); 
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+  const handleClearInput = () => {
+    setInputValue("");
+    setSearch("");
+    setCurrentPage(1);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
       handleSearchClick();
     }
   };
+
+  const handleInputChange = (value) => {
+    setInputValue(value);
+    if (value === "") {
+      setSearch("");
+    }
+  }
 
   // 정렬된 데이터
   const sortedData = sortData([...startupData], sortType);
@@ -92,22 +100,27 @@ export default function StartupPage() {
         <h1 className={style.title}>현재 스타트업 목록</h1>
         <div className={style.searchSortGroup}>
           <div className={style.searchGroup}>
-            <img className={style.searchIcon} src={searchIcon} alt="search" onClick={handleSearchClick} />
+            <img
+              className={style.searchIcon}
+              src={searchIcon}
+              alt="search"
+              onClick={handleSearchClick}
+            />
             <input
               className={style.search}
               value={inputValue}
               placeholder="검색어를 입력해주세요"
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => handleInputChange(e.target.value)}
               onKeyDown={handleKeyPress}
             />
             {inputValue && (
-            <img
-              className={style.closeCircle}
-              src={closeCircle}
-              alt="closeSmall_bt"
-              onClick={handleClearInput}
-            />
-          )}
+              <img
+                className={style.closeCircle}
+                src={closeCircle}
+                alt="closeSmall_bt"
+                onClick={handleClearInput}
+              />
+            )}
           </div>
           <SortContent
             sortOption={sortOption}
@@ -118,24 +131,24 @@ export default function StartupPage() {
       </div>
       <div className={style.body}>
         <div className={style.table}>
-        <div className={style.listHeader}>
-          <div className={style.rank}>순위</div>
-          <div className={style.company}>기업 명</div>
-          <div className={style.description}>기업 소개</div>
-          <div className={style.category}>카테고리</div>
-          <div className={style.category}>누적 투자 금액</div>
-          <div className={style.category}>매출액</div>
-          <div className={style.category}>고용 인원</div>
-        </div>
-        <div className={style.listBody}>
-          <StartupList
-            currentPage={currentPage}
-            itemLimit={ITEM_LIMIT}
-            data={sortedData}
-            isStatusPage={false}
-            isCompareStatus={false}
-          />
-        </div>
+          <div className={style.listHeader}>
+            <div className={style.rank}>순위</div>
+            <div className={style.company}>기업 명</div>
+            <div className={style.description}>기업 소개</div>
+            <div className={style.category}>카테고리</div>
+            <div className={style.category}>누적 투자 금액</div>
+            <div className={style.category}>매출액</div>
+            <div className={style.category}>고용 인원</div>
+          </div>
+          <div className={style.listBody}>
+            <StartupList
+              currentPage={currentPage}
+              itemLimit={ITEM_LIMIT}
+              data={sortedData}
+              isStatusPage={false}
+              isCompareStatus={false}
+            />
+          </div>
         </div>
         <div className={style.pagination}>
           <Pagination
