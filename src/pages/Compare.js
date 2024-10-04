@@ -119,7 +119,7 @@ function MyCompare() {
                   addSelectedCompany.map((company) => (
                     <div key={company.id} className={compareStyle.companyItem}>
                       <div className={compareStyle.minusSection}>
-                      <img src={minus} className={compareStyle.companyMinus} />
+                      <img src={minus} className={compareStyle.companyMinus} alt='minus' />
                       </div>
                       <img
                         className={compareStyle.logo}
@@ -163,6 +163,7 @@ function MyCompare() {
           isOpen={isAddModalOpen}
           onClose={closeAddModal}
           onSelectAddCompany={handleAddSelectCompany}
+          prevSelectedCompany={addSelectedCompany}
         />
       )}
     </>
