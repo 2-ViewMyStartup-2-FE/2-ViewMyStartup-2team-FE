@@ -2,10 +2,11 @@ import compareStyle from "../css/Compare.module.css";
 import btnPlus from "../asset/images/btn_plus.png";
 import ModalMyCompany from "../component/ModalCompany.js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import defaultImg from "../asset/images/img_company_default_logo.png";
 import ModalAddCompany from "../component/ModalAddCompany.js";
-import restart from "../asset/images/ic_restart.png"
-import minus from "../asset/images/ic_minus.png"
+import restart from "../asset/images/ic_restart.png";
+import minus from "../asset/images/ic_minus.png";
 
 function MyCompare() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -14,6 +15,8 @@ function MyCompare() {
   const [selectedCompany, setSelectedCompany] = useState(null); // 선택한 기업 상태 추가
   const [addSelectedCompany, setAddSelectedCompany] = useState([]);
   const [allClear, setAllClear] = useState(false);
+
+  const navigate = useNavigate();
 
   const openModal = () => {
     //나의 기업 추가 모달
@@ -38,8 +41,9 @@ function MyCompare() {
 
   const handleAddSelectCompany = (companies) => {
     if (addSelectedCompany.length < 5) {
-      setAddSelectedCompany((prev) => [...prev, companies]);}
-    console.log('추가된기업',addSelectedCompany)
+      setAddSelectedCompany((prev) => [...prev, companies]);
+    }
+    console.log("추가된기업", addSelectedCompany);
     setAllClear(true);
   };
 
@@ -48,22 +52,31 @@ function MyCompare() {
     setAddCompany(false);
   };
 
-  const handleClickAllReset = () =>{
+  const handleClickAllReset = () => {
     setAddCompany(false);
     setSelectedCompany(false);
     setAddSelectedCompany([]);
     setAllClear(false);
-  }
+  };
 
   return (
     <>
       <div className={compareStyle.container}>
         <div className={compareStyle.headTheme}>
           <p className={compareStyle.headFont}>나의 기업을 선택해 주세요!</p>
-          {allClear && <button className={compareStyle.addButton} onClick={handleClickAllReset} >
-            <img src={restart} alt="restart_IC" className={compareStyle.btRestart} />
-                전체 초기화
-              </button>}
+          {allClear && (
+            <button
+              className={compareStyle.addButton}
+              onClick={handleClickAllReset}
+            >
+              <img
+                src={restart}
+                alt="restart_IC"
+                className={compareStyle.btRestart}
+              />
+              전체 초기화
+            </button>
+          )}
         </div>
         <div className={compareStyle.mainSection}>
           {selectedCompany ? ( // 선택한 기업이 있을 경우
@@ -119,7 +132,10 @@ function MyCompare() {
                   addSelectedCompany.map((company) => (
                     <div key={company.id} className={compareStyle.companyItem}>
                       <div className={compareStyle.minusSection}>
-                      <img src={minus} className={compareStyle.companyMinus} />
+                        <img
+                          src={minus}
+                          className={compareStyle.companyMinus}
+                        />
                       </div>
                       <img
                         className={compareStyle.logo}
@@ -147,7 +163,25 @@ function MyCompare() {
         )}
       </div>
       <div className={compareStyle.buttonSection}>
-        <button className={compareStyle.button}>기업 비교하기</button>
+        <button
+          className={`${compareStyle.button} ${
+            addSelectedCompany.length >= 1 ? compareStyle.active : ""
+          }`} // 조건에 따라 클래스 추가
+          onClick={() => {
+            if (addSelectedCompany.length >= 1) {
+              navigate(
+                `/compare-result?mycompany=${
+                  selectedCompany.id
+                }&selectedcompany=${addSelectedCompany
+                  .map((comapany) => comapany.id)
+                  .join(`,`)}`
+              ); // 기업 비교하기 페이지로 이동
+            }
+          }}
+          disabled={addSelectedCompany.length < 1} // 길이가 1 미만일 경우 비활성화
+        >
+          기업 비교하기
+        </button>
       </div>
 
       {isModalOpen && (

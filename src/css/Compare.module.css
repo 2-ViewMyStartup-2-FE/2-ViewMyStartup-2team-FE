@@ -101,6 +101,10 @@ body {
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--gray-200);
+}
+.button.active {
+  background-color: var(--brand-orange);
+  color: #ffffff;
   cursor: pointer;
 }
 .addSection {
@@ -141,7 +145,7 @@ body {
   border-radius: 0.4rem;
   gap: 1.6rem;
 }
-.defaultFont{
+.defaultFont {
   font-size: 1.4rem;
   color: var(--gray-200);
   font-weight: 400;
@@ -180,21 +184,20 @@ body {
   background-color: var(--gray-400);
   border-radius: 0.8rem;
 }
-.minusSection{
+.minusSection {
   width: 100%;
   padding-right: 0.8rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.selectName{
+.selectName {
   color: #ffffff;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.909rem;
   margin: 1rem 0 0.4rem;
 }
-
 
 @media (max-width: 1199px) {
   .container {
@@ -208,7 +211,6 @@ body {
   .cancelFont {
     transform: translateY(-3rem);
   }
-  
 }
 
 @media (max-width: 743px) {
@@ -252,7 +254,7 @@ body {
     font-size: 1.2rem;
     line-height: 1.432rem;
   }
-  .companyItem{
+  .companyItem {
     width: 33%;
   }
 }
