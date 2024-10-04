@@ -4,6 +4,7 @@ import { getStartup } from "../api/StartupAPI.js";
 import styles from "../css/CompanyDetailPage.module.css";
 import InvestmentInfoList from "../component/InvestmentInfoList.js";
 import CompanyDetailTable from "../component/CompanyDetailTable.js";
+import CompanyInvestmentAction from "../component/CompanyInvestmentAction.js";
 
 export default function CompanyDetailPage() {
   const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
@@ -23,11 +24,12 @@ export default function CompanyDetailPage() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
   return (
     <div className={styles.companyDetailPage}>
       <CompanyDetailTable data={startupData} />
-      <InvestmentInfoList />
+      <CompanyInvestmentAction data={startupData} />
+      <InvestmentInfoList data={startupData} />
     </div>
   );
 }
