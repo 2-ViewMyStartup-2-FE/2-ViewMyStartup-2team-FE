@@ -19,7 +19,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const onTogglePassword = () => setIsPasswordVisible((prev) => !prev);
   const onToggleConfirm = () => setIsConfirmVisible((prev) => !prev);
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const sumbitData = {
@@ -29,7 +29,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
         password: formData.password,
         companyId: myCompany.id
       };
-      postInvestment(myCompany.id, sumbitData);
+      await postInvestment(myCompany.id, sumbitData);
     } catch (e) {
       console.log(e.message);
     }

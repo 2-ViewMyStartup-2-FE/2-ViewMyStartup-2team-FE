@@ -21,6 +21,11 @@ export async function postInvestment(companyId, formData) {
       `/companies/${companyId}/investments`,
       formData
     );
+    if (response) {
+      console.log(response.data);
+    } else {
+      console.log("데이터 전송 실패");
+    }
     return response.data;
   } catch (e) {
     console.log(e.message);
