@@ -12,7 +12,7 @@ function ManyChoiceCompany({ data, onSelect }) {
               <div className={style.company}>
                 <img
                   className={style.logo}
-                  src={item.logoImage === "" ? defaultImg : item.logoImage}
+                  src={item.logo === "" ? defaultImg : item.logo}
                   alt="logo"
                 />
                 <div className={style.companyName}>{item.name}</div>
