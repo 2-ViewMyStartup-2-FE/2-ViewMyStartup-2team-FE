@@ -2,7 +2,7 @@ import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
 import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import search from "../asset/images/ic_search.png";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
 import SPagination from "./SPagination.js";
 import AddCompanyList from "./AddCompanyList.js";
@@ -109,7 +109,6 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany }) {
 
   const handleCloseModal = () => {
     onClose();
-    // setDataLoaded(false); // 모달이 닫힐 때 dataLoaded 상태를 초기화
   };
 
   if (!isOpen) return null;
