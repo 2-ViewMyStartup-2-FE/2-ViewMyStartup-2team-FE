@@ -7,7 +7,8 @@ function ComparisonTable({
   list,
   onSelect,
   defaultOption,
-  sortOption
+  sortOption,
+  myCompany
 }) {
   const SELECT = "select";
   const RANKING = "ranking";
@@ -25,7 +26,11 @@ function ComparisonTable({
         defaultOption={defaultOption}
         sortOption={sortOption}
       />
-      <ComparisonTableContent type={comparisonType} list={list} />
+      <ComparisonTableContent
+        type={comparisonType}
+        list={list}
+        myCompany={myCompany}
+      />
     </div>
   );
 }

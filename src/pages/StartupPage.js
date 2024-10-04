@@ -39,7 +39,6 @@ export default function StartupPage() {
     };
 
     fetchData();
-    console.log(search);
   }, [currentPage, sortType, search]);
 
   // 데이터 정렬 함수

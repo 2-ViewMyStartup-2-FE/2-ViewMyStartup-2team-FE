@@ -1,7 +1,6 @@
 import kebabIcon from "../asset/images/ic_kebab.png";
 import Pagination from "./SPagination.js";
 import styles from "../css/InvestmentInfoList.module.css";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ConvertBillion from "../utils/ConvertBillion.js";
 import DeleteInvestment from "./DeleteInvestment.js";
@@ -226,13 +225,6 @@ export default function InvestmentInfoList({ MYCOMPANY = myComanyMockData }) {
 
   return (
     <div className={styles.investInfoSection}>
-      <div className={styles.investInfoTitle}>
-        <h1>View My Startup에서 받은 투자</h1>
-        <Link className={styles.investBtn}>기업투자하기</Link>
-      </div>
-      <div className={styles.investment}>
-        총 {ConvertBillion(totalAmount)} 원
-      </div>
       <div className={styles.investInfo}>
         <div className={styles.investDetailTitle}>
           <h1>투자자 이름</h1>

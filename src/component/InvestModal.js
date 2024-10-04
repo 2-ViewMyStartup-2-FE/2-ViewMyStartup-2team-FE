@@ -10,7 +10,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
     amount: "",
     comment: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   }); // 입력값을 state로 관리
   const onBlurField = (field) => (e) =>
     setFormData((prev) => ({ ...prev, [field]: e.target.value })); //입력값을 변경 onBlur로 사용

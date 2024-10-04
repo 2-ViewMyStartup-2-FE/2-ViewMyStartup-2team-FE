@@ -1,0 +1,95 @@
+:root {
+    /*black*/
+    --black-400: #131313;
+    --black-300: #212121;
+    --black-200: #282828;
+    --black-100: #2e2e2e;
+    /*gray*/
+    --gray-400: #333333;
+    --gray-300: #4b4b4b;
+    --gray-200: #747474;
+    --gray-100: #d8d8d8;
+    /*brand*/
+    --brand-orange: #eb5230;
+    /*blue*/
+    --blue: #3692ff;
+    /*red*/
+    --red-error: #c41013;
+  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.selectListContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+.selectList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.resultItem{
+    width: 100%;
+}
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.company{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+}
+.logo {
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 4.8rem;
+  }
+  .companyName {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.909rem;
+  }
+  .category {
+    color: var(--gray-200);
+    font-size: 1.4rem;
+    line-height: 1.671rem;
+  }
+  .selectButton {
+    border: 1px solid var(--gray-200);
+    background-color: var(--black-300);
+    padding: 1.3rem 2.4rem;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.909rem;
+    color: var(--gray-200);
+    cursor: pointer;
+  }
+  @media (max-width: 743px) {
+    .companyName {
+      font-size: 1.4rem;
+    }
+    .category {
+      font-size: 1.2rem;
+    }
+    .selectButton {
+      padding: 0.75rem 1.2rem;
+      font-size: 1.4rem;
+    }
+    .logo {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 4rem;
+    }
+  }

@@ -1,6 +1,9 @@
 import styles from "../css/ComparisonTableContent.module.css";
 import ConvertBillion from "../utils/ConvertBillion.js";
-function ComparisonTableContent({ list, type }) {
+import defaultLogo from "../asset/images/img_company_default_logo.png";
+function ComparisonTableContent({ list, type, myCompany }) {
+  const ROWCLASS = (company) =>
+    `${styles.row} ${company.name === myCompany.name ? styles.myCompany : ""}`;
   const NAMECONTENT = `${styles.name} ${styles.content}`;
   const DESCRIPTION = `${styles.description} ${styles.content}`;
   const OTHER = `${styles.other} ${styles.content}`;
@@ -22,7 +25,7 @@ function ComparisonTableContent({ list, type }) {
         <tbody className={styles.contentBackground}>
           <tr className={styles.margin}></tr>
           {list.map((company) => (
-            <tr className={styles.row} key={company.name}>
+            <tr className={ROWCLASS(company)} key={company.name}>
               {type === "ranking" && (
                 <td className={RANKING}>{company.rank}위</td>
               )}
@@ -31,8 +34,11 @@ function ComparisonTableContent({ list, type }) {
                   src={company.logo}
                   className={styles.logo}
                   alt="로고이미지"
+                  onError={(e) => {
+                    e.target.src = defaultLogo;
+                  }}
                 />
-                <p>{company.name}</p>
+                <div className={styles.ellipsis}>{company.name}</div>
               </td>
               <td className={DESCRIPTION}>{company.description}</td>
               <td className={OTHER}>{company.category}</td>

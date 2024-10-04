@@ -5,7 +5,7 @@ import search from "../asset/images/ic_search.png";
 import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
-import { requestGet } from "../api/api.js";
+import { getCompareList } from "../api/CompareAPI.js";
 import SPagination from "./SPagination.js";
 
 function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
@@ -26,9 +26,9 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   // 전체 데이터 로드 (페이지네이션 없음)
   const handleLoadFetchData = async () => {
     try {
-      const response = await requestGet({ limit: ITEM_LIMIT });
+      const response = await getCompareList({ limit: ITEM_LIMIT });
       if (response) {
-        const sortedData = response.data.data.sort(
+        const sortedData = response.data.sort(
           (a, b) => b.myChosenCount - a.myChosenCount
         );
         setStartupData(sortedData);
@@ -41,16 +41,15 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   // 검색 데이터 로드 (페이지네이션 필요)
   const handleLoadSearchData = async (searchTerm, page) => {
     try {
-      const response = await requestGet({
+      const response = await getCompareList({
         limit: ITEM_LIMIT,
         search: searchTerm,
-        sort: "createdAt",
         page: page,
       });
 
       if (response && response.data) {
-        setSearchData(response.data.data || []);
-        setTotalCount(response.data.totalCount || 0);
+        setSearchData(response.data || []);
+        setTotalCount(response.totalCount || 0);
       } else {
         console.error("Invalid response structure:", response);
         setSearchData([]);
@@ -64,6 +63,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   useEffect(() => {
     if (isOpen) {
       handleLoadFetchData();
+      handleLoadSearchData();
     } else {
       setInputValue("");
       setStartupData([]);
@@ -74,14 +74,18 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   }, [isOpen]);
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    const value = event.target.value;
+    setInputValue(value);
+    if (!value) {
+      handleLoadSearchData();
+    }
   };
 
   const handleClearInput = () => {
     setInputValue(""); // 입력값 초기화
-    setSearchData([]); // 검색 데이터 초기화
+
     setCurrentPage(1); // 현재 페이지를 1로 초기화
-    setTotalCount(0);
+    handleLoadSearchData();
   };
 
   const handleSearchClick = () => {
@@ -145,11 +149,9 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
         <div className={style.searchHeader}>
           <p className={style.modalFont}>검색 결과{`(${totalCount})`}</p>
         </div>
-        {searchData.length === 0 ? (
-          <p>비교하고 싶은 기업을 검색해 주세요</p>
-        ) : (
-          <SearchResult data={searchData} onSelect={handleSelectCompany} />
-        )}
+
+        <SearchResult data={searchData} onSelect={handleSelectCompany} />
+
         {totalCount > ITEM_LIMIT &&
           searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
             <SPagination
