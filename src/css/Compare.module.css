@@ -22,10 +22,18 @@
 body {
   background-color: var(--black-400);
 }
+
 .title .active {
   color: #ffffff;
 }
 
+span{
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.432rem;
+  border: none;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -37,6 +45,7 @@ body {
 .headTheme {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-bottom: 1.6rem;
 }
@@ -101,6 +110,10 @@ body {
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--gray-200);
+}
+.button.active {
+  background-color: var(--brand-orange);
+  color: #ffffff;
   cursor: pointer;
 }
 .addSection {
@@ -141,7 +154,7 @@ body {
   border-radius: 0.4rem;
   gap: 1.6rem;
 }
-.defaultFont{
+.defaultFont {
   font-size: 1.4rem;
   color: var(--gray-200);
   font-weight: 400;
@@ -175,26 +188,26 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  object-fit: cover;
   width: 12.6rem;
   height: 18.7rem;
   background-color: var(--gray-400);
   border-radius: 0.8rem;
 }
-.minusSection{
+.minusSection {
   width: 100%;
   padding-right: 0.8rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.selectName{
+.selectName {
   color: #ffffff;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.909rem;
   margin: 1rem 0 0.4rem;
 }
-
 
 @media (max-width: 1199px) {
   .container {
@@ -208,12 +221,20 @@ body {
   .cancelFont {
     transform: translateY(-3rem);
   }
-  
+  .companyItem {
+    width: calc(18%);
+  }
 }
 
 @media (max-width: 743px) {
+  span{
+    font-size: 1.2rem;
+  }
   .container {
     max-width: 34.3rem;
+  }
+  .headFont{
+    font-size: 1.6rem;
   }
   .mainSection {
     height: 18rem;
@@ -228,7 +249,9 @@ body {
   }
 
   .mainSection2 {
-    height: 34.8rem;
+    height: 100%;
+    gap: 0.8rem;
+    padding: 0.8rem;
   }
   .addButton {
     padding: 0.4rem 1.2rem;
@@ -252,7 +275,14 @@ body {
     font-size: 1.2rem;
     line-height: 1.432rem;
   }
-  .companyItem{
-    width: 33%;
+  .companyItem {
+    width: calc(33% - 4.249px);
+    height: 16.3rem;
   }
+  .companyItem:nth-child(4),
+  .companyItem:nth-child(5) {
+    width: calc(50%-1px);
+    height: 16.3rem;
+  }
+  
 }
