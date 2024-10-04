@@ -8,7 +8,7 @@ import SPagination from "./SPagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
 
-function ModalAddCompany({ isOpen, onClose, onSelectAddCompany }) {
+function ModalAddCompany({ isOpen, onClose, onSelectAddCompany,prevSelectedCompany }) {
   const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -18,6 +18,12 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany }) {
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const ITEM_LIMIT = 5;
+  
+  useEffect(() => {
+    if (isOpen && prevSelectedCompany?.length > 0) {
+      setSelectedCompanies(prevSelectedCompany);
+    }
+  }, [isOpen, prevSelectedCompany]);
 
   const handleSelectCompany = (company) => {
     if (selectedCompanies.length >= ITEM_LIMIT) {

@@ -43,7 +43,6 @@ function MyCompare() {
     if (addSelectedCompany.length < 5) {
       setAddSelectedCompany((prev) => [...prev, companies]);
     }
-    console.log("추가된기업", addSelectedCompany);
     setAllClear(true);
   };
 
@@ -58,6 +57,10 @@ function MyCompare() {
     setAddSelectedCompany([]);
     setAllClear(false);
   };
+
+  const handleClickRemove =(id) =>{
+    setAddSelectedCompany((prev)=>{prev.filter((company)=> company.id !== id)});
+  }
 
   return (
     <>
@@ -121,7 +124,7 @@ function MyCompare() {
         {addCompany && (
           <div className={compareStyle.addSection}>
             <div className={compareStyle.headTheme2}>
-              <p className={compareStyle.headFont}> 어떤기업이 궁금하세요?</p>
+              <p className={compareStyle.headFont}> 어떤기업이 궁금하세요?<span>(최대5개)</span></p>
               <button className={compareStyle.addButton} onClick={openAddModal}>
                 기업 추가하기
               </button>
@@ -134,6 +137,8 @@ function MyCompare() {
                       <div className={compareStyle.minusSection}>
                         <img
                           src={minus}
+                          alt="minus"
+                          onClick={handleClickRemove}
                           className={compareStyle.companyMinus}
                         />
                       </div>
@@ -173,7 +178,7 @@ function MyCompare() {
                 `/compare-result?mycompany=${
                   selectedCompany.id
                 }&selectedcompany=${addSelectedCompany
-                  .map((comapany) => comapany.id)
+                  .map((company) => company.id)
                   .join(`,`)}`
               ); // 기업 비교하기 페이지로 이동
             }
@@ -197,6 +202,7 @@ function MyCompare() {
           isOpen={isAddModalOpen}
           onClose={closeAddModal}
           onSelectAddCompany={handleAddSelectCompany}
+          prevSelectedCompany={addSelectedCompany}
         />
       )}
     </>
