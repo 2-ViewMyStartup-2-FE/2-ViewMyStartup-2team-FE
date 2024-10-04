@@ -36,7 +36,7 @@ body {
 }
 .headTheme {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   width: 100%;
   margin-bottom: 1.6rem;
 }
@@ -131,6 +131,7 @@ body {
 }
 .mainSection2 {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -140,7 +141,7 @@ body {
   border-radius: 0.4rem;
   gap: 1.6rem;
 }
-.mainSection2 p {
+.defaultFont{
   font-size: 1.4rem;
   color: var(--gray-200);
   font-weight: 400;
@@ -162,19 +163,38 @@ body {
   transform: translateY(-6rem);
   cursor: pointer;
 }
-.selectName {
-  color: #ffffff;
-  font-size: 1.6rem;
-  font-weight: 500;
-  line-height: 1.909rem;
-  margin: 1rem 0 0.4rem;
-}
+
 .selectCategory {
   color: var(--gray-200);
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.671rem;
 }
+.companyItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 12.6rem;
+  height: 18.7rem;
+  background-color: var(--gray-400);
+  border-radius: 0.8rem;
+}
+.minusSection{
+  width: 100%;
+  padding-right: 0.8rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.selectName{
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.909rem;
+  margin: 1rem 0 0.4rem;
+}
+
 
 @media (max-width: 1199px) {
   .container {
@@ -188,6 +208,7 @@ body {
   .cancelFont {
     transform: translateY(-3rem);
   }
+  
 }
 
 @media (max-width: 743px) {
@@ -230,5 +251,8 @@ body {
   .selectCategory {
     font-size: 1.2rem;
     line-height: 1.432rem;
+  }
+  .companyItem{
+    width: 33%;
   }
 }

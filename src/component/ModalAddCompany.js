@@ -18,8 +18,6 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany }) {
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const ITEM_LIMIT = 5;
-  // 데이터를 저장해둘 Ref 생성
-  const savedDataRef = useRef(null);
 
   const handleSelectCompany = (company) => {
     if (selectedCompanies.length >= ITEM_LIMIT) {
@@ -46,11 +44,6 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany }) {
 
   // 검색 데이터 로드 (페이지네이션 필요)
   const handleLoadSearchData = async (searchTerm = "", page = 1) => {
-    if (savedDataRef.current) {
-      setSearchData(savedDataRef.current.data);
-      setTotalCount(savedDataRef.current.totalCount);
-      return;
-    }
     try {
       const response = await getCompareList({
         limit: ITEM_LIMIT,
@@ -61,12 +54,6 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany }) {
       if (response && response.data) {
         setSearchData(response.data || []);
         setTotalCount(response.totalCount || 0);
-
-        // 데이터를 저장해두기
-        savedDataRef.current = {
-          data: response.data,
-          totalCount: response.totalCount,
-        };
       } else {
         console.error("Invalid response structure:", response);
         setSearchData([]);
@@ -132,7 +119,7 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany }) {
       <div className={style.modal}>
         <div className={style.modalContent}>
           <div className={style.modalHeader}>
-            <p className={style.modalFont}>나의기업 선택하기</p>
+            <p className={style.modalFont}>비교할 기업</p>
             <img src={mdClose} onClick={handleCloseModal} alt="modalClose_bt" />
           </div>
           <div className={style.inputContainer}>

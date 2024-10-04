@@ -5,6 +5,7 @@ import { useState } from "react";
 import defaultImg from "../asset/images/img_company_default_logo.png";
 import ModalAddCompany from "../component/ModalAddCompany.js";
 import restart from "../asset/images/ic_restart.png"
+import minus from "../asset/images/ic_minus.png"
 
 function MyCompare() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -47,15 +48,22 @@ function MyCompare() {
     setAddCompany(false);
   };
 
+  const handleClickAllReset = () =>{
+    setAddCompany(false);
+    setSelectedCompany(false);
+    setAddSelectedCompany([]);
+    setAllClear(false);
+  }
+
   return (
     <>
       <div className={compareStyle.container}>
         <div className={compareStyle.headTheme}>
           <p className={compareStyle.headFont}>나의 기업을 선택해 주세요!</p>
-          <button className={compareStyle.addButton} >
+          {allClear && <button className={compareStyle.addButton} onClick={handleClickAllReset} >
             <img src={restart} alt="restart_IC" className={compareStyle.btRestart} />
                 전체 초기화
-              </button>
+              </button>}
         </div>
         <div className={compareStyle.mainSection}>
           {selectedCompany ? ( // 선택한 기업이 있을 경우
@@ -110,6 +118,9 @@ function MyCompare() {
                 {addSelectedCompany && addSelectedCompany.length > 0 ? (
                   addSelectedCompany.map((company) => (
                     <div key={company.id} className={compareStyle.companyItem}>
+                      <div className={compareStyle.minusSection}>
+                      <img src={minus} className={compareStyle.companyMinus} />
+                      </div>
                       <img
                         className={compareStyle.logo}
                         src={company.logo === "" ? defaultImg : company.logo}
@@ -123,7 +134,7 @@ function MyCompare() {
                   ))
                 ) : (
                   <>
-                    <p>
+                    <p className={compareStyle.defaultFont}>
                       아직 추가한 기업이 없어요,
                       <br />
                       버튼을 눌러 기업을 추가 해 보세요!
