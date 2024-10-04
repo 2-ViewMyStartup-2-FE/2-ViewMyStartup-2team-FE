@@ -42,8 +42,10 @@ function CompareResultPage() {
     sort: "누적 투자금액 높은순",
     list: []
   });
+
   useEffect(() => {
     const fetchData = async () => {
+      if (!myCompanyId || selectedCompaniesId.length === 0) return;
       const myCompanyData = await getStartup(myCompanyId);
       setMyCompany(myCompanyData);
       const selectedCompanies = await Promise.all(
@@ -74,7 +76,7 @@ function CompareResultPage() {
       }));
     };
     fetchData();
-  }, [myCompanyId, selectedCompaniesId]);
+  }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -123,7 +125,6 @@ function CompareResultPage() {
       list: nextList
     }));
   };
-
   return (
     <div className={styles.compareResultPage}>
       <SelectedCompanyCard
