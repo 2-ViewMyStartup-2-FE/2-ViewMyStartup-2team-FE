@@ -32,7 +32,10 @@ function CompareResultPage() {
   const params = new URLSearchParams(location.search);
   const myCompanyId = params.get("mycompany");
   const joinedSelectedCompanies = params.get("selectedcompany");
-  const selectedCompaniesId = joinedSelectedCompanies.split(",");
+  const allSelectedCompaniesId = joinedSelectedCompanies.split(",");
+  const selectedCompaniesId = allSelectedCompaniesId.filter(
+    (id) => id !== myCompanyId
+  );
   const [myCompany, setMyCompany] = useState({});
   const [compStatus, setCompStatus] = useState({
     sort: "누적 투자금액 높은순",
