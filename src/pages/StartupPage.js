@@ -39,6 +39,7 @@ export default function StartupPage() {
     };
 
     fetchData();
+    console.log(search);
   }, [currentPage, sortType, search]);
 
   // 데이터 정렬 함수
@@ -77,11 +78,18 @@ export default function StartupPage() {
     setCurrentPage(1);
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
       handleSearchClick();
     }
   };
+
+  const handleInputChange = (value) => {
+    setInputValue(value);
+    if (value === "") {
+      setSearch("");
+    }
+  }
 
   // 정렬된 데이터
   const sortedData = sortData([...startupData], sortType);
@@ -102,7 +110,7 @@ export default function StartupPage() {
               className={style.search}
               value={inputValue}
               placeholder="검색어를 입력해주세요"
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={(e) => handleInputChange(e.target.value)}
               onKeyDown={handleKeyPress}
             />
             {inputValue && (
