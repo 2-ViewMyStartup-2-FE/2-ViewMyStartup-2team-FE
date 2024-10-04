@@ -1,5 +1,6 @@
 import styles from "../css/SelectedCompanyCard.module.css";
 import { Link } from "react-router-dom";
+import defaultLogo from "../asset/images/img_company_default_logo.png";
 function SelectedCompanyCard({ myCompany, className }) {
   return (
     <div className={`${styles.selectedCompanyCard} ${className}`}>
@@ -17,6 +18,7 @@ function SelectedCompanyCard({ myCompany, className }) {
             src={myCompany.logo}
             className={styles.logo}
             alt="로고이미지"
+            onError={(e) => (e.target.src = defaultLogo)}
           ></img>
           <p className={styles.name}>{myCompany.name}</p>
           <p className={styles.category}>{myCompany.category}</p>

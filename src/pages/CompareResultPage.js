@@ -3,59 +3,10 @@ import SelectedCompanyCard from "../component/SelectedCompanyCard.js";
 import ComparisonTable from "../component/ComparisonTable.js";
 import InvestModal from "../component/InvestModal.js";
 import InvestmentPopup from "../component/InvestmentPopup.js";
-import { useState } from "react";
-const myComanyMockData = {
-  name: "코드잇",
-  logo: "https://logo-resources.thevc.kr/organizations/200x200/485bb55e3da6f0af944776691c82f49d7131836de10d5718ec79242d44edfce4_1585722287000593.jpg",
-  rank: 14,
-  description: "코드잇은 온라인 교육",
-  category: "에듀테크",
-  totalInvestment: 14000000000,
-  revenue: 5000000000,
-  employee: 68
-};
-const selectedMockData = [
-  {
-    name: "스타트업 A",
-    logo: "https://logo-resources.thevc.kr/organizations/200x200/485bb55e3da6f0af944776691c82f49d7131836de10d5718ec79242d44edfce4_1585722287000593.jpg",
-    rank: 16,
-    description: "스타트업 A는 혁신적인 기술 솔루션을 제공합니다.",
-    category: "IT",
-    totalInvestment: 20000000000,
-    revenue: 10000000000,
-    employee: 120
-  },
-  {
-    name: "헬로우 월드",
-    logo: "https://logo-resources.thevc.kr/organizations/200x200/485bb55e3da6f0af944776691c82f49d7131836de10d5718ec79242d44edfce4_1585722287000593.jpg",
-    rank: 27,
-    description: "헬로우 월드는 AI 기반의 고객 서비스 플랫폼입니다.",
-    category: "테크",
-    totalInvestment: 30000000000,
-    revenue: 15000000000,
-    employee: 85
-  },
-  {
-    name: "그린 에너지",
-    logo: "https://logo-resources.thevc.kr/organizations/200x200/485bb55e3da6f0af944776691c82f49d7131836de10d5718ec79242d44edfce4_1585722287000593.jpg",
-    rank: 59,
-    description: "그린 에너지는 지속 가능한 에너지 솔루션을 제공합니다.",
-    category: "에너지",
-    totalInvestment: 25000000000,
-    revenue: 8000000000,
-    employee: 50
-  },
-  {
-    name: "푸드 테크",
-    logo: "https://logo-resources.thevc.kr/organizations/200x200/485bb55e3da6f0af944776691c82f49d7131836de10d5718ec79242d44edfce4_1585722287000593.jpg",
-    rank: 87,
-    description: "푸드 테크는 식품 기술 혁신을 선도합니다.",
-    category: "식품",
-    totalInvestment: 18000000000,
-    revenue: 7000000000,
-    employee: 40
-  }
-];
+import { useState, useEffect } from "react";
+import { getRankAndNearbyCompanies } from "../api/CompareResultAPI.js";
+import { getStartup } from "../api/StartupAPI.js";
+import defaultLogo from "../asset/images/img_company_default_logo.png";
 const sortData = (data, option) => {
   const sortedData = [...data];
   switch (option) {
@@ -76,17 +27,56 @@ const sortData = (data, option) => {
   }
 };
 function CompareResultPage({
-  MYCOMPANY = myComanyMockData,
-  SELETEDCOMPANIES = selectedMockData
+  myCompanyId = "9d0k1c26-6f16-464e-829f-8fcf442634e3",
+  SelectedCompaniesId = [
+    "6d3f1c26-6f16-464e-829f-8fcf442634e3",
+    "0d9j1c26-6f16-464e-829f-8fcf442634e3",
+    "7d1a2c26-6f16-464e-829f-8fcf442634e3",
+    "3d6g1c26-6f16-464e-829f-8fcf442634e3"
+  ]
 }) {
+  const [myCompany, setMyCompany] = useState({});
   const [compStatus, setCompStatus] = useState({
     sort: "누적 투자금액 높은순",
-    list: sortData([MYCOMPANY, ...SELETEDCOMPANIES], "누적 투자금액 높은순")
+    list: []
   });
   const [rankStatus, setRankStatus] = useState({
     sort: "누적 투자금액 높은순",
-    list: sortData([MYCOMPANY, ...SELETEDCOMPANIES], "누적 투자금액 높은순")
+    list: []
   });
+  useEffect(() => {
+    const fetchData = async () => {
+      const myCompanyData = await getStartup(myCompanyId);
+      setMyCompany(myCompanyData);
+      const selectedCompanies = await Promise.all(
+        SelectedCompaniesId.map((id) => getStartup(id))
+      );
+      const compList = sortData(
+        [myCompanyData, ...selectedCompanies],
+        "누적 투자금액 높은순"
+      );
+      compList.forEach((company) => {
+        if (!company.logo || company.logo.includes("example")) {
+          company.logo = defaultLogo;
+        }
+      });
+      setCompStatus((prev) => ({
+        ...prev,
+        list: compList
+      }));
+      const rankList = await getRankAndNearbyCompanies({ myCompanyId });
+      rankList.forEach((company) => {
+        if (!company.logo || company.logo.includes("example")) {
+          company.logo = defaultLogo;
+        }
+      });
+      setRankStatus((prev) => ({
+        ...prev,
+        list: rankList
+      }));
+    };
+    fetchData();
+  }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -96,23 +86,50 @@ function CompareResultPage({
   };
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
+  const convertStateToUrl = (selectedOption) => {
+    switch (selectedOption) {
+      case "누적 투자금액 높은순":
+        return "investmentHighest";
+      case "누적 투자금액 낮은순":
+        return "investmentLowest";
+      case "매출액 높은순":
+        return "revenueHighest";
+      case "매출액 낮은순":
+        return "revenueLowest";
+      case "고용 인원 많은순":
+        return "employeeHighest";
+      case "고용 인원 적은순":
+        return "employeeLowest";
+      default:
+        return "investmentHighest";
+    }
+  };
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
       list: sortData([...prev.list], selectedOption)
     }));
   };
-  const handleRankSelect = (selectedOption) => {
+  const handleRankSelect = async (selectedOption) => {
+    const nextList = await getRankAndNearbyCompanies({
+      myCompanyId,
+      order: convertStateToUrl(selectedOption)
+    });
+    nextList.forEach((company) => {
+      if (!company.logo || company.logo.includes("example")) {
+        company.logo = defaultLogo;
+      }
+    });
     setRankStatus((prev) => ({
       sort: selectedOption,
-      list: sortData([...prev.list], selectedOption)
+      list: nextList
     }));
   };
 
   return (
     <div className={styles.compareResultPage}>
       <SelectedCompanyCard
-        myCompany={MYCOMPANY}
+        myCompany={myCompany}
         className={styles.selectedCompanyCardLayout}
       />
       <ComparisonTable
@@ -122,6 +139,7 @@ function CompareResultPage({
         onSelect={handleCompSelect}
         defaultOption={compStatus.sort}
         sortOption="list"
+        myCompany={myCompany}
       />
       <ComparisonTable
         type="ranking"
@@ -130,6 +148,7 @@ function CompareResultPage({
         onSelect={handleRankSelect}
         defaultOption={rankStatus.sort}
         sortOption="list"
+        myCompany={myCompany}
       />
       <button onClick={openModal} className={styles.investBtn}>
         나의 기업에 투자하기
@@ -138,7 +157,7 @@ function CompareResultPage({
         <InvestModal
           completeTask={completeTask}
           closeModal={closeModal}
-          myCompany={MYCOMPANY}
+          myCompany={myCompany}
         />
       )}
       {isPopupOpen && <InvestmentPopup closePopup={closePopup} />}

@@ -1,9 +1,9 @@
 import styles from "../css/ComparisonTableContent.module.css";
-
-function ComparisonTableContent({ list, type }) {
-  function toBillion(number) {
-    return number / 100000000;
-  }
+import ConvertBillion from "../utils/ConvertBillion.js";
+import defaultLogo from "../asset/images/img_company_default_logo.png";
+function ComparisonTableContent({ list, type, myCompany }) {
+  const ROWCLASS = (company) =>
+    `${styles.row} ${company.name === myCompany.name ? styles.myCompany : ""}`;
   const NAMECONTENT = `${styles.name} ${styles.content}`;
   const DESCRIPTION = `${styles.description} ${styles.content}`;
   const OTHER = `${styles.other} ${styles.content}`;
@@ -25,7 +25,7 @@ function ComparisonTableContent({ list, type }) {
         <tbody className={styles.contentBackground}>
           <tr className={styles.margin}></tr>
           {list.map((company) => (
-            <tr className={styles.row} key={company.name}>
+            <tr className={ROWCLASS(company)} key={company.name}>
               {type === "ranking" && (
                 <td className={RANKING}>{company.rank}위</td>
               )}
@@ -34,15 +34,18 @@ function ComparisonTableContent({ list, type }) {
                   src={company.logo}
                   className={styles.logo}
                   alt="로고이미지"
+                  onError={(e) => {
+                    e.target.src = defaultLogo;
+                  }}
                 />
-                <p>{company.name}</p>
+                <div className={styles.ellipsis}>{company.name}</div>
               </td>
               <td className={DESCRIPTION}>{company.description}</td>
               <td className={OTHER}>{company.category}</td>
               <td className={OTHER}>
-                {toBillion(company.totalInvestment)}억 원
+                {ConvertBillion(company.totalInvestment)} 원
               </td>
-              <td className={OTHER}>{toBillion(company.revenue)}억 원</td>
+              <td className={OTHER}>{ConvertBillion(company.revenue)} 원</td>
               <td className={OTHER}>{company.employee}명</td>
             </tr>
           ))}
