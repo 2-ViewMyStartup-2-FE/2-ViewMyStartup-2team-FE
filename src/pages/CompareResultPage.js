@@ -115,6 +115,11 @@ function CompareResultPage({
       myCompanyId,
       order: convertStateToUrl(selectedOption)
     });
+    nextList.forEach((company) => {
+      if (!company.logo || company.logo.includes("example")) {
+        company.logo = defaultLogo;
+      }
+    });
     setRankStatus((prev) => ({
       sort: selectedOption,
       list: nextList
