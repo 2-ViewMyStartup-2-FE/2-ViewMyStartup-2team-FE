@@ -3,7 +3,8 @@ import SelectedCompanyCard from "../component/SelectedCompanyCard.js";
 import ComparisonTable from "../component/ComparisonTable.js";
 import InvestModal from "../component/InvestModal.js";
 import InvestmentPopup from "../component/InvestmentPopup.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getRankAndNearbyCompanies } from "../api/CompareResultAPI.js";
 const myComanyMockData = {
   name: "코드잇",
   logo: "https://logo-resources.thevc.kr/organizations/200x200/485bb55e3da6f0af944776691c82f49d7131836de10d5718ec79242d44edfce4_1585722287000593.jpg",
@@ -79,14 +80,25 @@ function CompareResultPage({
   MYCOMPANY = myComanyMockData,
   SELETEDCOMPANIES = selectedMockData
 }) {
+  const myCompanyId = "9d0k1c26-6f16-464e-829f-8fcf442634e3";
   const [compStatus, setCompStatus] = useState({
     sort: "누적 투자금액 높은순",
     list: sortData([MYCOMPANY, ...SELETEDCOMPANIES], "누적 투자금액 높은순")
   });
   const [rankStatus, setRankStatus] = useState({
     sort: "누적 투자금액 높은순",
-    list: sortData([MYCOMPANY, ...SELETEDCOMPANIES], "누적 투자금액 높은순")
+    list: []
   });
+  useEffect(() => {
+    const fetchData = async () => {
+      const rankList = await getRankAndNearbyCompanies({ myCompanyId });
+      setRankStatus((prev) => ({
+        ...prev,
+        list: rankList
+      }));
+    };
+    fetchData();
+  }, [myCompanyId]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -96,16 +108,38 @@ function CompareResultPage({
   };
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
+  const convertStateToUrl = (selectedOption) => {
+    switch (selectedOption) {
+      case "누적 투자금액 높은순":
+        return "investmentHighest";
+      case "누적 투자금액 낮은순":
+        return "investmentLowest";
+      case "매출액 높은순":
+        return "revenueHighest";
+      case "매출액 낮은순":
+        return "revenueLowest";
+      case "고용 인원 많은순":
+        return "employeeHighest";
+      case "고용 인원 적은순":
+        return "employeeLowest";
+      default:
+        return "investmentHighest";
+    }
+  };
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
       list: sortData([...prev.list], selectedOption)
     }));
   };
-  const handleRankSelect = (selectedOption) => {
+  const handleRankSelect = async (selectedOption) => {
+    const nextList = await getRankAndNearbyCompanies({
+      myCompanyId,
+      order: convertStateToUrl(selectedOption)
+    });
     setRankStatus((prev) => ({
       sort: selectedOption,
-      list: sortData([...prev.list], selectedOption)
+      list: nextList
     }));
   };
 
