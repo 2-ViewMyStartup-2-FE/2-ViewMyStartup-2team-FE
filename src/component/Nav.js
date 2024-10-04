@@ -12,8 +12,8 @@ export default function Nav() {
   const isInvestStatus = currentPath === "/invest-status";
 
   const handleLogoClick = () => {
-    window.location.reload();
     navigate("/");
+    window.location.reload();
   };
 
   return (
