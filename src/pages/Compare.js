@@ -53,7 +53,14 @@ function MyCompare() {
     setSelectedCompany(false);
     setAddSelectedCompany([]);
     setAllClear(false);
-  }
+  };
+
+  const handleClickRemove = (id) => () => {
+    setAddSelectedCompany(addSelectedCompany.filter((company) => company.id !== id));
+    if(addSelectedCompany.length === 1){
+      setAddCompany(false);
+    }
+  };
 
   return (
     <>
@@ -119,7 +126,7 @@ function MyCompare() {
                   addSelectedCompany.map((company) => (
                     <div key={company.id} className={compareStyle.companyItem}>
                       <div className={compareStyle.minusSection}>
-                      <img src={minus} className={compareStyle.companyMinus} alt='minus' />
+                      <img src={minus} className={compareStyle.companyMinus} alt='minus' onClick={handleClickRemove(company.id)} />
                       </div>
                       <img
                         className={compareStyle.logo}

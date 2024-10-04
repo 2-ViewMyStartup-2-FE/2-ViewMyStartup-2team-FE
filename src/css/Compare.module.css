@@ -187,6 +187,9 @@ body {
   justify-content: flex-end;
   align-items: center;
 }
+.companyMinus {
+  cursor: pointer;
+}
 .selectName{
   color: #ffffff;
   font-size: 1.6rem;
