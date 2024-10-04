@@ -74,7 +74,7 @@ function CompareResultPage() {
       }));
     };
     fetchData();
-  }, []);
+  }, [myCompanyId, selectedCompaniesId]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);

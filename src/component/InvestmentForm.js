@@ -49,7 +49,8 @@ function InvestmentForm({
   onBlur,
   isVisible,
   onToggle,
-  className
+  className,
+  errorMessage
 }) {
   const {
     frame: FRAME,
@@ -65,6 +66,7 @@ function InvestmentForm({
           className={styles.commentInput}
           placeholder={MESSAGE}
           onBlur={onBlur}
+          spellCheck="false" // 맞춤법 빨간줄 없애기
         />
       ) : (
         <div className={styles.inputContainer}>
@@ -86,6 +88,7 @@ function InvestmentForm({
           )}
         </div>
       )}
+      <div className={styles.errorMessage}>{errorMessage}</div>
     </div>
   );
 }
