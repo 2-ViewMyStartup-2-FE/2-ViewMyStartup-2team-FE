@@ -41,7 +41,7 @@ export default function SPagination({
   };
 
   return (
-    <div className={style.page}>
+    <div className={`${style.page} ${className ? style.addClass : ""}`}>
       <div
         className={`${style.pageBtn} ${className || ""}`}
         onClick={handlePrevClick}

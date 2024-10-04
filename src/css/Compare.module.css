@@ -36,6 +36,7 @@ body {
 }
 .headTheme {
   display: flex;
+  justify-content:space-between;
   width: 100%;
   margin-bottom: 1.6rem;
 }
@@ -62,8 +63,9 @@ body {
   width: 8rem;
   height: 8rem;
   border-radius: 8rem;
+  background-color: #ffffff;
 }
-.mainSection img {
+.btnPlus {
   cursor: pointer;
 }
 .content {
@@ -121,6 +123,11 @@ body {
   font-weight: 600;
   line-height: 1.909rem;
   color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
 }
 .mainSection2 {
   display: flex;
@@ -131,6 +138,7 @@ body {
   height: 30rem;
   background-color: var(--black-300);
   border-radius: 0.4rem;
+  gap: 1.6rem;
 }
 .mainSection2 p {
   font-size: 1.4rem;
@@ -215,12 +223,11 @@ body {
     line-height: 1.432rem;
     transform: translateY(-1rem);
   }
-  .selectName{
+  .selectName {
     font-size: 1.4rem;
     line-height: 1.671rem;
-
   }
-  .selectCategory{
+  .selectCategory {
     font-size: 1.2rem;
     line-height: 1.432rem;
   }
