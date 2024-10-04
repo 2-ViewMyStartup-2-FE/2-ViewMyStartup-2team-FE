@@ -1,5 +1,6 @@
 import styles from "../css/ComparisonTableContent.module.css";
 import ConvertBillion from "../utils/ConvertBillion.js";
+import defaultLogo from "../asset/images/img_company_default_logo.png";
 function ComparisonTableContent({ list, type, myCompany }) {
   const ROWCLASS = (company) =>
     `${styles.row} ${company.name === myCompany.name ? styles.myCompany : ""}`;
@@ -33,6 +34,9 @@ function ComparisonTableContent({ list, type, myCompany }) {
                   src={company.logo}
                   className={styles.logo}
                   alt="로고이미지"
+                  onError={(e) => {
+                    e.target.src = defaultLogo;
+                  }}
                 />
                 <div className={styles.ellipsis}>{company.name}</div>
               </td>
