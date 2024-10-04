@@ -4,7 +4,6 @@ export async function getRankAndNearbyCompanies({
   order = "investmentHighest"
 }) {
   try {
-    console.log(order);
     const response = await requestGetDB(
       `/companies/${myCompanyId}/rank?order=${order}`
     );
