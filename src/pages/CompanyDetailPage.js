@@ -27,8 +27,8 @@ export default function CompanyDetailPage() {
   }, [id]);
   return (
     <div className={styles.companyDetailPage}>
-      <CompanyDetailTable data={startupData} />
-      <CompanyInvestmentAction data={startupData} />
+      <CompanyDetailTable startupListData={startupData} />
+      <CompanyInvestmentAction startupListData={startupData} />
       <InvestmentInfoList data={startupData} />
     </div>
   );

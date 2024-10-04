@@ -3,10 +3,9 @@ import ConvertBillion from "../utils/ConvertBillion.js";
 import InvestModal from "./InvestModal.js";
 import { useState } from "react";
 
-function CompanyInvestmentAction({ data }) {
+function CompanyInvestmentAction({ startupListData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const formatNumber = (value) => ConvertBillion(parseInt(value));
 
   const completeTask = () => {
     setIsModalOpen(false);
@@ -27,12 +26,12 @@ function CompanyInvestmentAction({ data }) {
           <InvestModal
             completeTask={completeTask}
             closeModal={closeModal}
-            myCompany={data}
+            myCompany={startupListData}
           />
         )}
       </div>
       <div className={styles.investment}>
-        총 {formatNumber(data.virtualInvestment)} 원
+        총 {ConvertBillion(startupListData.virtualInvestment)} 원
       </div>
     </div>
   );
