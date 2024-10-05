@@ -7,7 +7,8 @@ export default function Nav() {
   const navigate = useNavigate();
   const currentPath = location.pathname;
 
-  const isCompare = currentPath === "/compare" || "/compare-result";
+  const isCompare =
+    currentPath === "/compare" || currentPath === "/compare-result";
   const isCompareStatus = currentPath === "/compare-status";
   const isInvestStatus = currentPath === "/invest-status";
 
