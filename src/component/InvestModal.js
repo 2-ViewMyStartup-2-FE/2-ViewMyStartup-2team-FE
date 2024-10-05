@@ -4,6 +4,7 @@ import InvestModalHeader from "./InvestModalHeader.js";
 import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
 import InvestmentForm from "./InvestmentForm.js";
 import InvestmentButton from "./InvestmentButton.js";
+import { postInvestment } from "../api/CompareResultAPI.js";
 function InvestModal({ completeTask, closeModal, myCompany }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,12 +19,22 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const onTogglePassword = () => setIsPasswordVisible((prev) => !prev);
   const onToggleConfirm = () => setIsConfirmVisible((prev) => !prev);
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const sumbitData = {
+        investorName: formData.name,
+        amount: formData.amount,
+        comment: formData.comment,
+        password: formData.password,
+        companyId: myCompany.id
+      };
+      await postInvestment(myCompany.id, sumbitData);
+    } catch (e) {
+      console.log(e.message);
+    }
     completeTask();
   };
-
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.frame}>
