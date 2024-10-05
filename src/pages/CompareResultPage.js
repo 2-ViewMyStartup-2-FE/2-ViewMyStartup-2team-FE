@@ -32,17 +32,17 @@ function CompareResultPage({
     "6d3f1c26-6f16-464e-829f-8fcf442634e3",
     "0d9j1c26-6f16-464e-829f-8fcf442634e3",
     "7d1a2c26-6f16-464e-829f-8fcf442634e3",
-    "3d6g1c26-6f16-464e-829f-8fcf442634e3"
-  ]
+    "3d6g1c26-6f16-464e-829f-8fcf442634e3",
+  ],
 }) {
   const [myCompany, setMyCompany] = useState({});
   const [compStatus, setCompStatus] = useState({
     sort: "누적 투자금액 높은순",
-    list: []
+    list: [],
   });
   const [rankStatus, setRankStatus] = useState({
     sort: "누적 투자금액 높은순",
-    list: []
+    list: [],
   });
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +62,7 @@ function CompareResultPage({
       });
       setCompStatus((prev) => ({
         ...prev,
-        list: compList
+        list: compList,
       }));
       const rankList = await getRankAndNearbyCompanies({ myCompanyId });
       rankList.forEach((company) => {
@@ -72,11 +72,11 @@ function CompareResultPage({
       });
       setRankStatus((prev) => ({
         ...prev,
-        list: rankList
+        list: rankList,
       }));
     };
     fetchData();
-  }, []);
+  }, [SelectedCompaniesId, myCompanyId]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -107,13 +107,13 @@ function CompareResultPage({
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
-      list: sortData([...prev.list], selectedOption)
+      list: sortData([...prev.list], selectedOption),
     }));
   };
   const handleRankSelect = async (selectedOption) => {
     const nextList = await getRankAndNearbyCompanies({
       myCompanyId,
-      order: convertStateToUrl(selectedOption)
+      order: convertStateToUrl(selectedOption),
     });
     nextList.forEach((company) => {
       if (!company.logo || company.logo.includes("example")) {
@@ -122,7 +122,7 @@ function CompareResultPage({
     });
     setRankStatus((prev) => ({
       sort: selectedOption,
-      list: nextList
+      list: nextList,
     }));
   };
 

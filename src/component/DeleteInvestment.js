@@ -2,48 +2,51 @@ import styles from "../css/DeleteInvestment.module.css";
 import closeIcon from "../asset/images/ic_delete.png";
 import openEyeIcon from "../asset/images/open-eyes.png";
 import closeEyeIcon from "../asset/images/closed-eyes.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ErrorModal from "./ErrorModal.js";
+import { deleteInvestment } from "../api/CompanyDetailAPI.js";
 
 export default function DeleteInvestment({
-  investorId,
-  investments,
-  setInvestments,
+  investment,
   onClose,
-  isPasswordVerified,
-  setIsPasswordVerified,
-  onVerifyPassword,
+  setInvestments,
+  verifyPassword, // 비밀번호 검증 함수 전달
 }) {
+  const [inputPassword, setInputPassword] = useState(""); // 입력된 비밀번호
+  const [passwordToggle, setPasswordToggle] = useState(false); // 비밀번호 표시 토글
   const [isErrorModal, setIsErrorModal] = useState(false); // 에러 모달 상태
-  const [passwordToggle, setPasswordToggle] = useState(false);
-  const [inputPassword, setInputPassword] = useState(""); // 비밀번호 상태
 
-  // 비밀번호 확인 및 삭제 처리
-  useEffect(() => {
-    if (isPasswordVerified) {
-      setInvestments(
-        investments.filter((investor) => investor.id !== investorId)
-      );
-      onClose();
-    }
-  }, [isPasswordVerified, investorId, investments, onClose, setInvestments]);
+  // 비밀번호 보이기/숨기기 토글
+  const handlePasswordToggle = () => setPasswordToggle(!passwordToggle);
 
-  const handlePasswordVerify = () => {
-    onVerifyPassword(inputPassword);
-    if (!isPasswordVerified) {
+  // 비밀번호 검증 후 삭제 처리
+  const handlePasswordVerify = async () => {
+    const isPasswordCorrect = verifyPassword(inputPassword, investment.id);
+
+    if (isPasswordCorrect) {
+      // 비밀번호가 맞으면 삭제 API 호출
+      const deleteSuccess = await deleteInvestment(investment.id);
+
+      if (deleteSuccess) {
+        // 삭제 성공 시 상태에서 해당 투자자 삭제
+        setInvestments((prevInvestments) =>
+          prevInvestments.filter((inv) => inv.id !== investment.id)
+        );
+        onClose(); // 모달 닫기
+      } else {
+        // 삭제 실패 시 에러 모달 표시
+        setIsErrorModal(true);
+      }
+    } else {
+      // 비밀번호가 틀렸을 때 에러 모달 표시
       setIsErrorModal(true);
     }
   };
 
-  // 에러 확인 버튼 클릭 시 원래 모달로 복귀
+  // 에러 모달 확인 버튼 처리
   const handleErrorConfirmBtn = () => {
     setIsErrorModal(false); // 에러 모달 닫기
-    setInputPassword(""); // 비밀번호 필드 초기화
-    setIsPasswordVerified(false); // 비밀번호 인증 초기화
-  };
-
-  const handlePasswordToggle = () => {
-    setPasswordToggle(!passwordToggle);
+    setInputPassword(""); // 비밀번호 초기화
   };
 
   return (

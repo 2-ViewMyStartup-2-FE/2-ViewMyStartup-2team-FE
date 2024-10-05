@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getStartup } from "../api/StartupAPI.js";
+import { getCompanyDetail } from "../api/CompanyDetailAPI.js";
 import styles from "../css/CompanyDetailPage.module.css";
 import InvestmentInfoList from "../component/InvestmentInfoList.js";
 import CompanyDetailTable from "../component/CompanyDetailTable.js";
@@ -13,8 +13,8 @@ export default function CompanyDetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getStartup(id);
-
+        const response = await getCompanyDetail(id);
+        console.log(response);
         if (response) {
           setStartupData(response);
         }
