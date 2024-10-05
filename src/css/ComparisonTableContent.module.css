@@ -6,121 +6,92 @@
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.671rem;
+    color: #D8D8D8;
 }
 
 .tableContainer {
     width: 100%;
 }
 
-.header {
+.row,
+.rowRanking {
+    display: grid;
+    height: 6.4rem;
+    background: #212121;
+}
+
+.row {
+    grid-template-columns: 21.3rem 30.4rem 1fr 1fr 1fr 1fr;
+}
+
+.rowRanking {
+    grid-template-columns: 6.8rem 21.3rem 30.4rem 1fr 1fr 1fr 1fr;
+}
+
+.rowRanking.header,
+.row.header {
     height: 3.9rem;
+    margin-bottom: 1.6rem;
     background: #2E2E2E;
+    color: #ffffff;
 }
 
-.header th {
-    vertical-align: middle;
-    /* 세로 가운데 정렬 */
-    text-align: center;
-    /* 텍스트 가운데 정렬 */
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.margin {
-    height: 1.6rem;
+.logoAndName {
+    display: flex;
+    align-items: center;
 }
 
 .logo {
     width: 3.2rem;
     height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
     margin-left: 2.4rem;
     margin-right: 1.2rem;
 }
 
-.name {
-    width: 21.3rem;
-    height: 100%;
-    color: #ffffff;
-}
-
-.name.content {
-    display: flex;
-    align-items: center;
-}
-
-.description {
-    width: 30.4rem;
-    height: 100%;
-    color: #ffffff;
+.ellipsisName,
+.ellipsisDescription {
+    display: -webkit-box;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
 }
 
-.description.content {
-    color: #D8D8D8;
-
-}
-
-.ranking {
-    width: 6.8rem;
-    height: 100%;
-    padding: 0;
+.ellipsisName {
+    max-width: 15rem;
+    -webkit-line-clamp: 1;
     color: #ffffff;
 }
 
-.ranking.content {
-    color: #D8D8D8;
+.ellipsisDescription {
+    padding: 1.5rem 1.6rem;
+    max-height: 5rem;
+    max-width: 30.4rem;
+    -webkit-line-clamp: 2;
 }
 
-.other {
-    height: 100%;
-    flex: 1;
-    color: #ffffff;
-}
-
-.other.content {
-    color: #D8D8D8;
-}
-
-.contentBackground {
-    height: auto;
-    background: #212121;
-}
-
-.row td {
-    height: 6.4rem;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.row.myCompany {
+.myCompany {
     background: #2E2E2E;
-
-}
-
-.ellipsis {
-    overflow: hidden;
-    /* 내용이 넘칠 경우 숨김 */
-    white-space: nowrap;
-    /* 한 줄로 표시 */
-    text-overflow: ellipsis;
-    /* 넘치는 내용은 '...'으로 표시 */
-    display: block;
-    /* 블록 요소로 설정 */
 }
 
 @media(max-width: 1199px) {
-    .name {
-        width: 15rem;
+    .row {
+        grid-template-columns: 15rem 18rem 1fr 1fr 1fr 1fr;
     }
 
-    .description {
-        width: 18rem;
-    }
-
-    .logo {
-        margin-left: 1.493rem;
-        margin-right: 0.8rem;
+    .rowRanking {
+        grid-template-columns: 6rem 14rem 18rem 8rem 1fr 1fr 1fr;
     }
 }
 
@@ -133,6 +104,7 @@
 
     .table {
         min-width: 800px;
+        padding-bottom: 1.2rem;
     }
 
     .tableContainer {
@@ -152,8 +124,5 @@
         background: gray;
     }
 
-    .marginBottom {
-        height: 1.2rem;
-        background: #131313;
-    }
+
 }
