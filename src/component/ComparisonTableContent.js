@@ -2,8 +2,6 @@ import styles from "../css/ComparisonTableContent.module.css";
 import ConvertBillion from "../utils/ConvertBillion.js";
 import defaultLogo from "../asset/images/img_company_default_logo.png";
 function ComparisonTableContent({ list, type, myCompany }) {
-  // const ROWCLASS = (company) =>
-  //   `${styles.row} ${company.name === myCompany.name ? styles.myCompany : ""}`;
   const isRanking = type === "ranking";
   const header = isRanking
     ? `${styles.rowRanking} ${styles.header}`

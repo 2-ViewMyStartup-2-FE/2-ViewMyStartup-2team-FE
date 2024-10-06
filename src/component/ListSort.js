@@ -20,16 +20,25 @@ export default function ListSort({ options, defaultOption, onSelect }) {
 
   return (
     <div className={style.sortMenu}>
-      <button className={`${style.sortButton} ${!isList ? style.status : ''}`} onClick={toggleSortMenu}>
+      <button
+        className={`${style.sortButton} ${!isList ? style.status : ""} `}
+        onClick={toggleSortMenu}
+      >
         <div className={style.sortContext}>{selectedOption}</div>
         <img src={toggle} alt="toggle" />
       </button>
       {isToggle && (
-        <div className={`${style.sortOptions} ${isCompareResult ? style.compareResult : !isList ? style.status :  ''}`}>
+        <div
+          className={`${style.sortOptions} ${
+            isCompareResult ? style.compareResult : !isList ? style.status : ""
+          }`}
+        >
           {options.map((option, index) => (
             <Fragment key={index}>
               <button
-                className={`${style.sortToggle} ${!isList ? style.status : ''}`}
+                className={`${style.sortToggle} ${
+                  !isList ? style.status : ""
+                } `}
                 onClick={() => handleOptionSelect(option)}
               >
                 {option}

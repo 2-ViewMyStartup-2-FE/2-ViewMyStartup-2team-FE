@@ -58,21 +58,11 @@ function CompareResultPage() {
         [myCompanyData, ...selectedCompanies],
         "누적 투자금액 높은순"
       );
-      compList.forEach((company) => {
-        if (!company.logo || company.logo.includes("example")) {
-          company.logo = defaultLogo;
-        }
-      });
       setCompStatus((prev) => ({
         ...prev,
         list: compList
       }));
       const rankList = await getRankAndNearbyCompanies({ myCompanyId });
-      rankList.forEach((company) => {
-        if (!company.logo || company.logo.includes("example")) {
-          company.logo = defaultLogo;
-        }
-      });
       setRankStatus((prev) => ({
         ...prev,
         list: rankList
@@ -117,11 +107,6 @@ function CompareResultPage() {
     const nextList = await getRankAndNearbyCompanies({
       myCompanyId,
       order: convertStateToUrl(selectedOption)
-    });
-    nextList.forEach((company) => {
-      if (!company.logo || company.logo.includes("example")) {
-        company.logo = defaultLogo;
-      }
     });
     setRankStatus((prev) => ({
       sort: selectedOption,
