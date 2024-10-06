@@ -27,6 +27,7 @@ const sortData = (data, option) => {
       return sortedData;
   }
 };
+
 function CompareResultPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -39,11 +40,11 @@ function CompareResultPage() {
   const [myCompany, setMyCompany] = useState({});
   const [compStatus, setCompStatus] = useState({
     sort: "누적 투자금액 높은순",
-    list: []
+    list: [],
   });
   const [rankStatus, setRankStatus] = useState({
     sort: "누적 투자금액 높은순",
-    list: []
+    list: [],
   });
 
   useEffect(() => {
@@ -60,12 +61,12 @@ function CompareResultPage() {
       );
       setCompStatus((prev) => ({
         ...prev,
-        list: compList
+        list: compList,
       }));
       const rankList = await getRankAndNearbyCompanies({ myCompanyId });
       setRankStatus((prev) => ({
         ...prev,
-        list: rankList
+        list: rankList,
       }));
     };
     fetchData();
@@ -100,17 +101,17 @@ function CompareResultPage() {
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
-      list: sortData([...prev.list], selectedOption)
+      list: sortData([...prev.list], selectedOption),
     }));
   };
   const handleRankSelect = async (selectedOption) => {
     const nextList = await getRankAndNearbyCompanies({
       myCompanyId,
-      order: convertStateToUrl(selectedOption)
+      order: convertStateToUrl(selectedOption),
     });
     setRankStatus((prev) => ({
       sort: selectedOption,
-      list: nextList
+      list: nextList,
     }));
   };
   return (

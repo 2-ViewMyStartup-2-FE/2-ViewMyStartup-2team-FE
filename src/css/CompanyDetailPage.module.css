@@ -16,6 +16,8 @@
 }
 
 .company img {
+  width: 8rem;
+  height: 8rem;
   display: flex;
   border-radius: 99rem;
 }
