@@ -7,7 +7,8 @@ export default function Nav() {
   const navigate = useNavigate();
   const currentPath = location.pathname;
 
-  const isCompare = currentPath === "/compare";
+  const isCompare =
+    currentPath === "/compare" || currentPath === "/compare-result";
   const isCompareStatus = currentPath === "/compare-status";
   const isInvestStatus = currentPath === "/invest-status";
 
@@ -20,7 +21,12 @@ export default function Nav() {
     <div className={style.header}>
       <div className={style.nav}>
         <div>
-          <img className={style.logo} src={img_logo} alt="logo" onClick={handleLogoClick} />
+          <img
+            className={style.logo}
+            src={img_logo}
+            alt="logo"
+            onClick={handleLogoClick}
+          />
         </div>
         <div className={style.titleGroup}>
           <Link

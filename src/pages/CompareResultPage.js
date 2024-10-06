@@ -1,4 +1,5 @@
 import styles from "../css/CompareResultPage.module.css";
+import { useLocation } from "react-router-dom";
 import SelectedCompanyCard from "../component/SelectedCompanyCard.js";
 import ComparisonTable from "../component/ComparisonTable.js";
 import InvestModal from "../component/InvestModal.js";
@@ -26,15 +27,15 @@ const sortData = (data, option) => {
       return sortedData;
   }
 };
-function CompareResultPage({
-  myCompanyId = "9d0k1c26-6f16-464e-829f-8fcf442634e3",
-  SelectedCompaniesId = [
-    "6d3f1c26-6f16-464e-829f-8fcf442634e3",
-    "0d9j1c26-6f16-464e-829f-8fcf442634e3",
-    "7d1a2c26-6f16-464e-829f-8fcf442634e3",
-    "3d6g1c26-6f16-464e-829f-8fcf442634e3"
-  ]
-}) {
+function CompareResultPage() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const myCompanyId = params.get("mycompany");
+  const joinedSelectedCompanies = params.get("selectedcompany");
+  const allSelectedCompaniesId = joinedSelectedCompanies.split(",");
+  const selectedCompaniesId = allSelectedCompaniesId.filter(
+    (id) => id !== myCompanyId
+  );
   const [myCompany, setMyCompany] = useState({});
   const [compStatus, setCompStatus] = useState({
     sort: "누적 투자금액 높은순",
@@ -44,12 +45,14 @@ function CompareResultPage({
     sort: "누적 투자금액 높은순",
     list: []
   });
+
   useEffect(() => {
     const fetchData = async () => {
+      if (!myCompanyId || selectedCompaniesId.length === 0) return;
       const myCompanyData = await getStartup(myCompanyId);
       setMyCompany(myCompanyData);
       const selectedCompanies = await Promise.all(
-        SelectedCompaniesId.map((id) => getStartup(id))
+        selectedCompaniesId.map((id) => getStartup(id))
       );
       const compList = sortData(
         [myCompanyData, ...selectedCompanies],
@@ -125,7 +128,6 @@ function CompareResultPage({
       list: nextList
     }));
   };
-
   return (
     <div className={styles.compareResultPage}>
       <SelectedCompanyCard
