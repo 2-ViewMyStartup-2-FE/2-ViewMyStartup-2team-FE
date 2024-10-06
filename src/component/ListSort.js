@@ -21,7 +21,9 @@ export default function ListSort({ options, defaultOption, onSelect }) {
   return (
     <div className={style.sortMenu}>
       <button
-        className={`${style.sortButton} ${!isList ? style.status : ""} `}
+        className={`${style.sortButton} ${!isList ? style.status : ""} ${
+          isCompareResult ? style.compareResult : ""
+        }`}
         onClick={toggleSortMenu}
       >
         <div className={style.sortContext}>{selectedOption}</div>
@@ -37,8 +39,12 @@ export default function ListSort({ options, defaultOption, onSelect }) {
             <Fragment key={index}>
               <button
                 className={`${style.sortToggle} ${
-                  !isList ? style.status : ""
-                } `}
+                  isCompareResult
+                    ? style.compareResult
+                    : !isList
+                    ? style.status
+                    : ""
+                }`}
                 onClick={() => handleOptionSelect(option)}
               >
                 {option}

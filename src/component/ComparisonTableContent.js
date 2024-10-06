@@ -28,7 +28,9 @@ function ComparisonTableContent({ list, type, myCompany }) {
               <img
                 className={styles.logo}
                 src={company.logo}
-                onError={defaultLogo}
+                onError={(e) => {
+                  e.target.src = defaultLogo;
+                }}
                 alt="로고이미지"
               />
               <div className={styles.ellipsisName}>{company.name}</div>
