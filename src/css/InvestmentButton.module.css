@@ -38,6 +38,10 @@
     background: #EB5230;
 }
 
+.invest.error {
+    background: gray;
+}
+
 @media(max-width: 743px) {
     .frame {
         height: 4.4rem;
