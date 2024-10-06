@@ -43,30 +43,29 @@ export default function EditInvestment({
 
     // 비밀번호 검증
     if (!verifyPassword(formData.password, investment.id)) {
-      alert("비밀번호가 잘못되었습니다.");
+      alert("투자 시 등록한 비밀번호를 입력해주세요.");
       return;
     }
 
-    // PATCH 요청 보내기
-    const updatedInvestment = await patchInvestment(investment.id, {
-      investorName: formData.name,
-      amount: formData.amount,
-      comment: formData.comment,
-      password: formData.password,
-    });
+    try {
+      // PATCH 요청 보내기
+      const updatedInvestment = await patchInvestment(investment.id, {
+        investorName: formData.name,
+        amount: formData.amount,
+        comment: formData.comment,
+        password: formData.password,
+      });
 
-    if (updatedInvestment) {
       setInvestments((prevInvestments) => {
         // 수정된 투자 데이터를 반영
         const updatedList = prevInvestments.map((inv) =>
           inv.id === investment.id ? updatedInvestment : inv
         );
-        // 수정된 데이터를 정렬 및 포맷팅한 후 상태에 반영
-        return formatAndSortInvestments(updatedList);
+        return formatAndSortInvestments(updatedList); // 정렬 및 포맷팅
       });
       onClose();
-    } else {
-      alert("투자를 업데이트하지 못했습니다.");
+    } catch (error) {
+      alert(error.message); // 에러 메시지 출력
     }
   };
 
@@ -80,6 +79,44 @@ export default function EditInvestment({
       }));
   };
 
+  // 각 form 필드의 설정을 객체로 정의
+  const formFields = [
+    {
+      mode: "edit",
+      type: "name",
+      value: formData.name,
+      onBlur: onBlurField("name"),
+    },
+    {
+      mode: "edit",
+      type: "amount",
+      value: formData.amount,
+      onBlur: onBlurField("amount"),
+    },
+    {
+      mode: "edit",
+      type: "comment",
+      value: formData.comment,
+      onBlur: onBlurField("comment"),
+    },
+    {
+      mode: "edit",
+      type: "password",
+      value: formData.password,
+      onBlur: onBlurField("password"),
+      isVisible: isPasswordVisible,
+      onToggle: onTogglePassword,
+    },
+    {
+      mode: "edit",
+      type: "confirm",
+      value: formData.confirmPassword,
+      onBlur: onBlurField("confirmPassword"),
+      isVisible: isConfirmVisible,
+      onToggle: onToggleConfirm,
+    },
+  ];
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.frame}>
@@ -89,44 +126,14 @@ export default function EditInvestment({
             myCompany={myCompany}
             className={styles.briefMargin}
           />
-          <InvestmentForm
-            type="name"
-            value={formData.name}
-            onBlur={onBlurField("name")}
-            className={styles.investFormMargin}
-          />
-          <InvestmentForm
-            mode="edit"
-            type="amount"
-            value={formData.amount}
-            onBlur={onBlurField("amount")}
-            className={styles.investFormMargin}
-          />
-          <InvestmentForm
-            mode="edit"
-            type="comment"
-            value={formData.comment}
-            onBlur={onBlurField("comment")}
-            className={styles.investFormMargin}
-          />
-          <InvestmentForm
-            mode="edit"
-            type="password"
-            value={formData.password}
-            onBlur={onBlurField("password")}
-            isVisible={isPasswordVisible}
-            onToggle={onTogglePassword}
-            className={styles.investFormMargin}
-          />
-          <InvestmentForm
-            mode="edit"
-            type="confirm"
-            value={formData.confirmPassword}
-            onBlur={onBlurField("confirmPassword")}
-            isVisible={isConfirmVisible}
-            onToggle={onToggleConfirm}
-            className={styles.investFormMargin}
-          />
+          {/* formFields 배열을 map으로 돌려서 InvestmentForm 컴포넌트 렌더링 */}
+          {formFields.map((field) => (
+            <InvestmentForm
+              key={field.type} // type을 key로 사용
+              {...field} // 필드 설정을 props로 전달
+              className={styles.investFormMargin}
+            />
+          ))}
           <InvestmentButton
             mode="edit"
             closeModal={onClose}
