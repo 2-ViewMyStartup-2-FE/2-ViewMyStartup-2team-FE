@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://two-viewmystartup-2team-be.onrender.com/api",
+  baseURL: "http://localhost:4000/api",
   // timeout: 10000,
 });
 
@@ -40,9 +40,11 @@ export async function requestPost(url, data) {
 
 export async function requestPatch(url, data) {
   try {
+    console.log("리퀘스트패치 데이터:", data);
     return await instance.patch(url, data);
   } catch (e) {
     console.error("patch error: ", e.message);
+    throw e; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 함
   }
 }
 

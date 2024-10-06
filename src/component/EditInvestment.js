@@ -55,6 +55,8 @@ export default function EditInvestment({
       password: formData.password,
     });
 
+    console.log("패치 결과:", updatedInvestment);
+
     if (updatedInvestment) {
       setInvestments((prevInvestments) => {
         // 수정된 투자 데이터를 반영
