@@ -44,7 +44,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
       const response = await getCompareList({
         limit: ITEM_LIMIT,
         search: searchTerm,
-        page: page,
+        page: currentPage,
       });
 
       if (response && response.data) {
@@ -63,7 +63,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   useEffect(() => {
     if (isOpen) {
       handleLoadFetchData();
-      handleLoadSearchData();
+      handleLoadSearchData(inputValue, currentPage);
     } else {
       setInputValue("");
       setStartupData([]);
@@ -71,7 +71,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
       setTotalCount(0);
       setCurrentPage(1);
     }
-  }, [isOpen]);
+  }, [isOpen, currentPage]);
 
   const handleInputChange = (event) => {
     const value = event.target.value;

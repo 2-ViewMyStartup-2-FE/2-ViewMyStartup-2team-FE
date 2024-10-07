@@ -8,17 +8,25 @@ import SPagination from "./SPagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
 
-function ModalAddCompany({ isOpen, onClose, onSelectAddCompany,prevSelectedCompany }) {
+function ModalAddCompany({
+  isOpen,
+  onClose,
+  onSelectAddCompany,
+  prevSelectedCompany,
+  selectedMyCompany,
+  onRemoveCompany,
+  errorMessage,
+  setErrorMessage,
+}) {
   const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
-  const [errorMessage, setErrorMessage] = useState("");
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const ITEM_LIMIT = 5;
-  
+
   useEffect(() => {
     if (isOpen && prevSelectedCompany?.length > 0) {
       setSelectedCompanies(prevSelectedCompany);
@@ -29,23 +37,13 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany,prevSelectedCompa
     if (selectedCompanies.length >= ITEM_LIMIT) {
       setErrorMessage("*최대 5개까지만 선택 가능합니다."); // 경고 메시지 설정
       return; // 선택을 중지
+    } else if (selectedCompanies.length < ITEM_LIMIT) {
+      setErrorMessage("");
     }
 
     setSelectedCompanies((prev) => [...prev, company]);
     onSelectAddCompany(company);
     setErrorMessage(""); // 선택 후 경고 메시지 초기화
-  };
-
-  //선택 해제 버튼 핸들러
-  const handleRemoveCompany = (id) => {
-    setSelectedCompanies((prev) => {
-      const updatedCompanies = prev.filter((company) => company.id !== id);
-      // 에러 메시지 초기화 조건
-      if (updatedCompanies.length < ITEM_LIMIT) {
-        setErrorMessage(""); // 선택 기업 수가 ITEM_LIMIT 미만일 때 에러 메시지 초기화
-      }
-      return updatedCompanies;
-    });
   };
 
   // 검색 데이터 로드 (페이지네이션 필요)
@@ -54,10 +52,12 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany,prevSelectedCompa
       const response = await getCompareList({
         limit: ITEM_LIMIT,
         search: searchTerm,
-        page: page,
+        page: currentPage,
+        excludeId: selectedMyCompany.id,
       });
 
       if (response && response.data) {
+
         setSearchData(response.data || []);
         setTotalCount(response.totalCount || 0);
       } else {
@@ -71,11 +71,15 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany,prevSelectedCompa
   };
 
   useEffect(() => {
-    if (isOpen && !dataLoaded) {
-      handleLoadSearchData();
-      setDataLoaded(true);
+    if (isOpen) {
+      if (!dataLoaded) {
+        handleLoadSearchData(); // 초기 데이터 로드
+        setDataLoaded(true);
+      } else {
+        handleLoadSearchData(inputValue, currentPage); // 페이지 변경 시 데이터 로드
+      }
     }
-  }, [isOpen, dataLoaded]);
+  }, [isOpen, currentPage, dataLoaded]); // 의존성 배열에 currentPage와 dataLoaded 추가
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -115,6 +119,15 @@ function ModalAddCompany({ isOpen, onClose, onSelectAddCompany,prevSelectedCompa
 
   const handleCloseModal = () => {
     onClose();
+  };
+
+  //선택리스트 삭제 및 초기화.
+  const handleRemoveCompany = (company) => {
+    onRemoveCompany(company);
+
+    if (selectedCompanies.length === 1) {
+      setSelectedCompanies([]); // 선택한 기업 리스트를 빈 배열로 초기화
+    }
   };
 
   if (!isOpen) return null;
