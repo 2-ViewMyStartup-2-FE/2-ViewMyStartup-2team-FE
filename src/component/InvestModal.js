@@ -82,7 +82,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
   const isFormValid = () =>
     Object.values(validation).every((status) => status === "SUCCESS");
 
-  const onBlurField = (field) => (e) => {
+  const onChangeField = (field) => (e) => {
     validateField(field, e.target.value);
     setFormData((prev) => ({ ...prev, [field]: e.target.value }));
   };
@@ -116,26 +116,26 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
 
           <InvestmentForm
             type="name"
-            onBlur={onBlurField("name")}
+            onChange={onChangeField("name")}
             errorMessage={errorMessage.name}
             className={styles.investFormMargin}
           />
           <InvestmentForm
             type="amount"
-            onBlur={onBlurField("amount")}
+            onChange={onChangeField("amount")}
             errorMessage={errorMessage.amount}
             className={styles.investFormMargin}
           />
           <InvestmentForm
             type="comment"
-            onBlur={onBlurField("comment")}
+            onChange={onChangeField("comment")}
             errorMessage={errorMessage.comment}
             className={styles.investFormMargin}
           />
 
           <InvestmentForm
             type="password"
-            onBlur={onBlurField("password")}
+            onChange={onChangeField("password")}
             isVisible={isPasswordVisible}
             onToggle={onTogglePassword}
             errorMessage={errorMessage.password}
@@ -143,7 +143,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
           />
           <InvestmentForm
             type="confirm"
-            onBlur={onBlurField("confirmPassword")}
+            onChange={onChangeField("confirmPassword")}
             isVisible={isConfirmVisible}
             onToggle={onToggleConfirm}
             errorMessage={errorMessage.confirmPassword}
