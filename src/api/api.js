@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: "https://two-viewmystartup-2team-be.onrender.com/api",
   // timeout: 10000,
 });
 
@@ -32,6 +32,9 @@ export async function requestGetDB(url, params = {}) {
 
 export async function requestPost(url, data) {
   try {
+    if (typeof url !== "string" || !url.trim()) {
+      throw new Error("Invalid URL provided");
+    }
     return await instance.post(url, data);
   } catch (e) {
     console.error("post error: ", e.message);

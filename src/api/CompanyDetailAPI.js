@@ -15,44 +15,63 @@ export async function getCompanyDetail(id) {
 }
 
 export async function postInvestment(id, data) {
+  // 유효성 검사
+  const { investorName, amount, comment, password } = data;
+
+  if (investorName.length < 2 || investorName.length > 10) {
+    throw new Error("투자자 이름은 2자 이상, 10자 이하여야 합니다.");
+  }
+
+  // 1억 이상, 1조 미만
+  if (amount < 100000000 || amount >= 1000000000000) {
+    throw new Error("투자 금액은 1억 이상, 1조 미만이어야 합니다.");
+  }
+
+  if (comment.length < 10 || comment.length > 30) {
+    throw new Error("투자 코멘트는 10자 이상, 30자 이하여야 합니다.");
+  }
+
+  if (password.length < 8 || password.length > 15) {
+    throw new Error("비밀번호는 8자 이상, 15자 이하여야 합니다.");
+  }
+
   try {
-    if (data.comment.length < 10) {
-      throw new Error("Page must be a positive number");
-    }
-    const response = await requestPatch(`/investments/${id}`, data);
-    console.log("서버 응답:", response); // 전체 응답을 출력
-    return response.data; // 여기가 문제가 발생한 부분
+    const response = await requestPost(`/companies2/${id}/investments`, data);
+    return response.data;
   } catch (e) {
-    console.error("패치 요청 실패:", e.message);
+    throw new Error(`투자 정보 생성 실패: ${e.message}`);
   }
 }
 
 export async function patchInvestment(id, data) {
+  // 유효성 검사
+  const { investorName, amount, comment, password } = data;
+
+  if (investorName.length < 2 || investorName.length > 10) {
+    throw new Error("투자자 이름은 2자 이상, 10자 이하여야 합니다.");
+  }
+
+  // 1억 이상, 1조 미만
+  if (amount < 100000000 || amount >= 1000000000000) {
+    throw new Error("투자 금액은 1억 이상, 1조 미만이어야 합니다.");
+  }
+
+  if (comment.length < 10 || comment.length > 30) {
+    throw new Error("투자 코멘트는 10자 이상, 30자 이하여야 합니다.");
+  }
+
+  if (password.length < 8 || password.length > 15) {
+    throw new Error("비밀번호는 8자 이상, 15자 이하여야 합니다.");
+  }
+
+  // 유효성 검사를 통과한 경우에만 PATCH 요청을 보냄
   try {
-    console.log(data.comment.length);
-    if (data.comment.length < 10 && data.comment.length > 30) {
-      throw new Error("Page must be a positive number");
-    }
     const response = await requestPatch(`/investments/${id}`, data);
     return response.data;
   } catch (e) {
-    console.error(e.message);
+    throw new Error(`투자 정보 업데이트 실패: ${e.message}`);
   }
 }
-
-// async function patchInvestment(companyid, investorid, data) {
-//   try {
-//     console.log("패치 요청 보냄:", data);
-//     const response = await requestPatch(
-//       `companies2/${companyid}/investments/${investorid}`,
-//       data
-//     );
-//     console.log("서버 응답 전체:", response); // 전체 응답을 출력
-//     return response.data; // 여기가 문제가 발생한 부분
-//   } catch (e) {
-//     console.error("에러 발생:", e.response?.data || e.message);
-//   }
-// }
 
 export async function deleteInvestment(id) {
   try {
@@ -62,10 +81,3 @@ export async function deleteInvestment(id) {
     console.error(e.message);
   }
 }
-
-patchInvestment("b0c1d2e3-f4a5-6b7c-8d9e-0f1g2h3i4j5k", {
-  investorName: "수정 되나요",
-  amount: 900000000,
-  comment: "수정1111111111",
-  password: "codeit12345",
-});
