@@ -86,7 +86,6 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
     setInputValue(""); // 입력값 초기화
     setSearch("");
     setCurrentPage(1); // 현재 페이지를 1로 초기화
-    // handleLoadSearchData();
   };
 
   const handleSearchClick = () => {
@@ -103,12 +102,6 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
       handleSearchClick();
     }
   };
-
-  // 검색 결과 페이지 변경 시 데이터 로드
-  // const handlePageChange = (page) => {
-  //   setCurrentPage(page);
-  //   handleLoadSearchData(inputValue, page);
-  // };
 
   if (!isOpen) return null;
 

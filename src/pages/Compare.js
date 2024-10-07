@@ -3,7 +3,7 @@ import btnPlus from "../asset/images/btn_plus.png";
 import ModalMyCompany from "../component/ModalCompany.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { requestPatch } from "../api/api.js";
+import { requestPatch } from "../api/api.js";
 import defaultImg from "../asset/images/img_company_default_logo.png";
 import ModalAddCompany from "../component/ModalAddCompany.js";
 import restart from "../asset/images/ic_restart.png";
@@ -72,21 +72,31 @@ function MyCompare() {
     });
   };
 
-  // const handleCompareCompanies = async () => {
-  //   const ids = addSelectedCompany.map(company => company.id).join(',');
-  //   const data = { ids, comparedChosenCounts: Array(addSelectedCompany.length).fill('1').join(',') };
-  //   console.log('전송할 데이터:', data);
-  //   try {
-  //     const response = await requestPatch('/comparison/company-compare', data);
-  //     console.log('비교 요청 성공:', response.data);
-  //     // 추가적인 로직(예: 결과 페이지로 이동 등)을 여기에 추가할 수 있습니다.
-  //     navigate(`/compare-result?mycompany=${selectedCompany.id}&selectedcompany=${ids}`);
-  //   } catch (error) {
-  //     const errorMessage = error.response ? error.response.data : error.message;
-  //     console.error('비교 요청 실패:', errorMessage);
-  //     alert('비교 요청에 실패했습니다. ' + errorMessage);
-  //   }
-  // };
+  const ids = addSelectedCompany.map((company) => company.id);
+
+  const handlePatchRequest = async () => {
+    const comparisonUrl = `/comparison/${ids.join(",")}/company-compare`; // ids를 쉼표로 구분해서 URL에 포함
+    const myCompareUrl = `/comparison/${selectedCompany.id}/my-compare`; // 단일 id로 URL 생성
+
+    try {
+      // 첫 번째 PATCH 요청 (다중 ids)
+      await requestPatch(comparisonUrl, null); // 데이터가 없으므로 두 번째 인자는 null로
+
+      // 두 번째 PATCH 요청 (단일 id)
+      await requestPatch(myCompareUrl, null); // 단일 id에 대한 PATCH 요청
+    } catch (error) {
+      console.error("Error while sending patch request:", error);
+    } finally {
+      // PATCH 요청이 성공하거나 실패한 후에 실행
+      if (addSelectedCompany.length >= 1 && selectedCompany) {
+        navigate(
+          `/compare-result?mycompany=${
+            selectedCompany.id
+          }&selectedcompany=${ids.join(",")}`
+        );
+      }
+    }
+  };
 
   return (
     <>
@@ -200,18 +210,10 @@ function MyCompare() {
               ? compareStyle.active
               : ""
           }`}
-          // onClick={handleCompareCompanies} // 비교 요청 함수 호출
-          onClick={() => {
-            if (addSelectedCompany.length >= 1 && selectedCompany) {
-              navigate(
-                `/compare-result?mycompany=${
-                  selectedCompany.id
-                }&selectedcompany=${addSelectedCompany
-                  .map((company) => company.id)
-                  .join(`,`)}`
-              );
-            }
-          }}
+          onClick={handlePatchRequest} // 비교 요청 함수 호출
+          // onClick={() => {
+
+          // }}
           disabled={addSelectedCompany.length < 1}
         >
           기업 비교하기

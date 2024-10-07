@@ -23,7 +23,7 @@ function ModalAddCompany({
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
-  // const [dataLoaded, setDataLoaded] = useState(false);
+  
   const [search, setSearch] = useState("");
 
   const ITEM_LIMIT = 5;
@@ -74,7 +74,7 @@ function ModalAddCompany({
     if (isOpen) {
       handleLoadSearchData(search, currentPage); // 페이지 변경 시 데이터 로드
     }
-  }, [isOpen, search, currentPage]); // 의존성 배열에 currentPage와 dataLoaded 추가
+  }, [isOpen, search, currentPage]); // 의존성 배열에 currentPage
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -95,7 +95,6 @@ function ModalAddCompany({
     if (inputValue) {
       setCurrentPage(1);
       setSearch(inputValue);
-      // handleLoadSearchData(inputValue, 1);
     } else {
       setSearchData([]);
     }
@@ -108,11 +107,7 @@ function ModalAddCompany({
     }
   };
 
-  // 검색 결과 페이지 변경 시 데이터 로드
-  // const handlePageChange = (page) => {
-  //   setCurrentPage(page);
-  //   handleLoadSearchData(inputValue, page);
-  // };
+
 
   const handleCloseModal = () => {
     onClose();
