@@ -22,6 +22,11 @@
     height: 4.8rem;
 }
 
+.sortButton.compareResult {
+    width: 16.8rem;
+    height: 4.8rem;
+}
+
 .sortContext {
     font-size: 1.4rem;
     line-height: 1.6rem;
@@ -48,7 +53,7 @@
 }
 
 .sortOptions.compareResult {
-    width: 26.4rem;
+    width: 16.8rem;
     height: 24rem;
 }
 
@@ -73,7 +78,16 @@ span {
     width: 26.4rem;
 }
 
+.sortToggle.compareResult {
+    width: 16.8rem;
+    height: 4.8rem;
+}
+
 @media (max-width: 743px) {
+    .sortContext {
+        font-size: 1.2rem;
+    }
+
     .sortButton {
         width: 14.6rem;
         height: 4rem;
@@ -88,5 +102,21 @@ span {
     .sortToggle {
         width: 14.6rem;
         height: 3.8rem;
+    }
+
+    .sortButton.compareResult {
+        width: 14.6rem;
+        height: 4rem;
+    }
+
+    .sortOptions.compareResult {
+        width: 14.6rem;
+        height: 22.8rem;
+    }
+
+    .sortToggle.compareResult {
+        width: 14.6rem;
+        height: 3.8rem;
+        font-size: 1.2rem;
     }
 }

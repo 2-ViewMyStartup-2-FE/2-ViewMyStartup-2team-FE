@@ -5,49 +5,10 @@
   margin-top: 3.2rem;
 }
 
-.investInfoTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 120rem;
-}
-
-.investInfoTitle h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 2.387rem;
-  color: #ffffff;
-}
-
-.investBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 13.1rem;
-  height: 4rem;
-  border-radius: 5rem;
-  background-color: #eb5230;
-  text-decoration: none;
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1.909rem;
-  color: #ffffff;
-}
-
 .investInfo {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-}
-
-.investment {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 2.387rem;
-  color: #ffffff;
-  padding-top: 1.6rem;
-  border-top: 0.1rem solid #2e2e2e;
 }
 
 .investDetailTitle {
@@ -131,10 +92,6 @@
     margin-top: 2.4rem;
   }
 
-  .investInfoTitle {
-    max-width: 69.6rem;
-  }
-
   .investDetailTitle {
     max-width: 69.6rem;
     grid-template-columns: 8.4rem 8.4rem 8.4rem 38.1rem 6.4rem;
@@ -154,30 +111,9 @@
     overflow: hidden;
   }
 
-  .investInfoTitle {
-    max-width: 34.3rem;
-  }
-
-  .investInfoTitle h1 {
-    font-size: 1.6rem;
-    line-height: 1.909rem;
-  }
-
-  .investBtn {
-    width: 9.7rem;
-    height: 3.2rem;
-    font-size: 1.4rem;
-    line-height: 1.671rem;
-  }
-
   .investInfo {
     overflow-x: auto; /* 가로 스크롤을 활성화 */
     padding-bottom: 1rem;
-  }
-
-  .investment {
-    font-size: 1.6rem;
-    line-height: 1.909rem;
   }
 
   .investDetailTitle {

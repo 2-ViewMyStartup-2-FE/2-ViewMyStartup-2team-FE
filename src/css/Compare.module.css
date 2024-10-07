@@ -27,7 +27,7 @@ body {
   color: #ffffff;
 }
 
-span{
+span {
   color: #ffffff;
   font-size: 1.6rem;
   font-weight: 400;
@@ -208,6 +208,9 @@ span{
   line-height: 1.909rem;
   margin: 1rem 0 0.4rem;
 }
+.companyMinus {
+  cursor: pointer;
+}
 
 @media (max-width: 1199px) {
   .container {
@@ -227,13 +230,13 @@ span{
 }
 
 @media (max-width: 743px) {
-  span{
+  span {
     font-size: 1.2rem;
   }
   .container {
     max-width: 34.3rem;
   }
-  .headFont{
+  .headFont {
     font-size: 1.6rem;
   }
   .mainSection {
@@ -284,5 +287,4 @@ span{
     width: calc(50%-1px);
     height: 16.3rem;
   }
-  
 }

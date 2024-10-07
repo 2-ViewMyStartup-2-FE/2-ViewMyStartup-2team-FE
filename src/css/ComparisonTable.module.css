@@ -1,6 +1,5 @@
 .comparisonTable {
     width: 120rem;
-    height: 43.9rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,6 +19,5 @@
 @media(max-width: 743px) {
     .comparisonTable {
         width: 34.3rem;
-        height: 45.5rem;
     }
 }
