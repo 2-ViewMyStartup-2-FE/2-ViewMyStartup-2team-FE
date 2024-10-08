@@ -1,7 +1,5 @@
 import style from "../css/ModalCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
-// import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
-// import searchIcon from "../asset/images/ic_search.png";
 import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
@@ -10,7 +8,7 @@ import SPagination from "./SPagination.js";
 import Search from "./Search.js";
 
 function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
   const [startupData, setStartupData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -67,42 +65,13 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
       handleLoadFetchData();
       handleLoadSearchData(search, currentPage);
     } else {
-      setInputValue("");
+      // setInputValue("");
       setStartupData([]);
       setSearchData([]);
       setTotalCount(0);
       setCurrentPage(1);
     }
   }, [isOpen, search, currentPage]);
-
-  // const handleInputChange = (event) => {
-  //   const value = event.target.value;
-  //   setInputValue(value);
-  //   if (value === "") {
-  //     setSearch("");
-  //   }
-  // };
-
-  // const handleClearInput = () => {
-  //   setInputValue(""); // 입력값 초기화
-  //   setSearch("");
-  //   setCurrentPage(1); // 현재 페이지를 1로 초기화
-  // };
-
-  // const handleSearchClick = () => {
-  //   if (inputValue) {
-  //     setCurrentPage(1);
-  //     setSearch(inputValue);
-  //   } else {
-  //     setSearchData([]);
-  //   }
-  // };
-  // const handleKeyDown = (event) => {
-  //   // 엔터 키 이벤트 추가
-  //   if (event.key === "Enter") {
-  //     handleSearchClick();
-  //   }
-  // };
 
   if (!isOpen) return null;
 
@@ -113,30 +82,11 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
           <p className={style.modalFont}>나의기업 선택하기</p>
           <img src={mdClose} onClick={onClose} alt="modalClose_bt" />
         </div>
-        <Search setSearch={setSearch} setCurrentPage={setCurrentPage} setSearchData={setSearchData} isList={false} isMine={true} />
-        {/* <div className={style.inputContainer}>
-          <input
-            className={style.modalInput}
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            placeholder="검색어를 입력하세요"
-          />
-          {inputValue && (
-            <img
-              className={style.closeCircle}
-              src={closeCircle}
-              alt="closeSmall_bt"
-              onClick={handleClearInput}
-            />
-          )}
-          <img
-            className={style.searchButton}
-            src={searchIcon}
-            alt="ic_search_bt"
-            onClick={handleSearchClick}
-          />
-        </div> */}
+        <Search 
+          setSearch={setSearch} 
+          setCurrentPage={setCurrentPage} 
+          setSearchData={setSearchData} 
+          isList={false} isMine={true} />
         <ManyChoiceCompany
           itemLimit={ITEM_LIMIT}
           data={startupData}

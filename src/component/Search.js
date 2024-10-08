@@ -50,6 +50,8 @@ export default function Search({ setSearch, setCurrentPage, handleLoadSearchData
       <input
         className={`${style.searchInput} ${isList ? style.list : style.compare}`}
         value={inputValue}
+        id="searchInput"
+        name="search"
         onChange={(e) => handleInputChange(e.target.value)}
         onKeyDown={handleKeyPress}
         placeholder="검색어를 입력해주세요"
