@@ -1,4 +1,5 @@
 import styles from "../css/InvestModal.module.css";
+import bigInt from "big-integer";
 import { useState } from "react";
 import InvestModalHeader from "./InvestModalHeader.js";
 import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
@@ -41,9 +42,18 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
         else changeState("SUCCESS", "");
         break;
       case "amount":
-        if (value < 100000000)
+        // 정규 표현식으로 숫자 확인 (정수 또는 큰 수)
+        const isValidNumber = /^[0-9]+$/.test(value.trim());
+        if (!isValidNumber) {
+          changeState("FAIL", "투자 금액은 숫자여야 합니다");
+          break;
+        }
+        const bigIntValue = bigInt(value);
+        if (bigIntValue.lt(100000000))
+          // 1억 이상
           changeState("FAIL", "투자 금액은 1억 이상이여야 합니다");
-        else if (value > 1000000000000)
+        else if (bigIntValue.gt(1000000000000))
+          // 1조 미만
           changeState("FAIL", "투자 금액은 1조 미만이여야 합니다");
         else changeState("SUCCESS", "");
         break;
@@ -72,7 +82,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
   const isFormValid = () =>
     Object.values(validation).every((status) => status === "SUCCESS");
 
-  const onBlurField = (field) => (e) => {
+  const onChangeField = (field) => (e) => {
     validateField(field, e.target.value);
     setFormData((prev) => ({ ...prev, [field]: e.target.value }));
   };
@@ -106,26 +116,26 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
 
           <InvestmentForm
             type="name"
-            onBlur={onBlurField("name")}
+            onChange={onChangeField("name")}
             errorMessage={errorMessage.name}
             className={styles.investFormMargin}
           />
           <InvestmentForm
             type="amount"
-            onBlur={onBlurField("amount")}
+            onChange={onChangeField("amount")}
             errorMessage={errorMessage.amount}
             className={styles.investFormMargin}
           />
           <InvestmentForm
             type="comment"
-            onBlur={onBlurField("comment")}
+            onChange={onChangeField("comment")}
             errorMessage={errorMessage.comment}
             className={styles.investFormMargin}
           />
 
           <InvestmentForm
             type="password"
-            onBlur={onBlurField("password")}
+            onChange={onChangeField("password")}
             isVisible={isPasswordVisible}
             onToggle={onTogglePassword}
             errorMessage={errorMessage.password}
@@ -133,7 +143,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
           />
           <InvestmentForm
             type="confirm"
-            onBlur={onBlurField("confirmPassword")}
+            onChange={onChangeField("confirmPassword")}
             isVisible={isConfirmVisible}
             onToggle={onToggleConfirm}
             errorMessage={errorMessage.confirmPassword}

@@ -1,98 +1,58 @@
-import styles from "../css/DeleteInvestment.module.css";
-import closeIcon from "../asset/images/ic_delete.png";
-import openEyeIcon from "../asset/images/open-eyes.png";
-import closeEyeIcon from "../asset/images/closed-eyes.png";
-import { useState } from "react";
-import ErrorModal from "./ErrorModal.js";
 import { deleteInvestment } from "../api/CompanyDetailAPI.js";
+import closeIcon from "../asset/images/ic_delete.png";
+import styles from "../css/DeleteInvestment.module.css";
+import ConvertBillion from "../utils/ConvertBillion.js";
 
 export default function DeleteInvestment({
   investment,
   onClose,
   setInvestments,
-  verifyPassword, // 비밀번호 검증 함수 전달
+  setErrorMessage,
+  setIsErrorModal,
+  setShowDeleteModal,
 }) {
-  const [inputPassword, setInputPassword] = useState(""); // 입력된 비밀번호
-  const [passwordToggle, setPasswordToggle] = useState(false); // 비밀번호 표시 토글
-  const [isErrorModal, setIsErrorModal] = useState(false); // 에러 모달 상태
+  // 삭제 처리
+  const handleDelete = async () => {
+    const deleteSuccess = await deleteInvestment(investment.id);
 
-  // 비밀번호 보이기/숨기기 토글
-  const handlePasswordToggle = () => setPasswordToggle(!passwordToggle);
-
-  // 비밀번호 검증 후 삭제 처리
-  const handlePasswordVerify = async () => {
-    const isPasswordCorrect = verifyPassword(inputPassword, investment.id);
-
-    if (isPasswordCorrect) {
-      // 비밀번호가 맞으면 삭제 API 호출
-      const deleteSuccess = await deleteInvestment(investment.id);
-
-      if (deleteSuccess) {
-        // 삭제 성공 시 상태에서 해당 투자자 삭제
-        setInvestments((prevInvestments) =>
-          prevInvestments.filter((inv) => inv.id !== investment.id)
+    if (deleteSuccess) {
+      // 삭제 성공 시 상태에서 해당 투자자 삭제 후 순위 재정렬
+      setInvestments((prevInvestments) => {
+        const updatedInvestments = prevInvestments.filter(
+          (inv) => inv.id !== investment.id
         );
-        onClose(); // 모달 닫기
-      } else {
-        // 삭제 실패 시 에러 모달 표시
-        setIsErrorModal(true);
-      }
+        return formatAndSortInvestments(updatedInvestments); // 순위 재정렬
+      });
+      onClose(); // 모달 닫기
     } else {
-      // 비밀번호가 틀렸을 때 에러 모달 표시
+      // 삭제 실패 시 에러 처리 (필요시 추가)
+      setErrorMessage("투자를 삭제하는데 실패하였습니다.");
       setIsErrorModal(true);
+      setShowDeleteModal(false);
     }
   };
 
-  // 에러 모달 확인 버튼 처리
-  const handleErrorConfirmBtn = () => {
-    setIsErrorModal(false); // 에러 모달 닫기
-    setInputPassword(""); // 비밀번호 초기화
+  const formatAndSortInvestments = (investments) => {
+    return investments
+      .sort((a, b) => b.amount - a.amount) // 금액을 기준으로 내림차순 정렬
+      .map((investment, index) => ({
+        ...investment,
+        rank: `${index + 1}위`, // 순위 추가
+        formattedAmount: ConvertBillion(investment.amount), // 금액 포맷팅
+      }));
   };
 
   return (
-    <div className={styles.modalOverlay}>
-      <div
-        className={`${styles.modalContainer} ${
-          isErrorModal ? styles.errorContainer : ""
-        }`}
-      >
-        {/* 비밀번호 인증 모달 */}
-        {!isErrorModal && (
-          <>
-            <div className={styles.modalTitle}>
-              <h1>삭제 권한 인증</h1>
-              <img src={closeIcon} alt="취소버튼" onClick={onClose} />
-            </div>
-            <div className={styles.modalContent}>
-              <div className={styles.modalinput}>
-                <label>비밀번호</label>
-                <input
-                  type={!passwordToggle ? "password" : "text"}
-                  placeholder="패스워드를 입력해주세요"
-                  value={inputPassword}
-                  onChange={(e) => setInputPassword(e.target.value)}
-                />
-                <img
-                  src={!passwordToggle ? openEyeIcon : closeEyeIcon}
-                  onClick={handlePasswordToggle}
-                  alt="passwordToggle"
-                />
-              </div>
-              <div className={styles.buttonContainer}>
-                <button onClick={handlePasswordVerify}>삭제하기</button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* 에러 모달 */}
-        {isErrorModal && (
-          <ErrorModal
-            onClose={onClose}
-            handleErrorConfirmBtn={handleErrorConfirmBtn}
-          />
-        )}
+    <>
+      <div className={styles.deleteModalTitle}>
+        <img src={closeIcon} alt="취소" onClick={onClose} />
       </div>
-    </div>
+      <div className={styles.deleteModalContent}>
+        <p>정말로 삭제하시겠습니까?</p>
+        <div className={styles.buttonContainer}>
+          <button onClick={handleDelete}>삭제하기</button>
+        </div>
+      </div>
+    </>
   );
 }

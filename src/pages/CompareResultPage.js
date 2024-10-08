@@ -4,29 +4,10 @@ import SelectedCompanyCard from "../component/SelectedCompanyCard.js";
 import ComparisonTable from "../component/ComparisonTable.js";
 import InvestModal from "../component/InvestModal.js";
 import InvestmentPopup from "../component/InvestmentPopup.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getRankAndNearbyCompanies } from "../api/CompareResultAPI.js";
-import { getStartup } from "../api/StartupAPI.js";
-import defaultLogo from "../asset/images/img_company_default_logo.png";
-const sortData = (data, option) => {
-  const sortedData = [...data];
-  switch (option) {
-    case "누적 투자금액 높은순":
-      return sortedData.sort((a, b) => b.totalInvestment - a.totalInvestment);
-    case "누적 투자금액 낮은순":
-      return sortedData.sort((a, b) => a.totalInvestment - b.totalInvestment);
-    case "매출액 높은순":
-      return sortedData.sort((a, b) => b.revenue - a.revenue);
-    case "매출액 낮은순":
-      return sortedData.sort((a, b) => a.revenue - b.revenue);
-    case "고용 인원 많은순":
-      return sortedData.sort((a, b) => b.employee - a.employee);
-    case "고용 인원 적은순":
-      return sortedData.sort((a, b) => a.employee - b.employee);
-    default:
-      return sortedData;
-  }
-};
+import useFetchCompanyData from "../hooks/useFetchCompanyData.js";
+import sortData from "../utils/sortData.js";
 
 function CompareResultPage() {
   const location = useLocation();
@@ -37,40 +18,11 @@ function CompareResultPage() {
   const selectedCompaniesId = allSelectedCompaniesId.filter(
     (id) => id !== myCompanyId
   );
-  const [myCompany, setMyCompany] = useState({});
-  const [compStatus, setCompStatus] = useState({
-    sort: "누적 투자금액 높은순",
-    list: [],
-  });
-  const [rankStatus, setRankStatus] = useState({
-    sort: "누적 투자금액 높은순",
-    list: [],
-  });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!myCompanyId || selectedCompaniesId.length === 0) return;
-      const myCompanyData = await getStartup(myCompanyId);
-      setMyCompany(myCompanyData);
-      const selectedCompanies = await Promise.all(
-        selectedCompaniesId.map((id) => getStartup(id))
-      );
-      const compList = sortData(
-        [myCompanyData, ...selectedCompanies],
-        "누적 투자금액 높은순"
-      );
-      setCompStatus((prev) => ({
-        ...prev,
-        list: compList,
-      }));
-      const rankList = await getRankAndNearbyCompanies({ myCompanyId });
-      setRankStatus((prev) => ({
-        ...prev,
-        list: rankList,
-      }));
-    };
-    fetchData();
-  }, []);
+  const { compStatus, setCompStatus, rankStatus, setRankStatus } =
+    useFetchCompanyData(myCompanyId, selectedCompaniesId);
+  const myCompany = compStatus.list.find(
+    (company) => company.id === myCompanyId
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -101,55 +53,57 @@ function CompareResultPage() {
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
-      list: sortData([...prev.list], selectedOption),
+      list: sortData([...prev.list], selectedOption)
     }));
   };
   const handleRankSelect = async (selectedOption) => {
     const nextList = await getRankAndNearbyCompanies({
       myCompanyId,
-      order: convertStateToUrl(selectedOption),
+      order: convertStateToUrl(selectedOption)
     });
     setRankStatus((prev) => ({
       sort: selectedOption,
-      list: nextList,
+      list: nextList
     }));
   };
-  return (
-    <div className={styles.compareResultPage}>
-      <SelectedCompanyCard
-        myCompany={myCompany}
-        className={styles.selectedCompanyCardLayout}
-      />
-      <ComparisonTable
-        type="select"
-        className={styles.selectTableLayout}
-        list={compStatus.list}
-        onSelect={handleCompSelect}
-        defaultOption={compStatus.sort}
-        sortOption="list"
-        myCompany={myCompany}
-      />
-      <ComparisonTable
-        type="ranking"
-        className={styles.rankingTableLayout}
-        list={rankStatus.list}
-        onSelect={handleRankSelect}
-        defaultOption={rankStatus.sort}
-        sortOption="list"
-        myCompany={myCompany}
-      />
-      <button onClick={openModal} className={styles.investBtn}>
-        나의 기업에 투자하기
-      </button>
-      {isModalOpen && (
-        <InvestModal
-          completeTask={completeTask}
-          closeModal={closeModal}
+  if (compStatus.list.length === 0) return <div>로딩중</div>;
+  else
+    return (
+      <div className={styles.compareResultPage}>
+        <SelectedCompanyCard
+          myCompany={myCompany}
+          className={styles.selectedCompanyCardLayout}
+        />
+        <ComparisonTable
+          type="select"
+          className={styles.selectTableLayout}
+          list={compStatus.list}
+          onSelect={handleCompSelect}
+          defaultOption={compStatus.sort}
+          sortOption="list"
           myCompany={myCompany}
         />
-      )}
-      {isPopupOpen && <InvestmentPopup closePopup={closePopup} />}
-    </div>
-  );
+        <ComparisonTable
+          type="ranking"
+          className={styles.rankingTableLayout}
+          list={rankStatus.list}
+          onSelect={handleRankSelect}
+          defaultOption={rankStatus.sort}
+          sortOption="list"
+          myCompany={myCompany}
+        />
+        <button onClick={openModal} className={styles.investBtn}>
+          나의 기업에 투자하기
+        </button>
+        {isModalOpen && (
+          <InvestModal
+            completeTask={completeTask}
+            closeModal={closeModal}
+            myCompany={myCompany}
+          />
+        )}
+        {isPopupOpen && <InvestmentPopup closePopup={closePopup} />}
+      </div>
+    );
 }
 export default CompareResultPage;

@@ -3,16 +3,15 @@ import Pagination from "./SPagination.js";
 import styles from "../css/InvestmentInfoList.module.css";
 import { useEffect, useState } from "react";
 import ConvertBillion from "../utils/ConvertBillion.js";
-import DeleteInvestment from "./DeleteInvestment.js";
-import EditInvestment from "./EditInvestment.js";
+import PasswordVerifyModal from "./PasswordVerifyModal.js";
 
 export default function InvestmentInfoList({ data }) {
   const [investments, setInvestments] = useState([]); // 투자 데이터를 상태로 관리
   const [activeDropdown, setActiveDropdown] = useState(null); // 드롭다운 열림 상태 관리
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const itemsPerPage = 5; // 페이지 당 표시할 아이템 수
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // 삭제 모달 상태
-  const [showEditModal, setShowEditModal] = useState(false); // 수정 모달 상태
+  const [showPasswordModal, setShowPasswordModal] = useState(false); // 비밀번호 인증 모달 상태
+  const [modalMode, setModalMode] = useState(""); // 모달 모드 추가
   const [selectedInvestment, setSelectedInvestment] = useState(null); // 선택된 투자자 데이터
 
   // useEffect로 투자 데이터를 투자 금액 순서로 정렬
@@ -47,31 +46,27 @@ export default function InvestmentInfoList({ data }) {
   // 수정 모달 열기
   const handleOpenEditModal = (id) => {
     const selected = investments.find((investor) => investor.id === id);
+    console.log("selected", selected);
     setSelectedInvestment(selected);
-    setShowEditModal(true);
+    setModalMode("edit"); // 수정 모드 설정
+    setShowPasswordModal(true); // 비밀번호 모달 열기
     setActiveDropdown(null); // 드롭다운 닫기
   };
 
   // 삭제 모달 열기
   const handleOpenDeleteModal = (id) => {
     const selected = investments.find((investor) => investor.id === id);
+    console.log("selected", selected);
     setSelectedInvestment(selected);
-    setShowDeleteModal(true);
+    setModalMode("delete"); // 수정 모드 설정
+    setShowPasswordModal(true); // 비밀번호 모달 열기
     setActiveDropdown(null); // 드롭다운 닫기
   };
 
   // 모달 닫기
   const closeModal = () => {
-    setShowEditModal(false);
-    setShowDeleteModal(false);
+    setShowPasswordModal(false);
     setSelectedInvestment(null);
-  };
-
-  // 비밀번호 검증 함수
-  const verifyPassword = (inputPassword, investmentId) => {
-    const investment = investments.find((inv) => inv.id === investmentId);
-    if (!investment) return false;
-    return investment.password === inputPassword;
   };
 
   return (
@@ -123,17 +118,10 @@ export default function InvestmentInfoList({ data }) {
         totalCount={investments.length} // 전체 데이터 수
         itemLimit={itemsPerPage} // 페이지당 항목 수
       />
-      {showDeleteModal && (
-        <DeleteInvestment
-          investment={selectedInvestment}
-          onClose={closeModal}
-          setInvestments={setInvestments}
-          verifyPassword={verifyPassword} // 비밀번호 검증 함수 전달
-        />
-      )}
-      {showEditModal && (
-        <EditInvestment
-          investment={selectedInvestment}
+      {showPasswordModal && (
+        <PasswordVerifyModal
+          mode={modalMode} // 수정, 삭제 모드 전달
+          investment={selectedInvestment} // 선택한 투자 정보 전달
           myCompany={{
             id: data.id,
             name: data.name,
@@ -142,7 +130,7 @@ export default function InvestmentInfoList({ data }) {
           }} // 필요한 기업 정보만 전달
           onClose={closeModal}
           setInvestments={setInvestments}
-          verifyPassword={verifyPassword} // 비밀번호 검증 함수 전달
+          setShowPasswordModal={setShowPasswordModal}
         />
       )}
     </div>

@@ -42,8 +42,7 @@ function AddSearchResult({ data, onSelect, selectedCompanies }) {
                   item={item}
                   onSelect={onSelect}
                   isSelected={isSelected}
-                />{" "}
-                {/* 선택 여부 전달 */}
+                />
               </li>
             );
           })}
