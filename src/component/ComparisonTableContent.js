@@ -12,19 +12,19 @@ function ComparisonTableContent({ list, type, myCompany }) {
   return (
     <div className={styles.tableContainer}>
       <div className={styles.table}>
-        <div class={header}>
-          {isRanking && <div class={styles.cell}>순위</div>}
-          <div class={styles.cell}>기업 명</div>
-          <div class={styles.cell}>기업 소개</div>
-          <div class={styles.cell}>카테고리</div>
-          <div class={styles.cell}>누적 투자 금액</div>
-          <div class={styles.cell}>매출액</div>
-          <div class={styles.cell}>고용 인원</div>
+        <div className={header}>
+          {isRanking && <div className={styles.cell}>순위</div>}
+          <div className={styles.cell}>기업 명</div>
+          <div className={styles.cell}>기업 소개</div>
+          <div className={styles.cell}>카테고리</div>
+          <div className={styles.cell}>누적 투자 금액</div>
+          <div className={styles.cell}>매출액</div>
+          <div className={styles.cell}>고용 인원</div>
         </div>
         {list.map((company) => (
           <div className={ROWCLASS(company)} key={company.name}>
             {isRanking && <div className={styles.cell}>{company.rank}위</div>}
-            <div class={styles.logoAndName}>
+            <div className={styles.logoAndName}>
               <img
                 className={styles.logo}
                 src={company.logo}
@@ -35,13 +35,17 @@ function ComparisonTableContent({ list, type, myCompany }) {
               />
               <div className={styles.ellipsisName}>{company.name}</div>
             </div>
-            <div class={styles.ellipsisDescription}>{company.description}</div>
-            <div class={styles.cell}>{company.category}</div>
-            <div class={styles.cell}>
+            <div className={styles.ellipsisDescription}>
+              {company.description}
+            </div>
+            <div className={styles.cell}>{company.category}</div>
+            <div className={styles.cell}>
               {ConvertBillion(company.totalInvestment)} 원
             </div>
-            <div class={styles.cell}>{ConvertBillion(company.revenue)} 원</div>
-            <div class={styles.cell}>{company.employee}명</div>
+            <div className={styles.cell}>
+              {ConvertBillion(company.revenue)} 원
+            </div>
+            <div className={styles.cell}>{company.employee}명</div>
           </div>
         ))}
       </div>
