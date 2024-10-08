@@ -19,12 +19,13 @@ function ModalAddCompany({
   errorMessage,
   setErrorMessage,
 }) {
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
-  const [dataLoaded, setDataLoaded] = useState(false);
+  
+  const [search, setSearch] = useState("");
 
   const ITEM_LIMIT = 5;
 
@@ -48,17 +49,16 @@ function ModalAddCompany({
   };
 
   // 검색 데이터 로드 (페이지네이션 필요)
-  const handleLoadSearchData = async (searchTerm = "", page = 1) => {
+  const handleLoadSearchData = async () => {
     try {
       const response = await getCompareList({
         limit: ITEM_LIMIT,
-        search: searchTerm,
+        search: search,
         page: currentPage,
         excludeId: selectedMyCompany.id,
       });
 
       if (response && response.data) {
-
         setSearchData(response.data || []);
         setTotalCount(response.totalCount || 0);
       } else {
@@ -73,26 +73,22 @@ function ModalAddCompany({
 
   useEffect(() => {
     if (isOpen) {
-      if (!dataLoaded) {
-        handleLoadSearchData(); // 초기 데이터 로드
-        setDataLoaded(true);
-      } else {
-        handleLoadSearchData(inputValue, currentPage); // 페이지 변경 시 데이터 로드
-      }
+      handleLoadSearchData(search, currentPage); // 페이지 변경 시 데이터 로드
     }
-  }, [isOpen, currentPage, dataLoaded]); // 의존성 배열에 currentPage와 dataLoaded 추가
+  }, [isOpen, search, currentPage]); // 의존성 배열에 currentPage
 
-  const handleInputChange = (event) => {
-    const value = event.target.value;
-    setInputValue(value);
-    if (!value) {
-      handleLoadSearchData();
-    }
-  };
+  // const handleInputChange = (event) => {
+  //   const value = event.target.value;
+  //   setInputValue(value);
+  //   if (value === "") {
+  //     setSearch("");
+  //   }
+  // };
 
   // const handleClearInput = () => {
   //   setInputValue(""); // 입력값 초기화
   //   setCurrentPage(1); // 현재 페이지를 1로 초기화
+  //   setSearch("");
   //   handleLoadSearchData();
   // };
 
@@ -100,6 +96,14 @@ function ModalAddCompany({
   //   if (inputValue) {
   //     setCurrentPage(1);
   //     handleLoadSearchData(inputValue, 1);
+  //   } else {
+  //     setSearchData([]);
+  //   }
+  // };
+  // const handleSearchClick = () => {
+  //   if (inputValue) {
+  //     setCurrentPage(1);
+  //     setSearch(inputValue);
   //   } else {
   //     setSearchData([]);
   //   }
@@ -112,11 +116,7 @@ function ModalAddCompany({
   //   }
   // };
 
-  // 검색 결과 페이지 변경 시 데이터 로드
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-    handleLoadSearchData(inputValue, page);
-  };
+
 
   const handleCloseModal = () => {
     onClose();
@@ -141,7 +141,7 @@ function ModalAddCompany({
             <p className={style.modalFont}>비교할 기업</p>
             <img src={mdClose} onClick={handleCloseModal} alt="modalClose_bt" />
           </div>
-          <Search setCurrentPage={setCurrentPage} handleLoadSearchData={handleLoadSearchData} searchData={searchData} isList={false} />
+          <Search setSearch={setSearch} setCurrentPage={setCurrentPage} handleLoadSearchData={handleLoadSearchData} searchData={searchData} isList={false} isMine={false} />
           {/* <div className={style.inputContainer}>
             <input
               className={style.modalInput}
@@ -160,7 +160,7 @@ function ModalAddCompany({
             )}
             <img
               className={style.searchButton}
-              src={search}
+              src={searchIcon}
               alt="ic_search_bt"
               onClick={handleSearchClick}
             />
@@ -191,7 +191,7 @@ function ModalAddCompany({
             searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
               <SPagination
                 currentPage={currentPage}
-                setCurrentPage={handlePageChange}
+                setCurrentPage={setCurrentPage}
                 totalCount={totalCount}
                 itemLimit={ITEM_LIMIT}
                 className={style.modalPage}

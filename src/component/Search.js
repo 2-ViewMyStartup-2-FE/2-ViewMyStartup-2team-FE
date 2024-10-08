@@ -3,29 +3,27 @@ import style from "../css/Search.module.css";
 import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import searchIcon from "../asset/images/ic_search.png";
 
-export default function Search({ setSearch, setCurrentPage, handleLoadSearchData, setSearchData, isList }) {
+export default function Search({ setSearch, setCurrentPage, handleLoadSearchData, setSearchData, isList, isMine }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleSearchClick = () => {
     if(inputValue){
       setCurrentPage(1);
-      if (!isList) {
-        handleLoadSearchData(inputValue, 1);
-      } else setSearch(inputValue);
+      setSearch(inputValue);
     } else {
       if (!isList) {
         setSearchData([]);
       } else setSearch("");
     }
-
   };
 
   const handleClearInput = () => {
     setInputValue("");
     setCurrentPage(1);
-    if (!isList) {
+    setSearch("");
+    if (!isList && !isMine) {
       handleLoadSearchData();
-    } else setSearch("");
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -36,10 +34,8 @@ export default function Search({ setSearch, setCurrentPage, handleLoadSearchData
 
   const handleInputChange = (value) => {
     setInputValue(value);
-    if (!value) {
-      if (!isList) {
-        handleLoadSearchData();
-      } else setSearch("");
+    if (value === "") {
+      setSearch("");
     }
   }
 
