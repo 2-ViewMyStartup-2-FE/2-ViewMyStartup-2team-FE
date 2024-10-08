@@ -13,6 +13,10 @@ export default function InvestmentInfoList({ data }) {
   const [showPasswordModal, setShowPasswordModal] = useState(false); // 비밀번호 인증 모달 상태
   const [modalMode, setModalMode] = useState(""); // 모달 모드 추가
   const [selectedInvestment, setSelectedInvestment] = useState(null); // 선택된 투자자 데이터
+  const MODAL_MODE = {
+    EDIT: "edit",
+    DELETE: "delete",
+  };
 
   // useEffect로 투자 데이터를 투자 금액 순서로 정렬
   useEffect(() => {
@@ -42,10 +46,6 @@ export default function InvestmentInfoList({ data }) {
       setActiveDropdown(id);
     }
   };
-  const MODAL_MODE = {
-    EDIT: "edit",
-    DELETE: "delete",
-  };
 
   const openModal = (id, mode) => {
     const selected = investments.find((investor) => investor.id === id);
@@ -73,7 +73,7 @@ export default function InvestmentInfoList({ data }) {
           <h1>투자 금액</h1>
           <h1>투자 코멘트</h1>
         </div>
-        <div>
+        <div className={styles.investList}>
           {currentItems.map((investor) => (
             <div className={styles.investDetail} key={investor.id}>
               <h1>{investor.investorName}</h1>

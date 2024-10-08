@@ -30,6 +30,12 @@
   color: #ffffff;
 }
 
+.investList {
+  background-color: #212121;
+  min-width: 50rem;
+  border-radius: 0.5rem;
+}
+
 .investDetail {
   display: grid;
   justify-items: center;
@@ -38,8 +44,11 @@
   grid-template-rows: 6.4rem;
   width: 100%;
   max-width: 120rem;
-  border-radius: 0.5rem;
-  background-color: #212121;
+  border-bottom: 1px solid #4b4b4b;
+}
+
+.investDetail:last-child {
+  border-bottom: none;
 }
 
 .investDetail h1 {
@@ -47,6 +56,11 @@
   font-weight: 400;
   line-height: 1.671rem;
   color: #d8d8d8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 75%;
+  text-align: center; /* 중앙 정렬 */
 }
 
 .investDetail h1:nth-of-type(4) {
@@ -79,8 +93,13 @@
   font-family: pretendard;
   font-size: 1.4rem;
   line-height: 1.671rem;
+  border-bottom: 1px solid #747474;
   color: #d8d8d8;
   cursor: pointer;
+}
+
+.dropdownMenu button:last-child {
+  border-bottom: none;
 }
 
 .dropdownMenu button:hover {
