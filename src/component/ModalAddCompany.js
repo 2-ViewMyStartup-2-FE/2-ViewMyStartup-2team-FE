@@ -1,12 +1,13 @@
 import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
-import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
-import search from "../asset/images/ic_search.png";
+// import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
+// import search from "../asset/images/ic_search.png";
 import { useEffect, useState } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
 import SPagination from "./SPagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
+import Search from "./Search.js";
 
 function ModalAddCompany({
   isOpen,
@@ -89,27 +90,27 @@ function ModalAddCompany({
     }
   };
 
-  const handleClearInput = () => {
-    setInputValue(""); // 입력값 초기화
-    setCurrentPage(1); // 현재 페이지를 1로 초기화
-    handleLoadSearchData();
-  };
+  // const handleClearInput = () => {
+  //   setInputValue(""); // 입력값 초기화
+  //   setCurrentPage(1); // 현재 페이지를 1로 초기화
+  //   handleLoadSearchData();
+  // };
 
-  const handleSearchClick = () => {
-    if (inputValue) {
-      setCurrentPage(1);
-      handleLoadSearchData(inputValue, 1);
-    } else {
-      setSearchData([]);
-    }
-  };
+  // const handleSearchClick = () => {
+  //   if (inputValue) {
+  //     setCurrentPage(1);
+  //     handleLoadSearchData(inputValue, 1);
+  //   } else {
+  //     setSearchData([]);
+  //   }
+  // };
 
-  // 엔터 키 이벤트 추가
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSearchClick();
-    }
-  };
+  // // 엔터 키 이벤트 추가
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     handleSearchClick();
+  //   }
+  // };
 
   // 검색 결과 페이지 변경 시 데이터 로드
   const handlePageChange = (page) => {
@@ -140,7 +141,8 @@ function ModalAddCompany({
             <p className={style.modalFont}>비교할 기업</p>
             <img src={mdClose} onClick={handleCloseModal} alt="modalClose_bt" />
           </div>
-          <div className={style.inputContainer}>
+          <Search setCurrentPage={setCurrentPage} handleLoadSearchData={handleLoadSearchData} searchData={searchData} isList={false} />
+          {/* <div className={style.inputContainer}>
             <input
               className={style.modalInput}
               value={inputValue}
@@ -162,7 +164,7 @@ function ModalAddCompany({
               alt="ic_search_bt"
               onClick={handleSearchClick}
             />
-          </div>
+          </div> */}
           <div className={style.searchHeader}>
             <p className={style.modalFont}>
               선택한 기업{`(${selectedCompanies.length})`}

@@ -1,9 +1,10 @@
 import style from "../css/StartupPage.module.css";
-import searchIcon from "../asset/images/ic_search.png";
+// import searchIcon from "../asset/images/ic_search.png";
 import SortContent from "../component/SortContent.js";
 import StartupList from "../component/StartupList.js";
 import Pagination from "../component/SPagination.js";
-import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
+// import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
+import Search from "../component/Search.js";
 import { useState, useEffect } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
 
@@ -15,7 +16,7 @@ export default function StartupPage() {
   const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
   const sortOption = "list";
   const [sortType, setSortType] = useState("investmentHighest");
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -66,29 +67,29 @@ export default function StartupPage() {
     setSortType(selectedOption);
   };
 
-  const handleSearchClick = () => {
-    setSearch(inputValue);
-    setCurrentPage(1);
-  };
+  // const handleSearchClick = () => {
+  //   setSearch(inputValue);
+  //   setCurrentPage(1);
+  // };
 
-  const handleClearInput = () => {
-    setInputValue("");
-    setSearch("");
-    setCurrentPage(1);
-  };
+  // const handleClearInput = () => {
+  //   setInputValue("");
+  //   setSearch("");
+  //   setCurrentPage(1);
+  // };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearchClick();
-    }
-  };
+  // const handleKeyPress = (e) => {
+  //   if (e.key === "Enter") {
+  //     handleSearchClick();
+  //   }
+  // };
 
-  const handleInputChange = (value) => {
-    setInputValue(value);
-    if (value === "") {
-      setSearch("");
-    }
-  }
+  // const handleInputChange = (value) => {
+  //   setInputValue(value);
+  //   if (value === "") {
+  //     setSearch("");
+  //   }
+  // }
 
   // 정렬된 데이터
   const sortedData = sortData([...startupData], sortType);
@@ -98,7 +99,11 @@ export default function StartupPage() {
       <div className={style.header}>
         <h1 className={style.title}>현재 스타트업 목록</h1>
         <div className={style.searchSortGroup}>
-          <div className={style.searchGroup}>
+          <Search 
+            setSearch={setSearch} 
+            setCurrentPage={setCurrentPage} 
+            isList={true} />
+          {/* <div className={style.searchGroup}>
             <img
               className={style.searchIcon}
               src={searchIcon}
@@ -120,7 +125,7 @@ export default function StartupPage() {
                 onClick={handleClearInput}
               />
             )}
-          </div>
+          </div> */}
           <SortContent
             sortOption={sortOption}
             defaultOption={sortType}

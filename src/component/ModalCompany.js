@@ -1,7 +1,6 @@
 import style from "../css/ModalCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
-import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
-import search from "../asset/images/ic_search.png";
+import Search from "./Search.js";
 import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
@@ -73,36 +72,6 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
     }
   }, [isOpen, currentPage]);
 
-  const handleInputChange = (event) => {
-    const value = event.target.value;
-    setInputValue(value);
-    if (!value) {
-      handleLoadSearchData();
-    }
-  };
-
-  const handleClearInput = () => {
-    setInputValue(""); // 입력값 초기화
-
-    setCurrentPage(1); // 현재 페이지를 1로 초기화
-    handleLoadSearchData();
-  };
-
-  const handleSearchClick = () => {
-    if (inputValue) {
-      setCurrentPage(1);
-      handleLoadSearchData(inputValue, 1);
-    } else {
-      setSearchData([]);
-    }
-  };
-  const handleKeyDown = (event) => {
-    // 엔터 키 이벤트 추가
-    if (event.key === "Enter") {
-      handleSearchClick();
-    }
-  };
-
   // 검색 결과 페이지 변경 시 데이터 로드
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -118,29 +87,11 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
           <p className={style.modalFont}>나의기업 선택하기</p>
           <img src={mdClose} onClick={onClose} alt="modalClose_bt" />
         </div>
-        <div className={style.inputContainer}>
-          <input
-            className={style.modalInput}
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            placeholder="검색어를 입력하세요"
-          />
-          {inputValue && (
-            <img
-              className={style.closeCircle}
-              src={closeCircle}
-              alt="closeSmall_bt"
-              onClick={handleClearInput}
-            />
-          )}
-          <img
-            className={style.searchButton}
-            src={search}
-            alt="ic_search_bt"
-            onClick={handleSearchClick}
-          />
-        </div>
+        <Search 
+          setCurrentPage={setCurrentPage} 
+          handleLoadSearchData={handleLoadSearchData} 
+          setSearchData={setSearchData} 
+          isList={false} />
         <ManyChoiceCompany
           itemLimit={ITEM_LIMIT}
           data={startupData}
