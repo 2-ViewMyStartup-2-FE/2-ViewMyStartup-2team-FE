@@ -1,7 +1,7 @@
 import { requestGet, requestPost } from "./api.js";
 export async function getRankAndNearbyCompanies({
   myCompanyId,
-  order = "investmentHighest"
+  order = "investmentHighest",
 }) {
   try {
     const response = await requestGet(
