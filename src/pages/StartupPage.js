@@ -1,7 +1,7 @@
 import style from "../css/StartupPage.module.css";
 import SortContent from "../component/SortContent.js";
 import StartupList from "../component/StartupList.js";
-import Pagination from "../component/SPagination.js";
+import Pagination from "../component/Pagination.js";
 import Search from "../component/Search.js";
 import { useState, useEffect } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
@@ -23,7 +23,7 @@ export default function StartupPage() {
           page: currentPage,
           limit: ITEM_LIMIT,
           order: sortType,
-          search: search
+          search: search,
         });
 
         if (response) {
@@ -71,10 +71,11 @@ export default function StartupPage() {
       <div className={style.header}>
         <h1 className={style.title}>현재 스타트업 목록</h1>
         <div className={style.searchSortGroup}>
-          <Search 
-            setSearch={setSearch} 
-            setCurrentPage={setCurrentPage} 
-            isList={true} />
+          <Search
+            setSearch={setSearch}
+            setCurrentPage={setCurrentPage}
+            isList={true}
+          />
           <SortContent
             sortOption={sortOption}
             defaultOption={sortType}

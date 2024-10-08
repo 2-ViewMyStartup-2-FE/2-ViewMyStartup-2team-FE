@@ -1,19 +1,18 @@
 import style from "../css/ModalCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
+import Search from "./Search.js";
 import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { getCompareList } from "../api/CompareAPI.js";
 import Pagination from "./Pagination.js";
-import Search from "./Search.js";
 
 function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
-  // const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [startupData, setStartupData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
 
   const ITEM_LIMIT = 5;
 
@@ -39,11 +38,11 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   };
 
   // 검색 데이터 로드 (페이지네이션 필요)
-  const handleLoadSearchData = async () => {
+  const handleLoadSearchData = async (searchTerm, page) => {
     try {
       const response = await getCompareList({
         limit: ITEM_LIMIT,
-        search: search,
+        search: searchTerm,
         page: currentPage,
       });
 
@@ -63,15 +62,21 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   useEffect(() => {
     if (isOpen) {
       handleLoadFetchData();
-      handleLoadSearchData(search, currentPage);
+      handleLoadSearchData(inputValue, currentPage);
     } else {
-      // setInputValue("");
+      setInputValue("");
       setStartupData([]);
       setSearchData([]);
       setTotalCount(0);
       setCurrentPage(1);
     }
-  }, [isOpen, search, currentPage]);
+  }, [isOpen, currentPage]);
+
+  // 검색 결과 페이지 변경 시 데이터 로드
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    handleLoadSearchData(inputValue, page);
+  };
 
   if (!isOpen) return null;
 
@@ -83,11 +88,10 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
           <img src={mdClose} onClick={onClose} alt="modalClose_bt" />
         </div>
         <Search
-          setSearch={setSearch}
           setCurrentPage={setCurrentPage}
+          handleLoadSearchData={handleLoadSearchData}
           setSearchData={setSearchData}
           isList={false}
-          isMine={true}
         />
         <ManyChoiceCompany
           itemLimit={ITEM_LIMIT}
@@ -104,7 +108,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
           searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
             <Pagination
               currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
+              setCurrentPage={handlePageChange}
               totalCount={totalCount}
               itemLimit={ITEM_LIMIT}
               className={style.modalPage}
