@@ -72,7 +72,7 @@ function ModalAddCompany({
     if (isOpen) {
       handleLoadSearchData(search, currentPage); // 페이지 변경 시 데이터 로드
     }
-  }, [isOpen, search, currentPage, handleLoadSearchData]); // 의존성 배열에 currentPage
+  }, [isOpen, search, currentPage]); // 의존성 배열에 currentPage
 
   const handleCloseModal = () => {
     onClose();
