@@ -1,0 +1,124 @@
+.searchGroup.list {
+    position: relative;
+}
+
+.searchGroup.compare {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+  .searchInput.compare {
+    width: 100%;
+    padding: 1.2rem;
+    gap: 1rem;
+    border: 0.1rem solid #747474;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.671rem;
+    color: #d8d8d8;
+    background-color: #212121;
+  }
+
+
+  .closeCircle.compare {
+    position: absolute;
+    left: 85%; /* search 버튼과의 간격을 조정 */
+    top: 50%;
+    transform: translateY(-50%); /* 세로 중앙 정렬 */
+    cursor: pointer; /* 포인터 커서 */
+  }
+  
+.searchIcon {
+    position: absolute;
+    width: 2.4rem;
+    height: 2.4rem;
+    top: 28%;
+    left: 2%;
+    cursor: pointer;
+}
+
+.searchIcon.compare {
+    position: absolute;
+    left: 92%; /* closeCircle와의 간격을 조정 */
+    top: 50%;
+    transform: translateY(-50%); /* 세로 중앙 정렬 */
+    cursor: pointer; /* 포인터 커서 */
+  }
+
+.searchInput {
+    width: 44.8rem;
+    height: 4.8rem;
+    border-radius: 1rem;
+    border: 1px solid #747474;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    font-weight: 400;
+    font-family: Pretendard;
+    color: #D8D8D8;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0 4.5rem;
+}
+
+.closeCircle {
+    position: absolute;
+    top: 30%;
+    left: 93%;
+    cursor: pointer;
+}
+
+@media (max-width: 1199px) and (min-width: 744px) {
+    .searchInput.list {
+        width: 26.9rem;
+    }
+
+    .searchInput.compare {
+        width: 100%;
+    }
+
+    .searchIcon.list {
+        top: 27%;
+        left: 3%;
+    }
+
+    .closeCircle.list {
+        left: 90%;
+    }
+}
+
+@media (max-width: 743px) {
+    .searchGroup.list {
+        width: 40%;
+    }
+
+    .searchInput.list {
+        width: 100%;
+        height: 4rem;
+        padding: 0 3.4rem;
+        font-size: 1.3rem;
+    }
+
+    .searchInput.compare {
+        width: 100%;
+        height: 4rem;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .searchIcon.list {
+        top: 20%;
+        left: 3%;
+    }
+
+    .searchIcon.compare {
+        left: 90%;
+    }
+
+    .closeCircle.list {
+        left: 82%;
+    }
+    
+    .closeCircle.compare {
+        left: 82%;
+    }
+}

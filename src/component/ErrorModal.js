@@ -12,11 +12,7 @@ export default function ErrorModal({
         <img src={closeIcon} alt="취소" onClick={onClose} />
       </div>
       <div className={styles.errorModalContent}>
-        {errorMessage ? (
-          <p>{errorMessage}</p>
-        ) : (
-          <p>잘못된 비밀번호로 삭제에 실패하셨습니다.</p>
-        )}
+        <p>{errorMessage}</p>
         <div className={styles.buttonContainer}>
           <button onClick={handleErrorConfirmBtn}>확인</button>
         </div>
