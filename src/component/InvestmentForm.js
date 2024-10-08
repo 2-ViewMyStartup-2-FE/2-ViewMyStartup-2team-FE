@@ -60,9 +60,12 @@ function InvestmentForm({
   } = getFieldConfig(type, isVisible, className);
   return (
     <div className={FRAME}>
-      <label className={styles.label}>{LABEL}</label>
+      <label for={type} className={styles.label}>
+        {LABEL}
+      </label>
       {type === "comment" ? ( //comment인경우에 textarea를 반환
         <textarea
+          id={type}
           className={styles.commentInput}
           placeholder={MESSAGE}
           onChange={onChange}
@@ -71,6 +74,7 @@ function InvestmentForm({
       ) : (
         <div className={styles.inputContainer}>
           <input //comment가 아닌 경우에는 input태그를 반환
+            id={type}
             className={styles.otherInput}
             placeholder={MESSAGE}
             type={INPUTTYPE}

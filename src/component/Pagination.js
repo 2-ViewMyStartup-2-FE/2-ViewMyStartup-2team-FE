@@ -1,8 +1,8 @@
-import style from "../css/SPagination.module.css";
+import style from "../css/Pagination.module.css";
 import arrow_left from "../asset/images/ic_arrow_left.png";
 import arrow_right from "../asset/images/ic_arrow_right.png";
 
-export default function SPagination({
+export default function Pagination({
   currentPage,
   setCurrentPage,
   totalCount,

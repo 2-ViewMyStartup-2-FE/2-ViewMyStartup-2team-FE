@@ -2,7 +2,7 @@ import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
 import { useEffect, useState } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
-import SPagination from "./SPagination.js";
+import Pagination from "./Pagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
 import Search from "./Search.js";
@@ -129,7 +129,7 @@ function ModalAddCompany({
 
           {totalCount > ITEM_LIMIT &&
             searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
-              <SPagination
+              <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 totalCount={totalCount}

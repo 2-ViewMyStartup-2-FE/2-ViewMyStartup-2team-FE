@@ -1,5 +1,5 @@
 import kebabIcon from "../asset/images/ic_kebab.png";
-import Pagination from "./SPagination.js";
+import Pagination from "./Pagination.js";
 import styles from "../css/InvestmentInfoList.module.css";
 import { useEffect, useState } from "react";
 import ConvertBillion from "../utils/ConvertBillion.js";
