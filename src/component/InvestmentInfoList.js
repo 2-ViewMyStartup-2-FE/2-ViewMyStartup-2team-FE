@@ -13,6 +13,10 @@ export default function InvestmentInfoList({ data }) {
   const [showPasswordModal, setShowPasswordModal] = useState(false); // 비밀번호 인증 모달 상태
   const [modalMode, setModalMode] = useState(""); // 모달 모드 추가
   const [selectedInvestment, setSelectedInvestment] = useState(null); // 선택된 투자자 데이터
+  const MODAL_MODE = {
+    EDIT: "edit",
+    DELETE: "delete",
+  };
 
   // useEffect로 투자 데이터를 투자 금액 순서로 정렬
   useEffect(() => {
@@ -43,25 +47,16 @@ export default function InvestmentInfoList({ data }) {
     }
   };
 
-  // 수정 모달 열기
-  const handleOpenEditModal = (id) => {
+  const openModal = (id, mode) => {
     const selected = investments.find((investor) => investor.id === id);
-    console.log("selected", selected);
     setSelectedInvestment(selected);
-    setModalMode("edit"); // 수정 모드 설정
-    setShowPasswordModal(true); // 비밀번호 모달 열기
-    setActiveDropdown(null); // 드롭다운 닫기
+    setModalMode(mode);
+    setShowPasswordModal(true);
+    setActiveDropdown(null);
   };
 
-  // 삭제 모달 열기
-  const handleOpenDeleteModal = (id) => {
-    const selected = investments.find((investor) => investor.id === id);
-    console.log("selected", selected);
-    setSelectedInvestment(selected);
-    setModalMode("delete"); // 수정 모드 설정
-    setShowPasswordModal(true); // 비밀번호 모달 열기
-    setActiveDropdown(null); // 드롭다운 닫기
-  };
+  const handleOpenEditModal = (id) => openModal(id, MODAL_MODE.EDIT);
+  const handleOpenDeleteModal = (id) => openModal(id, MODAL_MODE.DELETE);
 
   // 모달 닫기
   const closeModal = () => {
