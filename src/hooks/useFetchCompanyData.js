@@ -16,26 +16,30 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
   useEffect(() => {
     const fetchData = async () => {
       if (dataFetchedRef.current) return;
-      if (!myCompanyId || selectedCompaniesId.length === 0) return;
-      const myCompanyData = await getStartup(myCompanyId);
-      const selectedCompanies = await Promise.all(
-        selectedCompaniesId.map((id) => getStartup(id))
-      );
+      try {
+        if (!myCompanyId || selectedCompaniesId.length === 0) return;
+        const myCompanyData = await getStartup(myCompanyId);
+        const selectedCompanies = await Promise.all(
+          selectedCompaniesId.map((id) => getStartup(id))
+        );
 
-      const compList = sortData(
-        [myCompanyData, ...selectedCompanies],
-        "누적 투자금액 높은순"
-      );
-      setCompStatus((prev) => ({
-        ...prev,
-        list: compList
-      }));
+        const compList = sortData(
+          [myCompanyData, ...selectedCompanies],
+          "누적 투자금액 높은순"
+        );
+        setCompStatus((prev) => ({
+          ...prev,
+          list: compList
+        }));
 
-      const rankList = await getRankAndNearbyCompanies({ myCompanyId });
-      setRankStatus((prev) => ({
-        ...prev,
-        list: rankList
-      }));
+        const rankList = await getRankAndNearbyCompanies({ myCompanyId });
+        setRankStatus((prev) => ({
+          ...prev,
+          list: rankList
+        }));
+      } catch (e) {
+        console.log("데이터 가져오는중 에러발생");
+      }
     };
 
     fetchData();
