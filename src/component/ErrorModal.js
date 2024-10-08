@@ -3,8 +3,8 @@ import closeIcon from "../asset/images/ic_delete.png";
 
 export default function ErrorModal({
   onClose,
-  errorMessage,
   handleErrorConfirmBtn,
+  errorMessage = "",
 }) {
   return (
     <>

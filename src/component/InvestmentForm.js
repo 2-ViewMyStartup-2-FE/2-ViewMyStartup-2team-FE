@@ -46,7 +46,7 @@ function getFieldConfig(type, isVisible, className) {
 }
 function InvestmentForm({
   type = "name",
-  onBlur,
+  onChange,
   isVisible,
   onToggle,
   className,
@@ -65,7 +65,7 @@ function InvestmentForm({
         <textarea
           className={styles.commentInput}
           placeholder={MESSAGE}
-          onBlur={onBlur}
+          onChange={onChange}
           spellCheck="false" // 맞춤법 빨간줄 없애기
         />
       ) : (
@@ -74,7 +74,7 @@ function InvestmentForm({
             className={styles.otherInput}
             placeholder={MESSAGE}
             type={INPUTTYPE}
-            onBlur={onBlur}
+            onChange={onChange}
             autoComplete="off"
           />
           {(type === "password" || type === "confirm") && ( //비밀번호계열 인풋은 토글 버튼추가
