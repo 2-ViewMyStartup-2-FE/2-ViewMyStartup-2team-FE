@@ -89,7 +89,7 @@
 
 @media (max-width: 743px) {
     .searchGroup.list {
-        width: 40%
+        width: 40%;
     }
 
     .searchInput.list {
@@ -101,6 +101,7 @@
 
     .searchInput.compare {
         width: 100%;
+        height: 4rem;
         padding: 0.8rem 1.2rem;
     }
 
