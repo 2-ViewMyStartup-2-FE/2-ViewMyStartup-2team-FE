@@ -49,7 +49,7 @@ export default function ListSort({ options, defaultOption, onSelect }) {
               >
                 {option}
               </button>
-              {index < options.length - 1 && <span />}
+              {index < options.length - 1 && <span className={style.span} />}
             </Fragment>
           ))}
         </div>
