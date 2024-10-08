@@ -12,7 +12,7 @@ export default function EditInvestment({
   myCompany, // 기업 정보
   onClose, // 모달 닫기 함수
   setInvestments, // 투자 리스트 업데이트 함수
-  verifyPassword, // 비밀번호 검증 함수
+  // verifyPassword, // 비밀번호 검증 함수
 }) {
   const [formData, setFormData] = useState({
     name: investment.investorName || "", // 기존 데이터로 초기화
@@ -42,10 +42,10 @@ export default function EditInvestment({
     }
 
     // 비밀번호 검증
-    if (!verifyPassword(formData.password, investment.id)) {
-      alert("투자 시 등록한 비밀번호를 입력해주세요.");
-      return;
-    }
+    // if (!verifyPassword(formData.password, investment.id)) {
+    //   alert("투자 시 등록한 비밀번호를 입력해주세요.");
+    //   return;
+    // }
 
     try {
       // PATCH 요청 보내기

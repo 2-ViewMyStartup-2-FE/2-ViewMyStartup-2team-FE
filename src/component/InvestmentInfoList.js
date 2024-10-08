@@ -42,26 +42,21 @@ export default function InvestmentInfoList({ data }) {
       setActiveDropdown(id);
     }
   };
-
-  // 수정 모달 열기
-  const handleOpenEditModal = (id) => {
-    const selected = investments.find((investor) => investor.id === id);
-    console.log("selected", selected);
-    setSelectedInvestment(selected);
-    setModalMode("edit"); // 수정 모드 설정
-    setShowPasswordModal(true); // 비밀번호 모달 열기
-    setActiveDropdown(null); // 드롭다운 닫기
+  const MODAL_MODE = {
+    EDIT: "edit",
+    DELETE: "delete",
   };
 
-  // 삭제 모달 열기
-  const handleOpenDeleteModal = (id) => {
+  const openModal = (id, mode) => {
     const selected = investments.find((investor) => investor.id === id);
-    console.log("selected", selected);
     setSelectedInvestment(selected);
-    setModalMode("delete"); // 수정 모드 설정
-    setShowPasswordModal(true); // 비밀번호 모달 열기
-    setActiveDropdown(null); // 드롭다운 닫기
+    setModalMode(mode);
+    setShowPasswordModal(true);
+    setActiveDropdown(null);
   };
+
+  const handleOpenEditModal = (id) => openModal(id, MODAL_MODE.EDIT);
+  const handleOpenDeleteModal = (id) => openModal(id, MODAL_MODE.DELETE);
 
   // 모달 닫기
   const closeModal = () => {

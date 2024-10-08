@@ -8,7 +8,6 @@ import {
 export async function getCompanyDetail(id) {
   try {
     const response = await requestGetDB(`/companies/${id}/investments`);
-    console.log(response);
     return response.data;
   } catch (e) {
     console.error(e.message);
