@@ -2,7 +2,7 @@ import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
 import { useEffect, useState } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
-import SPagination from "./SPagination.js";
+import Pagination from "./Pagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
 import Search from "./Search.js";
@@ -21,7 +21,7 @@ function ModalAddCompany({
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
-  
+
   const [search, setSearch] = useState("");
 
   const ITEM_LIMIT = 5;
@@ -97,12 +97,14 @@ function ModalAddCompany({
             <p className={style.modalFont}>비교할 기업</p>
             <img src={mdClose} onClick={handleCloseModal} alt="modalClose_bt" />
           </div>
-          <Search 
-            setSearch={setSearch} 
-            setCurrentPage={setCurrentPage} 
-            handleLoadSearchData={handleLoadSearchData} 
-            searchData={searchData} 
-            isList={false} isMine={false} />
+          <Search
+            setSearch={setSearch}
+            setCurrentPage={setCurrentPage}
+            handleLoadSearchData={handleLoadSearchData}
+            searchData={searchData}
+            isList={false}
+            isMine={false}
+          />
           <div className={style.searchHeader}>
             <p className={style.modalFont}>
               선택한 기업{`(${selectedCompanies.length})`}
@@ -127,7 +129,7 @@ function ModalAddCompany({
 
           {totalCount > ITEM_LIMIT &&
             searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
-              <SPagination
+              <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 totalCount={totalCount}

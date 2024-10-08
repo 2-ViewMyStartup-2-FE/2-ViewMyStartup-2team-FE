@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { getCompareList } from "../api/CompareAPI.js";
-import SPagination from "./SPagination.js";
+import Pagination from "./Pagination.js";
 import Search from "./Search.js";
 
 function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
@@ -82,11 +82,13 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
           <p className={style.modalFont}>나의기업 선택하기</p>
           <img src={mdClose} onClick={onClose} alt="modalClose_bt" />
         </div>
-        <Search 
-          setSearch={setSearch} 
-          setCurrentPage={setCurrentPage} 
-          setSearchData={setSearchData} 
-          isList={false} isMine={true} />
+        <Search
+          setSearch={setSearch}
+          setCurrentPage={setCurrentPage}
+          setSearchData={setSearchData}
+          isList={false}
+          isMine={true}
+        />
         <ManyChoiceCompany
           itemLimit={ITEM_LIMIT}
           data={startupData}
@@ -100,7 +102,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
 
         {totalCount > ITEM_LIMIT &&
           searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
-            <SPagination
+            <Pagination
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               totalCount={totalCount}

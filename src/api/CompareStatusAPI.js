@@ -1,4 +1,4 @@
-import { requestGetDB } from "./api.js";
+import { requestGet } from "./api.js";
 
 //CompareStatus - count list 가져오는 함수
 export async function getCountList(page, limit, order) {
@@ -16,7 +16,7 @@ export async function getCountList(page, limit, order) {
       throw new Error("Order must be a string");
     }
     const params = { page, limit, order };
-    const response = await requestGetDB("/companies/counts", params);
+    const response = await requestGet("/companies/counts", params);
     return response.data;
   } catch (e) {
     console.error(e.message);
