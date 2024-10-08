@@ -8,6 +8,7 @@ import { useState } from "react";
 import { getRankAndNearbyCompanies } from "../api/CompareResultAPI.js";
 import useFetchCompanyData from "../hooks/useFetchCompanyData.js";
 import sortData from "../utils/sortData.js";
+import CompanyInfoTable from "../component/CompanyInfoTable.js";
 
 function CompareResultPage() {
   const location = useLocation();
@@ -74,7 +75,29 @@ function CompareResultPage() {
           myCompany={myCompany}
           className={styles.selectedCompanyCardLayout}
         />
-        <ComparisonTable
+        <CompanyInfoTable
+          list={rankStatus.list}
+          className={styles.selectedCompanyCardLayout}
+          highLightId={myCompany.id}
+          type={"standard"}
+        />
+        <CompanyInfoTable
+          list={compStatus.list}
+          className={styles.selectedCompanyCardLayout}
+          highLightId={myCompany.id}
+          type={"compareResult"}
+        />
+        <CompanyInfoTable
+          list={rankStatus.list}
+          className={styles.selectedCompanyCardLayout}
+          type={"compareStatus"}
+        />
+        <CompanyInfoTable
+          list={rankStatus.list}
+          className={styles.selectedCompanyCardLayout}
+          type={"investmentStatus"}
+        />
+        {/* <ComparisonTable
           type="select"
           className={styles.selectTableLayout}
           list={compStatus.list}
@@ -82,7 +105,7 @@ function CompareResultPage() {
           defaultOption={compStatus.sort}
           sortOption="list"
           myCompany={myCompany}
-        />
+        /> */}
         <ComparisonTable
           type="ranking"
           className={styles.rankingTableLayout}
