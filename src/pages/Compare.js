@@ -33,7 +33,11 @@ function MyCompare() {
   };
 
   const openAddModal = () => {
-    setAddModalOpen(true);
+    if ((addSelectedCompany.length === 5)) {
+      setAddModalOpen(false);
+    } else {
+      setAddModalOpen(true);
+    }
   };
 
   const closeAddModal = () => {
@@ -159,7 +163,12 @@ function MyCompare() {
               <p className={style.headFont}>
                 어떤기업이 궁금하세요?<span>(최대5개)</span>
               </p>
-              <button className={style.addButton} onClick={openAddModal}>
+              <button
+                className={`${style.addButton} ${(addSelectedCompany.length === 5
+                  ? style.maxAdd
+                  : "")}`}
+                onClick={openAddModal}
+              >
                 기업 추가하기
               </button>
             </div>
@@ -237,11 +246,7 @@ function MyCompare() {
 
       {showErrorModal && (
         <div className={style.modalOverlay}>
-          <div
-            className={`${style.modalContainer} ${
-              showErrorModal ? style.errorContainer : ""
-            }`}
-          >
+          <div className={style.modalContainer}>
             (
             <ErrorModal
               onClose={handleCloseErrorModal}

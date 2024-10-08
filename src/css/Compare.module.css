@@ -227,23 +227,17 @@ span {
 .modalContainer {
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
   width: 49.6rem;
-  height: 26.9rem;
-  padding: 2.4rem;
   border-radius: 1.6rem;
-  background-color: #212121;
-}
-
-.errorContainer {
-  display: flex;
-  flex-direction: column;
+  background-color: var(--black-300);
   gap: 0.8rem;
-  width: 49.6rem;
   height: 18.6rem;
-  padding: 0;
-  border-radius: 1.6rem;
-  background-color: #212121;
+  padding-right: 1rem;
+}
+.maxAdd {
+  pointer-events: none;
+  background-color: var(--black-100);
+  color: var(--gray-200);
 }
 
 @media (max-width: 1199px) {
@@ -312,6 +306,12 @@ span {
     font-size: 1.2rem;
     line-height: 1.432rem;
   }
+  .defaultFont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+  }
   .companyItem {
     width: calc(33% - 4.249px);
     height: 16.3rem;
@@ -324,13 +324,6 @@ span {
   .modalContainer {
     gap: 1rem;
     width: 34.3rem;
-    height: 22.5rem;
-    padding: 1.6rem;
-  }
-  .errorContainer {
-    gap: 1rem;
-    width: 34.3rem;
     height: 16.1rem;
-    padding: 0;
   }
 }
