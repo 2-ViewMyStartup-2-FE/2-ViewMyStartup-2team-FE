@@ -7,7 +7,7 @@ import {
 
 export async function getCompanyDetail(id) {
   try {
-    const response = await requestGetDB(`/companies2/${id}`);
+    const response = await requestGetDB(`/api/companies/${id}/investments`);
     return response.data;
   } catch (e) {
     console.error(e.message);
