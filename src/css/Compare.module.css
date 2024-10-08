@@ -318,7 +318,7 @@ span {
   }
   .companyItem:nth-child(4),
   .companyItem:nth-child(5) {
-    width: calc(50%-1px);
+    width: calc(50%-59.83px);
     height: 16.3rem;
   }
   .modalContainer {

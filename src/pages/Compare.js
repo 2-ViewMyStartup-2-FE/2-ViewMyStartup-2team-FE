@@ -18,7 +18,7 @@ function MyCompare() {
   const [addCompany, setAddCompany] = useState(false); // 나의기업 선택시 추가기업 섹션 오픈
   const [selectedCompany, setSelectedCompany] = useState(null); //선택된 나의 기업
   const [addSelectedCompany, setAddSelectedCompany] = useState([]); //선택된 추가기업들
-  const [allClear, setAllClear] = useState(false); //
+  const [allClear, setAllClear] = useState(false); 
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorModal, setShowErrorModal] = useState(false); // 에러 모달 상태 추가
 
@@ -33,7 +33,7 @@ function MyCompare() {
   };
 
   const openAddModal = () => {
-    if ((addSelectedCompany.length === 5)) {
+    if (addSelectedCompany.length === 5) {
       setAddModalOpen(false);
     } else {
       setAddModalOpen(true);
@@ -164,9 +164,9 @@ function MyCompare() {
                 어떤기업이 궁금하세요?<span>(최대5개)</span>
               </p>
               <button
-                className={`${style.addButton} ${(addSelectedCompany.length === 5
-                  ? style.maxAdd
-                  : "")}`}
+                className={`${style.addButton} ${
+                  addSelectedCompany.length === 5 ? style.maxAdd : ""
+                }`}
                 onClick={openAddModal}
               >
                 기업 추가하기
@@ -214,9 +214,6 @@ function MyCompare() {
               : ""
           }`}
           onClick={handlePatchRequest} // 비교 요청 함수 호출
-          // onClick={() => {
-
-          // }}
           disabled={addSelectedCompany.length < 1}
         >
           기업 비교하기
