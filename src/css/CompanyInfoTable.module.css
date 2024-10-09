@@ -38,11 +38,11 @@
     border-bottom: 0.1rem solid #4B4B4B;
 }
 
-.table>a:first-child .row {
+.table>.link:first-of-type .row {
     border-radius: 0.4rem 0.4rem 0 0;
 }
 
-.table>a:last-child .row {
+.table>.link:last-child .row {
     border-radius: 0 0 0.4rem 0.4rem;
     border-bottom: none;
 }
