@@ -108,7 +108,7 @@
 }
 
 .name {
-    max-width: 10rem;
+    max-width: 12rem;
     -webkit-line-clamp: 1;
     color: #ffffff;
 }
@@ -147,6 +147,10 @@
     .logo {
         margin-left: 1.6rem;
         margin-right: 0.8rem;
+    }
+
+    .name {
+        max-width: 7.2rem;
     }
 }
 
