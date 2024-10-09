@@ -4,7 +4,7 @@ import StartupList from "../component/StartupList.js";
 import style from "../css/InvestStatusPage.module.css";
 import SPagination from "../component/SPagination.js";
 import SortContent from "../component/SortContent.js";
-
+import CompanyInfoTable from "../component/CompanyInfoTable.js";
 const ITEM_LIMIT = 10;
 
 export default function InvestStatusPage() {
@@ -69,6 +69,7 @@ export default function InvestStatusPage() {
   };
 
   const sortedData = sortData([...investmentData], sortType);
+  const testData = sortedData.slice(0, 10);
 
   return (
     <div className={style.container}>
@@ -107,6 +108,7 @@ export default function InvestStatusPage() {
         totalCount={totalCount} // 전체 데이터 수
         itemLimit={ITEM_LIMIT}
       />
+      <CompanyInfoTable list={testData} type={"investmentStatus"} />
     </div>
   );
 }

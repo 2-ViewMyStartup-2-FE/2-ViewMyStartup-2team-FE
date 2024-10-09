@@ -23,24 +23,22 @@ function CompanyInfoTable({
     return result;
   };
   const selectMenuName = () => {
+    const pcMessage = "View My Startup 투자 금액";
+    const tabletMessage = (
+      <>
+        View My Startup
+        <br />
+        투자 금액
+      </>
+    );
     const result = isCompareStatus
       ? ["나의 기업 선택 횟수", "비교 기업 선택 횟수"]
       : isInvestment
-      ? [
-          isTablet ? (
-            <>
-              View My Startup
-              <br />
-              투자 금액
-            </>
-          ) : (
-            "View My Startup 투자 금액"
-          ),
-          "실제 누적 투자 금액"
-        ]
+      ? [isTablet ? tabletMessage : pcMessage, "실제 누적 투자 금액"]
       : ["누적 투자 금액", "매출액", "고용 인원"];
     return result;
   };
+  const selectMenuNames = selectMenuName();
   const handleError = (e) => (e.target.src = defaultLogo);
   const isHighLight = (company) =>
     company.id === highLightId ? styles.highLight : "";
@@ -69,18 +67,19 @@ function CompanyInfoTable({
           <div className={styles.cell}>기업 명</div>
           <div className={styles.cell}>기업 소개</div>
           <div className={styles.cell}>카테고리</div>
-          {selectMenuName().map((menu, index) => (
+          {selectMenuNames.map((menu, index) => (
             <div className={styles.cell} key={menu}>
               {menu}
             </div>
           ))}
         </div>
         {list.map((company) => (
-          <Link to={`/companies/${company.id}`} className={styles.link}>
-            <div
-              className={`${row} ${isHighLight(company)}`}
-              key={company.name}
-            >
+          <Link
+            to={`/companies/${company.id}`}
+            className={styles.link}
+            key={company.id}
+          >
+            <div className={`${row} ${isHighLight(company)}`}>
               {!isCompareResult && (
                 <div className={styles.cell}>{company.rank}위</div>
               )}

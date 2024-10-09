@@ -24,6 +24,7 @@ function CompareResultPage() {
   const myCompany = compStatus.list.find(
     (company) => company.id === myCompanyId
   );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -82,7 +83,7 @@ function CompareResultPage() {
           type={"standard"}
         />
         <CompanyInfoTable
-          list={compStatus.list}
+          list={rankStatus.list}
           className={styles.selectedCompanyCardLayout}
           highLightId={myCompany.id}
           type={"compareResult"}
@@ -106,7 +107,7 @@ function CompareResultPage() {
           sortOption="list"
           myCompany={myCompany}
         /> */}
-        <ComparisonTable
+        {/* <ComparisonTable
           type="ranking"
           className={styles.rankingTableLayout}
           list={rankStatus.list}
@@ -114,7 +115,7 @@ function CompareResultPage() {
           defaultOption={rankStatus.sort}
           sortOption="list"
           myCompany={myCompany}
-        />
+        /> */}
         <button onClick={openModal} className={styles.investBtn}>
           나의 기업에 투자하기
         </button>
