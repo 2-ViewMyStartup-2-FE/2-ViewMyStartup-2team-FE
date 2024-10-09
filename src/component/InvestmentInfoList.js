@@ -66,45 +66,49 @@ export default function InvestmentInfoList({ data }) {
 
   return (
     <div className={styles.investInfoSection}>
-      <div className={styles.investInfo}>
-        <div className={styles.investDetailTitle}>
-          <h1>투자자 이름</h1>
-          <h1>순위</h1>
-          <h1>투자 금액</h1>
-          <h1>투자 코멘트</h1>
-        </div>
-        <div>
-          {currentItems.map((investor) => (
-            <div className={styles.investDetail} key={investor.id}>
-              <h1>{investor.investorName}</h1>
-              <h1>{investor.rank}</h1>
-              <h1>{investor.formattedAmount}</h1>
-              <h1>{investor.comment}</h1>
-              <div>
-                {/* Kebab 아이콘 */}
-                <div className={styles.dropdown}>
-                  <img
-                    src={kebabIcon}
-                    alt="kebabIcon"
-                    onClick={() => toggleDropdown(investor.id)}
-                  />
-                  {/* 드롭다운 메뉴 */}
-                  {activeDropdown === investor.id && (
-                    <div className={styles.dropdownMenu}>
-                      <button onClick={() => handleOpenEditModal(investor.id)}>
-                        수정하기
-                      </button>
-                      <button
-                        onClick={() => handleOpenDeleteModal(investor.id)}
-                      >
-                        삭제하기
-                      </button>
-                    </div>
-                  )}
+      <div className={styles.investTableArea}>
+        <div className={styles.investTable}>
+          <div className={styles.investDetailTitle}>
+            <h1>투자자 이름</h1>
+            <h1>순위</h1>
+            <h1>투자 금액</h1>
+            <h1>투자 코멘트</h1>
+          </div>
+          <div className={styles.investList}>
+            {currentItems.map((investor) => (
+              <div className={styles.investDetail} key={investor.id}>
+                <h1>{investor.investorName}</h1>
+                <h1>{investor.rank}</h1>
+                <h1>{investor.formattedAmount}</h1>
+                <h1>{investor.comment}</h1>
+                <div>
+                  {/* Kebab 아이콘 */}
+                  <div className={styles.dropdown}>
+                    <img
+                      src={kebabIcon}
+                      alt="kebabIcon"
+                      onClick={() => toggleDropdown(investor.id)}
+                    />
+                    {/* 드롭다운 메뉴 */}
+                    {activeDropdown === investor.id && (
+                      <div className={styles.dropdownMenu}>
+                        <button
+                          onClick={() => handleOpenEditModal(investor.id)}
+                        >
+                          수정하기
+                        </button>
+                        <button
+                          onClick={() => handleOpenDeleteModal(investor.id)}
+                        >
+                          삭제하기
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       <Pagination
