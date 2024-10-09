@@ -48,12 +48,13 @@ function CompanyInfoTable({
     const comparedChosenCount = company.comparedChosenCount;
     const totalInvestment = `${ConvertBillion(company.totalInvestment)} 원`;
     const virtualInvestment = `${ConvertBillion(company.virtualInvestment)} 원`;
+    const actualInvestment = `${ConvertBillion(company.actualInvestment)} 원`;
     const revenue = `${ConvertBillion(company.revenue)} 원`;
     const employee = company.employee;
     const result = isCompareStatus
       ? [myChosenCount, comparedChosenCount]
       : isInvestment
-      ? [virtualInvestment, totalInvestment]
+      ? [virtualInvestment, actualInvestment]
       : [totalInvestment, revenue, employee];
     return result;
   };
