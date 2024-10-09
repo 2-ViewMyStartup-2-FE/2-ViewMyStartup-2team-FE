@@ -32,7 +32,9 @@
 
 .investList {
   background-color: #212121;
-  min-width: 50rem;
+  min-width: 69.6rem;
+  max-width: 120rem;
+  width: 100%;
   border-radius: 0.5rem;
 }
 
@@ -43,7 +45,6 @@
   grid-template-columns: 8.4rem 8.4rem 8.4rem 88.4rem 6.4rem;
   grid-template-rows: 6.4rem;
   width: 100%;
-  max-width: 120rem;
   border-bottom: 1px solid #4b4b4b;
 }
 
