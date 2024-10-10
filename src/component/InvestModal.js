@@ -6,7 +6,7 @@ import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
 import InvestmentForm from "./InvestmentForm.js";
 import InvestmentButton from "./InvestmentButton.js";
 import { postInvestment } from "../api/CompareResultAPI.js";
-function InvestModal({ completeTask, closeModal, myCompany }) {
+function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
   const [formData, setFormData] = useState({
     name: "",
     amount: "",
@@ -101,6 +101,7 @@ function InvestModal({ completeTask, closeModal, myCompany }) {
       companyId: myCompany.id
     };
     await postInvestment(myCompany.id, sumbitData);
+    fetchData();
     completeTask();
   };
 

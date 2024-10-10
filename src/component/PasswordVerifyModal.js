@@ -12,7 +12,7 @@ export default function PasswordVerifyModal({
   investment,
   myCompany,
   onClose,
-  setInvestments,
+  fetchData
 }) {
   const [inputPassword, setInputPassword] = useState(""); // 입력된 비밀번호
   const [passwordToggle, setPasswordToggle] = useState(false); // 비밀번호 표시 토글
@@ -91,7 +91,7 @@ export default function PasswordVerifyModal({
             investment={investment}
             myCompany={myCompany}
             onClose={onClose}
-            setInvestments={setInvestments}
+            fetchData={fetchData}
           />
         )}
 
@@ -100,10 +100,10 @@ export default function PasswordVerifyModal({
           <DeleteInvestment
             investment={investment}
             onClose={onClose}
-            setInvestments={setInvestments}
             setErrorMessage={setErrorMessage}
             setIsErrorModal={setIsErrorModal}
             setShowDeleteModal={setShowDeleteModal}
+            fetchData={fetchData}
           />
         )}
 

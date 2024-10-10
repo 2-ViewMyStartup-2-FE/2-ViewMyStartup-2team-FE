@@ -3,7 +3,7 @@ import ConvertBillion from "../utils/ConvertBillion.js";
 import InvestModal from "./InvestModal.js";
 import { useState } from "react";
 
-function CompanyInvestmentAction({ startupListData }) {
+function CompanyInvestmentAction({ startupListData, fetchData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -27,6 +27,7 @@ function CompanyInvestmentAction({ startupListData }) {
             completeTask={completeTask}
             closeModal={closeModal}
             myCompany={startupListData}
+            fetchData={fetchData}
           />
         )}
       </div>
