@@ -5,35 +5,34 @@ import InvestmentForm from "./InvestmentForm.js";
 import InvestModalHeader from "./InvestModalHeader.js";
 import InvestmentButton from "./InvestmentButton.js";
 import { patchInvestment } from "../api/CompanyDetailAPI.js";
-import ConvertBillion from "../utils/ConvertBillion.js";
 import bigInt from "big-integer";
 
 export default function EditInvestment({
   investment, // 선택된 투자자 정보
   myCompany, // 기업 정보
   onClose, // 모달 닫기 함수
-  setInvestments, // 투자 리스트 업데이트 함수
+  fetchData
 }) {
   const [formData, setFormData] = useState({
     name: investment.investorName || "", // 기존 데이터로 초기화
     amount: investment.amount || "",
     comment: investment.comment || "",
     password: investment.password || "",
-    confirmPassword: investment.password || "",
+    confirmPassword: investment.password || ""
   }); // 입력값을 state로 관리
   const [validation, setValidation] = useState({
     name: "INITIAL",
     amount: "INITIAL",
     comment: "INITIAL",
     password: "INITIAL",
-    confirmPassword: "INITIAL",
+    confirmPassword: "INITIAL"
   });
   const [errorMessage, setErrorMessage] = useState({
     name: "",
     amount: "",
     comment: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   });
 
   const validateField = useCallback(
@@ -131,34 +130,17 @@ export default function EditInvestment({
 
     try {
       // PATCH 요청 보내기
-      const updatedInvestment = await patchInvestment(investment.id, {
+      await patchInvestment(investment.id, {
         investorName: formData.name,
         amount: formData.amount,
         comment: formData.comment,
-        password: formData.password,
+        password: formData.password
       });
-
-      setInvestments((prevInvestments) => {
-        // 수정된 투자 데이터를 반영
-        const updatedList = prevInvestments.map((inv) =>
-          inv.id === investment.id ? updatedInvestment : inv
-        );
-        return formatAndSortInvestments(updatedList); // 정렬 및 포맷팅
-      });
+      fetchData();
       onClose();
     } catch (error) {
       console.error(error.message); // 에러 메시지 출력
     }
-  };
-
-  const formatAndSortInvestments = (investments) => {
-    return investments
-      .sort((a, b) => b.amount - a.amount) // 금액을 기준으로 내림차순 정렬
-      .map((investment, index) => ({
-        ...investment,
-        rank: `${index + 1}위`, // 순위 추가
-        formattedAmount: ConvertBillion(investment.amount), // 금액 포맷팅
-      }));
   };
 
   // 각 form 필드의 설정을 객체로 정의
@@ -168,21 +150,21 @@ export default function EditInvestment({
       type: "name",
       onChange: onChangeField("name"),
       errorMessage: errorMessage.name,
-      value: formData.name,
+      value: formData.name
     },
     {
       mode: "edit",
       type: "amount",
       onChange: onChangeField("amount"),
       errorMessage: errorMessage.amount,
-      value: formData.amount,
+      value: formData.amount
     },
     {
       mode: "edit",
       type: "comment",
       onChange: onChangeField("comment"),
       errorMessage: errorMessage.comment,
-      value: formData.comment,
+      value: formData.comment
     },
     {
       mode: "edit",
@@ -191,7 +173,7 @@ export default function EditInvestment({
       isVisible: isPasswordVisible,
       onToggle: onTogglePassword,
       errorMessage: errorMessage.password,
-      value: formData.password,
+      value: formData.password
     },
     {
       mode: "edit",
@@ -200,8 +182,8 @@ export default function EditInvestment({
       isVisible: isConfirmVisible,
       onToggle: onToggleConfirm,
       errorMessage: errorMessage.confirmPassword,
-      value: formData.confirmPassword,
-    },
+      value: formData.confirmPassword
+    }
   ];
 
   return (

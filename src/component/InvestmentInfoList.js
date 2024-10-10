@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ConvertBillion from "../utils/ConvertBillion.js";
 import PasswordVerifyModal from "./PasswordVerifyModal.js";
 
-export default function InvestmentInfoList({ data }) {
+export default function InvestmentInfoList({ data, fetchData }) {
   const [investments, setInvestments] = useState([]); // 투자 데이터를 상태로 관리
   const [activeDropdown, setActiveDropdown] = useState(null); // 드롭다운 열림 상태 관리
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -15,7 +15,7 @@ export default function InvestmentInfoList({ data }) {
   const [selectedInvestment, setSelectedInvestment] = useState(null); // 선택된 투자자 데이터
   const MODAL_MODE = {
     EDIT: "edit",
-    DELETE: "delete",
+    DELETE: "delete"
   };
 
   // useEffect로 투자 데이터를 투자 금액 순서로 정렬
@@ -27,7 +27,7 @@ export default function InvestmentInfoList({ data }) {
       const rankedInvestments = sortedInvestments.map((investment, index) => ({
         ...investment,
         rank: `${index + 1}위`, // 순위 추가
-        formattedAmount: ConvertBillion(investment.amount), // 금액 포맷팅
+        formattedAmount: ConvertBillion(investment.amount) // 금액 포맷팅
       }));
       setInvestments(rankedInvestments); // 상태에 저장
     }
@@ -125,11 +125,11 @@ export default function InvestmentInfoList({ data }) {
             id: data.id,
             name: data.name,
             logo: data.logo,
-            category: data.category,
+            category: data.category
           }} // 필요한 기업 정보만 전달
           onClose={closeModal}
-          setInvestments={setInvestments}
           setShowPasswordModal={setShowPasswordModal}
+          fetchData={fetchData}
         />
       )}
     </div>
