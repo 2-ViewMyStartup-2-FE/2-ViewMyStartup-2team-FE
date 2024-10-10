@@ -1,5 +1,5 @@
 import {
-  requestGetDB,
+  requestGet,
   requestPost,
   requestPatch,
   requestDelete,
@@ -7,7 +7,7 @@ import {
 
 export async function getCompanyDetail(id) {
   try {
-    const response = await requestGetDB(`/companies/${id}/investments`);
+    const response = await requestGet(`/companies/${id}/investments`);
     return response.data;
   } catch (e) {
     console.error(e.message);

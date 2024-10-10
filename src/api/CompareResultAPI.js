@@ -1,10 +1,10 @@
-import { requestGetDB, requestPost } from "./api.js";
+import { requestGet, requestPost } from "./api.js";
 export async function getRankAndNearbyCompanies({
   myCompanyId,
   order = "investmentHighest"
 }) {
   try {
-    const response = await requestGetDB(
+    const response = await requestGet(
       `/companies/${myCompanyId}/rank?order=${order}`
     );
     return response.data;

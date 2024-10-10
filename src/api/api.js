@@ -1,21 +1,11 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://two-viewmystartup-2team-be.onrender.com/api",
-  //"http://localhost:3000/api"
+  baseURL: "https://two-viewmystartup-2team-be.onrender.com/api"
   // timeout: 10000,
 });
 
 export async function requestGet(url, params = {}) {
-  try {
-    return await instance.get(url, { params });
-  } catch (e) {
-    console.error("get error: ", e.message);
-  }
-}
-
-//배포된 서버에서 Get으로 데이터 가져오기
-export async function requestGetDB(url, params = {}) {
   try {
     // URL 유효성 검사 (문자열이 맞는지 확인, 공백만 있는 문자열이 아닌지 확인)
     if (typeof url !== "string" || !url.trim()) {

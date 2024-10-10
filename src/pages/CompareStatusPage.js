@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import StartupList from "../component/StartupList.js";
 import style from "../css/InvestStatusPage.module.css";
 import { getCountList } from "../api/CompareStatusAPI.js";
-import SPagination from "../component/SPagination.js";
+import Pagination from "../component/Pagination.js";
 import SortContent from "../component/SortContent.js";
 
 const ITEM_LIMIT = 10;
@@ -81,7 +81,7 @@ export default function CompareStatusPage() {
           isCompareStatus={true}
         />
       </div>
-      <SPagination
+      <Pagination
         currentPage={currentPage} // 현재 페이지 번호
         setCurrentPage={setCurrentPage}
         totalCount={totalCount} // 전체 데이터 수
