@@ -24,7 +24,7 @@ export default function CompanyDetailPage() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, startupData]);
   return (
     <div className={styles.companyDetailPage}>
       <CompanyDetailTable startupListData={startupData} />
