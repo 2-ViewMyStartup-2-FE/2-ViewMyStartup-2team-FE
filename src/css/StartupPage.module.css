@@ -31,10 +31,12 @@
 
 .body {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     margin: 2rem;
 }
-
+/* 
 .table {
     display: flex;
     flex-direction: column;
@@ -76,37 +78,37 @@
     color: #FFFFFF;
     white-space: nowrap; 
     overflow: hidden; 
-}
+} */
 
 
 @media (max-width: 1199px) and (min-width: 744px) {
-    .container {
+    /* .container {
         padding-left: 2.4rem;
         padding-right: 2.4rem;
-    }
+    } */
 
     .header {
-        width: 100%;
+        width: 69.6rem;
     }
-
+/* 
     .body {
         width: 100%;
     }
 
     .listHeader {
         width: 100%;
-    }
+    } */
 }
 
 @media (max-width: 743px) {
     .container {
         padding-top: 8rem;
-        padding-left: 1.6rem;
-        padding-right: 1.6rem;
+        /* padding-left: 1.6rem;
+        padding-right: 1.6rem; */
     }
 
     .header {
-        width: 100%;
+        width: 36rem;
         flex-direction: column;
         height: 9rem;
     }
@@ -116,7 +118,7 @@
         line-height: 1.9rem;
     }
 
-    .body {
+    /* .body {
         width: 100%;
         overflow-x:auto;
     }
@@ -128,6 +130,6 @@
     .rank, .company, .description, .category {
         font-size: 1rem;
         line-height: 1.5rem;
-    }
+    } */
 
 }

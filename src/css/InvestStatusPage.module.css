@@ -27,9 +27,10 @@
 .body {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 2rem;
 }
-
+/* 
 .table {
     display: flex;
     flex-direction: column;
@@ -76,37 +77,37 @@
     color: #FFFFFF;
     overflow: hidden; 
     text-align: center;
-}
+} */
 
 
 @media (max-width: 1199px) and (min-width: 744px) {
-    .container {
+    /* .container {
         padding-left: 2.4rem;
         padding-right: 2.4rem;
-    }
+    } */
 
     .header {
-        width: 100%;
+        width: 69.6rem;
     }
 
-    .body {
+    /* .body {
         width: 100%;
     }
 
     .listHeader {
         width: 100%;
-    }
+    } */
 }
 
 @media (max-width: 743px) {
     .container {
         padding-top: 8rem;
-        padding-left: 1.6rem;
-        padding-right: 1.6rem;
+        /* padding-left: 1.6rem;
+        padding-right: 1.6rem; */
     }
 
     .header {
-        width: 100%;
+        width: 36rem;
         flex-direction: column;
         height: 9rem;
     }
@@ -116,18 +117,18 @@
         line-height: 1.9rem;
     }
 
-    .body {
-        width: 100%;
-        overflow-x:auto;
-    }
+    /* .body {
+        width: 100%; */
+        /* overflow-x:auto; */
+    /* } */
 
-    .listHeader {
+    /* .listHeader {
         width: 100%;
     }
 
     .rank, .company, .description, .category, .other {
         font-size: 1rem;
         line-height: 1.5rem;
-    }
+    } */
 
 }
