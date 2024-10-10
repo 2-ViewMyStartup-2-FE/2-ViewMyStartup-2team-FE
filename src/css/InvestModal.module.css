@@ -23,7 +23,7 @@
   /* 위에서부터 쌓이도록 설정 */
   overflow-x: hidden;
   overflow-y: auto;
-  border-radius: 2.8rem;
+  border-radius: 1rem;
 }
 
 .form {
@@ -48,7 +48,8 @@
 @media (max-width: 743px) {
   .frame {
     width: 34.2rem;
-    max-height: 74.2rem;
+    height: auto;
+    max-height: 100vh;
   }
 
   .form {
@@ -69,15 +70,26 @@
   }
 }
 
-@media (max-height: 742px) {
+@media (max-height: 1000px) {
   .frame {
-    width: auto;
-    height: auto;
-    max-height: 90vh;
+    max-height: 100vh;
   }
 
-  .form {
-    width: auto;
-    min-height: 71rem;
+  /* 가로 스크롤바의 전체 영역 */
+  .frame::-webkit-scrollbar {
+    height: 1.2rem;
+  }
+
+  /* 스크롤바의 트랙(스크롤바 배경) */
+  .frame::-webkit-scrollbar-track {
+    background-color: #212121;
+    border-radius: 0.8rem;
+  }
+
+  /* 스크롤바의 이동 가능한 슬라이더 부분 */
+  .frame::-webkit-scrollbar-thumb {
+    background-color: #131313;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #212121;
   }
 }
