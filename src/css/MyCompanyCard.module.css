@@ -1,9 +1,17 @@
-.selectedCompanyCard {
+.myCompanyCard {
     width: 120rem;
     height: 35.6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
@@ -37,6 +45,7 @@
     border: none;
     color: #FFFFFF;
     background: #EB5230;
+    cursor: pointer;
 }
 
 .companyInfoFrame {
@@ -85,7 +94,7 @@
 }
 
 @media(max-width:1199px) {
-    .selectedCompanyCard {
+    .myCompanyCard {
         width: 69.6rem;
         height: 29.6rem;
     }
@@ -96,7 +105,7 @@
 }
 
 @media(max-width:743px) {
-    .selectedCompanyCard {
+    .myCompanyCard {
         width: 34.3rem;
         height: 22.8rem;
     }

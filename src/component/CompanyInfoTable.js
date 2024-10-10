@@ -1,6 +1,5 @@
 import styles from "../css/CompanyInfoTable.module.css";
 import { Link } from "react-router-dom";
-import ConvertBillion from "../utils/ConvertBillion.js";
 import formatAmount from "../utils/formatAmount.js";
 import defaultLogo from "../asset/images/img_company_default_logo.png";
 function CompanyInfoTable({
