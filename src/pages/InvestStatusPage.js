@@ -31,7 +31,7 @@ export default function InvestStatusPage() {
         const response = await getInvestmentList({
           page: currentPage,
           limit: ITEM_LIMIT,
-          order: sortType,
+          order: sortType
         });
 
         if (response) {
@@ -47,7 +47,6 @@ export default function InvestStatusPage() {
     fetchData();
   }, [currentPage, sortType]);
 
-    
   // 데이터 정렬 함수
   const sortData = (data, option) => {
     switch (option) {
@@ -83,22 +82,24 @@ export default function InvestStatusPage() {
       </div>
       <div className={style.body}>
         <div className={style.table}>
-        <div className={style.listHeader}>
-          <div className={style.rank}>순위</div>
-          <div className={style.company}>기업 명</div>
-          <div className={style.description}>기업 소개</div>
-          <div className={style.category}>카테고리</div>
-          <div className={style.other}>View My Startup {windowSize < 1000 && <br />}투자 금액</div>
-          <div className={style.other}>실제 누적 투자 금액</div>
+          <div className={style.listHeader}>
+            <div className={style.rank}>순위</div>
+            <div className={style.company}>기업 명</div>
+            <div className={style.description}>기업 소개</div>
+            <div className={style.category}>카테고리</div>
+            <div className={style.other}>
+              View My Startup {windowSize < 1000 && <br />}투자 금액
+            </div>
+            <div className={style.other}>실제 누적 투자 금액</div>
+          </div>
+          <StartupList
+            currentPage={currentPage}
+            itemLimit={ITEM_LIMIT}
+            data={sortedData}
+            isStatusPage={true}
+            isCompareStatus={false}
+          />
         </div>
-        <StartupList
-          currentPage={currentPage}
-          itemLimit={ITEM_LIMIT}
-          data={sortedData}
-          isStatusPage={true}
-          isCompareStatus={false}
-        />
-      </div>
       </div>
       <Pagination
         currentPage={currentPage} // 현재 페이지 번호

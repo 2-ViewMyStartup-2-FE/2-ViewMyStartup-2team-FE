@@ -1,0 +1,182 @@
+.link {
+    text-decoration: none;
+    /* 밑줄 제거 */
+    color: black;
+    /* 링크 색상 변경 (필요시) */
+}
+
+.tableContainer {
+    width: 120rem;
+    display: flex;
+    justify-content: left;
+}
+
+.table {
+    width: 100%;
+    font-size: 1.4rem;
+    line-height: 1.671rem;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    height: 3.9rem;
+    margin-bottom: 1.6rem;
+    background: #2E2E2E;
+    color: #ffffff;
+    font-weight: 500;
+    border-radius: 0.4rem;
+}
+
+.row {
+    height: 6.4rem;
+    color: #D8D8D8;
+    background: #212121;
+    font-weight: 400;
+    text-align: left;
+    border-bottom: 0.1rem solid #4B4B4B;
+}
+
+.table>.link:first-of-type .row {
+    border-radius: 0.4rem 0.4rem 0 0;
+}
+
+.table>.link:last-of-type .row {
+    border-radius: 0 0 0.4rem 0.4rem;
+    border-bottom: none;
+}
+
+.row.standard.highLight,
+.row.compareResult.highLight {
+    background: #2E2E2E;
+}
+
+
+
+.standard,
+.compareResult,
+.compareStatus,
+.investmentStatus {
+    display: grid;
+}
+
+.standard {
+    grid-template-columns: 6.8rem 21.3rem 30.4rem 1fr 1fr 1fr 1fr;
+}
+
+.compareResult {
+    grid-template-columns: 21.3rem 30.4rem 1fr 1fr 1fr 1fr;
+}
+
+.compareStatus,
+.investmentStatus {
+    grid-template-columns: 6.8rem 21.3rem 30.4rem 15.375rem 1fr 1fr;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.nameAndLogo {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    margin-left: 2.4rem;
+    margin-right: 1.2rem;
+}
+
+.name,
+.description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.name {
+    max-width: 12rem;
+    -webkit-line-clamp: 1;
+    color: #ffffff;
+}
+
+.description {
+    padding: 1.5rem 1.6rem;
+    line-height: 1.671rem;
+    height: 4.842rem;
+    max-width: 30.4rem;
+    -webkit-line-clamp: 2;
+    text-align: left;
+}
+
+@media(max-width: 1199px) {
+    .tableContainer {
+        width: 69.6rem;
+    }
+
+    .table {
+        font-size: 1.3rem;
+    }
+
+    .standard {
+        grid-template-columns: 6rem 14rem 18rem 8rem 1fr 1fr 1fr;
+    }
+
+    .compareResult {
+        grid-template-columns: 15rem 18rem 1fr 1fr 1fr 1fr;
+    }
+
+    .compareStatus,
+    .investmentStatus {
+        grid-template-columns: 6rem 14rem 18rem 8.4rem 1fr 1fr;
+    }
+
+    .logo {
+        margin-left: 1.6rem;
+        margin-right: 0.8rem;
+    }
+
+    .name {
+        max-width: 7.2rem;
+    }
+}
+
+@media(max-width: 743px) {
+    .tableContainer {
+        width: 36rem;
+        overflow-x: auto;
+    }
+
+    .table {
+        min-width: 80rem;
+        padding-bottom: 1.2rem;
+    }
+
+    .tableContainer::-webkit-scrollbar {
+        height: 1.2rem;
+    }
+
+    .tableContainer::-webkit-scrollbar-track {
+        background: #212121;
+        border-radius: 0.8rem;
+    }
+
+    .tableContainer::-webkit-scrollbar-thumb {
+        background: #131313;
+        border-radius: 0.8rem;
+        border: 0.2rem solid #212121;
+    }
+}
