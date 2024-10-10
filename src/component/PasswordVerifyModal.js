@@ -29,7 +29,7 @@ export default function PasswordVerifyModal({
         setShowDeleteModal(true); // DeleteInvestment 관련 모달을 띄움
       }
     } else {
-      setErrorMessage("잘못된 비밀번호로 삭제에 실패하셨습니다.");
+      setErrorMessage("잘못된 비밀번호로 인증에 실패하셨습니다.");
       setIsErrorModal(true); // 에러 모달 띄우기
     }
   };
@@ -60,8 +60,9 @@ export default function PasswordVerifyModal({
             </div>
             <div className={styles.modalContent}>
               <div className={styles.modalinput}>
-                <label>비밀번호</label>
+                <label htmlFor="password">비밀번호</label>
                 <input
+                  id="password"
                   type={!passwordToggle ? "password" : "text"}
                   placeholder="패스워드를 입력해주세요"
                   value={inputPassword}
