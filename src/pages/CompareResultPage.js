@@ -1,14 +1,14 @@
 import styles from "../css/CompareResultPage.module.css";
 import { useLocation } from "react-router-dom";
 import SelectedCompanyCard from "../component/SelectedCompanyCard.js";
-import ComparisonTable from "../component/ComparisonTable.js";
 import InvestModal from "../component/InvestModal.js";
 import InvestmentPopup from "../component/InvestmentPopup.js";
 import { useState } from "react";
 import { getRankAndNearbyCompanies } from "../api/CompareResultAPI.js";
 import useFetchCompanyData from "../hooks/useFetchCompanyData.js";
 import sortData from "../utils/sortData.js";
-
+import CompanyInfoTable from "../component/CompanyInfoTable.js";
+import SortContent from "../component/SortContent.js";
 function CompareResultPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -74,24 +74,38 @@ function CompareResultPage() {
           myCompany={myCompany}
           className={styles.selectedCompanyCardLayout}
         />
-        <ComparisonTable
-          type="select"
-          className={styles.selectTableLayout}
-          list={compStatus.list}
-          onSelect={handleCompSelect}
-          defaultOption={compStatus.sort}
-          sortOption="list"
-          myCompany={myCompany}
-        />
-        <ComparisonTable
-          type="ranking"
-          className={styles.rankingTableLayout}
-          list={rankStatus.list}
-          onSelect={handleRankSelect}
-          defaultOption={rankStatus.sort}
-          sortOption="list"
-          myCompany={myCompany}
-        />
+        <div className={styles.selectTableLayout}>
+          <div className={styles.header}>
+            <h1 className={styles.tableTitle}>내가 선택한 기업</h1>
+            <SortContent
+              onSelect={handleCompSelect}
+              defaultOption={compStatus.sort}
+              sortOption="list"
+            />
+          </div>
+          <CompanyInfoTable
+            type="compareResult"
+            list={compStatus.list}
+            highLightId={myCompanyId}
+            className={styles.tableLayout}
+          />
+        </div>
+        <div className={styles.rankingTableLayout}>
+          <div className={styles.header}>
+            <h1 className={styles.tableTitle}>기업 순위 확인하기</h1>
+            <SortContent
+              onSelect={handleRankSelect}
+              defaultOption={rankStatus.sort}
+              sortOption="list"
+            />
+          </div>
+          <CompanyInfoTable
+            type="standard"
+            list={rankStatus.list}
+            highLightId={myCompanyId}
+            className={styles.tableLayout}
+          />
+        </div>
         <button onClick={openModal} className={styles.investBtn}>
           나의 기업에 투자하기
         </button>

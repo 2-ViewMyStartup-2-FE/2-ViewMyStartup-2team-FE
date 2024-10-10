@@ -60,8 +60,9 @@ export default function PasswordVerifyModal({
             </div>
             <div className={styles.modalContent}>
               <div className={styles.modalinput}>
-                <label>비밀번호</label>
+                <label htmlFor="password">비밀번호</label>
                 <input
+                  id="password"
                   type={!passwordToggle ? "password" : "text"}
                   placeholder="패스워드를 입력해주세요"
                   value={inputPassword}

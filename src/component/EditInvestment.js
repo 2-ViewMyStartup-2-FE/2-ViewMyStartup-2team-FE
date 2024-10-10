@@ -92,20 +92,24 @@ export default function EditInvestment({
   );
 
   useEffect(() => {
-    // 초기값에 대해 유효성 검사 수행
     validateField("name", formData.name);
+  }, [formData.name, validateField]);
+
+  useEffect(() => {
     validateField("amount", formData.amount);
+  }, [formData.amount, validateField]);
+
+  useEffect(() => {
     validateField("comment", formData.comment);
+  }, [formData.comment, validateField]);
+
+  useEffect(() => {
     validateField("password", formData.password);
+  }, [formData.password, validateField]);
+
+  useEffect(() => {
     validateField("confirmPassword", formData.confirmPassword);
-  }, [
-    formData.name,
-    formData.amount,
-    formData.comment,
-    formData.password,
-    formData.confirmPassword,
-    validateField,
-  ]);
+  }, [formData.confirmPassword, formData.password, validateField]);
 
   const isFormValid = () =>
     Object.values(validation).every((status) => status === "SUCCESS");
