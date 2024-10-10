@@ -1,6 +1,6 @@
 import styles from "../css/CompanyInfoTable.module.css";
 import { Link } from "react-router-dom";
-import ConvertBillion from "../utils/ConvertBillion.js";
+import formatAmount from "../utils/formatAmount.js";
 import defaultLogo from "../asset/images/img_company_default_logo.png";
 function CompanyInfoTable({
   type = "standard",
@@ -46,11 +46,11 @@ function CompanyInfoTable({
   const seletedMenuValue = (company) => {
     const myChosenCount = company.myChosenCount;
     const comparedChosenCount = company.comparedChosenCount;
-    const totalInvestment = `${ConvertBillion(company.totalInvestment)} 원`;
-    const virtualInvestment = `${ConvertBillion(company.virtualInvestment)} 원`;
-    const actualInvestment = `${ConvertBillion(company.actualInvestment)} 원`;
-    const revenue = `${ConvertBillion(company.revenue)} 원`;
-    const employee = company.employee;
+    const totalInvestment = formatAmount(company.totalInvestment);
+    const virtualInvestment = formatAmount(company.virtualInvestment);
+    const actualInvestment = formatAmount(company.actualInvestment);
+    const revenue = formatAmount(company.revenue);
+    const employee = `${company.employee}명`;
     const result = isCompareStatus
       ? [myChosenCount, comparedChosenCount]
       : isInvestment
