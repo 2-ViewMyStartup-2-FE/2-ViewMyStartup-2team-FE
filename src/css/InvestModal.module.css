@@ -13,6 +13,7 @@
 
 .frame {
   width: 49.6rem;
+  /* InvestForm 길이에 따라 변화하도록 height 수정*/
   height: auto;
   background: #212121;
   display: flex;
