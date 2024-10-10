@@ -21,30 +21,22 @@ export default function Nav() {
     <div className={style.header}>
       <div className={style.nav}>
         <div>
-          <img
-            className={style.logo}
-            src={img_logo}
-            alt="logo"
-            onClick={handleLogoClick}
-          />
+          <img className={style.logo} src={img_logo} alt="logo" onClick={handleLogoClick} />
         </div>
         <div className={style.titleGroup}>
           <Link
             className={`${style.title} ${isCompare ? style.active : ""}`}
-            to="/compare"
-          >
+            to="/compare" >
             나의 기업 비교
           </Link>
           <Link
             className={`${style.title} ${isCompareStatus ? style.active : ""}`}
-            to="/compare-status"
-          >
+            to="/compare-status" >
             비교 현황
           </Link>
           <Link
             className={`${style.title} ${isInvestStatus ? style.active : ""}`}
-            to="/invest-status"
-          >
+            to="/invest-status" >
             투자 현황
           </Link>
         </div>

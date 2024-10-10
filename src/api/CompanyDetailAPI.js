@@ -1,9 +1,4 @@
-import {
-  requestGet,
-  requestPost,
-  requestPatch,
-  requestDelete,
-} from "./api.js";
+import { requestGet, requestPost, requestPatch, requestDelete } from "./api.js";
 
 export async function getCompanyDetail(id) {
   try {
