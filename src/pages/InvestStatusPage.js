@@ -2,18 +2,20 @@ import { useState, useEffect } from "react";
 import { getInvestmentList } from "../api/InvestStatusAPI.js";
 import StartupList from "../component/StartupList.js";
 import style from "../css/InvestStatusPage.module.css";
-import SPagination from "../component/SPagination.js";
+import Pagination from "../component/Pagination.js";
 import SortContent from "../component/SortContent.js";
+import useFetchList from "../hooks/useFetchList.js";
 
 const ITEM_LIMIT = 10;
 
 export default function InvestStatusPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [investmentData, setInvestmentData] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const sortOption = "invest";
   const [sortType, setSortType] = useState("simulatedInvestHighest");
+  const sortOption = "invest";
+  // const [investmentData, setInvestmentData] = useState([]);
+  // const [totalCount, setTotalCount] = useState(0);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const { data: investmentData, totalCount } = useFetchList(getInvestmentList, currentPage, sortType);
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,29 +27,28 @@ export default function InvestStatusPage() {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getInvestmentList({
-          page: currentPage,
-          limit: ITEM_LIMIT,
-          order: sortType,
-        });
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await getInvestmentList({
+  //         page: currentPage,
+  //         limit: ITEM_LIMIT,
+  //         order: sortType
+  //       });
 
-        if (response) {
-          setInvestmentData(response.data);
-          setTotalCount(response.totalCount);
-          console.log(response.data, response.totalCount);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       if (response) {
+  //         setInvestmentData(response.data);
+  //         setTotalCount(response.totalCount);
+  //         console.log(response.data, response.totalCount);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [currentPage, sortType]);
+  //   fetchData();
+  // }, [currentPage, sortType]);
 
-    
   // 데이터 정렬 함수
   const sortData = (data, option) => {
     switch (option) {
@@ -83,24 +84,26 @@ export default function InvestStatusPage() {
       </div>
       <div className={style.body}>
         <div className={style.table}>
-        <div className={style.listHeader}>
-          <div className={style.rank}>순위</div>
-          <div className={style.company}>기업 명</div>
-          <div className={style.description}>기업 소개</div>
-          <div className={style.category}>카테고리</div>
-          <div className={style.other}>View My Startup {windowSize < 1000 && <br />}투자 금액</div>
-          <div className={style.other}>실제 누적 투자 금액</div>
+          <div className={style.listHeader}>
+            <div className={style.rank}>순위</div>
+            <div className={style.company}>기업 명</div>
+            <div className={style.description}>기업 소개</div>
+            <div className={style.category}>카테고리</div>
+            <div className={style.other}>
+              View My Startup {windowSize < 1000 && <br />}투자 금액
+            </div>
+            <div className={style.other}>실제 누적 투자 금액</div>
+          </div>
+          <StartupList
+            currentPage={currentPage}
+            itemLimit={ITEM_LIMIT}
+            data={sortedData}
+            isStatusPage={true}
+            isCompareStatus={false} 
+          />
         </div>
-        <StartupList
-          currentPage={currentPage}
-          itemLimit={ITEM_LIMIT}
-          data={sortedData}
-          isStatusPage={true}
-          isCompareStatus={false}
-        />
       </div>
-      </div>
-      <SPagination
+      <Pagination
         currentPage={currentPage} // 현재 페이지 번호
         setCurrentPage={setCurrentPage}
         totalCount={totalCount} // 전체 데이터 수

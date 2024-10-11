@@ -50,7 +50,9 @@ function InvestmentForm({
   isVisible,
   onToggle,
   className,
-  errorMessage
+  errorMessage,
+  mode,
+  value = "" // value 추가
 }) {
   const {
     frame: FRAME,
@@ -58,24 +60,34 @@ function InvestmentForm({
     inputType: INPUTTYPE,
     message: MESSAGE
   } = getFieldConfig(type, isVisible, className);
+
+  // mode가 edit일 경우에만 초기값을 설정, 그렇지 않으면 입력 필드를 자유롭게 할당
+  const inputValue = mode === "edit" ? value : undefined;
+
   return (
     <div className={FRAME}>
-      <label className={styles.label}>{LABEL}</label>
+      <label for={type} className={styles.label}>
+        {LABEL}
+      </label>
       {type === "comment" ? ( //comment인경우에 textarea를 반환
         <textarea
+          id={type}
           className={styles.commentInput}
           placeholder={MESSAGE}
           onChange={onChange}
           spellCheck="false" // 맞춤법 빨간줄 없애기
+          value={inputValue} // 조건부로 value 설정
         />
       ) : (
         <div className={styles.inputContainer}>
           <input //comment가 아닌 경우에는 input태그를 반환
+            id={type}
             className={styles.otherInput}
             placeholder={MESSAGE}
             type={INPUTTYPE}
             onChange={onChange}
             autoComplete="off"
+            value={inputValue} // 조건부로 value 설정
           />
           {(type === "password" || type === "confirm") && ( //비밀번호계열 인풋은 토글 버튼추가
             <button
@@ -88,7 +100,9 @@ function InvestmentForm({
           )}
         </div>
       )}
-      <div className={styles.errorMessage}>{errorMessage}</div>
+      {errorMessage && (
+        <div className={styles.errorMessage}>{errorMessage}</div>
+      )}
     </div>
   );
 }

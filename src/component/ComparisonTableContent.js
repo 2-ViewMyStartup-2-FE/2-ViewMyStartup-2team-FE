@@ -54,3 +54,4 @@ function ComparisonTableContent({ list, type, myCompany }) {
 }
 
 export default ComparisonTableContent;
+

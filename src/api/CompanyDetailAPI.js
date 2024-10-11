@@ -1,13 +1,8 @@
-import {
-  requestGetDB,
-  requestPost,
-  requestPatch,
-  requestDelete,
-} from "./api.js";
+import { requestGet, requestPost, requestPatch, requestDelete } from "./api.js";
 
 export async function getCompanyDetail(id) {
   try {
-    const response = await requestGetDB(`/companies2/${id}`);
+    const response = await requestGet(`/companies/${id}/investments`);
     return response.data;
   } catch (e) {
     console.error(e.message);
@@ -76,8 +71,16 @@ export async function patchInvestment(id, data) {
 export async function deleteInvestment(id) {
   try {
     const response = await requestDelete(`/investments/${id}`);
-    return response.data;
+
+    // 요청이 204 (No Content) 이거나 200일 때 성공으로 간주
+    if (response.status === 200 || response.status === 204) {
+      return true; // 성공 시 true 반환
+    } else {
+      console.error(`Failed to delete investment. Status: ${response.status}`);
+      return false; // 실패 시 false 반환
+    }
   } catch (e) {
     console.error(e.message);
+    return false; // 예외 발생 시 false 반환
   }
 }

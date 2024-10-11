@@ -1,35 +1,37 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StartupList from "../component/StartupList.js";
 import style from "../css/InvestStatusPage.module.css";
 import { getCountList } from "../api/CompareStatusAPI.js";
-import SPagination from "../component/SPagination.js";
+import Pagination from "../component/Pagination.js";
 import SortContent from "../component/SortContent.js";
+import useFetchList from "../hooks/useFetchList.js";
 
 const ITEM_LIMIT = 10;
 
 export default function CompareStatusPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [item, setItem] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
-  const sortOption = "compare";
   const [sortType, setSortType] = useState("myCountHighest");
+  // const [item, setItem] = useState([]);
+  // const [totalCount, setTotalCount] = useState(0);
+  const sortOption = "compare";
+  const { data: item, totalCount } = useFetchList(getCountList, currentPage, sortType);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getCountList(currentPage, ITEM_LIMIT, sortType);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await getCountList(currentPage, ITEM_LIMIT, sortType);
 
-        if (response) {
-          setItem(response.data);
-          setTotalCount(response.totalCount);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       if (response) {
+  //         setItem(response.data);
+  //         setTotalCount(response.totalCount);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [currentPage, sortType]);
+  //   fetchData();
+  // }, [currentPage, sortType]);
 
   //데이터 정렬 함수
   const sortData = (data, option) => {
@@ -81,7 +83,7 @@ export default function CompareStatusPage() {
           isCompareStatus={true}
         />
       </div>
-      <SPagination
+      <Pagination
         currentPage={currentPage} // 현재 페이지 번호
         setCurrentPage={setCurrentPage}
         totalCount={totalCount} // 전체 데이터 수

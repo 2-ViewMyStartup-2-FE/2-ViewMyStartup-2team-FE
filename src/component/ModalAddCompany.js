@@ -1,12 +1,14 @@
 import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
-import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
-import searchIcon from "../asset/images/ic_search.png";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
-import SPagination from "./SPagination.js";
+import Pagination from "./Pagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
+import Search from "./Search.js";
+import useFetchList from "../hooks/useFetchList.js";
+
+const ITEM_LIMIT = 5;
 
 function ModalAddCompany({
   isOpen,
@@ -18,15 +20,20 @@ function ModalAddCompany({
   errorMessage,
   setErrorMessage,
 }) {
-  const [inputValue, setInputValue] = useState("");
-  const [searchData, setSearchData] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  // const [searchData, setSearchData] = useState([]);
+  // const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
-
   const [search, setSearch] = useState("");
 
-  const ITEM_LIMIT = 5;
+  const { data: searchData, totalCount } = useFetchList(//커스텀 hook 사용
+    getCompareList,
+    currentPage,
+    "recent",
+    search,
+    selectedMyCompany.id, // excludeId로 현재 선택된 회사의 ID를 전달
+    ITEM_LIMIT // limit을 5로 전달
+  );
 
   useEffect(() => {
     if (isOpen && prevSelectedCompany?.length > 0) {
@@ -48,64 +55,33 @@ function ModalAddCompany({
   };
 
   // 검색 데이터 로드 (페이지네이션 필요)
-  const handleLoadSearchData = useCallback(async () => {
-    try {
-      const response = await getCompareList({
-        limit: ITEM_LIMIT,
-        search: search,
-        page: currentPage,
-        excludeId: selectedMyCompany.id,
-      });
+  // const handleLoadSearchData = useCallback(async () => {
+  //   try {
+  //     const response = await getCompareList({
+  //       limit: ITEM_LIMIT,
+  //       search: search,
+  //       page: currentPage,
+  //       excludeId: selectedMyCompany.id,
+  //     });
 
-      if (response && response.data) {
-        setSearchData(response.data || []);
-        setTotalCount(response.totalCount || 0);
-      } else {
-        console.error("Invalid response structure:", response);
-        setSearchData([]);
-        setTotalCount(0);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }, [search, currentPage, selectedMyCompany.id]);
+  //     if (response && response.data) {
+  //       setSearchData(response.data || []);
+  //       setTotalCount(response.totalCount || 0);
+  //     } else {
+  //       console.error("Invalid response structure:", response);
+  //       setSearchData([]);
+  //       setTotalCount(0);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // }, [search, currentPage, selectedMyCompany.id]);
 
-  useEffect(() => {
-    if (isOpen) {
-      handleLoadSearchData(); // 페이지 변경 시 데이터 로드
-    }
-  }, [isOpen, handleLoadSearchData]); // 의존성 배열에 currentPage
-
-  const handleInputChange = (event) => {
-    const value = event.target.value;
-    setInputValue(value);
-    if (value === "") {
-      setSearch("");
-    }
-  };
-
-  const handleClearInput = () => {
-    setInputValue(""); // 입력값 초기화
-    setCurrentPage(1); // 현재 페이지를 1로 초기화
-    setSearch("");
-    handleLoadSearchData();
-  };
-
-  const handleSearchClick = () => {
-    if (inputValue) {
-      setCurrentPage(1);
-      setSearch(inputValue);
-    } else {
-      setSearchData([]);
-    }
-  };
-
-  // 엔터 키 이벤트 추가
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSearchClick();
-    }
-  };
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     handleLoadSearchData(); // 페이지 변경 시 데이터 로드
+  //   }
+  // }, [isOpen, handleLoadSearchData]);
 
   const handleCloseModal = () => {
     onClose();
@@ -130,29 +106,14 @@ function ModalAddCompany({
             <p className={style.modalFont}>비교할 기업</p>
             <img src={mdClose} onClick={handleCloseModal} alt="modalClose_bt" />
           </div>
-          <div className={style.inputContainer}>
-            <input
-              className={style.modalInput}
-              value={inputValue}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              placeholder="검색어를 입력하세요"
-            />
-            {inputValue && (
-              <img
-                className={style.closeCircle}
-                src={closeCircle}
-                alt="closeSmall_bt"
-                onClick={handleClearInput}
-              />
-            )}
-            <img
-              className={style.searchButton}
-              src={searchIcon}
-              alt="ic_search_bt"
-              onClick={handleSearchClick}
-            />
-          </div>
+          <Search
+            setSearch={setSearch}
+            setCurrentPage={setCurrentPage}
+            handleLoadSearchData={searchData}
+            // searchData={searchData}
+            isList={false}
+            isMine={false}
+          />
           <div className={style.searchHeader}>
             <p className={style.modalFont}>
               선택한 기업{`(${selectedCompanies.length})`}
@@ -177,7 +138,7 @@ function ModalAddCompany({
 
           {totalCount > ITEM_LIMIT &&
             searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
-              <SPagination
+              <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 totalCount={totalCount}

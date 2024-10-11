@@ -1,45 +1,44 @@
 import style from "../css/StartupPage.module.css";
-import searchIcon from "../asset/images/ic_search.png";
 import SortContent from "../component/SortContent.js";
 import StartupList from "../component/StartupList.js";
-import Pagination from "../component/SPagination.js";
-import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
-import { useState, useEffect } from "react";
+import Pagination from "../component/Pagination.js";
+import Search from "../component/Search.js";
+import { useState } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
+import useFetchList from "../hooks/useFetchList.js";
 
 const ITEM_LIMIT = 10; // 페이지 당 항목 수
 
 export default function StartupPage() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
-  const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
-  const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
-  const sortOption = "list";
+  // const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
+  // const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
   const [sortType, setSortType] = useState("investmentHighest");
-  const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
+  const { data: startupData, totalCount } = useFetchList(getStartupList, currentPage, sortType, search);
+  const sortOption = "list";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getStartupList({
-          page: currentPage,
-          limit: ITEM_LIMIT,
-          order: sortType,
-          search: search
-        });
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await getStartupList({
+  //         page: currentPage,
+  //         limit: ITEM_LIMIT,
+  //         order: sortType,
+  //         search: search
+  //       });
 
-        if (response) {
-          setStartupData(response.data);
-          setTotalCount(response.totalCount);
-          // console.log(response.data, response.totalCount);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       if (response) {
+  //         setStartupData(response.data);
+  //         setTotalCount(response.totalCount);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [currentPage, sortType, search]);
+  //   fetchData();
+  // }, [currentPage, sortType, search]);
 
   // 데이터 정렬 함수
   const sortData = (data, option) => {
@@ -66,30 +65,6 @@ export default function StartupPage() {
     setSortType(selectedOption);
   };
 
-  const handleSearchClick = () => {
-    setSearch(inputValue);
-    setCurrentPage(1);
-  };
-
-  const handleClearInput = () => {
-    setInputValue("");
-    setSearch("");
-    setCurrentPage(1);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearchClick();
-    }
-  };
-
-  const handleInputChange = (value) => {
-    setInputValue(value);
-    if (value === "") {
-      setSearch("");
-    }
-  }
-
   // 정렬된 데이터
   const sortedData = sortData([...startupData], sortType);
 
@@ -98,29 +73,11 @@ export default function StartupPage() {
       <div className={style.header}>
         <h1 className={style.title}>현재 스타트업 목록</h1>
         <div className={style.searchSortGroup}>
-          <div className={style.searchGroup}>
-            <img
-              className={style.searchIcon}
-              src={searchIcon}
-              alt="search"
-              onClick={handleSearchClick}
-            />
-            <input
-              className={style.search}
-              value={inputValue}
-              placeholder="검색어를 입력해주세요"
-              onChange={(e) => handleInputChange(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
-            {inputValue && (
-              <img
-                className={style.closeCircle}
-                src={closeCircle}
-                alt="closeSmall_bt"
-                onClick={handleClearInput}
-              />
-            )}
-          </div>
+          <Search
+            setSearch={setSearch}
+            setCurrentPage={setCurrentPage}
+            isList={true}
+          />
           <SortContent
             sortOption={sortOption}
             defaultOption={sortType}
