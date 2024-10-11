@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { getCompanyDetail } from "../api/CompanyDetailAPI.js";
 import styles from "../css/CompanyDetailPage.module.css";
@@ -9,18 +9,27 @@ import CompanyInvestmentAction from "../component/CompanyInvestmentAction.js";
 export default function CompanyDetailPage() {
   const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
-    try {
-      const response = await getCompanyDetail(id);
-      console.log(response);
-      if (response) {
-        setStartupData(response);
+    if (id) {
+      console.log(id);
+      try {
+        const response = await getCompanyDetail(id);
+        console.log(response);
+        if (response.id) {
+          setStartupData(response);
+        } else {
+          navigate("/404");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        navigate("/404");
       }
-    } catch (error) {
-      console.error("Error fetching data:", error);
+    } else {
+      navigate("/404");
     }
-  }, [id]);
+  }, [id, navigate]);
 
   useEffect(() => {
     fetchData();
@@ -35,7 +44,5 @@ export default function CompanyDetailPage() {
       />
       <InvestmentInfoList data={startupData} fetchData={fetchData} />
     </div>
-    sdfsdf
-    sdfsdf
   );
 }
