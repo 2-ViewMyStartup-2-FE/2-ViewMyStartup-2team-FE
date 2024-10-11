@@ -85,8 +85,8 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
     if (isOpen) {
       // handleLoadFetchData(); // 전체 데이터 로드
       // handleLoadSearchData(); // 검색 데이터 로드
-      setCurrentPage(1);
-    } else {
+      // setCurrentPage(1);
+    // } else {
       // setInputValue("");
       // setStartupData([]);
       // setSearchData([]);
