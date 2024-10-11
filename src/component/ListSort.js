@@ -7,7 +7,7 @@ export default function ListSort({ options, defaultOption, onSelect }) {
   const [isToggle, setToggle] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultOption);
   const location = useLocation();
-  const isList = location.pathname === "/";
+  const isList = location.pathname === "/companies";
   const isCompareResult = location.pathname === "/compare-result";
 
   const toggleSortMenu = () => setToggle(!isToggle);

@@ -11,6 +11,7 @@ export default function Nav() {
     currentPath === "/compare" || currentPath === "/compare-result";
   const isCompareStatus = currentPath === "/compare-status";
   const isInvestStatus = currentPath === "/invest-status";
+  const isCompany = currentPath === "/companies";
 
   const handleLogoClick = () => {
     navigate("/");
@@ -24,6 +25,11 @@ export default function Nav() {
           <img className={style.logo} src={img_logo} alt="logo" onClick={handleLogoClick} />
         </div>
         <div className={style.titleGroup}>
+          <Link 
+            className={`${style.title} ${isCompany ? style.active : ""}`}
+            to="/companies" >
+            전체 기업
+          </Link>
           <Link
             className={`${style.title} ${isCompare ? style.active : ""}`}
             to="/compare" >
