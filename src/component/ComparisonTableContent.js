@@ -13,7 +13,7 @@ function ComparisonTableContent({ list, type, myCompany }) {
     <div className={styles.tableContainer}>
       <div className={styles.table}>
         <div className={header}>
-          {isRanking && <div class={styles.cell}>순위</div>}
+          {isRanking && <div className={styles.cell}>순위</div>}
           <div className={styles.cell}>기업 명</div>
           <div className={styles.cell}>기업 소개</div>
           <div className={styles.cell}>카테고리</div>

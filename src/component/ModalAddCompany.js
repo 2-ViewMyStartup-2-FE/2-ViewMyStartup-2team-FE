@@ -2,7 +2,7 @@ import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
 import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import searchIcon from "../asset/images/ic_search.png";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
 import SPagination from "./SPagination.js";
 import AddCompanyList from "./AddCompanyList.js";
@@ -23,7 +23,7 @@ function ModalAddCompany({
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
-  
+
   const [search, setSearch] = useState("");
 
   const ITEM_LIMIT = 5;
@@ -48,7 +48,7 @@ function ModalAddCompany({
   };
 
   // 검색 데이터 로드 (페이지네이션 필요)
-  const handleLoadSearchData = async () => {
+  const handleLoadSearchData = useCallback(async () => {
     try {
       const response = await getCompareList({
         limit: ITEM_LIMIT,
@@ -68,13 +68,13 @@ function ModalAddCompany({
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, [search, currentPage, selectedMyCompany.id]);
 
   useEffect(() => {
     if (isOpen) {
-      handleLoadSearchData(search, currentPage); // 페이지 변경 시 데이터 로드
+      handleLoadSearchData(); // 페이지 변경 시 데이터 로드
     }
-  }, [isOpen, search, currentPage]); // 의존성 배열에 currentPage
+  }, [isOpen, handleLoadSearchData]); // 의존성 배열에 currentPage
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -106,8 +106,6 @@ function ModalAddCompany({
       handleSearchClick();
     }
   };
-
-
 
   const handleCloseModal = () => {
     onClose();

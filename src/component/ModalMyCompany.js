@@ -2,7 +2,7 @@ import style from "../css/ModalCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
 import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import searchIcon from "../asset/images/ic_search.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { getCompareList } from "../api/CompareAPI.js";
@@ -25,7 +25,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   };
 
   // 전체 데이터 로드 (페이지네이션 없음)
-  const handleLoadFetchData = async () => {
+  const handleLoadFetchData = useCallback(async () => {
     try {
       const response = await getCompareList({ limit: ITEM_LIMIT });
       if (response) {
@@ -37,10 +37,10 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, []); // 의존성 배열이 비어 있음
 
   // 검색 데이터 로드 (페이지네이션 필요)
-  const handleLoadSearchData = async () => {
+  const handleLoadSearchData = useCallback(async () => {
     try {
       const response = await getCompareList({
         limit: ITEM_LIMIT,
@@ -59,20 +59,21 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, [search, currentPage]); // 의존성 배열에 search와 currentPage 추가
 
   useEffect(() => {
     if (isOpen) {
-      handleLoadFetchData();
-      handleLoadSearchData(search, currentPage);
+      handleLoadFetchData(); // 전체 데이터 로드
+      handleLoadSearchData(); // 검색 데이터 로드
     } else {
+      // 모달이 닫힐 때 상태 초기화
       setInputValue("");
       setStartupData([]);
       setSearchData([]);
       setTotalCount(0);
       setCurrentPage(1);
     }
-  }, [isOpen, search, currentPage]);
+  }, [isOpen, handleLoadFetchData, handleLoadSearchData]);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
