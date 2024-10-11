@@ -2,10 +2,10 @@ import kebabIcon from "../asset/images/ic_kebab.png";
 import Pagination from "./Pagination.js";
 import styles from "../css/InvestmentInfoList.module.css";
 import { useEffect, useState } from "react";
-import ConvertBillion from "../utils/ConvertBillion.js";
+import formatAmount from "../utils/formatAmount.js";
 import PasswordVerifyModal from "./PasswordVerifyModal.js";
 
-export default function InvestmentInfoList({ data }) {
+export default function InvestmentInfoList({ data, fetchData }) {
   const [investments, setInvestments] = useState([]); // 투자 데이터를 상태로 관리
   const [activeDropdown, setActiveDropdown] = useState(null); // 드롭다운 열림 상태 관리
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -15,7 +15,7 @@ export default function InvestmentInfoList({ data }) {
   const [selectedInvestment, setSelectedInvestment] = useState(null); // 선택된 투자자 데이터
   const MODAL_MODE = {
     EDIT: "edit",
-    DELETE: "delete",
+    DELETE: "delete"
   };
 
   // useEffect로 투자 데이터를 투자 금액 순서로 정렬
@@ -27,7 +27,7 @@ export default function InvestmentInfoList({ data }) {
       const rankedInvestments = sortedInvestments.map((investment, index) => ({
         ...investment,
         rank: `${index + 1}위`, // 순위 추가
-        formattedAmount: ConvertBillion(investment.amount), // 금액 포맷팅
+        formattedAmount: formatAmount(investment.amount) // 금액 포맷팅
       }));
       setInvestments(rankedInvestments); // 상태에 저장
     }
@@ -64,59 +64,71 @@ export default function InvestmentInfoList({ data }) {
     setSelectedInvestment(null);
   };
 
+  const hasInvestments = investments.length > 0; // 투자자 여부 상태
+
   return (
     <div className={styles.investInfoSection}>
       <div className={styles.investTableArea}>
-        <div className={styles.investTable}>
-          <div className={styles.investDetailTitle}>
-            <h1>투자자 이름</h1>
-            <h1>순위</h1>
-            <h1>투자 금액</h1>
-            <h1>투자 코멘트</h1>
-          </div>
-          <div className={styles.investList}>
-            {currentItems.map((investor) => (
-              <div className={styles.investDetail} key={investor.id}>
-                <h1>{investor.investorName}</h1>
-                <h1>{investor.rank}</h1>
-                <h1>{investor.formattedAmount}</h1>
-                <h1>{investor.comment}</h1>
-                <div>
-                  {/* Kebab 아이콘 */}
-                  <div className={styles.dropdown}>
-                    <img
-                      src={kebabIcon}
-                      alt="kebabIcon"
-                      onClick={() => toggleDropdown(investor.id)}
-                    />
-                    {/* 드롭다운 메뉴 */}
-                    {activeDropdown === investor.id && (
-                      <div className={styles.dropdownMenu}>
-                        <button
-                          onClick={() => handleOpenEditModal(investor.id)}
-                        >
-                          수정하기
-                        </button>
-                        <button
-                          onClick={() => handleOpenDeleteModal(investor.id)}
-                        >
-                          삭제하기
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
+        {hasInvestments ? (
+          <>
+            <div className={styles.investTable}>
+              <div className={styles.investDetailTitle}>
+                <h1>투자자 이름</h1>
+                <h1>순위</h1>
+                <h1>투자 금액</h1>
+                <h1>투자 코멘트</h1>
               </div>
-            ))}
+              <div className={styles.investList}>
+                {currentItems.map((investor) => (
+                  <div className={styles.investDetail} key={investor.id}>
+                    <h1>{investor.investorName}</h1>
+                    <h1>{investor.rank}</h1>
+                    <h1>{investor.formattedAmount}</h1>
+                    <h1>{investor.comment}</h1>
+                    <div>
+                      {/* Kebab 아이콘 */}
+                      <div className={styles.dropdown}>
+                        <img
+                          src={kebabIcon}
+                          alt="kebabIcon"
+                          onClick={() => toggleDropdown(investor.id)}
+                        />
+                        {/* 드롭다운 메뉴 */}
+                        {activeDropdown === investor.id && (
+                          <div className={styles.dropdownMenu}>
+                            <button
+                              onClick={() => handleOpenEditModal(investor.id)}
+                            >
+                              수정하기
+                            </button>
+                            <button
+                              onClick={() => handleOpenDeleteModal(investor.id)}
+                            >
+                              삭제하기
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className={styles.noInvestments}>
+            아직 투자한 기업이 없어요, <br /> 버튼을 눌러 기업에 투자해보세요!
           </div>
-        </div>
+        )}
       </div>
-      <Pagination
-        currentPage={currentPage} // 현재 페이지 번호
-        setCurrentPage={setCurrentPage}
-        totalCount={investments.length} // 전체 데이터 수
-        itemLimit={itemsPerPage} // 페이지당 항목 수
-      />
+      {hasInvestments && (
+        <Pagination
+          currentPage={currentPage} // 현재 페이지 번호
+          setCurrentPage={setCurrentPage}
+          totalCount={investments.length} // 전체 데이터 수
+          itemLimit={itemsPerPage} // 페이지당 항목 수
+        />
+      )}
       {showPasswordModal && (
         <PasswordVerifyModal
           mode={modalMode} // 수정, 삭제 모드 전달
@@ -125,11 +137,11 @@ export default function InvestmentInfoList({ data }) {
             id: data.id,
             name: data.name,
             logo: data.logo,
-            category: data.category,
+            category: data.category
           }} // 필요한 기업 정보만 전달
           onClose={closeModal}
-          setInvestments={setInvestments}
           setShowPasswordModal={setShowPasswordModal}
+          fetchData={fetchData}
         />
       )}
     </div>
