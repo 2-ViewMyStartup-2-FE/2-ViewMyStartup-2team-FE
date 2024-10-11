@@ -9,6 +9,7 @@ function CompanyInvestmentAction({ startupListData, fetchData }) {
 
   const completeTask = () => {
     setIsModalOpen(false);
+    fetchData();
     // setIsPopupOpen(true);
   };
 
@@ -24,10 +25,10 @@ function CompanyInvestmentAction({ startupListData, fetchData }) {
         </button>
         {isModalOpen && (
           <InvestModal
+            mode="post"
             completeTask={completeTask}
             closeModal={closeModal}
             myCompany={startupListData}
-            fetchData={fetchData}
           />
         )}
       </div>

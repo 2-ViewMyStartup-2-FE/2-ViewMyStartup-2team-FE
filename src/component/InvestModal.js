@@ -6,21 +6,50 @@ import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
 import InvestmentForm from "./InvestmentForm.js";
 import InvestmentButton from "./InvestmentButton.js";
 import { postInvestment } from "../api/CompareResultAPI.js";
-function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    amount: "",
-    comment: "",
-    password: "",
-    confirmPassword: ""
-  }); // 입력값을 state로 관리
-  const [validation, setValidation] = useState({
-    name: "INITIAL",
-    amount: "INITIAL",
-    comment: "INITIAL",
-    password: "INITIAL",
-    confirmPassword: "INITIAL"
-  });
+import { patchInvestment } from "../api/CompanyDetailAPI.js";
+function InvestModal({
+  mode,
+  investment,
+  completeTask,
+  closeModal,
+  myCompany
+}) {
+  const firstFormData =
+    mode === "post"
+      ? {
+          name: "",
+          amount: "",
+          comment: "",
+          password: "",
+          confirmPassword: ""
+        }
+      : {
+          name: investment.investorName,
+          amount: investment.amount,
+          comment: investment.comment,
+          password: investment.password,
+          confirmPassword: investment.password
+        };
+  const firstValidation =
+    mode === "post"
+      ? {
+          name: "INITIAL",
+          amount: "INITIAL",
+          comment: "INITIAL",
+          password: "INITIAL",
+          confirmPassword: "INITIAL"
+        }
+      : {
+          name: "SUCCESS",
+          amount: "SUCCESS",
+          comment: "SUCCESS",
+          password: "SUCCESS",
+          confirmPassword: "SUCCESS"
+        };
+  const investAction = mode === "post" ? postInvestment : patchInvestment;
+  const investActionId = mode === "post" ? myCompany.id : investment.id;
+  const [formData, setFormData] = useState(firstFormData); // 입력값을 state로 관리
+  const [validation, setValidation] = useState(firstValidation);
   const [errorMessage, setErrorMessage] = useState({
     name: "",
     amount: "",
@@ -93,15 +122,22 @@ function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
   const onToggleConfirm = () => setIsConfirmVisible((prev) => !prev);
   const onSubmit = async (e) => {
     e.preventDefault();
-    const sumbitData = {
-      investorName: formData.name,
-      amount: formData.amount,
-      comment: formData.comment,
-      password: formData.password,
-      companyId: myCompany.id
-    };
-    await postInvestment(myCompany.id, sumbitData);
-    fetchData();
+    const sumbitData =
+      mode === "post"
+        ? {
+            investorName: formData.name,
+            amount: formData.amount,
+            comment: formData.comment,
+            password: formData.password,
+            companyId: myCompany.id
+          }
+        : {
+            investorName: formData.name,
+            amount: formData.amount,
+            comment: formData.comment,
+            password: formData.password
+          };
+    await investAction(investActionId, sumbitData);
     completeTask();
   };
 
@@ -109,7 +145,7 @@ function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
     <div className={styles.modalOverlay}>
       <div className={styles.frame}>
         <form className={styles.form} onSubmit={onSubmit}>
-          <InvestModalHeader closeModal={closeModal} />
+          <InvestModalHeader mode={mode} closeModal={closeModal} />
           <InvestmentCompanyBrief
             myCompany={myCompany}
             className={styles.briefMargin}
@@ -117,18 +153,24 @@ function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
 
           <InvestmentForm
             type="name"
+            mode={mode}
+            value={formData.name}
             onChange={onChangeField("name")}
             errorMessage={errorMessage.name}
             className={styles.investFormMargin}
           />
           <InvestmentForm
             type="amount"
+            mode={mode}
+            value={formData.amount}
             onChange={onChangeField("amount")}
             errorMessage={errorMessage.amount}
             className={styles.investFormMargin}
           />
           <InvestmentForm
             type="comment"
+            mode={mode}
+            value={formData.comment}
             onChange={onChangeField("comment")}
             errorMessage={errorMessage.comment}
             className={styles.investFormMargin}
@@ -136,6 +178,8 @@ function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
 
           <InvestmentForm
             type="password"
+            mode={mode}
+            value={formData.password}
             onChange={onChangeField("password")}
             isVisible={isPasswordVisible}
             onToggle={onTogglePassword}
@@ -144,6 +188,8 @@ function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
           />
           <InvestmentForm
             type="confirm"
+            mode={mode}
+            value={formData.confirmPassword}
             onChange={onChangeField("confirmPassword")}
             isVisible={isConfirmVisible}
             onToggle={onToggleConfirm}
@@ -151,6 +197,7 @@ function InvestModal({ completeTask, closeModal, myCompany, fetchData }) {
             className={styles.investFormMargin}
           />
           <InvestmentButton
+            mode={mode}
             closeModal={closeModal}
             className={styles.buttonMargin}
             disabled={!isFormValid()}

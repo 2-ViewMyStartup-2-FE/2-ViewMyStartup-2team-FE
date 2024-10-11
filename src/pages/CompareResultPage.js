@@ -111,6 +111,7 @@ function CompareResultPage() {
         </button>
         {isModalOpen && (
           <InvestModal
+            mode="post"
             completeTask={completeTask}
             closeModal={closeModal}
             myCompany={myCompany}
