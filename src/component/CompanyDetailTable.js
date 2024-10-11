@@ -1,6 +1,6 @@
 import styles from "../css/CompanyDetailPage.module.css";
 import defaultImg from "../asset/images/img_company_default_logo.png";
-import ConvertBillion from "../utils/ConvertBillion.js";
+import formatAmount from "../utils/formatAmount.js";
 
 function CompanyDetailTable({ startupListData }) {
   const logoSrc =
@@ -19,11 +19,11 @@ function CompanyDetailTable({ startupListData }) {
       <div className={styles.companyInfo}>
         <div className={styles.companyDetailInfo}>
           <h1>누적 투자 금액</h1>
-          <p>{ConvertBillion(startupListData.totalInvestment)} 원</p>
+          <p>{formatAmount(startupListData.totalInvestment)} 원</p>
         </div>
         <div className={styles.companyDetailInfo}>
           <h1>매출액</h1>
-          <p>{ConvertBillion(startupListData.revenue)} 원</p>
+          <p>{formatAmount(startupListData.revenue)} 원</p>
         </div>
         <div className={styles.companyDetailInfo}>
           <h1>고용 인원</h1>

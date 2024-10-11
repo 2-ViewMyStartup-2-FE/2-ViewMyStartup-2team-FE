@@ -2,7 +2,7 @@ import kebabIcon from "../asset/images/ic_kebab.png";
 import Pagination from "./Pagination.js";
 import styles from "../css/InvestmentInfoList.module.css";
 import { useEffect, useState } from "react";
-import ConvertBillion from "../utils/ConvertBillion.js";
+import formatAmount from "../utils/formatAmount.js";
 import PasswordVerifyModal from "./PasswordVerifyModal.js";
 
 export default function InvestmentInfoList({ data, fetchData }) {
@@ -27,7 +27,7 @@ export default function InvestmentInfoList({ data, fetchData }) {
       const rankedInvestments = sortedInvestments.map((investment, index) => ({
         ...investment,
         rank: `${index + 1}위`, // 순위 추가
-        formattedAmount: ConvertBillion(investment.amount) // 금액 포맷팅
+        formattedAmount: formatAmount(investment.amount) // 금액 포맷팅
       }));
       setInvestments(rankedInvestments); // 상태에 저장
     }
