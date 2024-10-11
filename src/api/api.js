@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://two-viewmystartup-2team-be.onrender.com/api",
-  timeout: 400
+  timeout: 10000
 });
 
 // export async function requestGet(url, params = {}) {
