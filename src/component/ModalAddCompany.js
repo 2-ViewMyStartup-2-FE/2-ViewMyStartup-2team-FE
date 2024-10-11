@@ -6,6 +6,9 @@ import Pagination from "./Pagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
 import Search from "./Search.js";
+import useFetchList from "../hooks/useFetchList.js";
+
+const ITEM_LIMIT = 5;
 
 function ModalAddCompany({
   isOpen,
@@ -17,14 +20,20 @@ function ModalAddCompany({
   errorMessage,
   setErrorMessage,
 }) {
-  const [searchData, setSearchData] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  // const [searchData, setSearchData] = useState([]);
+  // const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
-
   const [search, setSearch] = useState("");
 
-  const ITEM_LIMIT = 5;
+  const { data: searchData, totalCount } = useFetchList(//커스텀 hook 사용
+    getCompareList,
+    currentPage,
+    "recent",
+    search,
+    selectedMyCompany.id, // excludeId로 현재 선택된 회사의 ID를 전달
+    ITEM_LIMIT // limit을 5로 전달
+  );
 
   useEffect(() => {
     if (isOpen && prevSelectedCompany?.length > 0) {
@@ -46,33 +55,33 @@ function ModalAddCompany({
   };
 
   // 검색 데이터 로드 (페이지네이션 필요)
-  const handleLoadSearchData = async () => {
-    try {
-      const response = await getCompareList({
-        limit: ITEM_LIMIT,
-        search: search,
-        page: currentPage,
-        excludeId: selectedMyCompany.id,
-      });
+  // const handleLoadSearchData = useCallback(async () => {
+  //   try {
+  //     const response = await getCompareList({
+  //       limit: ITEM_LIMIT,
+  //       search: search,
+  //       page: currentPage,
+  //       excludeId: selectedMyCompany.id,
+  //     });
 
-      if (response && response.data) {
-        setSearchData(response.data || []);
-        setTotalCount(response.totalCount || 0);
-      } else {
-        console.error("Invalid response structure:", response);
-        setSearchData([]);
-        setTotalCount(0);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  //     if (response && response.data) {
+  //       setSearchData(response.data || []);
+  //       setTotalCount(response.totalCount || 0);
+  //     } else {
+  //       console.error("Invalid response structure:", response);
+  //       setSearchData([]);
+  //       setTotalCount(0);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // }, [search, currentPage, selectedMyCompany.id]);
 
-  useEffect(() => {
-    if (isOpen) {
-      handleLoadSearchData(search, currentPage); // 페이지 변경 시 데이터 로드
-    }
-  }, [isOpen, search, currentPage]); // 의존성 배열에 currentPage
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     handleLoadSearchData(); // 페이지 변경 시 데이터 로드
+  //   }
+  // }, [isOpen, handleLoadSearchData]);
 
   const handleCloseModal = () => {
     onClose();
@@ -100,8 +109,8 @@ function ModalAddCompany({
           <Search
             setSearch={setSearch}
             setCurrentPage={setCurrentPage}
-            handleLoadSearchData={handleLoadSearchData}
-            searchData={searchData}
+            handleLoadSearchData={searchData}
+            // searchData={searchData}
             isList={false}
             isMine={false}
           />

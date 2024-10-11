@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 
-export default function useFetchList(getFunction, currentPage, sortType, search = "") {
+export default function useFetchList(
+  getFunction,
+  currentPage,
+  sortType,
+  search = "",
+  excludeId = null,
+  limit = 10,
+) {
   const [data, setData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
 
@@ -9,9 +16,10 @@ export default function useFetchList(getFunction, currentPage, sortType, search 
       try {
         const response = await getFunction({
           page: currentPage,
-          limit: 10,
+          limit: limit,
           order: sortType,
-          search: search
+          search: search,
+          excludeId: excludeId,
         });
 
         if (response) {
@@ -24,7 +32,7 @@ export default function useFetchList(getFunction, currentPage, sortType, search 
     };
 
     fetchData();
-  }, [getFunction, currentPage, sortType, search]);
+  }, [getFunction, currentPage, sortType, search, excludeId, limit]);
 
   return { data, totalCount };
 }
