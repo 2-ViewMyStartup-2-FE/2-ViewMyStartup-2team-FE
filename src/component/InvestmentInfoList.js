@@ -112,12 +112,6 @@ export default function InvestmentInfoList({ data, fetchData }) {
                 ))}
               </div>
             </div>
-            <Pagination
-              currentPage={currentPage} // 현재 페이지 번호
-              setCurrentPage={setCurrentPage}
-              totalCount={investments.length} // 전체 데이터 수
-              itemLimit={itemsPerPage} // 페이지당 항목 수
-            />
           </>
         ) : (
           <div className={styles.noInvestments}>
@@ -125,6 +119,12 @@ export default function InvestmentInfoList({ data, fetchData }) {
           </div>
         )}
       </div>
+      <Pagination
+        currentPage={currentPage} // 현재 페이지 번호
+        setCurrentPage={setCurrentPage}
+        totalCount={investments.length} // 전체 데이터 수
+        itemLimit={itemsPerPage} // 페이지당 항목 수
+      />
       {showPasswordModal && (
         <PasswordVerifyModal
           mode={modalMode} // 수정, 삭제 모드 전달
