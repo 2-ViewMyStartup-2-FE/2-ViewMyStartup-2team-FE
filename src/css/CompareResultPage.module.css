@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-.selectedCompanyCardLayout {
+.myCompanyCardLayout {
     margin-top: 10rem;
 }
 
@@ -30,6 +30,7 @@
     white-space: nowrap;
     color: #FFFFFF;
     background: #EB5230;
+    cursor: pointer;
 }
 
 .header {
@@ -64,7 +65,7 @@
 }
 
 @media(max-width:743px) {
-    .selectedCompanyCardLayout {
+    .myCompanyCardLayout {
         margin-top: 8.8rem;
     }
 
