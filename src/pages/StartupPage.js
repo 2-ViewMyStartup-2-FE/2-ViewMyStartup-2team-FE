@@ -3,41 +3,43 @@ import SortContent from "../component/SortContent.js";
 // import StartupList from "../component/StartupList.js";
 import Pagination from "../component/Pagination.js";
 import Search from "../component/Search.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getStartupList } from "../api/StartupAPI.js";
+import useFetchList from "../hooks/useFetchList.js";
 import CompanyInfoTable from "../component/CompanyInfoTable.js";
 
 const ITEM_LIMIT = 10; // 페이지 당 항목 수
 
 export default function StartupPage() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 관리
-  const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
-  const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
+  // const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
+  // const [totalCount, setTotalCount] = useState(0); // 전체 데이터 수 상태 관리
   const [sortType, setSortType] = useState("investmentHighest");
   const [search, setSearch] = useState("");
+  const { data: startupData, totalCount } = useFetchList(getStartupList, currentPage, sortType, search);
   const sortOption = "list";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getStartupList({
-          page: currentPage,
-          limit: ITEM_LIMIT,
-          order: sortType,
-          search: search,
-        });
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await getStartupList({
+  //         page: currentPage,
+  //         limit: ITEM_LIMIT,
+  //         order: sortType,
+  //         search: search
+  //       });
 
-        if (response) {
-          setStartupData(response.data);
-          setTotalCount(response.totalCount);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //       if (response) {
+  //         setStartupData(response.data);
+  //         setTotalCount(response.totalCount);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [currentPage, sortType, search]);
+  //   fetchData();
+  // }, [currentPage, sortType, search]);
 
   // 데이터 정렬 함수
   // const sortData = (data, option) => {

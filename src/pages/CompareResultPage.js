@@ -1,6 +1,6 @@
 import styles from "../css/CompareResultPage.module.css";
 import { useLocation } from "react-router-dom";
-import SelectedCompanyCard from "../component/SelectedCompanyCard.js";
+import MyCompanyCard from "../component/MyCompanyCard.js";
 import InvestModal from "../component/InvestModal.js";
 import InvestmentPopup from "../component/InvestmentPopup.js";
 import { useState } from "react";
@@ -70,9 +70,9 @@ function CompareResultPage() {
   else
     return (
       <div className={styles.compareResultPage}>
-        <SelectedCompanyCard
+        <MyCompanyCard
           myCompany={myCompany}
-          className={styles.selectedCompanyCardLayout}
+          className={styles.myCompanyCardLayout}
         />
         <div className={styles.selectTableLayout}>
           <div className={styles.header}>
