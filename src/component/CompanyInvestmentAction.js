@@ -32,7 +32,10 @@ function CompanyInvestmentAction({ startupListData, fetchData }) {
         )}
       </div>
       <div className={styles.investment}>
-        총 {ConvertBillion(startupListData.virtualInvestment)} 원
+        {/* 투자자 리스트가 있을 때만 총 투자 금액을 표시 */}
+        {startupListData.Investments &&
+          startupListData.Investments.length > 0 &&
+          `총 ${ConvertBillion(startupListData.virtualInvestment)} 원`}
       </div>
     </div>
   );

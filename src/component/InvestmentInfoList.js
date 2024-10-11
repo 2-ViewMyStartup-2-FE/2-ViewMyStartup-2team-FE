@@ -67,56 +67,64 @@ export default function InvestmentInfoList({ data, fetchData }) {
   return (
     <div className={styles.investInfoSection}>
       <div className={styles.investTableArea}>
-        <div className={styles.investTable}>
-          <div className={styles.investDetailTitle}>
-            <h1>투자자 이름</h1>
-            <h1>순위</h1>
-            <h1>투자 금액</h1>
-            <h1>투자 코멘트</h1>
-          </div>
-          <div className={styles.investList}>
-            {currentItems.map((investor) => (
-              <div className={styles.investDetail} key={investor.id}>
-                <h1>{investor.investorName}</h1>
-                <h1>{investor.rank}</h1>
-                <h1>{investor.formattedAmount}</h1>
-                <h1>{investor.comment}</h1>
-                <div>
-                  {/* Kebab 아이콘 */}
-                  <div className={styles.dropdown}>
-                    <img
-                      src={kebabIcon}
-                      alt="kebabIcon"
-                      onClick={() => toggleDropdown(investor.id)}
-                    />
-                    {/* 드롭다운 메뉴 */}
-                    {activeDropdown === investor.id && (
-                      <div className={styles.dropdownMenu}>
-                        <button
-                          onClick={() => handleOpenEditModal(investor.id)}
-                        >
-                          수정하기
-                        </button>
-                        <button
-                          onClick={() => handleOpenDeleteModal(investor.id)}
-                        >
-                          삭제하기
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
+        {investments.length > 0 ? (
+          <>
+            <div className={styles.investTable}>
+              <div className={styles.investDetailTitle}>
+                <h1>투자자 이름</h1>
+                <h1>순위</h1>
+                <h1>투자 금액</h1>
+                <h1>투자 코멘트</h1>
               </div>
-            ))}
+              <div className={styles.investList}>
+                {currentItems.map((investor) => (
+                  <div className={styles.investDetail} key={investor.id}>
+                    <h1>{investor.investorName}</h1>
+                    <h1>{investor.rank}</h1>
+                    <h1>{investor.formattedAmount}</h1>
+                    <h1>{investor.comment}</h1>
+                    <div>
+                      {/* Kebab 아이콘 */}
+                      <div className={styles.dropdown}>
+                        <img
+                          src={kebabIcon}
+                          alt="kebabIcon"
+                          onClick={() => toggleDropdown(investor.id)}
+                        />
+                        {/* 드롭다운 메뉴 */}
+                        {activeDropdown === investor.id && (
+                          <div className={styles.dropdownMenu}>
+                            <button
+                              onClick={() => handleOpenEditModal(investor.id)}
+                            >
+                              수정하기
+                            </button>
+                            <button
+                              onClick={() => handleOpenDeleteModal(investor.id)}
+                            >
+                              삭제하기
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <Pagination
+              currentPage={currentPage} // 현재 페이지 번호
+              setCurrentPage={setCurrentPage}
+              totalCount={investments.length} // 전체 데이터 수
+              itemLimit={itemsPerPage} // 페이지당 항목 수
+            />
+          </>
+        ) : (
+          <div className={styles.noInvestments}>
+            아직 투자한 기업이 없어요, <br /> 버튼을 눌러 기업에 투자해보세요!
           </div>
-        </div>
+        )}
       </div>
-      <Pagination
-        currentPage={currentPage} // 현재 페이지 번호
-        setCurrentPage={setCurrentPage}
-        totalCount={investments.length} // 전체 데이터 수
-        itemLimit={itemsPerPage} // 페이지당 항목 수
-      />
       {showPasswordModal && (
         <PasswordVerifyModal
           mode={modalMode} // 수정, 삭제 모드 전달
