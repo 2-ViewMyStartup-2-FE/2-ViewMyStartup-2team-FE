@@ -27,9 +27,9 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
   //가장 선택 많이한 기업(페이지네이션 X)
   const { data: startupData } = useFetchList(
     getCompareList,
-    currentPage,
+    1,
     "myCountHighest",
-    search,
+    "",
     null,
     ITEM_LIMIT
   );
