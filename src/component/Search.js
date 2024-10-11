@@ -7,7 +7,7 @@ export default function Search({ setSearch, setCurrentPage, handleLoadSearchData
   const [inputValue, setInputValue] = useState("");
 
   const handleSearchClick = () => {
-    if(inputValue){
+    if (inputValue) {
       setCurrentPage(1);
       setSearch(inputValue);
     } else {
@@ -37,36 +37,30 @@ export default function Search({ setSearch, setCurrentPage, handleLoadSearchData
     if (value === "") {
       setSearch("");
     }
-  }
+  };
 
   return (
-    <div className={`${style.searchGroup} ${isList ? style.list : style.compare}`}>
+    <div
+      className={`${style.searchGroup} ${isList ? style.list : style.compare}`} >
       <img
-        className= {`${style.searchIcon} ${isList ? style.list : style.compare}`}
+        className={`${style.searchIcon} ${isList ? style.list : style.compare}`}
         src={searchIcon}
         alt="ic_search_bt"
-        onClick={handleSearchClick}
-      />
+        onClick={handleSearchClick} />
       <input
-        className={`${style.searchInput} ${isList ? style.list : style.compare}`}
+        className={`${style.searchInput} ${isList ? style.list : style.compare }`}
         value={inputValue}
         id="searchInput"
         name="search"
         onChange={(e) => handleInputChange(e.target.value)}
         onKeyDown={handleKeyPress}
-        placeholder="검색어를 입력해주세요"
-      />
+        placeholder="검색어를 입력해주세요" />
       {inputValue && (
-        <img
-          className={`${style.closeCircle} ${isList ? style.list : style.compare}`}
+        <img className={`${style.closeCircle} ${isList ? style.list : style.compare}`}
           src={closeCircle}
           alt="closeSmall_bt"
-          onClick={handleClearInput}
-        />
+          onClick={handleClearInput} />
       )}
-      
     </div>
-
-    
   );
 }

@@ -2,13 +2,7 @@ import style from "../css/Pagination.module.css";
 import arrow_left from "../asset/images/ic_arrow_left.png";
 import arrow_right from "../asset/images/ic_arrow_right.png";
 
-export default function Pagination({
-  currentPage,
-  setCurrentPage,
-  totalCount,
-  itemLimit,
-  className,
-}) {
+export default function Pagination({ currentPage, setCurrentPage, totalCount, itemLimit, className }) {
   const pageLimit = 5; // 보여줄 최대 페이지 수
   const totalPage = Math.ceil(totalCount / itemLimit); // 전체 페이지 수
 
@@ -44,8 +38,7 @@ export default function Pagination({
     <div className={`${style.page} ${className ? style.addClass : ""}`}>
       <div
         className={`${style.pageBtn} ${className || ""}`}
-        onClick={handlePrevClick}
-      >
+        onClick={handlePrevClick} >
         <img src={arrow_left} alt="left" />
       </div>
       {visiblePages.map((page) => (
@@ -54,15 +47,13 @@ export default function Pagination({
           className={`${style.pageBtn} ${
             currentPage === page ? style.active : ""
           } ${className || ""}`}
-          onClick={() => handlePageClick(page)}
-        >
+          onClick={() => handlePageClick(page)} >
           {page}
         </div>
       ))}
       <div
         className={`${style.pageBtn} ${className || ""}`}
-        onClick={handleNextClick}
-      >
+        onClick={handleNextClick} >
         <img src={arrow_right} alt="right" />
       </div>
     </div>

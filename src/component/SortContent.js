@@ -45,8 +45,7 @@ export default function SortContent({ sortOption, defaultOption, onSelect }) {
       <ListSort
         options={getOptions()}
         defaultOption={defaultOptions[sortOption] || defaultOption}
-        onSelect={onSelect}
-      />
+        onSelect={onSelect}/>
     </div>
   );
 }
