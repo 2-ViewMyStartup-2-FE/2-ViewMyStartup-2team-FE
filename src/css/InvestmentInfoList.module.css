@@ -105,6 +105,15 @@
   background-color: #555;
 }
 
+.noInvestments {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.671rem;
+  text-align: center;
+  color: #747474;
+  margin-top: 8.8rem;
+}
+
 @media (max-width: 1199px) and (min-width: 744px) {
   .investDetailTitle {
     grid-template-columns: 8.4rem 8.4rem 8.4rem 38.1rem 6.4rem;
@@ -112,6 +121,10 @@
 
   .investDetail {
     grid-template-columns: 8.4rem 8.4rem 8.4rem 38.1rem 6.4rem;
+  }
+
+  .noInvestments {
+    margin-top: 4.7rem;
   }
 }
 
@@ -165,5 +178,9 @@
   .dropdownMenu button {
     font-size: 1.3rem;
     line-height: 1.551rem;
+  }
+
+  .noInvestments {
+    margin-top: 1.5rem;
   }
 }

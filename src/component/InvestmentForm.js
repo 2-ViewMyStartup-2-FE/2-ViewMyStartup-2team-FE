@@ -66,7 +66,7 @@ function InvestmentForm({
 
   return (
     <div className={FRAME}>
-      <label for={type} className={styles.label}>
+      <label htmlFor={type} className={styles.label}>
         {LABEL}
       </label>
       {type === "comment" ? ( //comment인경우에 textarea를 반환

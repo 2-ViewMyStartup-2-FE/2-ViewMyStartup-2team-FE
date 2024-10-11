@@ -1,5 +1,5 @@
 import styles from "../css/CompanyInvestmentAction.module.css";
-import ConvertBillion from "../utils/ConvertBillion.js";
+import formatAmount from "../utils/formatAmount.js";
 import InvestModal from "./InvestModal.js";
 import { useState } from "react";
 
@@ -32,7 +32,10 @@ function CompanyInvestmentAction({ startupListData, fetchData }) {
         )}
       </div>
       <div className={styles.investment}>
-        총 {ConvertBillion(startupListData.virtualInvestment)} 원
+        {/* 투자자 리스트가 있을 때만 총 투자 금액을 표시 */}
+        {startupListData.Investments &&
+          startupListData.Investments.length > 0 &&
+          `총 ${formatAmount(startupListData.virtualInvestment)}`}
       </div>
     </div>
   );
