@@ -64,7 +64,7 @@ function InvestmentForm({
 
   // mode가 edit일 경우에만 초기값을 설정, 그렇지 않으면 입력 필드를 자유롭게 할당
   const inputValue = mode === "edit" ? value : undefined;
-  const toggleImg = isVisible ? toggle : toggleOff;
+  const toggleImg = isVisible ? toggleOff : toggle;
   return (
     <div className={FRAME}>
       <label htmlFor={type} className={styles.label}>
