@@ -64,10 +64,12 @@ export default function InvestmentInfoList({ data, fetchData }) {
     setSelectedInvestment(null);
   };
 
+  const hasInvestments = investments.length > 0; // 투자자 여부 상태
+
   return (
     <div className={styles.investInfoSection}>
       <div className={styles.investTableArea}>
-        {investments.length > 0 ? (
+        {hasInvestments ? (
           <>
             <div className={styles.investTable}>
               <div className={styles.investDetailTitle}>
@@ -119,12 +121,14 @@ export default function InvestmentInfoList({ data, fetchData }) {
           </div>
         )}
       </div>
-      <Pagination
-        currentPage={currentPage} // 현재 페이지 번호
-        setCurrentPage={setCurrentPage}
-        totalCount={investments.length} // 전체 데이터 수
-        itemLimit={itemsPerPage} // 페이지당 항목 수
-      />
+      {hasInvestments && (
+        <Pagination
+          currentPage={currentPage} // 현재 페이지 번호
+          setCurrentPage={setCurrentPage}
+          totalCount={investments.length} // 전체 데이터 수
+          itemLimit={itemsPerPage} // 페이지당 항목 수
+        />
+      )}
       {showPasswordModal && (
         <PasswordVerifyModal
           mode={modalMode} // 수정, 삭제 모드 전달
