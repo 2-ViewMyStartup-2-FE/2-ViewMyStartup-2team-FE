@@ -35,7 +35,7 @@ function CompanyInvestmentAction({ startupListData, fetchData }) {
         {/* 투자자 리스트가 있을 때만 총 투자 금액을 표시 */}
         {startupListData.Investments &&
           startupListData.Investments.length > 0 &&
-          `총 ${formatAmount(startupListData.virtualInvestment)} 원`}
+          `총 ${formatAmount(startupListData.virtualInvestment)}`}
       </div>
     </div>
   );

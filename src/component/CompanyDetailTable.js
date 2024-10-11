@@ -19,11 +19,11 @@ function CompanyDetailTable({ startupListData }) {
       <div className={styles.companyInfo}>
         <div className={styles.companyDetailInfo}>
           <h1>누적 투자 금액</h1>
-          <p>{formatAmount(startupListData.totalInvestment)} 원</p>
+          <p>{formatAmount(startupListData.totalInvestment)}</p>
         </div>
         <div className={styles.companyDetailInfo}>
           <h1>매출액</h1>
-          <p>{formatAmount(startupListData.revenue)} 원</p>
+          <p>{formatAmount(startupListData.revenue)}</p>
         </div>
         <div className={styles.companyDetailInfo}>
           <h1>고용 인원</h1>
