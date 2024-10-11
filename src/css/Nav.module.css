@@ -55,19 +55,19 @@
     height: 5.6rem;
   }
   .nav {
-    width: 37.5rem;
+    /* width: 37.5rem; */
     height: 5.6rem;
     margin: 0 1.6rem;
     gap: 1.6rem;
   }
 
   .logo {
-    width: 6.35rem;
-    height: 2.24rem;
+    width: 6.3rem;
+    height: 2.2rem;
   }
 
   .title {
-    font-size: 1.3rem;
+    font-size: 1rem;
     line-height: 1.551rem;
     gap: 1rem;
   }
