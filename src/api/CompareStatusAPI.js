@@ -1,7 +1,7 @@
 import { requestGet } from "./api.js";
 
 //CompareStatus - count list 가져오는 함수
-export async function getCountList(page, limit, order) {
+export async function getCountList({page, limit, order}) {
   try {
     // page 유효성 검사
     if (typeof page !== "number" || page < 0) {
