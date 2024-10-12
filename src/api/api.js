@@ -1,34 +1,24 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://two-viewmystartup-2team-be.onrender.com/api",
-  timeout: 500
+  baseURL: "https://two-viewmystartup-2team-be.onrender.com/api"
+  // baseURL: "http://localhost:3000/api"
+  // timeout: 10000,
 });
-
-// export async function requestGet(url, params = {}) {
-//   try {
-//     // URL 유효성 검사 (문자열이 맞는지 확인, 공백만 있는 문자열이 아닌지 확인)
-//     if (typeof url !== "string" || !url.trim()) {
-//       throw new Error("Invalid URL provided");
-//     }
-//     // Params 유효성 검사 (객체인지 확인)
-//     if (typeof params !== "object") {
-//       throw new Error("Params should be an object");
-//     }
-//     return await instance.get(url, { params });
-//   } catch (e) {
-//     console.error("get error: ", e.message);
-//   }
-// }
 
 export async function requestGet(url, params = {}) {
   try {
-    console.log("GET 요청 시작:", url);
-    const response = await instance.get(url, { params });
-    console.log("GET 요청 성공:", response);
-    return response;
+    // URL 유효성 검사 (문자열이 맞는지 확인, 공백만 있는 문자열이 아닌지 확인)
+    if (typeof url !== "string" || !url.trim()) {
+      throw new Error("Invalid URL provided");
+    }
+    // Params 유효성 검사 (객체인지 확인)
+    if (typeof params !== "object") {
+      throw new Error("Params should be an object");
+    }
+    return await instance.get(url, { params });
   } catch (e) {
-    console.error("GET 요청 실패:", e.message);
+    console.error("get error: ", e.message);
   }
 }
 

@@ -1,8 +1,8 @@
 import errorImage from "../asset/images/404.svg";
-import style from "../css/NotfoundPage.module.css";
+import style from "../css/NotFoundPage.module.css";
 import { Link } from "react-router-dom";
 
-export default function PageNotfoundPage() {
+export default function NotFoundPage() {
   return (
     <div className={style.pageNotfoundPage}>
       <div className={style.errorimage}>
