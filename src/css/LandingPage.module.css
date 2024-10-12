@@ -1,90 +1,130 @@
+.background {
+  width: 100%;
+  height: 100%;
+  /* background: rgb(19, 19, 19); */
+  background: linear-gradient(
+    0deg,
+    rgba(19, 19, 19, 1) 0%,
+    rgba(47, 47, 47, 1) 100%
+  );
+}
+
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20rem;
-    margin: 15rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
 }
 
 .logoGroup {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 2rem;
+  margin-top: 10rem;
 }
 
 .logo {
-    width: 28.9rem;
-    height: 10.4rem;
+  width: 40rem;
 }
 
 .descGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
 .desc_1 {
-    font-size: 2.4rem;
-    font-weight: 500;
-    color: #FFFFFF;
+  font-size: 2.7rem;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .desc_2 {
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: #FFFFFF;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .startBtn {
-    width: 28.9rem;
-    height: 4rem;
-    border-radius: 2rem;
-    background-color: #EB5230;
-    color: #FFFFFF;
-    font-size: 1.6rem;
-    font-weight: 500;
-    font-family: Pretendard;
+  width: 26rem;
+  height: 4rem;
+  border-radius: 2rem;
+  background-color: #eb5230;
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 1.1rem;
+  cursor: pointer;
+}
+
+.startBtn:hover {
+  background-color: #bd3416;
+  transition: 0.2s ease-in-out;
 }
 
 .img {
-    width: 50rem;
-    height: 30rem;
+  width: 57rem;
+  margin-top: 15rem;
 }
 
 @media (max-width: 1199px) and (min-width: 744px) {
-    .container {
-        margin: 25rem 0;
-    }
+  .container {
+    gap: 5rem;
+    flex-direction: column;
+  }
 
-    .logoGroup {
-        align-items: center;
-    }
+  .logoGroup {
+    margin-top: 15rem;
+    align-items: center;
+  }
 
-    .logo.tablet {
-        width: 35rem;
-        height: 5rem;
+  .descGroup {
+    align-items: center;
+  }
 
-    }
+  .img {
+    margin-top: 4rem;
+    margin-bottom: 8rem;
+  }
 }
 
 @media (max-width: 743px) {
-    .logo {
-        width: 22rem;
-        height: 7.9rem;
-    }
+  .container {
+    gap: 1rem;
+    flex-direction: column;
+  }
+  .logoGroup {
+    align-items: center;
+    gap: 1.5rem;
+  }
 
-    .desc_1 {
-        font-size: 1.5rem;
-    }
+  .logo {
+    width: 24rem;
+  }
 
-    .desc_2 {
-        font-size: 1.2rem;
-    }
+  .descGroup {
+    align-items: center;
+    gap: 0.7rem;
+  }
 
-    .startBtn {
-        width: 22rem;
-        height: 3rem;
-        font-size: 1.2rem;
-    }
+  .desc_1 {
+    font-size: 1.5rem;
+  }
+
+  .desc_2 {
+    font-size: 1rem;
+  }
+
+  .img {
+    width: 35rem;
+    margin-top: 3rem;
+  }
+
+  .startBtn {
+    width: 17.5rem;
+    height: 3rem;
+    margin-top: 0.4rem;
+    font-size: 1.2rem;
+  }
 }
