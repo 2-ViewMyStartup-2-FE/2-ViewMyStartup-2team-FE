@@ -32,16 +32,12 @@ export default function CompanyDetailPage() {
   // startupData가 존재할 때만 렌더링
   return (
     <div className={styles.companyDetailPage}>
-      {startupData && (
-        <>
-          <CompanyDetailTable startupListData={startupData} />
-          <CompanyInvestmentAction
-            startupListData={startupData}
-            fetchData={fetchData}
-          />
-          <InvestmentInfoList data={startupData} fetchData={fetchData} />
-        </>
-      )}
+      <CompanyDetailTable startupListData={startupData} />
+      <CompanyInvestmentAction
+        startupListData={startupData}
+        fetchData={fetchData}
+      />
+      <InvestmentInfoList data={startupData} fetchData={fetchData} />
     </div>
   );
 }
