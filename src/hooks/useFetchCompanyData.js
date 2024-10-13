@@ -5,11 +5,11 @@ import sortData from "../utils/sortData.js";
 
 const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
   const [compStatus, setCompStatus] = useState({
-    sort: "누적 투자금액 높은순",
+    sort: "investmentHighest",
     list: []
   });
   const [rankStatus, setRankStatus] = useState({
-    sort: "누적 투자금액 높은순",
+    sort: "investmentHighest",
     list: []
   });
   const dataFetchedRef = useRef(false);
@@ -25,13 +25,12 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
 
         const compList = sortData(
           [myCompanyData, ...selectedCompanies],
-          "누적 투자금액 높은순"
+          "investmentHighest"
         );
         setCompStatus((prev) => ({
           ...prev,
           list: compList
         }));
-
         const rankList = await getRankAndNearbyCompanies({ myCompanyId });
         setRankStatus((prev) => ({
           ...prev,
