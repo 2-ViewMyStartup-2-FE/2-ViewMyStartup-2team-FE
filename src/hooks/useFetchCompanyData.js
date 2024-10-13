@@ -12,6 +12,8 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
     sort: "누적 투자금액 높은순",
     list: []
   });
+  const [isNotFound, setIsNotFound] = useState(false);
+
   const dataFetchedRef = useRef(false);
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +21,11 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
       try {
         if (!myCompanyId || selectedCompaniesId.length === 0) return;
         const myCompanyData = await getStartup(myCompanyId);
+        //id가 없는 경우 바로 오류 상태를 전송하는 로직 추가
+        if (!myCompanyData) {
+          setIsNotFound(true);
+          return;
+        }
         const selectedCompanies = await Promise.all(
           selectedCompaniesId.map((id) => getStartup(id))
         );
@@ -46,7 +53,7 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
     dataFetchedRef.current = true;
   }, [myCompanyId, selectedCompaniesId]);
 
-  return { compStatus, setCompStatus, rankStatus, setRankStatus };
+  return { compStatus, setCompStatus, rankStatus, setRankStatus, isNotFound };
 };
 
 export default useFetchCompanyData;

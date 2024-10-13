@@ -9,20 +9,28 @@ import useFetchCompanyData from "../hooks/useFetchCompanyData.js";
 import sortData from "../utils/sortData.js";
 import CompanyInfoTable from "../component/CompanyInfoTable.js";
 import SortContent from "../component/SortContent.js";
+import NotFoundPage from "./NotPage.js"; // 수정: 경로가 NotFoundPage로 되어있는지 확인하세요.
+
 function CompareResultPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const myCompanyId = params.get("mycompany");
   const joinedSelectedCompanies = params.get("selectedcompany");
-  const allSelectedCompaniesId = joinedSelectedCompanies.split(",");
+  const allSelectedCompaniesId = joinedSelectedCompanies
+    ? joinedSelectedCompanies.split(",")
+    : [];
   const selectedCompaniesId = allSelectedCompaniesId.filter(
     (id) => id !== myCompanyId
   );
-  const { compStatus, setCompStatus, rankStatus, setRankStatus } =
+
+  // useFetchCompanyData에서 isNotFound 받아오기 추가
+  const { compStatus, setCompStatus, rankStatus, setRankStatus, isNotFound } =
     useFetchCompanyData(myCompanyId, selectedCompaniesId);
+
   const myCompany = compStatus.list.find(
     (company) => company.id === myCompanyId
   );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -32,30 +40,14 @@ function CompareResultPage() {
   };
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
-  // const convertStateToUrl = (selectedOption) => {
-  //   switch (selectedOption) {
-  //     case "누적 투자금액 높은순":
-  //       return "investmentHighest";
-  //     case "누적 투자금액 낮은순":
-  //       return "investmentLowest";
-  //     case "매출액 높은순":
-  //       return "revenueHighest";
-  //     case "매출액 낮은순":
-  //       return "revenueLowest";
-  //     case "고용 인원 많은순":
-  //       return "employeeHighest";
-  //     case "고용 인원 적은순":
-  //       return "employeeLowest";
-  //     default:
-  //       return "investmentHighest";
-  //   }
-  // };
+
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
       list: sortData([...prev.list], selectedOption)
     }));
   };
+
   const handleRankSelect = async (selectedOption) => {
     const nextList = await getRankAndNearbyCompanies({
       myCompanyId,
@@ -66,6 +58,12 @@ function CompareResultPage() {
       list: nextList
     }));
   };
+
+  // ID가 잘못되었을 경우 404 페이지 렌더링
+  if (isNotFound) {
+    return <NotFoundPage />;
+  }
+
   if (compStatus.list.length === 0) return <div>로딩중</div>;
   else
     return (
@@ -120,4 +118,5 @@ function CompareResultPage() {
       </div>
     );
 }
+
 export default CompareResultPage;
