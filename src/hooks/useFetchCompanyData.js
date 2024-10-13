@@ -21,13 +21,21 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
       try {
         if (!myCompanyId || selectedCompaniesId.length === 0) return;
         const myCompanyData = await getStartup(myCompanyId);
-        //id가 없는 경우 바로 오류 상태를 전송하는 로직 추가
+        //id가 유효하지 않는 경우 바로 오류 상태를 전송하는 로직 추가
         if (!myCompanyData) {
           setIsNotFound(true);
           return;
         }
         const selectedCompanies = await Promise.all(
-          selectedCompaniesId.map((id) => getStartup(id))
+          selectedCompaniesId.map(async (id) => {
+            const companyData = await getStartup(id);
+            // id가 유효하지 않는 경우 바로 오류 상태를 전송하는 로직 추가
+            if (!companyData) {
+              setIsNotFound(true);
+              return;
+            }
+            return companyData;
+          })
         );
 
         const compList = sortData(
