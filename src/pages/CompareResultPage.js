@@ -9,7 +9,7 @@ import useFetchCompanyData from "../hooks/useFetchCompanyData.js";
 import sortData from "../utils/sortData.js";
 import CompanyInfoTable from "../component/CompanyInfoTable.js";
 import SortContent from "../component/SortContent.js";
-import NotFoundPage from "./NotPage.js"; // 수정: 경로가 NotFoundPage로 되어있는지 확인하세요.
+import NotFoundPage from "./NotFoundPage.js"; // 수정: 경로가 NotFoundPage로 되어있는지 확인하세요.
 
 function CompareResultPage() {
   const location = useLocation();

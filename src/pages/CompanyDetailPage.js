@@ -5,7 +5,7 @@ import styles from "../css/CompanyDetailPage.module.css";
 import InvestmentInfoList from "../component/InvestmentInfoList.js";
 import CompanyDetailTable from "../component/CompanyDetailTable.js";
 import CompanyInvestmentAction from "../component/CompanyInvestmentAction.js";
-import NotFoundPage from "./NotPage.js";
+import NotFoundPage from "./NotFoundPage.js";
 
 export default function CompanyDetailPage() {
   const [startupData, setStartupData] = useState([]);

@@ -7,7 +7,7 @@ import CompareResultPage from "./pages/CompareResultPage.js";
 import CompareStatusPage from "./pages/CompareStatusPage.js";
 import InvestStatusPage from "./pages/InvestStatusPage.js";
 import LandingPage from "./pages/LandingPage.js";
-import NotFoundPage from "./pages/NotPage.js";
+import NotFoundPage from "./pages/NotFoundPage.js";
 
 export default function Main() {
   return (
