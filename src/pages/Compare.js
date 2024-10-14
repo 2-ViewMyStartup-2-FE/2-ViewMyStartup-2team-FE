@@ -18,9 +18,9 @@ function MyCompare() {
   const {
     isOpen: isAddModalOpen,
     openModal: openAddModal,
-    closeModal: closeAddModal,
+    closeModal: closeAddModal
   } = useModal(); //추가 기업 선택 모달 오픈 훅
-  
+
   const [addCompany, setAddCompany] = useState(false); // 나의기업 선택시 추가기업 섹션 오픈
   const [selectedCompany, setSelectedCompany] = useState(null); //선택된 나의 기업
   const [addSelectedCompany, setAddSelectedCompany] = useState([]); //선택된 추가기업들
@@ -150,7 +150,8 @@ function MyCompare() {
           <div className={style.addSection}>
             <div className={style.headTheme2}>
               <p className={style.headFont}>
-                어떤기업이 궁금하세요?<span>(최대5개)</span>
+                어떤기업이 궁금하세요?
+                <span className={style.span}>(최대5개)</span>
               </p>
               <button
                 className={`${style.addButton} ${

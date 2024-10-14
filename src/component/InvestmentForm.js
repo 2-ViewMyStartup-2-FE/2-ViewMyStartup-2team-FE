@@ -65,6 +65,7 @@ function InvestmentForm({
   } = getFieldConfig(type, isVisible, className);
   useEffect(() => {
     if (inputRef.current) {
+      inputRef.current.style.width = value ? "0" : "140px";
       inputRef.current.style.width = `${inputRef.current.scrollWidth}px`;
     }
   }, [value]);
@@ -106,9 +107,8 @@ function InvestmentForm({
               autoComplete="off"
               value={value}
               placeholder={MESSAGE}
-              style={{ width: value ? "" : "100%" }}
             />
-            {value && <div className={styles.amountFormat}>억</div>}
+            {value && <span className={styles.amountFormat}>억</span>}
           </div>
         </div>
         {errorMessage && (
@@ -131,7 +131,7 @@ function InvestmentForm({
           type={INPUTTYPE}
           onChange={onChange}
           autoComplete="off"
-          value={value} // 조건부로 value 설정
+          value={value}
         />
         {(type === "password" || type === "confirm") && (
           <button

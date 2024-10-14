@@ -1,5 +1,4 @@
 import styles from "../css/InvestModal.module.css";
-import bigInt from "big-integer";
 import { useState } from "react";
 import InvestModalHeader from "./InvestModalHeader.js";
 import InvestmentCompanyBrief from "./InvestmentCompanyBrief.js";
@@ -25,7 +24,7 @@ function InvestModal({
         }
       : {
           name: investment.investorName,
-          amount: investment.amount,
+          amount: investment.amount / 100000000,
           comment: investment.comment,
           password: investment.password,
           confirmPassword: investment.password
@@ -62,6 +61,10 @@ function InvestModal({
       setErrorMessage((prev) => ({ ...prev, [field]: message }));
       setValidation((prev) => ({ ...prev, [field]: nextValidation }));
     };
+    const changeConfirmPassword = (nextValidation, message) => {
+      setErrorMessage((prev) => ({ ...prev, confirmPassword: message }));
+      setValidation((prev) => ({ ...prev, confirmPassword: nextValidation }));
+    };
     switch (field) {
       case "name":
         if (value.length < 2)
@@ -77,11 +80,10 @@ function InvestModal({
           changeState("FAIL", "투자 금액은 숫자여야 합니다");
           break;
         }
-        const bigIntValue = bigInt(value);
-        if (bigIntValue.lt(100000000))
+        if (value < 1)
           // 1억 이상
           changeState("FAIL", "투자 금액은 1억 이상이여야 합니다");
-        else if (bigIntValue.gt(1000000000000))
+        else if (value >= 10000)
           // 1조 미만
           changeState("FAIL", "투자 금액은 1조 미만이여야 합니다");
         else changeState("SUCCESS", "");
@@ -99,6 +101,10 @@ function InvestModal({
         else if (value.length > 15)
           changeState("FAIL", "비밀번호는 15자 이하여야 합니다");
         else changeState("SUCCESS", "");
+        if (formData.confirmPassword === "") break;
+        if (value === formData.confirmPassword)
+          changeConfirmPassword("SUCCESS", "");
+        else changeConfirmPassword("FAIL", "비밀번호가 동일하지 않습니다");
         break;
       case "confirmPassword":
         if (value === formData.password) changeState("SUCCESS", "");
@@ -122,22 +128,23 @@ function InvestModal({
   const onToggleConfirm = () => setIsConfirmVisible((prev) => !prev);
   const onSubmit = async (e) => {
     e.preventDefault();
-    const sumbitData =
+    const submitData =
       mode === "post"
         ? {
             investorName: formData.name,
-            amount: formData.amount,
+            amount: formData.amount * 100000000,
             comment: formData.comment,
             password: formData.password,
             companyId: myCompany.id
           }
         : {
             investorName: formData.name,
-            amount: formData.amount,
+            amount: formData.amount * 100000000,
             comment: formData.comment,
             password: formData.password
           };
-    await investAction(investActionId, sumbitData);
+    console.log(submitData);
+    await investAction(investActionId, submitData);
     completeTask();
   };
 

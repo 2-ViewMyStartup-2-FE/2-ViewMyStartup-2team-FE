@@ -16,9 +16,11 @@
   /*red*/
   --red-error: #c41013;
 }
+
 * {
   box-sizing: border-box;
 }
+
 body {
   background-color: var(--black-400);
 }
@@ -27,13 +29,14 @@ body {
   color: #ffffff;
 }
 
-span {
+.span {
   color: #ffffff;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.432rem;
   border: none;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -42,6 +45,7 @@ span {
   width: 100%;
   margin: 10rem auto 0;
 }
+
 .headTheme {
   display: flex;
   justify-content: space-between;
@@ -49,6 +53,7 @@ span {
   width: 100%;
   margin-bottom: 1.6rem;
 }
+
 .headFont {
   font-size: 2rem;
   font-weight: 700;
@@ -56,6 +61,7 @@ span {
   color: #ffffff;
   margin: 0;
 }
+
 .mainSection {
   display: flex;
   flex-direction: column;
@@ -68,24 +74,29 @@ span {
   border-radius: 0.4rem;
   background-color: var(--black-300);
 }
+
 .logo {
   width: 8rem;
   height: 8rem;
   border-radius: 8rem;
   /* background-color: #ffffff; */
 }
+
 .btnPlus {
   cursor: pointer;
 }
+
 .content {
   height: 100%;
   width: 100%;
 }
+
 .content img {
   width: 4.8rem;
   height: 4.8rem;
   cursor: pointer;
 }
+
 .contentFont {
   font-size: 1.8rem;
   font-weight: 500;
@@ -94,6 +105,7 @@ span {
   cursor: pointer;
   margin: 1.6rem 0 0;
 }
+
 .buttonSection {
   display: flex;
   align-items: center;
@@ -102,6 +114,7 @@ span {
   justify-content: center;
   margin-top: 2.4rem;
 }
+
 .button {
   padding: 1.3rem 4.8rem;
   border: none;
@@ -111,14 +124,17 @@ span {
   font-weight: 600;
   color: var(--gray-200);
 }
+
 .button.active {
   background-color: var(--brand-orange);
   color: #ffffff;
   cursor: pointer;
 }
+
 .addSection {
   width: 100%;
 }
+
 .headTheme2 {
   display: flex;
   justify-content: space-between;
@@ -126,6 +142,7 @@ span {
   margin: 4rem 0 1.6rem;
   width: 100%;
 }
+
 .addButton {
   padding: 0.8rem 2.4rem;
   border: none;
@@ -142,6 +159,7 @@ span {
   align-items: center;
   gap: 0.4rem;
 }
+
 .mainSection2 {
   display: flex;
   flex-wrap: wrap;
@@ -154,6 +172,7 @@ span {
   border-radius: 0.4rem;
   gap: 1.6rem;
 }
+
 .defaultFont {
   font-size: 1.4rem;
   color: var(--gray-200);
@@ -161,12 +180,14 @@ span {
   line-height: 1.671rem;
   text-align: center;
 }
+
 .cancelSection {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
+
 .cancelFont {
   color: var(--gray-100);
   font-size: 1.6rem;
@@ -183,6 +204,7 @@ span {
   font-weight: 500;
   line-height: 1.671rem;
 }
+
 .companyItem {
   display: flex;
   flex-direction: column;
@@ -194,6 +216,7 @@ span {
   background-color: var(--gray-400);
   border-radius: 0.8rem;
 }
+
 .minusSection {
   width: 100%;
   padding-right: 0.8rem;
@@ -201,6 +224,7 @@ span {
   justify-content: flex-end;
   align-items: center;
 }
+
 .selectName {
   color: #ffffff;
   font-size: 1.6rem;
@@ -209,9 +233,11 @@ span {
   margin: 1rem 0 0.4rem;
   text-align: center;
 }
+
 .companyMinus {
   cursor: pointer;
 }
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -235,6 +261,7 @@ span {
   height: 18.6rem;
   padding-right: 1rem;
 }
+
 .maxAdd {
   pointer-events: none;
   background-color: var(--black-100);
@@ -245,37 +272,45 @@ span {
   .container {
     max-width: 69.6rem;
   }
+
   .mainSection,
   .mainSection2 {
     height: 24rem;
     border-radius: 0.8rem;
   }
+
   .cancelFont {
     transform: translateY(-3rem);
   }
+
   .companyItem {
     width: calc(18%);
   }
 }
 
 @media (max-width: 743px) {
-  span {
+  .span {
     font-size: 1.2rem;
   }
+
   .container {
     max-width: 34.3rem;
   }
+
   .headFont {
     font-size: 1.6rem;
   }
+
   .mainSection {
     height: 18rem;
   }
+
   .contentFont,
   .button {
     font-size: 1.4rem;
     line-height: 1.671rem;
   }
+
   .button {
     padding: 1.3rem 2.4rem;
   }
@@ -285,43 +320,52 @@ span {
     gap: 0.8rem;
     padding: 0.8rem;
   }
+
   .addButton {
     padding: 0.4rem 1.2rem;
     height: 3.2rem;
   }
+
   .logo {
     width: 6.5rem;
     height: 6.5rem;
     border-radius: 6.5rem;
   }
+
   .cancelFont {
     font-size: 1.2rem;
     line-height: 1.432rem;
     transform: translateY(-1rem);
   }
+
   .selectName {
     font-size: 1.4rem;
     line-height: 1.671rem;
   }
+
   .selectCategory {
     font-size: 1.2rem;
     line-height: 1.432rem;
   }
+
   .defaultFont {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 20rem;
   }
+
   .companyItem {
     width: calc(33% - 4.249px);
     height: 16.3rem;
   }
+
   .companyItem:nth-child(4),
   .companyItem:nth-child(5) {
     width: calc(50%-59.83px);
     height: 16.3rem;
   }
+
   .modalContainer {
     gap: 1rem;
     width: 34.3rem;
