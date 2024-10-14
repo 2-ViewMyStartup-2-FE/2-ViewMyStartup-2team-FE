@@ -36,12 +36,12 @@ export default function LandingPage() {
       <div className={style.container}>
         <div className={style.logoGroup}>
           <img className={style.logo} src={logo} alt="logo_img" />
-          <p className={style.desc_1}>당신을 위한 모의 투자</p>
+          <p className={style.desc1}>당신을 위한 모의 투자</p>
           <div className={style.descGroup}>
-            <p className={style.desc_2}>
+            <p className={style.desc2}>
               언제 어디서나 투자 전략을 테스트할 수 있는
             </p>
-            <p className={style.desc_2}>내 손안의 스타트업 투자 플랫폼</p>
+            <p className={style.desc2}>내 손안의 스타트업 투자 플랫폼</p>
           </div>
           <Link to="/companies">
             <button className={style.startBtn}>투자 시작하기</button>
