@@ -1,5 +1,5 @@
 import style from "../css/ModalCompany.module.css";
-import mdClose from "../asset/images/ic_modalClose.png";
+import mdClose from "../asset/images/ic_x.png";
 import { useEffect, useState } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
@@ -86,7 +86,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
       // handleLoadFetchData(); // 전체 데이터 로드
       // handleLoadSearchData(); // 검색 데이터 로드
       // setCurrentPage(1);
-    // } else {
+      // } else {
       // setInputValue("");
       // setStartupData([]);
       // setSearchData([]);

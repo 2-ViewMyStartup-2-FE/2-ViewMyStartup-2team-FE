@@ -1,5 +1,5 @@
 import style from "../css/ModalAddCompany.module.css";
-import mdClose from "../asset/images/ic_modalClose.png";
+import mdClose from "../asset/images/ic_x.png";
 import { useEffect, useState } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
 import Pagination from "./Pagination.js";
@@ -18,7 +18,7 @@ function ModalAddCompany({
   selectedMyCompany,
   onRemoveCompany,
   errorMessage,
-  setErrorMessage,
+  setErrorMessage
 }) {
   // const [searchData, setSearchData] = useState([]);
   // const [totalCount, setTotalCount] = useState(0);
@@ -26,7 +26,8 @@ function ModalAddCompany({
   const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
   const [search, setSearch] = useState("");
 
-  const { data: searchData, totalCount } = useFetchList(//커스텀 hook 사용
+  const { data: searchData, totalCount } = useFetchList(
+    //커스텀 hook 사용
     getCompareList,
     currentPage,
     "recent",

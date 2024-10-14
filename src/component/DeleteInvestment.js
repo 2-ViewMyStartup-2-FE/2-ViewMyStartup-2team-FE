@@ -1,5 +1,5 @@
 import { deleteInvestment } from "../api/CompanyDetailAPI.js";
-import closeIcon from "../asset/images/ic_delete.png";
+import closeIcon from "../asset/images/ic_x.png";
 import styles from "../css/DeleteInvestment.module.css";
 
 export default function DeleteInvestment({

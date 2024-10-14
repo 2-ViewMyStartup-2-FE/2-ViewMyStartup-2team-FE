@@ -1,5 +1,5 @@
 import styles from "../css/InvestmentForm.module.css";
-import toggle from "../asset/images/toggle.png";
+import toggleOn from "../asset/images/open-eyes.png";
 import toggleOff from "../asset/images/closed-eyes.png";
 import { useRef, useEffect } from "react";
 
@@ -65,11 +65,11 @@ function InvestmentForm({
   } = getFieldConfig(type, isVisible, className);
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.style.width = value ? "0" : "140px";
+      inputRef.current.style.width = value ? "0" : "400px";
       inputRef.current.style.width = `${inputRef.current.scrollWidth}px`;
     }
   }, [value]);
-  const toggleImg = isVisible ? toggleOff : toggle;
+  const toggleImg = isVisible ? toggleOff : toggleOn;
   // 조건에 따라 다른 JSX를 반환
   if (type === "comment") {
     return (

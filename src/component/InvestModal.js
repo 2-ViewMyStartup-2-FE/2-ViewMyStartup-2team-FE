@@ -143,7 +143,6 @@ function InvestModal({
             comment: formData.comment,
             password: formData.password
           };
-    console.log(submitData);
     await investAction(investActionId, submitData);
     completeTask();
   };

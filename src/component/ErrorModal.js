@@ -1,10 +1,10 @@
 import styles from "../css/ErrorModal.module.css";
-import closeIcon from "../asset/images/ic_delete.png";
+import closeIcon from "../asset/images/ic_x.png";
 
 export default function ErrorModal({
   onClose,
   handleErrorConfirmBtn,
-  errorMessage = "",
+  errorMessage = ""
 }) {
   return (
     <>

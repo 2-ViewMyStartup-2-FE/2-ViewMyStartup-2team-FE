@@ -1,5 +1,5 @@
 import styles from "../css/InvestmentPopup.module.css";
-import exitImg from "../asset/images/exit.png";
+import exitImg from "../asset/images/ic_x.png";
 function InvestmentPopup({ closePopup }) {
   return (
     <div className={styles.popupOverlay}>

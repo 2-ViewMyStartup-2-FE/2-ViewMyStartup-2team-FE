@@ -1,5 +1,5 @@
 import styles from "../css/PasswordVerifyModal.module.css";
-import closeIcon from "../asset/images/ic_delete.png";
+import closeIcon from "../asset/images/ic_x.png";
 import openEyeIcon from "../asset/images/open-eyes.png";
 import closeEyeIcon from "../asset/images/closed-eyes.png";
 import { useState } from "react";
