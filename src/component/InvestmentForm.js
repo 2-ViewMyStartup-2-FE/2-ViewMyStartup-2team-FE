@@ -65,8 +65,8 @@ function InvestmentForm({
   } = getFieldConfig(type, isVisible, className);
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.style.width = value ? "0" : "400px";
-      inputRef.current.style.width = `${inputRef.current.scrollWidth}px`;
+      inputRef.current.style.width = value ? "0" : "40rem";
+      inputRef.current.style.width = `${inputRef.current.scrollWidth / 10}rem `;
     }
   }, [value]);
   const toggleImg = isVisible ? toggleOff : toggleOn;
