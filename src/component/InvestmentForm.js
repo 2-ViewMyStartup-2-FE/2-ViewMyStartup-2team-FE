@@ -1,5 +1,6 @@
 import styles from "../css/InvestmentForm.module.css";
 import toggle from "../asset/images/toggle.png";
+import toggleOff from "../asset/images/closed-eyes.png";
 
 function getFieldConfig(type, isVisible, className) {
   switch (type) {
@@ -63,7 +64,7 @@ function InvestmentForm({
 
   // mode가 edit일 경우에만 초기값을 설정, 그렇지 않으면 입력 필드를 자유롭게 할당
   const inputValue = mode === "edit" ? value : undefined;
-
+  const toggleImg = isVisible ? toggleOff : toggle;
   return (
     <div className={FRAME}>
       <label htmlFor={type} className={styles.label}>
@@ -95,7 +96,7 @@ function InvestmentForm({
               className={styles.passwordToggle}
               onClick={onToggle}
             >
-              <img src={toggle} alt="토글이미지" />
+              <img src={toggleImg} alt="토글이미지" />
             </button>
           )}
         </div>

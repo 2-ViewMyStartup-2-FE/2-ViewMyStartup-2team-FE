@@ -4,8 +4,8 @@ import openEyeIcon from "../asset/images/open-eyes.png";
 import closeEyeIcon from "../asset/images/closed-eyes.png";
 import { useState } from "react";
 import ErrorModal from "./ErrorModal.js";
-import EditInvestment from "./EditInvestment.js";
 import DeleteInvestment from "./DeleteInvestment.js";
+import InvestModal from "./InvestModal.js";
 
 export default function PasswordVerifyModal({
   mode, // "edit" 또는 "delete" 모드
@@ -47,6 +47,10 @@ export default function PasswordVerifyModal({
     setInputPassword(""); // 비밀번호 초기화
     setErrorMessage(""); // 에러 메시지 초기화
     setShowPasswordVerifyModal(true); // 비밀번호 인증 모달 띄우기
+  };
+  const completeTask = () => {
+    fetchData();
+    onClose();
   };
 
   return (
@@ -94,12 +98,13 @@ export default function PasswordVerifyModal({
       )}
 
       {/* EditInvestment 컴포넌트 보여주기 */}
-      {showEditModal && (
-        <EditInvestment
+      {showEditInvestment && (
+        <InvestModal
+          mode="edit"
           investment={investment}
           myCompany={myCompany}
-          onClose={onClose}
-          fetchData={fetchData}
+          closeModal={onClose}
+          completeTask={completeTask}
         />
       )}
 
