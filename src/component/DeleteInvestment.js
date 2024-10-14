@@ -26,16 +26,18 @@ export default function DeleteInvestment({
   };
 
   return (
-    <>
-      <div className={styles.deleteModalTitle}>
-        <img src={closeIcon} alt="취소" onClick={onClose} />
-      </div>
-      <div className={styles.deleteModalContent}>
-        <p>정말로 삭제하시겠습니까?</p>
-        <div className={styles.buttonContainer}>
-          <button onClick={handleDelete}>삭제하기</button>
+    <div className={styles.modalOverlay}>
+      <div className={styles.deleteContainer}>
+        <div className={styles.deleteModalTitle}>
+          <img src={closeIcon} alt="취소" onClick={onClose} />
+        </div>
+        <div className={styles.deleteModalContent}>
+          <p>정말로 삭제하시겠습니까?</p>
+          <div className={styles.buttonContainer}>
+            <button onClick={handleDelete}>삭제하기</button>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
