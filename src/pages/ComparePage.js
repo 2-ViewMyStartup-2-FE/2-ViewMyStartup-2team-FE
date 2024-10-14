@@ -1,4 +1,4 @@
-import style from "../css/Compare.module.css";
+import style from "../css/ComparePage.module.css";
 import btnPlus from "../asset/images/btn_plus.png";
 import ModalMyCompany from "../component/ModalMyCompany.js";
 import { useState } from "react";
@@ -13,12 +13,12 @@ import useModal from "../hooks/useModal.js";
 
 const ITEM_LIMIT = 5;
 
-function MyCompare() {
+function ComparePage() {
   const { isOpen: isModalOpen, openModal, closeModal } = useModal();
   const {
     isOpen: isAddModalOpen,
     openModal: openAddModal,
-    closeModal: closeAddModal,
+    closeModal: closeAddModal
   } = useModal();
 
   const [addCompany, setAddCompany] = useState(false);
@@ -250,4 +250,4 @@ function MyCompare() {
   );
 }
 
-export default MyCompare;
+export default ComparePage;
