@@ -5,18 +5,16 @@ import styles from "../css/CompanyDetailPage.module.css";
 import InvestmentInfoList from "../component/InvestmentInfoList.js";
 import CompanyDetailTable from "../component/CompanyDetailTable.js";
 import CompanyInvestmentAction from "../component/CompanyInvestmentAction.js";
+import NotFoundPage from "./NotFoundPage.js";
 
 export default function CompanyDetailPage() {
-  const [startupData, setStartupData] = useState([]); // 스타트업 데이터 상태 관리
+  const [startupData, setStartupData] = useState([]);
   const { id } = useParams();
 
   const fetchData = useCallback(async () => {
     try {
       const response = await getCompanyDetail(id);
-      console.log(response);
-      if (response) {
-        setStartupData(response);
-      }
+      setStartupData(response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -26,6 +24,12 @@ export default function CompanyDetailPage() {
     fetchData();
   }, [fetchData]);
 
+  // startupData가 없으면 바로 NotFoundPage를 리턴하는 로직으로 수정
+  if (!startupData) {
+    return <NotFoundPage />;
+  }
+
+  // startupData가 존재할 때만 렌더링
   return (
     <div className={styles.companyDetailPage}>
       <CompanyDetailTable startupListData={startupData} />

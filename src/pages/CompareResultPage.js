@@ -9,20 +9,28 @@ import useFetchCompanyData from "../hooks/useFetchCompanyData.js";
 import sortData from "../utils/sortData.js";
 import CompanyInfoTable from "../component/CompanyInfoTable.js";
 import SortContent from "../component/SortContent.js";
+import NotFoundPage from "./NotFoundPage.js"; // 수정: 경로가 NotFoundPage로 되어있는지 확인하세요.
+
 function CompareResultPage() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const myCompanyId = params.get("mycompany");
   const joinedSelectedCompanies = params.get("selectedcompany");
-  const allSelectedCompaniesId = joinedSelectedCompanies.split(",");
+  const allSelectedCompaniesId = joinedSelectedCompanies
+    ? joinedSelectedCompanies.split(",")
+    : [];
   const selectedCompaniesId = allSelectedCompaniesId.filter(
     (id) => id !== myCompanyId
   );
-  const { compStatus, setCompStatus, rankStatus, setRankStatus } =
+
+  // useFetchCompanyData에서 isNotFound 받아오기 추가
+  const { compStatus, setCompStatus, rankStatus, setRankStatus, isNotFound } =
     useFetchCompanyData(myCompanyId, selectedCompaniesId);
+
   const myCompany = compStatus.list.find(
     (company) => company.id === myCompanyId
   );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -32,12 +40,14 @@ function CompareResultPage() {
   };
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
+
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
       list: sortData([...prev.list], selectedOption)
     }));
   };
+
   const handleRankSelect = async (selectedOption) => {
     const nextList = await getRankAndNearbyCompanies({
       myCompanyId,
@@ -48,6 +58,12 @@ function CompareResultPage() {
       list: nextList
     }));
   };
+
+  // ID가 잘못되었을 경우 404 페이지 렌더링
+  if (isNotFound) {
+    return <NotFoundPage />;
+  }
+
   if (compStatus.list.length === 0) return <div>로딩중</div>;
   else
     return (
@@ -103,4 +119,5 @@ function CompareResultPage() {
       </div>
     );
 }
+
 export default CompareResultPage;
