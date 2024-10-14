@@ -39,6 +39,123 @@ Database: PostgreSQL
 
 ### 파일구조
 
+```
+2-ViewMyStartup-2team-FE
+ ┣ .git
+public
+ ┣ index.html
+ ┗ _redirects
+src
+ ┣ api
+ ┃ ┣ api.js
+ ┃ ┣ CompanyDetailAPI.js
+ ┃ ┣ CompareAPI.js
+ ┃ ┣ CompareResultAPI.js
+ ┃ ┣ CompareStatusAPI.js
+ ┃ ┣ InvestStatusAPI.js
+ ┃ ┗ StartupAPI.js
+ ┣ asset
+ ┃ ┗ images
+ ┃ ┃ ┣ btn_plus.png
+ ┃ ┃ ┣ closed-eyes.png
+ ┃ ┃ ┣ codeit.png
+ ┃ ┃ ┣ codeitLogo.png
+ ┃ ┃ ┣ exit.png
+ ┃ ┃ ┣ ic_arrow_left.png
+ ┃ ┃ ┣ ic_arrow_right.png
+ ┃ ┃ ┣ ic_check.png
+ ┃ ┃ ┣ ic_cloaseCircleSmall.png
+ ┃ ┃ ┣ ic_delete.png
+ ┃ ┃ ┣ ic_kebab.png
+ ┃ ┃ ┣ ic_minus.png
+ ┃ ┃ ┣ ic_modalClose.png
+ ┃ ┃ ┣ ic_restart.png
+ ┃ ┃ ┣ ic_search.png
+ ┃ ┃ ┣ ic_toggle.png
+ ┃ ┃ ┣ img_company_default_logo.png
+ ┃ ┃ ┣ img_logo.png
+ ┃ ┃ ┣ img_sort.png
+ ┃ ┃ ┣ logo.png
+ ┃ ┃ ┣ open-eyes.png
+ ┃ ┃ ┗ toggle.png
+ ┣ component
+ ┃ ┣ AddCompanyList.js
+ ┃ ┣ AddSeachResult.js
+ ┃ ┣ App.js
+ ┃ ┣ CompanyDetailTable.js
+ ┃ ┣ CompanyInfoTable.js
+ ┃ ┣ CompanyInvestmentAction.js
+ ┃ ┣ ComparisonTableContent.js
+ ┃ ┣ DeleteInvestment.js
+ ┃ ┣ EditInvestment.js
+ ┃ ┣ ErrorModal.js
+ ┃ ┣ InvestmentButton.js
+ ┃ ┣ InvestmentCompanyBrief.js
+ ┃ ┣ InvestmentForm.js
+ ┃ ┣ InvestmentInfoList.js
+ ┃ ┣ InvestmentPopup.js
+ ┃ ┣ InvestModal.js
+ ┃ ┣ InvestModalHeader.js
+ ┃ ┣ ListSort.js
+ ┃ ┣ ManychoiceCompany.js
+ ┃ ┣ ModalAddCompany.js
+ ┃ ┣ ModalMyCompany.js
+ ┃ ┣ MyCompanyCard.js
+ ┃ ┣ Nav.js
+ ┃ ┣ Pagination.js
+ ┃ ┣ PasswordVerifyModal.js
+ ┃ ┣ Search.js
+ ┃ ┣ SearchResult.js
+ ┃ ┣ SortContent.js
+ ┃ ┗ StartupList.js
+ ┣ css
+ ┃ ┣ AddCompanyList.module.css
+ ┃ ┣ App.css
+ ┃ ┣ CompanyDetailPage.module.css
+ ┃ ┣ CompanyInfoTable.module.css
+ ┃ ┣ CompanyInvestmentAction.module.css
+ ┃ ┣ Compare.module.css
+ ┃ ┣ CompareResultPage.module.css
+ ┃ ┣ DeleteInvestment.module.css
+ ┃ ┣ ErrorModal.module.css
+ ┃ ┣ InvestmentButton.module.css
+ ┃ ┣ InvestmentCompanyBrief.module.css
+ ┃ ┣ InvestmentForm.module.css
+ ┃ ┣ InvestmentInfoList.module.css
+ ┃ ┣ InvestmentPopup.module.css
+ ┃ ┣ InvestModal.module.css
+ ┃ ┣ InvestModalHeader.module.css
+ ┃ ┣ InvestStatusPage.module.css
+ ┃ ┣ ListSort.module.css
+ ┃ ┣ ManyChoiceCompany.module.css
+ ┃ ┣ ModalAddCompany.module.css
+ ┃ ┣ ModalCompany.module.css
+ ┃ ┣ MyCompanyCard.module.css
+ ┃ ┣ Nav.module.css
+ ┃ ┣ Pagination.module.css
+ ┃ ┣ PasswordVerifyModal.module.css
+ ┃ ┣ Search.module.css
+ ┃ ┣ SearchResult.module.css
+ ┃ ┣ StartupList.module.css
+ ┃ ┗ StartupPage.module.css
+ ┣ hooks
+ ┃ ┣ useFetchCompanyData.js
+ ┃ ┣ useFetchList.js
+ ┃ ┗ useModal.js
+ ┣ pages
+ ┃ ┣ CompanyDetailPage.js
+ ┃ ┣ Compare.js
+ ┃ ┣ CompareResultPage.js
+ ┃ ┣ CompareStatusPage.js
+ ┃ ┣ InvestStatusPage.js
+ ┃ ┗ StartupPage.js
+ ┣ utils
+ ┃ ┣ formatAmount.js
+ ┃ ┗ sortData.js
+ ┣ index.js
+ ┣ Main.js
+ ┗ reset.css
+```
 
 ### 구현 홈페이지
 
