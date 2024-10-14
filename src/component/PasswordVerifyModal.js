@@ -98,7 +98,7 @@ export default function PasswordVerifyModal({
       )}
 
       {/* EditInvestment 컴포넌트 보여주기 */}
-      {showEditInvestment && (
+      {showEditModal && (
         <InvestModal
           mode="edit"
           investment={investment}

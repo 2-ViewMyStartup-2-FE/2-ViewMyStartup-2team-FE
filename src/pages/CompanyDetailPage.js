@@ -13,7 +13,6 @@ export default function CompanyDetailPage() {
   const fetchData = useCallback(async () => {
     try {
       const response = await getCompanyDetail(id);
-      console.log(response);
       if (response) {
         setStartupData(response);
       }
