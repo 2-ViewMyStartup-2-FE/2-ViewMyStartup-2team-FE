@@ -1,12 +1,11 @@
 import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
 import Pagination from "./Pagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
 import Search from "./Search.js";
-import useFetchList from "../hooks/useFetchList.js";
 
 const ITEM_LIMIT = 5;
 
@@ -20,20 +19,11 @@ function ModalAddCompany({
   errorMessage,
   setErrorMessage,
 }) {
-  // const [searchData, setSearchData] = useState([]);
-  // const [totalCount, setTotalCount] = useState(0);
+  const [searchData, setSearchData] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCompanies, setSelectedCompanies] = useState([]); //선택한 기업 리스트
+  const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [search, setSearch] = useState("");
-
-  const { data: searchData, totalCount } = useFetchList(//커스텀 hook 사용
-    getCompareList,
-    currentPage,
-    "recent",
-    search,
-    selectedMyCompany.id, // excludeId로 현재 선택된 회사의 ID를 전달
-    ITEM_LIMIT // limit을 5로 전달
-  );
 
   useEffect(() => {
     if (isOpen && prevSelectedCompany?.length > 0) {
@@ -43,45 +33,45 @@ function ModalAddCompany({
 
   const handleSelectCompany = (company) => {
     if (selectedCompanies.length >= ITEM_LIMIT) {
-      setErrorMessage("*최대 5개까지만 선택 가능합니다."); // 경고 메시지 설정
-      return; // 선택을 중지
+      setErrorMessage("*최대 5개까지만 선택 가능합니다.");
+      return;
     } else if (selectedCompanies.length < ITEM_LIMIT) {
       setErrorMessage("");
     }
 
     setSelectedCompanies((prev) => [...prev, company]);
     onSelectAddCompany(company);
-    setErrorMessage(""); // 선택 후 경고 메시지 초기화
+    setErrorMessage("");
   };
 
   // 검색 데이터 로드 (페이지네이션 필요)
-  // const handleLoadSearchData = useCallback(async () => {
-  //   try {
-  //     const response = await getCompareList({
-  //       limit: ITEM_LIMIT,
-  //       search: search,
-  //       page: currentPage,
-  //       excludeId: selectedMyCompany.id,
-  //     });
+  const handleLoadSearchData = useCallback(async () => {
+    try {
+      const response = await getCompareList({
+        limit: ITEM_LIMIT,
+        search: search,
+        page: currentPage,
+        excludeId: selectedMyCompany.id,
+      });
 
-  //     if (response && response.data) {
-  //       setSearchData(response.data || []);
-  //       setTotalCount(response.totalCount || 0);
-  //     } else {
-  //       console.error("Invalid response structure:", response);
-  //       setSearchData([]);
-  //       setTotalCount(0);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // }, [search, currentPage, selectedMyCompany.id]);
+      if (response && response.data) {
+        setSearchData(response.data || []);
+        setTotalCount(response.totalCount || 0);
+      } else {
+        console.error("Invalid response structure:", response);
+        setSearchData([]);
+        setTotalCount(0);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [search, currentPage, selectedMyCompany.id]);
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     handleLoadSearchData(); // 페이지 변경 시 데이터 로드
-  //   }
-  // }, [isOpen, handleLoadSearchData]);
+  useEffect(() => {
+    if (isOpen) {
+      handleLoadSearchData();
+    }
+  }, [isOpen, handleLoadSearchData]);
 
   const handleCloseModal = () => {
     onClose();
@@ -92,7 +82,7 @@ function ModalAddCompany({
     onRemoveCompany(company);
 
     if (selectedCompanies.length === 1) {
-      setSelectedCompanies([]); // 선택한 기업 리스트를 빈 배열로 초기화
+      setSelectedCompanies([]);
     }
   };
 
@@ -109,10 +99,8 @@ function ModalAddCompany({
           <Search
             setSearch={setSearch}
             setCurrentPage={setCurrentPage}
-            handleLoadSearchData={searchData}
-            // searchData={searchData}
+            searchData={searchData}
             isList={false}
-            isMine={false}
           />
           <div className={style.searchHeader}>
             <p className={style.modalFont}>
@@ -134,18 +122,16 @@ function ModalAddCompany({
           />
 
           {errorMessage && <p className={style.errorText}>{errorMessage}</p>}
-          {/*에러메세지 위치 고정*/}
 
-          {totalCount > ITEM_LIMIT &&
-            searchData.length > 0 && ( // 검색 데이터가 있을 때만 페이지네이션 표시
-              <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalCount={totalCount}
-                itemLimit={ITEM_LIMIT}
-                className={style.modalPage}
-              />
-            )}
+          {totalCount > ITEM_LIMIT && searchData.length > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalCount={totalCount}
+              itemLimit={ITEM_LIMIT}
+              className={style.modalPage}
+            />
+          )}
         </div>
       </div>
     </>

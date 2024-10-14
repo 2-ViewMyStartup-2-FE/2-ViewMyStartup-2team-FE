@@ -14,19 +14,19 @@ import useModal from "../hooks/useModal.js";
 const ITEM_LIMIT = 5;
 
 function MyCompare() {
-  const { isOpen: isModalOpen, openModal, closeModal } = useModal(); //나의 기업선택 모달 오픈 훅
+  const { isOpen: isModalOpen, openModal, closeModal } = useModal();
   const {
     isOpen: isAddModalOpen,
     openModal: openAddModal,
     closeModal: closeAddModal,
-  } = useModal(); //추가 기업 선택 모달 오픈 훅
-  
-  const [addCompany, setAddCompany] = useState(false); // 나의기업 선택시 추가기업 섹션 오픈
-  const [selectedCompany, setSelectedCompany] = useState(null); //선택된 나의 기업
-  const [addSelectedCompany, setAddSelectedCompany] = useState([]); //선택된 추가기업들
+  } = useModal();
+
+  const [addCompany, setAddCompany] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [addSelectedCompany, setAddSelectedCompany] = useState([]);
   const [allClear, setAllClear] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [showErrorModal, setShowErrorModal] = useState(false); // 에러 모달 상태 추가
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -60,25 +60,24 @@ function MyCompare() {
     setAddSelectedCompany((prev) => {
       const updatedCompanies = prev.filter((company) => company.id !== id);
       if (updatedCompanies.length < ITEM_LIMIT) {
-        setErrorMessage(""); // 선택 기업 수가 ITEM_LIMIT 미만일 때 에러 메시지 초기화
+        setErrorMessage("");
       }
-      return updatedCompanies; // 업데이트된 리스트 반환
+      return updatedCompanies;
     });
   };
 
   const ids = addSelectedCompany.map((company) => company.id);
 
   const handlePatchRequest = async () => {
-    const comparisonUrl = `/comparison/${ids.join(",")}/company-compare`; // ids를 쉼표로 구분해서 URL에 포함
-    const myCompareUrl = `/comparison/${selectedCompany.id}/my-compare`; // 단일 id로 URL 생성
+    const comparisonUrl = `/comparison/${ids.join(",")}/company-compare`;
+    const myCompareUrl = `/comparison/${selectedCompany.id}/my-compare`;
 
     try {
       // 첫 번째 PATCH 요청 (다중 ids)
-      await requestPatch(comparisonUrl, null); // 데이터가 없으므로 두 번째 인자는 null로
-      console.log(`첫 번째 PATCH 요청 성공: ${comparisonUrl}`);
+      await requestPatch(comparisonUrl, null);
+
       // 두 번째 PATCH 요청 (단일 id)
-      await requestPatch(myCompareUrl, null); // 단일 id에 대한 PATCH 요청
-      console.log(`두 번째 PATCH 요청 성공: ${myCompareUrl}`);
+      await requestPatch(myCompareUrl, null);
 
       if (addSelectedCompany.length >= 1 && selectedCompany) {
         navigate(
@@ -89,14 +88,14 @@ function MyCompare() {
       }
     } catch (error) {
       console.error("Error while sending patch request:", error);
-      setErrorMessage("비교 요청 중 오류가 발생했습니다."); // 에러 메시지 설정
-      setShowErrorModal(true); // 에러 모달 열기
+      setErrorMessage("비교 요청 중 오류가 발생했습니다.");
+      setShowErrorModal(true);
     }
   };
 
   const handleCloseErrorModal = () => {
-    setShowErrorModal(false); // 에러 모달 닫기
-    setErrorMessage(""); // 에러 메시지 초기화
+    setShowErrorModal(false);
+    setErrorMessage("");
   };
 
   return (
@@ -154,9 +153,10 @@ function MyCompare() {
               </p>
               <button
                 className={`${style.addButton} ${
-                  addSelectedCompany.length === 5 ? style.maxAdd : ""
-                }`}
+                  selectedCompany === null ? style.maxAdd : ""
+                } ${addSelectedCompany.length === 5 ? style.maxAdd : ""}`}
                 onClick={openAddModal}
+                disabled={selectedCompany === null}
               >
                 기업 추가하기
               </button>
@@ -171,7 +171,7 @@ function MyCompare() {
                           src={minus}
                           className={style.companyMinus}
                           alt="minus"
-                          onClick={() => handleClickRemove(company.id)} // 수정: 람다 함수로 감싸기
+                          onClick={() => handleClickRemove(company.id)}
                         />
                       </div>
                       <img
@@ -202,7 +202,7 @@ function MyCompare() {
               ? style.active
               : ""
           }`}
-          onClick={handlePatchRequest} // 비교 요청 함수 호출
+          onClick={handlePatchRequest}
           disabled={addSelectedCompany.length < 1}
         >
           기업 비교하기
@@ -214,6 +214,7 @@ function MyCompare() {
           isOpen={isModalOpen}
           onClose={closeModal}
           onSelectCompany={handleSelectCompany}
+          addSelectedCompany={addSelectedCompany}
         />
       )}
 
@@ -224,7 +225,7 @@ function MyCompare() {
           onSelectAddCompany={handleAddSelectCompany}
           prevSelectedCompany={addSelectedCompany}
           selectedMyCompany={selectedCompany}
-          onRemoveCompany={handleClickRemove} // 선택 해제 함수 전달
+          onRemoveCompany={handleClickRemove}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
         />
