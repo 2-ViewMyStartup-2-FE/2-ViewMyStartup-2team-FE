@@ -1,12 +1,11 @@
 import style from "../css/ModalAddCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
-import { useEffect, useState,useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
 import Pagination from "./Pagination.js";
 import AddCompanyList from "./AddCompanyList.js";
 import AddSearchResult from "./AddSeachResult.js";
 import Search from "./Search.js";
-
 
 const ITEM_LIMIT = 5;
 
@@ -23,10 +22,8 @@ function ModalAddCompany({
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCompanies, setSelectedCompanies] = useState([]); 
+  const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [search, setSearch] = useState("");
-
-
 
   useEffect(() => {
     if (isOpen && prevSelectedCompany?.length > 0) {
@@ -72,7 +69,7 @@ function ModalAddCompany({
 
   useEffect(() => {
     if (isOpen) {
-      handleLoadSearchData(); 
+      handleLoadSearchData();
     }
   }, [isOpen, handleLoadSearchData]);
 
@@ -103,7 +100,7 @@ function ModalAddCompany({
             setSearch={setSearch}
             setCurrentPage={setCurrentPage}
             handleLoadSearchData={handleLoadSearchData}
-            searchData={handleLoadSearchData}
+            searchData={searchData}
             isList={false}
             isMine={false}
           />
@@ -127,18 +124,16 @@ function ModalAddCompany({
           />
 
           {errorMessage && <p className={style.errorText}>{errorMessage}</p>}
-         
 
-          {totalCount > ITEM_LIMIT &&
-            searchData.length > 0 && (
-              <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalCount={totalCount}
-                itemLimit={ITEM_LIMIT}
-                className={style.modalPage}
-              />
-            )}
+          {totalCount > ITEM_LIMIT && searchData.length > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalCount={totalCount}
+              itemLimit={ITEM_LIMIT}
+              className={style.modalPage}
+            />
+          )}
         </div>
       </div>
     </>
