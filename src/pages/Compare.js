@@ -153,9 +153,10 @@ function MyCompare() {
               </p>
               <button
                 className={`${style.addButton} ${
-                  addSelectedCompany.length === 5 ? style.maxAdd : ""
-                }`}
+                  selectedCompany === null ? style.maxAdd : ""
+                } ${addSelectedCompany.length === 5 ? style.maxAdd : ""}`}
                 onClick={openAddModal}
+                disabled={selectedCompany === null}
               >
                 기업 추가하기
               </button>

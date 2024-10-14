@@ -19,6 +19,3 @@ import { requestGet } from "./api.js";
     }
   }
 
-//  export async function patchCompare(id) {
-   
-//     }
