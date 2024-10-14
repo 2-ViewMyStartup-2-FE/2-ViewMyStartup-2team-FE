@@ -1,10 +1,9 @@
 import img_logo from "../asset/images/img_logo.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import style from "../css/Nav.module.css";
 
 export default function Nav() {
   const location = useLocation();
-  const navigate = useNavigate();
   const currentPath = location.pathname;
 
   const isCompare =
@@ -13,17 +12,12 @@ export default function Nav() {
   const isInvestStatus = currentPath === "/invest-status";
   const isCompany = currentPath === "/companies";
 
-  const handleLogoClick = () => {
-    navigate("/");
-    window.location.reload();
-  };
-
   return (
     <div className={style.header}>
       <div className={style.nav}>
-        <div>
-          <img className={style.logo} src={img_logo} alt="logo" onClick={handleLogoClick} />
-        </div>
+        <Link to="/">
+          <img className={style.logo} src={img_logo} alt="logo" />
+        </Link>
         <div className={style.titleGroup}>
           <Link 
             className={`${style.title} ${isCompany ? style.active : ""}`}

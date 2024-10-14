@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "../css/LandingPage.module.css";
 import logo from "../asset/images/img_logo.png";
-import tablet_logo from "../asset/images/tablet_logo.png"; // tablet 전용 로고
-import img from "../asset/images/img_landing.png";
+import pcImg from "../asset/images/p_main_image.svg";
+import mobileImg from "../asset/images/m_main_image.svg";
 
 export default function LandingPage() {
   const [tablet, setTablet] = useState(false);
@@ -11,13 +11,13 @@ export default function LandingPage() {
 
   useEffect(() => {
     const handle_resize = () => {
-        const width = window.innerWidth;
+      const width = window.innerWidth;
 
-        // width가 744px 이상 1199px 미만일 때 tablet 크기로 간주
-        setTablet(width >= 744 && width < 1199);
-  
-        // width가 744px 미만일 때 모바일 크기로 간주
-        setMobile(width < 744);
+      // width가 744px 이상 1199px 미만일 때 tablet 크기로 간주
+      setTablet(width >= 744 && width <= 1199);
+
+      // width가 744px 미만일 때 모바일 크기로 간주
+      setMobile(width < 744);
     };
 
     // 컴포넌트가 마운트될 때와 창 크기 변경 시 실행
@@ -29,23 +29,26 @@ export default function LandingPage() {
     };
   }, []);
 
+  const displayImg = mobile || tablet ? mobileImg : pcImg;
+
   return (
-    <div className={style.container}>
-      <div className={`${style.logoGroup} ${style.tablet}`}>
-        <img
-          className={`${style.logo} ${style.tablet}`}
-          src={tablet ? tablet_logo : logo}
-          alt="logo_img"
-        />
-        <div className={style.descGroup}>
-            <p className={style.desc_1}>당신을 위한 모의 투자</p>
-            <p className={style.desc_2}>스타트업을 비교하고 투자해보세요</p>
+    <div className={style.background}>
+      <div className={style.container}>
+        <div className={style.logoGroup}>
+          <img className={style.logo} src={logo} alt="logo_img" />
+          <p className={style.desc1}>당신을 위한 모의 투자</p>
+          <div className={style.descGroup}>
+            <p className={style.desc2}>
+              언제 어디서나 투자 전략을 테스트할 수 있는
+            </p>
+            <p className={style.desc2}>내 손안의 스타트업 투자 플랫폼</p>
+          </div>
+          <Link to="/companies">
+            <button className={style.startBtn}>투자 시작하기</button>
+          </Link>
         </div>
-        <Link to="/companies">
-          <button className={style.startBtn}>시작하기</button>
-        </Link>
+        <img className={style.img} src={displayImg} alt="landing_img" />
       </div>
-      {!tablet && !mobile && <img className={style.img} src={img} alt="landing_img" />}
     </div>
   );
 }

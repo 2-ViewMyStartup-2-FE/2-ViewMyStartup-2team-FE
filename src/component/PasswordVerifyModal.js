@@ -18,17 +18,21 @@ export default function PasswordVerifyModal({
   const [passwordToggle, setPasswordToggle] = useState(false); // 비밀번호 표시 토글
   const [isErrorModal, setIsErrorModal] = useState(false); // 에러 모달 상태
   const [errorMessage, setErrorMessage] = useState("");
-  const [showEditInvestment, setShowEditInvestment] = useState(false);
+  const [showPasswordVerifyModal, setShowPasswordVerifyModal] = useState(true); // 비밀번호 인증 모달 상태
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handlePasswordVerify = () => {
     if (inputPassword === investment.password) {
       if (mode === "edit") {
-        setShowEditInvestment(true); // EditInvestment 컴포넌트를 보여줌
+        setShowPasswordVerifyModal(false); // 비밀번호 인증 모달 내리기
+        setShowEditModal(true); // EditInvestment 모달을 띄우기
       } else if (mode === "delete") {
-        setShowDeleteModal(true); // DeleteInvestment 관련 모달을 띄움
+        setShowPasswordVerifyModal(false);
+        setShowDeleteModal(true); // DeleteInvestment 모달을 띄우기
       }
     } else {
+      setShowPasswordVerifyModal(false);
       setErrorMessage("잘못된 비밀번호로 인증에 실패하셨습니다.");
       setIsErrorModal(true); // 에러 모달 띄우기
     }
@@ -42,6 +46,7 @@ export default function PasswordVerifyModal({
     setIsErrorModal(false); // 에러 모달 닫기
     setInputPassword(""); // 비밀번호 초기화
     setErrorMessage(""); // 에러 메시지 초기화
+    setShowPasswordVerifyModal(true); // 비밀번호 인증 모달 띄우기
   };
   const completeTask = () => {
     fetchData();
@@ -49,78 +54,80 @@ export default function PasswordVerifyModal({
   };
 
   return (
-    <div className={styles.modalOverlay}>
-      <div
-        className={`${styles.modalContainer} ${
-          showDeleteModal || isErrorModal ? styles.errorContainer : ""
-        }`}
-      >
-        {/* 비밀번호 인증 모달 */}
-        {!showEditInvestment && !showDeleteModal && !isErrorModal && (
-          <>
-            <div className={styles.modalTitle}>
-              <h1>{mode === "edit" ? "수정 권한 인증" : "삭제 권한 인증"}</h1>
-              <img src={closeIcon} alt="취소버튼" onClick={onClose} />
-            </div>
-            <div className={styles.modalContent}>
-              <div className={styles.modalinput}>
-                <label htmlFor="password">비밀번호</label>
-                <input
-                  id="password"
-                  type={!passwordToggle ? "password" : "text"}
-                  placeholder="패스워드를 입력해주세요"
-                  value={inputPassword}
-                  onChange={(e) => setInputPassword(e.target.value)}
-                />
-                <img
-                  src={!passwordToggle ? openEyeIcon : closeEyeIcon}
-                  onClick={handlePasswordToggle}
-                  alt="passwordToggle"
-                />
-              </div>
-              <div className={styles.buttonContainer}>
-                {mode === "edit" ? (
-                  <button onClick={handlePasswordVerify}>수정하기</button>
-                ) : (
-                  <button onClick={handlePasswordVerify}>삭제하기</button>
-                )}
-              </div>
-            </div>
-          </>
-        )}
+    <>
+      {showPasswordVerifyModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContainer}>
+            {/* 비밀번호 인증 모달 */}
+            {!showEditModal && !showDeleteModal && !isErrorModal && (
+              <>
+                <div className={styles.modalTitle}>
+                  <h1>
+                    {mode === "edit" ? "수정 권한 인증" : "삭제 권한 인증"}
+                  </h1>
+                  <img src={closeIcon} alt="취소버튼" onClick={onClose} />
+                </div>
+                <div className={styles.modalContent}>
+                  <div className={styles.modalinput}>
+                    <label htmlFor="password">비밀번호</label>
+                    <input
+                      id="password"
+                      type={!passwordToggle ? "password" : "text"}
+                      placeholder="패스워드를 입력해주세요"
+                      value={inputPassword}
+                      onChange={(e) => setInputPassword(e.target.value)}
+                    />
+                    <img
+                      src={!passwordToggle ? openEyeIcon : closeEyeIcon}
+                      onClick={handlePasswordToggle}
+                      alt="passwordToggle"
+                    />
+                  </div>
+                  <div className={styles.buttonContainer}>
+                    {mode === "edit" ? (
+                      <button onClick={handlePasswordVerify}>수정하기</button>
+                    ) : (
+                      <button onClick={handlePasswordVerify}>삭제하기</button>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
-        {/* EditInvestment 컴포넌트 보여주기 */}
-        {showEditInvestment && (
-          <InvestModal
-            mode="edit"
-            investment={investment}
-            myCompany={myCompany}
-            closeModal={onClose}
-            completeTask={completeTask}
-          />
-        )}
+      {/* EditInvestment 컴포넌트 보여주기 */}
+      {showEditModal && (
+        <InvestModal
+          mode="edit"
+          investment={investment}
+          myCompany={myCompany}
+          closeModal={onClose}
+          completeTask={completeTask}
+        />
+      )}
 
-        {/* DeleteInvestment 컴포넌트 보여주기 */}
-        {showDeleteModal && (
-          <DeleteInvestment
-            investment={investment}
-            onClose={onClose}
-            setErrorMessage={setErrorMessage}
-            setIsErrorModal={setIsErrorModal}
-            setShowDeleteModal={setShowDeleteModal}
-            fetchData={fetchData}
-          />
-        )}
+      {/* DeleteInvestment 컴포넌트 보여주기 */}
+      {showDeleteModal && (
+        <DeleteInvestment
+          investment={investment}
+          onClose={onClose}
+          setErrorMessage={setErrorMessage}
+          setIsErrorModal={setIsErrorModal}
+          setShowDeleteModal={setShowDeleteModal}
+          fetchData={fetchData}
+        />
+      )}
 
-        {/* 에러 모달 */}
-        {isErrorModal && (
-          <ErrorModal
-            onClose={onClose}
-            errorMessage={errorMessage}
-            handleErrorConfirmBtn={handleErrorConfirmBtn}
-          />
-        )}
-      </div>
-    </div>
+      {/* 에러 모달 */}
+      {isErrorModal && (
+        <ErrorModal
+          onClose={onClose}
+          errorMessage={errorMessage}
+          handleErrorConfirmBtn={handleErrorConfirmBtn}
+        />
+      )}
+    </>
   );
 }
