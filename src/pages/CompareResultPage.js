@@ -32,24 +32,6 @@ function CompareResultPage() {
   };
   const closeModal = () => setIsModalOpen(false);
   const closePopup = () => setIsPopupOpen(false);
-  // const convertStateToUrl = (selectedOption) => {
-  //   switch (selectedOption) {
-  //     case "누적 투자금액 높은순":
-  //       return "investmentHighest";
-  //     case "누적 투자금액 낮은순":
-  //       return "investmentLowest";
-  //     case "매출액 높은순":
-  //       return "revenueHighest";
-  //     case "매출액 낮은순":
-  //       return "revenueLowest";
-  //     case "고용 인원 많은순":
-  //       return "employeeHighest";
-  //     case "고용 인원 적은순":
-  //       return "employeeLowest";
-  //     default:
-  //       return "investmentHighest";
-  //   }
-  // };
   const handleCompSelect = (selectedOption) => {
     setCompStatus((prev) => ({
       sort: selectedOption,
@@ -111,6 +93,7 @@ function CompareResultPage() {
         </button>
         {isModalOpen && (
           <InvestModal
+            mode="post"
             completeTask={completeTask}
             closeModal={closeModal}
             myCompany={myCompany}
