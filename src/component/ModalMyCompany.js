@@ -1,5 +1,5 @@
 import style from "../css/ModalCompany.module.css";
-import mdClose from "../asset/images/ic_modalClose.png";
+import mdClose from "../asset/images/ic_x.png";
 import { useEffect, useState, useMemo } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";

@@ -1,5 +1,5 @@
 import style from "../css/ModalAddCompany.module.css";
-import mdClose from "../asset/images/ic_modalClose.png";
+import mdClose from "../asset/images/ic_x.png";
 import { useEffect, useState, useCallback } from "react";
 import { getCompareList } from "../api/CompareAPI.js";
 import Pagination from "./Pagination.js";
@@ -17,14 +17,13 @@ function ModalAddCompany({
   selectedMyCompany,
   onRemoveCompany,
   errorMessage,
-  setErrorMessage,
+  setErrorMessage
 }) {
   const [searchData, setSearchData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [search, setSearch] = useState("");
-
   useEffect(() => {
     if (isOpen && prevSelectedCompany?.length > 0) {
       setSelectedCompanies(prevSelectedCompany);

@@ -1,6 +1,7 @@
 import styles from "../css/InvestmentForm.module.css";
-import toggle from "../asset/images/toggle.png";
+import toggleOn from "../asset/images/open-eyes.png";
 import toggleOff from "../asset/images/closed-eyes.png";
+import { useRef, useEffect } from "react";
 
 function getFieldConfig(type, isVisible, className) {
   switch (type) {
@@ -53,59 +54,99 @@ function InvestmentForm({
   className,
   errorMessage,
   mode,
-  value = "" // value 추가
+  value = ""
 }) {
+  const inputRef = useRef(null);
   const {
     frame: FRAME,
     label: LABEL,
     inputType: INPUTTYPE,
     message: MESSAGE
   } = getFieldConfig(type, isVisible, className);
-
-  // mode가 edit일 경우에만 초기값을 설정, 그렇지 않으면 입력 필드를 자유롭게 할당
-  const inputValue = mode === "edit" ? value : undefined;
-  const toggleImg = isVisible ? toggleOff : toggle;
-  return (
-    <div className={FRAME}>
-      <label htmlFor={type} className={styles.label}>
-        {LABEL}
-      </label>
-      {type === "comment" ? ( //comment인경우에 textarea를 반환
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.width = value ? "0" : "40rem";
+      inputRef.current.style.width = `${inputRef.current.scrollWidth / 10}rem `;
+    }
+  }, [value]);
+  const toggleImg = isVisible ? toggleOff : toggleOn;
+  // 조건에 따라 다른 JSX를 반환
+  if (type === "comment") {
+    return (
+      <div className={FRAME}>
+        <label htmlFor={type} className={styles.label}>
+          {LABEL}
+        </label>
         <textarea
           id={type}
           className={styles.commentInput}
           placeholder={MESSAGE}
           onChange={onChange}
-          spellCheck="false" // 맞춤법 빨간줄 없애기
-          value={inputValue} // 조건부로 value 설정
+          spellCheck="false"
+          value={value}
         />
-      ) : (
+        {errorMessage && (
+          <div className={styles.errorMessage}>{errorMessage}</div>
+        )}
+      </div>
+    );
+  } else if (type === "amount") {
+    return (
+      <div className={FRAME}>
+        <label htmlFor={type} className={styles.label}>
+          {LABEL}
+        </label>
         <div className={styles.inputContainer}>
-          <input //comment가 아닌 경우에는 input태그를 반환
-            id={type}
-            className={styles.otherInput}
-            placeholder={MESSAGE}
-            type={INPUTTYPE}
-            onChange={onChange}
-            autoComplete="off"
-            value={inputValue} // 조건부로 value 설정
-          />
-          {(type === "password" || type === "confirm") && ( //비밀번호계열 인풋은 토글 버튼추가
-            <button
-              type="button"
-              className={styles.passwordToggle}
-              onClick={onToggle}
-            >
-              <img src={toggleImg} alt="토글이미지" />
-            </button>
-          )}
+          <div className={styles.otherInput}>
+            <input
+              id={type}
+              ref={inputRef}
+              className={styles.amountInput}
+              type={INPUTTYPE}
+              onChange={onChange}
+              autoComplete="off"
+              value={value}
+              placeholder={MESSAGE}
+            />
+            {value && <span className={styles.amountFormat}>억</span>}
+          </div>
         </div>
-      )}
+        {errorMessage && (
+          <div className={styles.errorMessage}>{errorMessage}</div>
+        )}
+      </div>
+    );
+  }
+  // 나머지 경우에 대한 반환
+  return (
+    <div className={FRAME}>
+      <label htmlFor={type} className={styles.label}>
+        {LABEL}
+      </label>
+      <div className={styles.inputContainer}>
+        <input
+          id={type}
+          className={styles.otherInput}
+          placeholder={MESSAGE}
+          type={INPUTTYPE}
+          onChange={onChange}
+          autoComplete="off"
+          value={value}
+        />
+        {(type === "password" || type === "confirm") && (
+          <button
+            type="button"
+            className={styles.passwordToggle}
+            onClick={onToggle}
+          >
+            <img src={toggleImg} alt="토글이미지" />
+          </button>
+        )}
+      </div>
       {errorMessage && (
         <div className={styles.errorMessage}>{errorMessage}</div>
       )}
     </div>
   );
 }
-
 export default InvestmentForm;

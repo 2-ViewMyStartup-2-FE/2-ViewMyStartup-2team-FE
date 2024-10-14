@@ -52,7 +52,7 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
           list: rankList
         }));
       } catch (e) {
-        console.log("데이터 가져오는중 에러발생");
+        console.error("데이터 가져오는중 에러발생");
       }
     };
 
