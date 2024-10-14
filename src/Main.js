@@ -7,6 +7,7 @@ import CompareResultPage from "./pages/CompareResultPage.js";
 import CompareStatusPage from "./pages/CompareStatusPage.js";
 import InvestStatusPage from "./pages/InvestStatusPage.js";
 import LandingPage from "./pages/LandingPage.js";
+import NotFoundPage from "./pages/NotFoundPage.js";
 
 export default function Main() {
   return (
@@ -20,6 +21,7 @@ export default function Main() {
           <Route path="compare-result" element={<CompareResultPage />} />
           <Route path="compare-status" element={<CompareStatusPage />} />
           <Route path="invest-status" element={<InvestStatusPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

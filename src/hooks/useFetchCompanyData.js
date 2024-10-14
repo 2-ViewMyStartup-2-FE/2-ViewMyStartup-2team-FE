@@ -5,13 +5,15 @@ import sortData from "../utils/sortData.js";
 
 const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
   const [compStatus, setCompStatus] = useState({
-    sort: "누적 투자금액 높은순",
+    sort: "investmentHighest",
     list: []
   });
   const [rankStatus, setRankStatus] = useState({
-    sort: "누적 투자금액 높은순",
+    sort: "investmentHighest",
     list: []
   });
+  const [isNotFound, setIsNotFound] = useState(false);
+
   const dataFetchedRef = useRef(false);
   useEffect(() => {
     const fetchData = async () => {
@@ -19,19 +21,31 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
       try {
         if (!myCompanyId || selectedCompaniesId.length === 0) return;
         const myCompanyData = await getStartup(myCompanyId);
+        //id가 유효하지 않는 경우 바로 오류 상태를 전송하는 로직 추가
+        if (!myCompanyData) {
+          setIsNotFound(true);
+          return;
+        }
         const selectedCompanies = await Promise.all(
-          selectedCompaniesId.map((id) => getStartup(id))
+          selectedCompaniesId.map(async (id) => {
+            const companyData = await getStartup(id);
+            // id가 유효하지 않는 경우 바로 오류 상태를 전송하는 로직 추가
+            if (!companyData) {
+              setIsNotFound(true);
+              return;
+            }
+            return companyData;
+          })
         );
 
         const compList = sortData(
           [myCompanyData, ...selectedCompanies],
-          "누적 투자금액 높은순"
+          "investmentHighest"
         );
         setCompStatus((prev) => ({
           ...prev,
           list: compList
         }));
-
         const rankList = await getRankAndNearbyCompanies({ myCompanyId });
         setRankStatus((prev) => ({
           ...prev,
@@ -46,7 +60,7 @@ const useFetchCompanyData = (myCompanyId, selectedCompaniesId) => {
     dataFetchedRef.current = true;
   }, [myCompanyId, selectedCompaniesId]);
 
-  return { compStatus, setCompStatus, rankStatus, setRankStatus };
+  return { compStatus, setCompStatus, rankStatus, setRankStatus, isNotFound };
 };
 
 export default useFetchCompanyData;
