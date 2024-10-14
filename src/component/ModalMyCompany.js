@@ -1,6 +1,6 @@
 import style from "../css/ModalCompany.module.css";
 import mdClose from "../asset/images/ic_modalClose.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import ManyChoiceCompany from "./ManychoiceCompany.js";
 import SearchResult from "./SearchResult.js";
 import { getCompareList } from "../api/CompareAPI.js";
@@ -8,7 +8,12 @@ import Pagination from "./Pagination.js";
 import Search from "./Search.js";
 import useFetchList from "../hooks/useFetchList.js";
 
-function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
+function ModalMyCompany({
+  isOpen,
+  onClose,
+  onSelectCompany,
+  addSelectedCompany,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
@@ -19,13 +24,17 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
     onClose();
   };
 
+  const addSelectedCompanyExcludeIds = useMemo(() => {// 무한렌더링 방지용
+    return addSelectedCompany.map((companies) => companies.id);
+  }, [addSelectedCompany]);
+
   //가장 선택 많이한 기업(페이지네이션 X)
   const { data: startupData } = useFetchList(
     getCompareList,
     1,
     "myCountHighest",
     "",
-    null,
+    addSelectedCompanyExcludeIds,
     ITEM_LIMIT
   );
 
@@ -35,7 +44,7 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
     currentPage,
     "recent",
     search,
-    null,
+    addSelectedCompanyExcludeIds,
     ITEM_LIMIT
   );
 
@@ -58,10 +67,8 @@ function ModalMyCompany({ isOpen, onClose, onSelectCompany }) {
         <Search
           setSearch={setSearch}
           setCurrentPage={setCurrentPage}
-          handleLoadSearchData={searchData}
           setSearchData={searchData}
           isList={false}
-          isMine={true}
         />
         <ManyChoiceCompany
           itemLimit={ITEM_LIMIT}

@@ -3,7 +3,12 @@ import style from "../css/Search.module.css";
 import closeCircle from "../asset/images/ic_cloaseCircleSmall.png";
 import searchIcon from "../asset/images/ic_search.png";
 
-export default function Search({ setSearch, setCurrentPage, handleLoadSearchData, setSearchData, isList, isMine }) {
+export default function Search({
+  setSearch,
+  setCurrentPage,
+  setSearchData,
+  isList,
+}) {
   const [inputValue, setInputValue] = useState("");
 
   const handleSearchClick = () => {
@@ -21,9 +26,6 @@ export default function Search({ setSearch, setCurrentPage, handleLoadSearchData
     setInputValue("");
     setCurrentPage(1);
     setSearch("");
-    if (!isList && !isMine) {
-      handleLoadSearchData();
-    }
   };
 
   const handleKeyPress = (e) => {
@@ -41,25 +43,34 @@ export default function Search({ setSearch, setCurrentPage, handleLoadSearchData
 
   return (
     <div
-      className={`${style.searchGroup} ${isList ? style.list : style.compare}`} >
+      className={`${style.searchGroup} ${isList ? style.list : style.compare}`}
+    >
       <img
         className={`${style.searchIcon} ${isList ? style.list : style.compare}`}
         src={searchIcon}
         alt="ic_search_bt"
-        onClick={handleSearchClick} />
+        onClick={handleSearchClick}
+      />
       <input
-        className={`${style.searchInput} ${isList ? style.list : style.compare }`}
+        className={`${style.searchInput} ${
+          isList ? style.list : style.compare
+        }`}
         value={inputValue}
         id="searchInput"
         name="search"
         onChange={(e) => handleInputChange(e.target.value)}
         onKeyDown={handleKeyPress}
-        placeholder="검색어를 입력해주세요" />
+        placeholder="검색어를 입력해주세요"
+      />
       {inputValue && (
-        <img className={`${style.closeCircle} ${isList ? style.list : style.compare}`}
+        <img
+          className={`${style.closeCircle} ${
+            isList ? style.list : style.compare
+          }`}
           src={closeCircle}
           alt="closeSmall_bt"
-          onClick={handleClearInput} />
+          onClick={handleClearInput}
+        />
       )}
     </div>
   );

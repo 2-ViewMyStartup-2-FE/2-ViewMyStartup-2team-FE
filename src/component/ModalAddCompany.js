@@ -99,10 +99,8 @@ function ModalAddCompany({
           <Search
             setSearch={setSearch}
             setCurrentPage={setCurrentPage}
-            handleLoadSearchData={handleLoadSearchData}
             searchData={searchData}
             isList={false}
-            isMine={false}
           />
           <div className={style.searchHeader}>
             <p className={style.modalFont}>

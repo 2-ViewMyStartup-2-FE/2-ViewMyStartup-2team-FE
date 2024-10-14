@@ -213,6 +213,7 @@ function MyCompare() {
           isOpen={isModalOpen}
           onClose={closeModal}
           onSelectCompany={handleSelectCompany}
+          addSelectedCompany={addSelectedCompany}
         />
       )}
 
