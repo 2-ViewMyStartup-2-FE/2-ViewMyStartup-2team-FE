@@ -17,25 +17,25 @@ function CompanyList({ item, onSelect, isSelected }) {
       <button
         className={isSelected ? style.clearButton : style.selectButton}
         onClick={() => onSelect(item)}
-        disabled={isSelected} // 이미 선택된 기업은 버튼 비활성화
+        disabled={isSelected}
       >
         {isSelected && (
           <img src={checkedIcon} alt="checked" className={style.iconCheck} />
         )}
-        {isSelected ? `선택완료` : "선택하기"} {/* 버튼 텍스트 변경 */}
+        {isSelected ? `선택완료` : "선택하기"} 
       </button>
     </div>
   );
 }
 
 function AddSearchResult({ data, onSelect, selectedCompanies }) {
-  // 기본값 설정
+
   return (
     <div className={style.listSection}>
       {data && data.length > 0 ? (
         <ul className={style.listItem}>
           {data.map((item) => {
-            const isSelected = selectedCompanies.some((c) => c.id === item.id); // 선택 여부 확인
+            const isSelected = selectedCompanies.some((c) => c.id === item.id); 
             return (
               <li key={item.id} className={style.resultItem}>
                 <CompanyList
