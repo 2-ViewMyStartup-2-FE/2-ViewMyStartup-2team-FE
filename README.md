@@ -60,8 +60,9 @@ Database: PostgreSQL
 
 김태연
 
-  <img src ="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJ3hb5%2FbtsJ7MqhVcf%2FKBdxcf8jXH9kFDr7xXCvzk%2Fimg.png" width="300" height="200"/>
-  <img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkxZg3%2FbtsJ7NQfqDr%2Fa3DSaBzJXFc1rbhSJ552t0%2Fimg.png" width="300" height="200"/>
+<img width="300" height="200" src = "https://github.com/user-attachments/assets/0b4a7c77-bddd-472c-b0aa-9c8880ceb113" />
+<img width="300" height="200" src = "https://github.com/user-attachments/assets/7748712e-0366-4f8b-89ca-b33058e17602" />
+<img width="300" height="200" src = "https://github.com/user-attachments/assets/7558de05-c1d1-49d7-b57d-04db9c4fd278" />
 
 ### 나의 기업 비교 결과 페이지 구현
 
@@ -99,8 +100,8 @@ Database: PostgreSQL
 
 이예린
 
-<img width="300" height="200" src="https://velog.velcdn.com/images/annylee0723/post/930b58f3-0976-46e4-a355-40f4ebe553f7/image.png"/>
-<img width="300" height="200" src="https://velog.velcdn.com/images/annylee0723/post/00637023-8ef6-4614-b18f-4dc460df8365/image.png"/>
+<img width="300" height="200" src="https://github.com/user-attachments/assets/71597f74-9ab2-45aa-8564-8af2943a8f24"/>
+<img width="300" height="200" src="https://github.com/user-attachments/assets/b8cd4fa2-940b-4556-a9a2-2957520cc086"/>
 
 ### 비교 현황 페이지 구현 및 기업상세 페이지 보조
 
