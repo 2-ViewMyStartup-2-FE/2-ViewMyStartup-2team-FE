@@ -42,6 +42,7 @@ Database: PostgreSQL
 - 반응형 레이아웃 구현
 
 강명곤
+
 <img src="https://github.com/user-attachments/assets/8bddc2a1-bfe3-4b7c-bac3-b64e67623546" width="300" height="200"/>
 <img src="https://github.com/user-attachments/assets/a979c289-05b9-4765-8331-39da7ac82792" width="300" height="200"/>
 <img src="https://github.com/user-attachments/assets/f718de1d-eda5-46c2-88cd-d77397343f51" width="300" height="200"/>
@@ -50,14 +51,17 @@ Database: PostgreSQL
 <img src="https://github.com/user-attachments/assets/e81500ff-27eb-4edd-9463-fc79679d2eb9" width="300" height="200"/>
 
 #### 기업 상세 페이지 구현
- 
-  - 해당 기업 정보
-  - 기업 투자 정보 리스트
-  - 기업에 투자하기 기능 구현
-  - 투자한 투자정보 수정 및 삭제 기능 구현
-  - 반응형 레이아웃 구현
+
+- 해당 기업 정보
+- 기업 투자 정보 리스트
+- 기업에 투자하기 기능 구현
+- 투자한 투자정보 수정 및 삭제 기능 구현
+- 반응형 레이아웃 구현
 
 김태연
+
+  <img src ="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJ3hb5%2FbtsJ7MqhVcf%2FKBdxcf8jXH9kFDr7xXCvzk%2Fimg.png" width="300" height="200"/>
+  <img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkxZg3%2FbtsJ7NQfqDr%2Fa3DSaBzJXFc1rbhSJ552t0%2Fimg.png" width="300" height="200"/>
 
 ### 나의 기업 비교 결과 페이지 구현
 
@@ -65,8 +69,6 @@ Database: PostgreSQL
 - 기업 투자하기 모달 구현
 - 기업 수정하기 모달을 투자하기 모달과 공통 컴포넌트화
 - 투자 성공시 팝업 구현
-  <img src ="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJ3hb5%2FbtsJ7MqhVcf%2FKBdxcf8jXH9kFDr7xXCvzk%2Fimg.png" width="300" height="200"/>
-  <img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkxZg3%2FbtsJ7NQfqDr%2Fa3DSaBzJXFc1rbhSJ552t0%2Fimg.png" width="300" height="200"/>
 
 신지원
 
@@ -76,27 +78,29 @@ Database: PostgreSQL
 
 #### 랜딩 페이지 구현
 
- - 기본 와이어프레임 구현
+- 기본 와이어프레임 구현
 
 #### 전체 스타트업 목록 페이지 구현
 
- - 검색, 정렬, 페이지네이션 기능 구현
- - 반응형 레이아웃 구현
+- 검색, 정렬, 페이지네이션 기능 구현
+- 반응형 레이아웃 구현
 
 #### 투자 현황 페이지 구현
 
- - 정렬, 페이지네이션 기능 구현
- - 반응형 레이아웃 구현
+- 정렬, 페이지네이션 기능 구현
+- 반응형 레이아웃 구현
 
 #### 공통 컴포넌트
 
- - Nav 바
- - 검색 기능
- - 정렬 기능
- - 페이지네이션 기능
- 
+- Nav 바
+- 검색 기능
+- 정렬 기능
+- 페이지네이션 기능
 
 이예린
+
+<img width="300" height="200" src="https://velog.velcdn.com/images/annylee0723/post/930b58f3-0976-46e4-a355-40f4ebe553f7/image.png"/>
+<img width="300" height="200" src="https://velog.velcdn.com/images/annylee0723/post/00637023-8ef6-4614-b18f-4dc460df8365/image.png"/>
 
 ### 비교 현황 페이지 구현 및 기업상세 페이지 보조
 
