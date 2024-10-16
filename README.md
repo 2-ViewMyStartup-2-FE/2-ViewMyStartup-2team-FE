@@ -4,11 +4,11 @@
 
 방신철 (https://github.com/bangsinchur)
 
-강명곤 (개인 Github 링크)
+강명곤 (https://github.com/GGON123)
 
 김태연 (https://github.com/taeyeonkim94)
 
-신지원 (개인 Github 링크)
+신지원 (https://github.com/shinji530)
 
 이예린 (https://github.com/annylee0723)
 
@@ -42,6 +42,20 @@ Database: PostgreSQL
 - 반응형 레이아웃 구현
 
 강명곤
+<img src="https://github.com/user-attachments/assets/8bddc2a1-bfe3-4b7c-bac3-b64e67623546" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/a979c289-05b9-4765-8331-39da7ac82792" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/f718de1d-eda5-46c2-88cd-d77397343f51" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/07b9b800-c5ce-4573-a98d-2e8042c9ae3f" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/eb3dfd75-cbb2-4c81-8604-62a22c521a65" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/e81500ff-27eb-4edd-9463-fc79679d2eb9" width="300" height="200"/>
+
+#### 기업 상세 페이지 구현
+ 
+  - 해당 기업 정보
+  - 기업 투자 정보 리스트
+  - 기업에 투자하기 기능 구현
+  - 투자한 투자정보 수정 및 삭제 기능 구현
+  - 반응형 레이아웃 구현
 
 김태연
 
@@ -55,6 +69,32 @@ Database: PostgreSQL
   <img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkxZg3%2FbtsJ7NQfqDr%2Fa3DSaBzJXFc1rbhSJ552t0%2Fimg.png" width="300" height="200"/>
 
 신지원
+
+<img src="https://github.com/user-attachments/assets/fa4db476-ee78-4941-8cbe-c4c1d13f1f2a" width="300" height="150" />
+<img src="https://github.com/user-attachments/assets/f964e7e8-fff7-43ba-b0e8-2d673987958e" width="300" height="150" />
+<img src="https://github.com/user-attachments/assets/06f00b8e-ecbc-415f-badb-4a31b8209997" width="300" height="150" />
+
+#### 랜딩 페이지 구현
+
+ - 기본 와이어프레임 구현
+
+#### 전체 스타트업 목록 페이지 구현
+
+ - 검색, 정렬, 페이지네이션 기능 구현
+ - 반응형 레이아웃 구현
+
+#### 투자 현황 페이지 구현
+
+ - 정렬, 페이지네이션 기능 구현
+ - 반응형 레이아웃 구현
+
+#### 공통 컴포넌트
+
+ - Nav 바
+ - 검색 기능
+ - 정렬 기능
+ - 페이지네이션 기능
+ 
 
 이예린
 
@@ -81,28 +121,23 @@ src
  ┃ ┗ StartupAPI.js
  ┣ asset
  ┃ ┗ images
+ ┃ ┃ ┣ 404.svg
  ┃ ┃ ┣ btn_plus.png
  ┃ ┃ ┣ closed-eyes.png
- ┃ ┃ ┣ codeit.png
- ┃ ┃ ┣ codeitLogo.png
- ┃ ┃ ┣ exit.png
  ┃ ┃ ┣ ic_arrow_left.png
  ┃ ┃ ┣ ic_arrow_right.png
  ┃ ┃ ┣ ic_check.png
  ┃ ┃ ┣ ic_cloaseCircleSmall.png
- ┃ ┃ ┣ ic_delete.png
  ┃ ┃ ┣ ic_kebab.png
  ┃ ┃ ┣ ic_minus.png
- ┃ ┃ ┣ ic_modalClose.png
  ┃ ┃ ┣ ic_restart.png
  ┃ ┃ ┣ ic_search.png
  ┃ ┃ ┣ ic_toggle.png
+ ┃ ┃ ┣ ic_x.png
  ┃ ┃ ┣ img_company_default_logo.png
  ┃ ┃ ┣ img_logo.png
- ┃ ┃ ┣ img_sort.png
- ┃ ┃ ┣ logo.png
  ┃ ┃ ┣ open-eyes.png
- ┃ ┃ ┗ toggle.png
+ ┃ ┃ ┗ p_main_image.svg
  ┣ component
  ┃ ┣ AddCompanyList.js
  ┃ ┣ AddSeachResult.js
@@ -110,9 +145,7 @@ src
  ┃ ┣ CompanyDetailTable.js
  ┃ ┣ CompanyInfoTable.js
  ┃ ┣ CompanyInvestmentAction.js
- ┃ ┣ ComparisonTableContent.js
  ┃ ┣ DeleteInvestment.js
- ┃ ┣ EditInvestment.js
  ┃ ┣ ErrorModal.js
  ┃ ┣ InvestmentButton.js
  ┃ ┣ InvestmentCompanyBrief.js
@@ -131,8 +164,7 @@ src
  ┃ ┣ PasswordVerifyModal.js
  ┃ ┣ Search.js
  ┃ ┣ SearchResult.js
- ┃ ┣ SortContent.js
- ┃ ┗ StartupList.js
+ ┃ ┗ SortContent.js
  ┣ css
  ┃ ┣ AddCompanyList.module.css
  ┃ ┣ App.css
@@ -151,17 +183,18 @@ src
  ┃ ┣ InvestModal.module.css
  ┃ ┣ InvestModalHeader.module.css
  ┃ ┣ InvestStatusPage.module.css
+ ┃ ┣ LandingPage.module.css
  ┃ ┣ ListSort.module.css
  ┃ ┣ ManyChoiceCompany.module.css
  ┃ ┣ ModalAddCompany.module.css
  ┃ ┣ ModalCompany.module.css
  ┃ ┣ MyCompanyCard.module.css
  ┃ ┣ Nav.module.css
+ ┃ ┣ NotFoundPage.module.css
  ┃ ┣ Pagination.module.css
  ┃ ┣ PasswordVerifyModal.module.css
  ┃ ┣ Search.module.css
  ┃ ┣ SearchResult.module.css
- ┃ ┣ StartupList.module.css
  ┃ ┗ StartupPage.module.css
  ┣ hooks
  ┃ ┣ useFetchCompanyData.js
@@ -173,6 +206,8 @@ src
  ┃ ┣ CompareResultPage.js
  ┃ ┣ CompareStatusPage.js
  ┃ ┣ InvestStatusPage.js
+ ┃ ┣ LandingPage.js
+ ┃ ┣ NotFoundPage.js
  ┃ ┗ StartupPage.js
  ┣ utils
  ┃ ┣ formatAmount.js
