@@ -3,7 +3,7 @@
 ### 팀원 구성
 방신철 (https://github.com/bangsinchur)
 
-강명곤 (개인 Github 링크)
+강명곤 (https://github.com/GGON123)
 
 김태연 (개인 Github 링크)
 
@@ -39,6 +39,20 @@ Database: PostgreSQL
 
 
 강명곤
+<img src="https://github.com/user-attachments/assets/8bddc2a1-bfe3-4b7c-bac3-b64e67623546" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/a979c289-05b9-4765-8331-39da7ac82792" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/f718de1d-eda5-46c2-88cd-d77397343f51" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/07b9b800-c5ce-4573-a98d-2e8042c9ae3f" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/eb3dfd75-cbb2-4c81-8604-62a22c521a65" width="300" height="200"/>
+<img src="https://github.com/user-attachments/assets/e81500ff-27eb-4edd-9463-fc79679d2eb9" width="300" height="200"/>
+
+#### 기업 상세 페이지 구현
+ 
+  - 해당 기업 정보
+  - 기업 투자 정보 리스트
+  - 기업에 투자하기 기능 구현
+  - 투자한 투자정보 수정 및 삭제 기능 구현
+  - 반응형 레이아웃 구현
 
 김태연
 
